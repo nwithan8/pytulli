@@ -1,10 +1,23 @@
-# Bake a PyPi
-Easy setup for an automated PyPi package
+# Python client for Tautulli API
+Interact with Tautulli's API in Python
 
-# Usage:
-- [ ] Change "packageName" in ``setup.py`` and ``_info.py`` to whatever your package name is.
-- [ ] Change the "packageName" folder to this same name.
-- [ ] In ``Settings -> Secrets``, add ``PYPI_USERNAME`` and ``PYPI_PASSWORD``.
-- [ ] Do code.
-- [ ] When making a release, update ``__version__`` in ``_info.py`` This must be entirely numeric for PyPi (i.e. 1.0.0, not 1.0.b). Set the TAG to this same number EXACTLY.
-- [ ] Package will be automatically generated and uploaded to PyPi whenever a release is created.
+# Installation
+From PyPi: ``python -m pip install tautulli``
+From GitHub ``python -m pip install git+https://github.com/nwithan8/pytulli.git``
+
+# Usage
+This client covers nearly 100% of all Tautulli's available API calls, including type checks and enforcing required variables.
+More details about Tautulli's API can be found on the [Tautulli's GitHub wiki page](https://github.com/Tautulli/Tautulli-Wiki/wiki/Tautulli-API-Reference).
+
+Most API call functions that return data return raw JSON data. Some return strings or file contents (in the case of downloads).
+API calls functions that do not return data return True/False booleans to confirm that the API call was successful.
+
+Import the ``tautulli`` package as initialize the API
+Example:
+```python
+from tautulli import tautulli
+
+api = tautulli.API(base_url="http://myipaddress:port", api_key="thisisanapikey")
+```
+
+You can optionally pass ``verbose=True`` into the API declaration to produce verbose debugging logs and error messages.
