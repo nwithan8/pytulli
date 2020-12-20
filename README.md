@@ -24,3 +24,7 @@ api = tautulli.API(base_url="http://myipaddress:port", api_key="thisisanapikey")
 ```
 
 You can optionally pass ``verbose=True`` into the API declaration to produce verbose debugging logs and error messages.
+
+# Documentation
+
+Documentation available on [ReadTheDocs](https://pytulli.readthedocs.io/en/latest/documentation.html)
