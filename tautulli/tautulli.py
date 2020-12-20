@@ -4,21 +4,10 @@ from urllib.parse import urlencode
 import requests
 from datetime import datetime
 
-from tautulli.classes import HomeStats, HomeStatsCategory, User, WatchTimeStats, WatchTimeStat
 from tautulli import static
 from tautulli.utils import build_optional_params, _get_response_data, _success_result, int_list_to_string, _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string
 from tautulli.decorators import raw_json, set_and_forget
 import tautulli._info as package_info
-
-def _stat_category_to_number(stat_category: str) -> Union[int, None]:
-    translations = {
-        'movies': 0,
-        'shows': 1,
-        'artists': 2,
-        'users': 7
-    }
-    return translations.get(stat_category, None)
-
 
 class API:
     def __init__(self, base_url: str, api_key: str, verbose: bool = False):
@@ -138,7 +127,11 @@ class API:
     def delete_mobile_device(self, mobile_device_id: int = None, device_id: str = None) -> bool:
         if not _one_needed(mobile_device_id=mobile_device_id, device_id=device_id):
             return False, None
-        return 'delete_mobile_device', {'mobile_device_id': mobile_device_id, 'device_id': device_id}
+        params = {}
+        name, value = _which_used(mobile_device_id=mobile_device_id, device_id=device_id)
+        if name:
+            params[name] = value
+        return 'delete_mobile_device', params
 
     @set_and_forget
     def delete_newsletter(self, newsletter_id: int) -> bool:
@@ -496,7 +489,6 @@ class API:
         params = build_optional_params(time_range=time_range, y_axis=y_axis, user_id=user_id, grouping=grouping)
         return endpoint, params
 
-
     def get_plays_by_date(self, time_range: int = None, y_axis: str = None, user_id: str = None, grouping: bool = False) -> dict:
         return self._get_X_by(endpoint='get_plays_by_date', time_range=time_range, y_axis=y_axis, user_id=user_id, grouping=grouping)
 
@@ -722,124 +714,119 @@ class API:
         params['body'] = body
         return 'notify', params
 
+    @set_and_forget
+    def notify_newsletter(self, newsletter_id: int, subject: str = None, body: str = None, message: str = None) -> bool:
+        params = build_optional_params(subject=subject, body=body, message=message)
+        params['newsletter_id'] = newsletter_id
+        return 'notify_newsletter', params
 
+    @set_and_forget
+    def notify_recently_added(self, rating_key: int, notifier_id: int = None) -> bool:
+        params = build_optional_params(notifier_id=notifier_id)
+        params['rating_key'] = rating_key
+        return 'notify_recently_added', params
 
+    @set_and_forget
+    def pms_image_proxy(self, img: str = None, rating_key: str = None, width: int = None, height: int = None, opacity: int = None, background_hex: str = None, blur: int = None, img_format: str = None, fallback: str = None, refresh: bool = False, return_hash: bool = False) -> bool:
+        if not _one_needed(img=img, rating_key=rating_key):
+            return False, None
+        if _is_invalid_choice(value=fallback, variable_name='fallback',
+                              choices=static.image_fallback_types):
+            return False, None
+        params = build_optional_params(width=width, height=height, opacity=opacity, background=background_hex, img_format=img_format, fallback=fallback, refresh=refresh, return_hash=return_hash)
+        name, value = _which_used(img=img, rating_key=rating_key)
+        if name:
+            params[name] = value
+        return 'pms_image_proxy', params
 
+    @set_and_forget
+    def refresh_libraries_list(self) -> bool:
+        return 'refresh_libraries_list', None
 
+    @set_and_forget
+    def refresh_users_list(self) -> bool:
+        return 'refresh_users_list', None
 
+    @raw_json
+    def register_device(self, device_id: str, device_name: str, friendly_name: str = None, onesignal_id: str = None, min_version: str = None) -> dict:
+        params = build_optional_params(friendly_name=friendly_name, onesignal_id=onesignal_id, min_version=min_version)
+        params['device_id'] = device_id
+        params['device_name'] = device_name
+        return 'register_device', params
 
+    @set_and_forget
+    def restart(self) -> bool:
+        return 'restart', None
 
+    @raw_json
+    def search(self, query: str, limit: int = None) -> dict:
+        params = build_optional_params(limit=limit)
+        params['query'] = query
+        return 'search', params
 
+    @set_and_forget
+    def set_mobile_device_config(self, mobile_device_id: int, friendly_name: str = None) -> bool:
+        params = build_optional_params(friendly_name=friendly_name)
+        params['mobile_device_id'] = mobile_device_id
+        return 'set_mobile_device_config', params
 
+    """
+    @set_and_forget
+    def set_newsletter_config(self, newsletter_id: int, agent_id: int, **kwargs) -> bool:
+        params = {}
+        for k, v in kwargs.items():
+            params[f"newsletter_config_{k}"] = v
+            params[f"newsletter_email_{k}"] = v
+        params['newsletter_id'] = newsletter_id
+        params['agent_id'] = agent_id
+        return 'set_newsletter_config', params
+    """
 
+    """
+    @set_and_forget
+    def set_notifier_config(self, notifier_id: int, agent_id: int, **kwargs) -> bool:
+    """
 
+    @raw_json
+    def sql(self, query: str) -> dict:
+        return 'sql', {'query': query}
 
+    @raw_json
+    def status(self, check: str = None) -> dict:
+        params = build_optional_params(check=check)
+        return 'status', params
 
+    @set_and_forget
+    def terminate_session(self, session_key: int = None, session_id: str = None, message: str = None) -> bool:
+        if not _one_needed(session_key=session_key, session_id=session_id):
+            return False, None
+        params = build_optional_params(message=message)
+        name, value = _which_used(session_key=session_key, session_id=session_id)
+        if name:
+            params[name] = value
+        return 'terminate_session', params
 
+    @set_and_forget
+    def undelete_library(self, section_id: str, section_name: str) -> bool:
+        return 'undelete_library', {'section_id': section_id, 'section_name': section_name}
 
+    @set_and_forget
+    def undelete_user(self, user_id: str, username: str) -> bool:
+        return 'undelete_user', {'user_id': user_id, 'username': username}
 
-
-
-
-
-
-
-
-    def get_user_watch_time_stats(self, user_id: str, days: List[int] = None) -> Union[
-        WatchTimeStats, None]:
-        params = {'user_id': user_id}
-        if days:
-            params['query_days'] = ','.join(map(str, days))
-        json_data = self._get_json(command="get_user_watch_time_stats", params=params)
-        if json_data:
-            return WatchTimeStats(data=json_data['response']['data'])
-        return None
-
-    def get_user_ips(self, user_id: str) -> dict:
-        json_data = self._get_json(command='get_user_ips', params={'user_id': user_id, 'order_column': 'last_seen'})
-        if json_data:
-            return json_data['response']['data']
-        return {}
-
-    def get_last_time_user_seen(self, user_id: str) -> int:
-        user_ips = self.get_user_ips(user_id=user_id)
-        if not user_ips:
-            return 0
-        return user_ips[0]['last_seen']
-
-    def refresh_users(self) -> bool:
-        if self._get(command='refresh_users_list'):
-            return True
-        return False
-
-    def delete_user(self, plex_username: str) -> bool:
-        if self._get(command='delete_user', params={'user_id': plex_username}):
-            return True
-        return False
-
-    # ACTIVITY
-
-    def home_stats(self, time_range: int = 30, stat_category: str = 'user', stat_type: str = 'duration',
-                   stat_count: int = 5) -> Union[HomeStats, None]:
-        category_number = _stat_category_to_number(stat_category=stat_category)
-        if not category_number:
-            return None
-        params = {'time_range': time_range,
-                  'stats_type': stat_type,
-                  'stats_count': stat_count}
-        json_data = self._get_json(command='get_home_stats', params=params)
-        if json_data:
-            return HomeStats(data=json_data['response']['data'])
-        return None
+    @set_and_forget
+    def update(self) -> bool:
+        return 'update', None
 
     @property
-    def current_activity(self) -> dict:
-        json_data = self._get_json(command="get_activity")
-        if json_data:
-            return json_data['response']['data']
-        return {}
+    @raw_json
+    def update_check(self) -> dict:
+        return 'update_check', None
 
-    # MEDIA
-
-    @property
-    def libraries(self) -> dict:
-        json_data = self._get_json(command="get_libraries")
-        if json_data:
-            return json_data['response']['data']
-        return {}
-
-    def get_library_media_info(self, section_id: str) -> dict:
-        json_data = self._get_json(command='get_library_media_info', params={'section_id': section_id})
-        if json_data:
-            return json_data['response']['data']
-        return {}
-
-    def recently_added(self, count: int = 5) -> dict:
-        json_data = self._get_json(command='get_recently_added', params={'count': count})
-        if json_data:
-            return json_data['response']['data']
-        return {}
-
-    def image_thumb_url(self, thumb: str) -> str:
-        return f'{self.url}&cmd=pms_image_proxy&img={thumb}'
-
-    def delete_image_cache(self) -> bool:
-        if self._get(command='delete_image_cache'):
-            return True
-        return False
-
-    def search(self, keyword: str) -> dict:
-        json_data = self._get_json(command='search', params={'query': keyword})
-        if json_data:
-            return json_data['response']['data']
-        return {}
-
-    # SESSIONS
-
-    def terminate_session(self, session_id, message: str = None) -> bool:
-        params = {'session_id': session_id}
-        if message:
-            params['message'] = message
-        if self._get(command='terminate_session', params=params):
-            return True
-        return False
+    @set_and_forget
+    def update_metadata_details(self, old_rating_key: str, new_rating_key: str, media_type: str) -> bool:
+        if _is_invalid_choice(value=media_type, variable_name='media_type',
+                              choices=static.all_media_types):
+            return False, None
+        params = {'old_rating_key': old_rating_key, 'new_rating_key': new_rating_key, 'media_type': media_type}
+        return 'update_metadata_details', params

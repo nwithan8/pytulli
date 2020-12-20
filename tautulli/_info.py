@@ -1,10 +1,10 @@
 __version__ = '0.0.1'
 
 __title__ = "tautulli"
-__author__ = 'my name'
-__author_email__ = 'myemail@example.com'
-__github_username__ = "myusername"
-__copyright__ = "Copyright © 2020 - my name"
+__author__ = 'Nate Harris'
+__author_email__ = 'n8gr8gbln@gmail.com'
+__github_username__ = "nwithan8"
+__copyright__ = "Copyright © 2020 - Nate Harris"
 __license__ = 'GNU General Public License v3 (GPLv3)'
-__description__ = "Description of the package"
+__description__ = "A complete Python client for Tautulli's API"
 __keywords__ = ["keywords", "related", "to", "this", "package"]

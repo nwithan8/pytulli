@@ -30,3 +30,4 @@ user_tables_order_columns = ["user_thumb", "friendly_name", "last_seen", "ip_add
 database_app_types = ['tautulli', 'plexwatch', 'plexivity']
 tautulli_database_import_methods = ['merge', 'overwrite']
 plexivity_table_names = ['processed', 'grouped']
+image_fallback_types = ["poster", "cover", "art", "poster-live", "art-live", "art-live-full"]
