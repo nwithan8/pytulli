@@ -1040,6 +1040,21 @@ class API:
     @raw_json
     def get_notification_log(self, order_column: str = None, order_direction: str = None, start: int = 0,
                              length: int = 25, search: str = None) -> dict:
+        """
+        Get the data on the Tautulli notification logs table
+        :param order_column: Column to order rows by (i.e. 'timestamp', 'agent_name', 'notifier_id')
+        :type order_column: str
+        :param order_direction: Direction to order rows ('desc' or 'asc')
+        :type order_direction: str
+        :param start: Row number to start from (default: 0)
+        :type start: int
+        :param length: Number of items to return (default: 25)
+        :type length: int
+        :param search: String to search for
+        :type search: str
+        :return: Dict of data
+        :rtype: dict
+        """
         if _is_invalid_choice(value=order_column, variable_name='order_column',
                               choices=static.notifications_order_column):
             return False, None
@@ -1052,20 +1067,48 @@ class API:
 
     @raw_json
     def get_notifier_config(self, notifier_id: int) -> dict:
+        """
+        Get the configuration for an existing notification agent
+        :param notifier_id: ID of the notifier
+        :type notifier_id: int
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_notifier_config', {'notifier_id': notifier_id}
 
     @property
     @raw_json
     def notifier_parameters(self) -> dict:
+        """
+        Get a list of available notification parameters
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_notifier_parameters', None
 
     @raw_json
     def get_notifiers(self, notify_action: str = None) -> dict:
+        """
+        Get a list of configured notifiers
+        :param notify_action: The notification action to filter out
+        :type notify_action: str
+        :return: Dict of data
+        :rtype: dict
+        """
         params = build_optional_params(notify_action=notify_action)
         return 'get_notifiers', params
 
     @raw_json
     def get_old_rating_keys(self, rating_key: str, media_type: str) -> dict:
+        """
+        Get a list of old rating keys from the Tautulli databse for all of the item's parent/children
+        :param rating_key: Rating key of item
+        :type rating_key: str
+        :param media_type: Type of media (i.e. 'movie', 'show', 'episode', 'album', 'track')
+        :type media_type: str
+        :return: Dict of data
+        :rtype: dict
+        """
         if _is_invalid_choice(value=media_type, variable_name='media_type',
                               choices=static.all_media_types):
             return False, None
@@ -1074,6 +1117,15 @@ class API:
 
     @raw_json
     def get_playlists_table(self, section_id: str = None, user_id: str = None) -> dict:
+        """
+        Get the data on the Tautulli playlists tables
+        :param section_id: Section ID of the Plex library
+        :type section_id: str
+        :param user_id: User ID of the Plex user
+        :type user_id: str
+        :return: Dict of data
+        :rtype: dict
+        """
         if not _one_needed(section_id=section_id, user_id=user_id):
             return False, None
         params = {}
@@ -1085,6 +1137,21 @@ class API:
     @raw_json
     def _get_X_by(self, endpoint: str, time_range: int = None, y_axis: str = None, user_id: str = None,
                   grouping: bool = False) -> dict:
+        """
+        Abstract method for the get_plays_by_X and get_streams_by_X functions
+        :param endpoint: Tautulli endpoint
+        :type endpoint: str
+        :param time_range: Number of days of data to return
+        :type time_range: int
+        :param y_axis: Stat type ('plays' or 'duration')
+        :type y_axis: str
+        :param user_id: User ID to filter data
+        :type user_id: str
+        :param grouping: Whether to group the results (default: False)
+        :type grouping: bool
+        :return: Dict of data
+        :rtype: dict
+        """
         grouping = bool_to_int(boolean=grouping)
         if _is_invalid_choice(value=y_axis, variable_name='y_axis',
                               choices=static.stats_type):
@@ -1094,51 +1161,177 @@ class API:
 
     def get_plays_by_date(self, time_range: int = None, y_axis: str = None, user_id: str = None,
                           grouping: bool = False) -> dict:
+        """
+        Get graph data by date
+        :param time_range: Number of days of data to return
+        :type time_range: int
+        :param y_axis: Stat type ('plays' or 'duration')
+        :type y_axis: str
+        :param user_id: User ID to filter data
+        :type user_id: str
+        :param grouping: Whether to group the results (default: False)
+        :type grouping: bool
+        :return: Dict of data
+        :rtype: dict
+        """
         return self._get_X_by(endpoint='get_plays_by_date', time_range=time_range, y_axis=y_axis, user_id=user_id,
                               grouping=grouping)
 
     def get_plays_by_day_of_week(self, time_range: int = None, y_axis: str = None, user_id: str = None,
                                  grouping: bool = False) -> dict:
+        """
+        Get graph data by day of the week
+        :param time_range: Number of days of data to return
+        :type time_range: int
+        :param y_axis: Stat type ('plays' or 'duration')
+        :type y_axis: str
+        :param user_id: User ID to filter data
+        :type user_id: str
+        :param grouping: Whether to group the results (default: False)
+        :type grouping: bool
+        :return: Dict of data
+        :rtype: dict
+        """
         return self._get_X_by(endpoint='get_plays_by_dayofweek', time_range=time_range, y_axis=y_axis, user_id=user_id,
                               grouping=grouping)
 
     def get_plays_by_hour_of_day(self, time_range: int = None, y_axis: str = None, user_id: str = None,
                                  grouping: bool = False) -> dict:
+        """
+        Get graph data by hour of the day
+        :param time_range: Number of days of data to return
+        :type time_range: int
+        :param y_axis: Stat type ('plays' or 'duration')
+        :type y_axis: str
+        :param user_id: User ID to filter data
+        :type user_id: str
+        :param grouping: Whether to group the results (default: False)
+        :type grouping: bool
+        :return: Dict of data
+        :rtype: dict
+        """
         return self._get_X_by(endpoint='get_plays_by_hourofday', time_range=time_range, y_axis=y_axis, user_id=user_id,
                               grouping=grouping)
 
     def get_plays_by_source_resolution(self, time_range: int = None, y_axis: str = None, user_id: str = None,
                                        grouping: bool = False) -> dict:
+        """
+        Get graph data by source resolution
+        :param time_range: Number of days of data to return
+        :type time_range: int
+        :param y_axis: Stat type ('plays' or 'duration')
+        :type y_axis: str
+        :param user_id: User ID to filter data
+        :type user_id: str
+        :param grouping: Whether to group the results (default: False)
+        :type grouping: bool
+        :return: Dict of data
+        :rtype: dict
+        """
         return self._get_X_by(endpoint='get_plays_by_source_resolution', time_range=time_range, y_axis=y_axis,
                               user_id=user_id, grouping=grouping)
 
     def get_plays_by_stream_resolution(self, time_range: int = None, y_axis: str = None, user_id: str = None,
                                        grouping: bool = False) -> dict:
+        """
+        Get graph data by stream resolution
+        :param time_range: Number of days of data to return
+        :type time_range: int
+        :param y_axis: Stat type ('plays' or 'duration')
+        :type y_axis: str
+        :param user_id: User ID to filter data
+        :type user_id: str
+        :param grouping: Whether to group the results (default: False)
+        :type grouping: bool
+        :return: Dict of data
+        :rtype: dict
+        """
         return self._get_X_by(endpoint='get_plays_by_stream_resolution', time_range=time_range, y_axis=y_axis,
                               user_id=user_id, grouping=grouping)
 
     def get_plays_by_stream_type(self, time_range: int = None, y_axis: str = None, user_id: str = None,
                                  grouping: bool = False) -> dict:
+        """
+        Get graph data by stream type
+        :param time_range: Number of days of data to return
+        :type time_range: int
+        :param y_axis: Stat type ('plays' or 'duration')
+        :type y_axis: str
+        :param user_id: User ID to filter data
+        :type user_id: str
+        :param grouping: Whether to group the results (default: False)
+        :type grouping: bool
+        :return: Dict of data
+        :rtype: dict
+        """
         return self._get_X_by(endpoint='get_plays_by_stream_type', time_range=time_range, y_axis=y_axis,
                               user_id=user_id, grouping=grouping)
 
     def get_plays_by_top_10_platforms(self, time_range: int = None, y_axis: str = None, user_id: str = None,
                                       grouping: bool = False) -> dict:
+        """
+        Get graph data by top 10 platforms
+        :param time_range: Number of days of data to return
+        :type time_range: int
+        :param y_axis: Stat type ('plays' or 'duration')
+        :type y_axis: str
+        :param user_id: User ID to filter data
+        :type user_id: str
+        :param grouping: Whether to group the results (default: False)
+        :type grouping: bool
+        :return: Dict of data
+        :rtype: dict
+        """
         return self._get_X_by(endpoint='get_plays_by_top_10_platforms', time_range=time_range, y_axis=y_axis,
                               user_id=user_id, grouping=grouping)
 
     def get_plays_by_top_10_users(self, time_range: int = None, y_axis: str = None, user_id: str = None,
                                   grouping: bool = False) -> dict:
+        """
+        Get graph data by top 10 users
+        :param time_range: Number of days of data to return
+        :type time_range: int
+        :param y_axis: Stat type ('plays' or 'duration')
+        :type y_axis: str
+        :param user_id: User ID to filter data
+        :type user_id: str
+        :param grouping: Whether to group the results (default: False)
+        :type grouping: bool
+        :return: Dict of data
+        :rtype: dict
+        """
         return self._get_X_by(endpoint='get_plays_by_top_10_users', time_range=time_range, y_axis=y_axis,
                               user_id=user_id, grouping=grouping)
 
     def get_plays_per_month(self, time_range: int = None, y_axis: str = None, user_id: str = None,
                             grouping: bool = False) -> dict:
+        """
+        Get graph data by month
+        :param time_range: Number of days of data to return
+        :type time_range: int
+        :param y_axis: Stat type ('plays' or 'duration')
+        :type y_axis: str
+        :param user_id: User ID to filter data
+        :type user_id: str
+        :param grouping: Whether to group the results (default: False)
+        :type grouping: bool
+        :return: Dict of data
+        :rtype: dict
+        """
         return self._get_X_by(endpoint='get_plays_per_month', time_range=time_range, y_axis=y_axis, user_id=user_id,
                               grouping=grouping)
 
     @raw_json
     def get_plex_log(self, window: int = None, log_type: str = None) -> dict:
+        """
+        Get the Plex Media Server logs
+        :param window: Number of tail lines to return
+        :type window: int
+        :param log_type: Log type ('server' or 'scanner')
+        :type log_type: str
+        :return: Dict of data
+        :rtype: dict
+        """
         if _is_invalid_choice(value=log_type, variable_name='log_type',
                               choices=static.plex_log_types):
             return False, None
@@ -1146,6 +1339,15 @@ class API:
         return 'get_plex_log', params
 
     def get_pms_token(self, username: str, password: str) -> str:
+        """
+        Get the user's Plex token used for Tautulli
+        :param username: Plex.tv username
+        :type username: str
+        :param password: Plex.tv password
+        :type password: str
+        :return: Plex token used for Tautulli
+        :rtype: str
+        """
         params = {'username': username, 'password': password}
         json_data = self._get_json(command='get_pms_token', params=params)
         if _success_result(json_data=json_data):
@@ -1155,10 +1357,28 @@ class API:
     @property
     @raw_json
     def pms_update(self) -> dict:
+        """
+        Check for updates to the Plex Media Server
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_pms_update', None
 
     @raw_json
     def get_recently_added(self, count: int, start: int = 0, media_type: str = None, section_id: str = None) -> dict:
+        """
+        Get all items that were recently added to Plex
+        :param count: Number of item to return
+        :type count: int
+        :param start: Item number to start from
+        :type start: int
+        :param media_type: Media type (i.e. 'movie', 'show', 'artist')
+        :type media_type: str
+        :param section_id: ID of the Plex library section
+        :type section_id: str
+        :return: Dict of data
+        :rtype: dict
+        """
         if _is_invalid_choice(value=media_type, variable_name='media_type',
                               choices=static.recently_added_media_types):
             return False, None
@@ -1168,6 +1388,11 @@ class API:
 
     @property
     def server_friendly_name(self) -> str:
+        """
+        Get the name of the Plex Media Server
+        :return: Name of the Plex Media Server
+        :rtype: str
+        """
         json_data = self._get_json(command='get_server_friendly_name')
         if _success_result(json_data=json_data):
             return _get_response_data(json_data=json_data)
@@ -1175,6 +1400,19 @@ class API:
 
     @raw_json
     def get_server_id(self, hostname: str, port: int, ssl: bool = False, remote: bool = False) -> dict:
+        """
+        Get the Plex Media Server identifier
+        :param hostname: IP address of the Plex Media Server
+        :type hostname: str
+        :param port: Port of the Plex Media Server
+        :type port: int
+        :param ssl: Whether to use SSL (default: False)
+        :type ssl: bool
+        :param remote: Whether the Plex Media Server is remote (default: False)
+        :type remote: bool
+        :return: Dict of data
+        :rtype: dict
+        """
         ssl = bool_to_int(boolean=ssl)
         remote = bool_to_int(boolean=remote)
         params = build_optional_params(ssl=ssl, remote=remote)
@@ -1185,19 +1423,41 @@ class API:
     @property
     @raw_json
     def server_identity(self) -> dict:
+        """
+        Get info about the local server
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_server_identity', None
 
     @property
     @raw_json
     def server_info(self) -> dict:
+        """
+        Get the Plex Media Server information
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_server_info', None
 
     @property
     @raw_json
     def server_list(self) -> dict:
+        """
+        Get all your servers that are published to Plex.tv
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_server_list', None
 
     def get_server_pref(self, pref: str) -> str:
+        """
+        Get a specified Plex Media Server preference
+        :param pref: Name of preference
+        :type pref: str
+        :return: Value of preference
+        :rtype: str
+        """
         json_data = self._get_json(command='get_server_pref', params={'pref': pref})
         if _success_result(json_data=json_data):
             return _get_response_data(json_data=json_data)
@@ -1206,15 +1466,36 @@ class API:
     @property
     @raw_json
     def servers_info(self) -> dict:
+        """
+        Get info about the Plex Media Server
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_servers_info', None
 
     @raw_json
     def get_settings(self, key: str = None) -> dict:
+        """
+        Get all settings from the config file
+        :param key: Name of a config section to return
+        :type key: str
+        :return: Dict of data
+        :rtype: dict
+        """
         params = build_optional_params(key=key)
         return 'get_settings', params
 
     @raw_json
     def get_stream_data(self, row_id: int = None, session_key: int = None) -> dict:
+        """
+        Get the details of a stream from history or current stream
+        :param row_id: Row ID number for a history item
+        :type row_id: int
+        :param session_key: Session key for the current stream
+        :type session_key: int
+        :return: Dict of data
+        :rtype: dict
+        """
         if not _one_needed(row_id=row_id, session_key=session_key):
             return False, None
         params = {}
@@ -1225,27 +1506,86 @@ class API:
 
     def get_stream_type_by_top_10_platforms(self, time_range: int = None, y_axis: str = None, user_id: str = None,
                                             grouping: bool = False) -> dict:
+        """
+        Get graph data by stream type by the top 10 platforms
+        :param time_range: Number of days of data to return
+        :type time_range: int
+        :param y_axis: Stat type ('plays' or 'duration')
+        :type y_axis: str
+        :param user_id: User ID to filter data
+        :type user_id: str
+        :param grouping: Whether to group the results (default: False)
+        :type grouping: bool
+        :return: Dict of data
+        :rtype: dict
+        """
         return self._get_X_by(endpoint='get_stream_type_by_top_10_platforms', time_range=time_range, y_axis=y_axis,
                               user_id=user_id, grouping=grouping)
 
     def get_stream_type_by_top_10_users(self, time_range: int = None, y_axis: str = None, user_id: str = None,
                                         grouping: bool = False) -> dict:
+        """
+        Get graph data by stream type by the top 10 users
+        :param time_range: Number of days of data to return
+        :type time_range: int
+        :param y_axis: Stat type ('plays' or 'duration')
+        :type y_axis: str
+        :param user_id: User ID to filter data
+        :type user_id: str
+        :param grouping: Whether to group the results (default: False)
+        :type grouping: bool
+        :return: Dict of data
+        :rtype: dict
+        """
         return self._get_X_by(endpoint='get_stream_type_by_top_10_users', time_range=time_range, y_axis=y_axis,
                               user_id=user_id, grouping=grouping)
 
     @raw_json
     def get_synced_items(self, machine_id: str, user_id: str = None) -> dict:
+        """
+        Get a list of synced items on the Plex Media Server
+        :param machine_id: Plex Media Server identifier
+        :type machine_id: str
+        :param user_id: ID of the Plex user
+        :type user_id: str
+        :return: Dict of data
+        :rtype: dict
+        """
         params = build_optional_params(user_id=user_id)
         params['machine_id'] = machine_id
         return 'get_synced_items', params
 
     @raw_json
     def get_user(self, user_id: str) -> dict:
+        """
+        Get a user's details
+        :param user_id: ID of the Plex user
+        :type user_id: str
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_user', {'user_id': user_id}
 
     @raw_json
     def get_user_ips(self, user_id: str, order_column: str = None, order_direction: str = None, start: int = 0,
                      length: int = 25, search: str = None) -> dict:
+        """
+        Get the data on Tautulli's users IP table
+        :param user_id: ID of the Plex user
+        :type user_id: str
+        :param order_column: Column to order rows by (i.e. 'last_seen', 'ip_address', 'player')
+        :type order_column: str
+        :param order_direction: Direction to order rows ('desc' or 'asc')
+        :type order_direction: str
+        :param start: Row number to start from (default: 0)
+        :type start: int
+        :param length: Number of items to return (default: 25)
+        :type length: int
+        :param search: String to search for (e.g. "xxx.xxx.xxx.xxx")
+        :type search: str
+        :return: Dict of data
+        :rtype: dict
+        """
         if _is_invalid_choice(value=order_column, variable_name='order_column',
                               choices=static.user_ips_order_columns):
             return False, None
@@ -1260,6 +1600,23 @@ class API:
     @raw_json
     def get_user_logins(self, user_id: str, order_column: str = None, order_direction: str = None, start: int = 0,
                         length: int = 25, search: str = None) -> dict:
+        """
+        Get the data on Tautulli's user login table
+        :param user_id: ID of the Plex user
+        :type user_id: str
+        :param order_column: Column to order rows by (i.e. 'date', 'time', 'ip_address')
+        :type order_column: str
+        :param order_direction: Direction to order rows ('desc' or 'asc')
+        :type order_direction: str
+        :param start: Row number to start from (default: 0)
+        :type start: int
+        :param length: Number of items to return (default: 25)
+        :type length: int
+        :param search: String to search for (e.g. "xxx.xxx.xxx.xxx")
+        :type search: str
+        :return: Dict of data
+        :rtype: dict
+        """
         if _is_invalid_choice(value=order_column, variable_name='order_column',
                               choices=static.user_logins_order_columns):
             return False, None
@@ -1274,10 +1631,24 @@ class API:
     @property
     @raw_json
     def user_names(self) -> dict:
+        """
+        Get a list of all usernames and user ids
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_user_names', None
 
     @raw_json
     def get_user_player_stats(self, user_id: str, grouping: bool = False) -> dict:
+        """
+        Get a user's player statistics
+        :param user_id: ID of the Plex user
+        :type user_id: str
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool
+        :return: Dict of data
+        :rtype: dict
+        """
         grouping = bool_to_int(boolean=grouping)
         params = build_optional_params(grouping=grouping)
         params['user_id'] = user_id
@@ -1285,6 +1656,17 @@ class API:
 
     @raw_json
     def get_user_watch_time_stats(self, user_id: str, grouping: bool = False, query_days: List[int] = None) -> dict:
+        """
+        Get a user's watch time statistics
+        :param user_id: ID of the Plex user
+        :type user_id: str
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool
+        :param query_days: List of days to get results for (e.g. [0, 1, 14, 30])
+        :type query_days: list
+        :return: Dict of data
+        :rtype: dict
+        """
         grouping = bool_to_int(boolean=grouping)
         params = build_optional_params(grouping=grouping)
         if query_days:
@@ -1295,11 +1677,33 @@ class API:
     @property
     @raw_json
     def users(self) -> dict:
+        """
+        Get a list of all users that have access to your server
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_users', None
 
     @raw_json
     def get_users_table(self, grouping: bool = False, order_column: str = None, order_direction: str = None,
                         start: int = 0, length: int = 25, search: str = None) -> dict:
+        """
+        Get the data on Tautulli's users table
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool
+        :param order_column: Column to order rows by ('friendly_name', 'ip_address', 'player')
+        :type order_column: str
+        :param order_direction: Direction to order rows ('desc' or 'asc')
+        :type order_direction: str
+        :param start: Row number to start from (default: 0)
+        :type start: int
+        :param length: Number of items to return (default: 25)
+        :type length: int
+        :param search: String to search for
+        :type search: str
+        :return: Dict of data
+        :rtype: dict
+        """
         grouping = bool_to_int(boolean=grouping)
         if _is_invalid_choice(value=order_column, variable_name='order_column',
                               choices=static.user_logins_order_columns):
@@ -1313,16 +1717,23 @@ class API:
 
     @raw_json
     def get_whois_lookup(self, ip_address: str) -> dict:
+        """
+        Get the connection info for an IP address
+        :param ip_address: IP address
+        :type ip_address: str
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_whois_lookup', {'ip_address': ip_address}
 
     @set_and_forget
     def import_config(self, config_file_path: str, backup: bool = True) -> bool:
         """
-
-        :param config_file_path:
-        :type config_file_path:
-        :param backup:
-        :type backup:
+        Import a Tautulli config file
+        :param config_file_path: Full path to the config file to import
+        :type config_file_path: str
+        :param backup: Whether to backup the current config before importing (default: True)
+        :type backup: bool
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -1330,19 +1741,21 @@ class API:
 
     @set_and_forget
     def import_database(self, app: str, database_file_path: str, method: str = None, table_name: str = None,
-                        backup: bool = True) -> bool:
+                        backup: bool = True, import_ignore_interval: int = None) -> bool:
         """
-
-        :param app:
-        :type app:
-        :param database_file_path:
-        :type database_file_path:
-        :param method:
-        :type method:
-        :param table_name:
-        :type table_name:
-        :param backup:
-        :type backup:
+        Import a Tautulli, PlexWatch or Plexivity database into Tautulli
+        :param app: Type of app the database is from ('tautulli', 'plexwatch' or 'plexivity')
+        :type app: str
+        :param database_file_path: Full path to the database file to import
+        :type database_file_path: str
+        :param method: Only if app is 'tautulli', method to import database ('merge' or 'overwrite')
+        :type method: str
+        :param table_name: Only if app is 'plexwatch' or 'plexivity', table name to import ('processed' or 'grouped')
+        :type table_name: str
+        :param backup: Whether to backup the current database before importing (default: True)
+        :type backup: bool
+        :param import_ignore_interval: Only if app is 'plexwatch' or 'plexivity', the minimum number of seconds for a stream to import
+        :type import_ignore_interval: int
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -1357,7 +1770,7 @@ class API:
             if _is_invalid_choice(value=table_name, variable_name='table_name',
                                   choices=static.plexivity_table_names):
                 return False, None
-        params = build_optional_params(method=method, table_name=table_name, backup=backup)
+        params = build_optional_params(method=method, table_name=table_name, backup=backup, import_ignore_interval=import_ignore_interval)
         params['app'] = app
         params['database_path'] = database_file_path
         return 'import_database', params
@@ -1365,17 +1778,17 @@ class API:
     @set_and_forget
     def notify(self, notifier_id: int, subject: str, body: str, headers: str = None, script_args: str = None) -> bool:
         """
-
-        :param notifier_id:
-        :type notifier_id:
-        :param subject:
-        :type subject:
-        :param body:
-        :type body:
-        :param headers:
-        :type headers:
-        :param script_args:
-        :type script_args:
+        Send a notification using Tautulli
+        :param notifier_id: ID of the notification agent
+        :type notifier_id: int
+        :param subject: Subject of the message
+        :type subject: str
+        :param body: Body of the message
+        :type body: str
+        :param headers: JSON headers for webhook notifications
+        :type headers: str
+        :param script_args: Arguments for script notifications
+        :type script_args: str
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -1388,15 +1801,15 @@ class API:
     @set_and_forget
     def notify_newsletter(self, newsletter_id: int, subject: str = None, body: str = None, message: str = None) -> bool:
         """
-
-        :param newsletter_id:
-        :type newsletter_id:
-        :param subject:
-        :type subject:
-        :param body:
-        :type body:
-        :param message:
-        :type message:
+        Send a newsletter using Tautulli
+        :param newsletter_id: ID of the newsletter agent
+        :type newsletter_id: int
+        :param subject: Subject of the newsletter
+        :type subject: str
+        :param body: Body of the newsletter
+        :type body: str
+        :param message: Message of the newsletter
+        :type message: str
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -1407,11 +1820,11 @@ class API:
     @set_and_forget
     def notify_recently_added(self, rating_key: int, notifier_id: int = None) -> bool:
         """
-
-        :param rating_key:
-        :type rating_key:
-        :param notifier_id:
-        :type notifier_id:
+        Send a recently added notification using Tautulli
+        :param rating_key: Rating key for the media item
+        :type rating_key: int
+        :param notifier_id: ID of the notification agent. Notification will be send to all enabled notification agents if notifier_id is not provided.
+        :type notifier_id: int
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -1424,29 +1837,29 @@ class API:
                         opacity: int = None, background_hex: str = None, blur: int = None, img_format: str = None,
                         fallback: str = None, refresh: bool = False, return_hash: bool = False) -> bool:
         """
-
-        :param img:
-        :type img:
-        :param rating_key:
-        :type rating_key:
-        :param width:
-        :type width:
-        :param height:
-        :type height:
-        :param opacity:
-        :type opacity:
-        :param background_hex:
-        :type background_hex:
-        :param blur:
-        :type blur:
-        :param img_format:
-        :type img_format:
-        :param fallback:
-        :type fallback:
-        :param refresh:
-        :type refresh:
-        :param return_hash:
-        :type return_hash:
+        Gets an image from the Plex Media Server and saves it to the image cache directory
+        :param img: Path of image (e.g. "/library/metadata/153037/thumb/1462175060")
+        :type img: str
+        :param rating_key: Rating key of image
+        :type rating_key: str
+        :param width: Width of image
+        :type width: int
+        :param height: Height of image
+        :type height: int
+        :param opacity: Opacity of image
+        :type opacity: int
+        :param background_hex: Background hex color
+        :type background_hex: str
+        :param blur: Blur level of image
+        :type blur: int
+        :param img_format: Format of image (i.e. 'png')
+        :type img_format: str
+        :param fallback: Fallback of image (i.e. 'poster', 'cover', 'art', 'poster-live', 'art-live', 'art-live-full')
+        :type fallback: str
+        :param refresh: Whether or refresh the image cache (default: False)
+        :type refresh: bool
+        :param return_hash: Whether to return the self-hosted image hash instead of the image (default: False)
+        :type return_hash: bool
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -1455,7 +1868,7 @@ class API:
         if _is_invalid_choice(value=fallback, variable_name='fallback',
                               choices=static.image_fallback_types):
             return False, None
-        params = build_optional_params(width=width, height=height, opacity=opacity, background=background_hex,
+        params = build_optional_params(width=width, height=height, opacity=opacity, background=background_hex, blur=blur,
                                        img_format=img_format, fallback=fallback, refresh=refresh,
                                        return_hash=return_hash)
         name, value = _which_used(img=img, rating_key=rating_key)
@@ -1466,7 +1879,7 @@ class API:
     @set_and_forget
     def refresh_libraries_list(self) -> bool:
         """
-
+        Refresh the Tautulli libraries list
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -1475,7 +1888,7 @@ class API:
     @set_and_forget
     def refresh_users_list(self) -> bool:
         """
-
+        Refresh the Tautulli users list
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -1484,6 +1897,21 @@ class API:
     @raw_json
     def register_device(self, device_id: str, device_name: str, friendly_name: str = None, onesignal_id: str = None,
                         min_version: str = None) -> dict:
+        """
+        Register the Tautulli Android App for notifications
+        :param device_id: Unique device identifier for the mobile device
+        :type device_id: str
+        :param device_name: Device name of the mobil device
+        :type device_name: str
+        :param friendly_name: Friendly name to identity the mobile device
+        :type friendly_name: str
+        :param onesignal_id: The OneSignal ID of the mobile device
+        :type onesignal_id: str
+        :param min_version: The minimum Tautulli version supported by the mobile device (e.g. "v2.5.6")
+        :type min_version: str
+        :return: Dict of data
+        :rtype: dict
+        """
         params = build_optional_params(friendly_name=friendly_name, onesignal_id=onesignal_id, min_version=min_version)
         params['device_id'] = device_id
         params['device_name'] = device_name
@@ -1492,7 +1920,7 @@ class API:
     @set_and_forget
     def restart(self) -> bool:
         """
-
+        Restart Tautulli
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -1500,6 +1928,15 @@ class API:
 
     @raw_json
     def search(self, query: str, limit: int = None) -> dict:
+        """
+        Get search results from the Plex Media Server
+        :param query: String to search for
+        :type query: str
+        :param limit: Maximum number of items to return per media type
+        :type limit: int
+        :return: Dict of data
+        :rtype: dict
+        """
         params = build_optional_params(limit=limit)
         params['query'] = query
         return 'search', params
@@ -1507,11 +1944,11 @@ class API:
     @set_and_forget
     def set_mobile_device_config(self, mobile_device_id: int, friendly_name: str = None) -> bool:
         """
-
-        :param mobile_device_id:
-        :type mobile_device_id:
-        :param friendly_name:
-        :type friendly_name:
+        Configure an existing notification agent
+        :param mobile_device_id: ID of the mobile device config to update
+        :type mobile_device_id: int
+        :param friendly_name: Friendly name to identify the mobile device
+        :type friendly_name: str
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -1538,23 +1975,39 @@ class API:
 
     @raw_json
     def sql(self, query: str) -> dict:
+        """
+        Query the Tautulli database with raw SQL.
+        Automatically makes a backup of the database if the latest backup is older than 24 hours.
+        `api_sql` must be manually enabled in the config file while Tautulli is shut down.
+        :param query: SQL query
+        :type query: str
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'sql', {'query': query}
 
     @raw_json
     def status(self, check: str = None) -> dict:
+        """
+        Get the current status of Tautulli
+        :param check: What to check (i.e. 'database')
+        :type check: str
+        :return: Dict of data
+        :rtype: dict
+        """
         params = build_optional_params(check=check)
         return 'status', params
 
     @set_and_forget
     def terminate_session(self, session_key: int = None, session_id: str = None, message: str = None) -> bool:
         """
-
-        :param session_key:
-        :type session_key:
-        :param session_id:
-        :type session_id:
-        :param message:
-        :type message:
+        Stop a streaming session
+        :param session_key: Session key of the session to terminate
+        :type session_key: int
+        :param session_id: Session ID of the session to terminate
+        :type session_id: str
+        :param message: Custom message to send to the client
+        :type message: str
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -1569,11 +2022,11 @@ class API:
     @set_and_forget
     def undelete_library(self, section_id: str, section_name: str) -> bool:
         """
-
-        :param section_id:
-        :type section_id:
-        :param section_name:
-        :type section_name:
+        Restore a deleted library section to Tautulli
+        :param section_id: ID of the Plex library section
+        :type section_id: str
+        :param section_name: Name of the Plex library section
+        :type section_name: str
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -1582,11 +2035,11 @@ class API:
     @set_and_forget
     def undelete_user(self, user_id: str, username: str) -> bool:
         """
-
-        :param user_id:
-        :type user_id:
-        :param username:
-        :type username:
+        Restore a deleted user to Tautulli
+        :param user_id: ID of the Plex user
+        :type user_id: str
+        :param username: Username of the Plex user
+        :type username: str
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -1595,7 +2048,7 @@ class API:
     @set_and_forget
     def update(self) -> bool:
         """
-
+        Update Tautulli
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -1604,18 +2057,24 @@ class API:
     @property
     @raw_json
     def update_check(self) -> dict:
+        """
+        Check for Tautulli updates
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'update_check', None
 
     @set_and_forget
     def update_metadata_details(self, old_rating_key: str, new_rating_key: str, media_type: str) -> bool:
         """
-
-        :param old_rating_key:
-        :type old_rating_key:
-        :param new_rating_key:
-        :type new_rating_key:
-        :param media_type:
-        :type media_type:
+        Update the metadata in the Tautulli database by matching rating keys.
+        Also updates all parents or children of the media item if it is a show/season/episode or artist/album/track.
+        :param old_rating_key: Old rating key for item
+        :type old_rating_key: str
+        :param new_rating_key: New rating key for item
+        :type new_rating_key: str
+        :param media_type: Type of media (i.e. 'movie', 'show', 'episode', 'album', 'track')
+        :type media_type: str
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
