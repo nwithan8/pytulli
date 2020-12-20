@@ -72,6 +72,28 @@ class API:
         """
         return "get_server_friendly_name", None
 
+    @set_and_forget
+    def add_newsletter_config(self, agent_id: int) -> bool:
+        """
+        Add a new newsletter notification agent
+        :param agent_id: Newletter type to add
+        :type agent_id: int
+        :return: True if successful, False if unsuccessful
+        :rtype: bool
+        """
+        return 'add_newsletter_config', {'agent_id': agent_id}
+
+    @set_and_forget
+    def add_notifier_config(self, agent_id: int) -> bool:
+        """
+        Add a new notifier notification agent
+        :param agent_id: Notification agent to add
+        :type: int
+        :return: True if successful, False if unsuccessful
+        :rtype: bool
+        """
+        return 'add_notifier_config', {'agent_id': agent_id}
+
     @property
     def arnold(self) -> str:
         """
@@ -83,28 +105,6 @@ class API:
         if json_data:
             return _get_response_data(json_data=json_data)
         return static.empty_string
-
-    @set_and_forget
-    def add_newsletter_config(self, agent_id: int) -> bool:
-        """
-        Add a new newsletter agent
-        :param agent_id:
-        :type agent_id:
-        :return: True if successful, False if unsuccessful
-        :rtype: bool
-        """
-        return "add_newsletter_config", {'agent_id': agent_id}
-
-    @set_and_forget
-    def add_notifier_config(self, agent_id: int) -> bool:
-        """
-        Add a new notification agent
-        :param agent_id:
-        :type agent_id:
-        :return: True if successful, False if unsuccessful
-        :rtype: bool
-        """
-        return "add_notifier_config", {'agent_id': agent_id}
 
     @set_and_forget
     def backup_config(self) -> bool:
@@ -128,12 +128,12 @@ class API:
     def delete_all_library_history(self, server_id: str, section_id: str, row_ids: List[int] = None) -> bool:
         """
         Delete all Tautulli history for a specific library
-        :param server_id:
-        :type server_id:
-        :param section_id:
-        :type section_id:
-        :param row_ids:
-        :type row_ids:
+        :param server_id: Plex server identifier of the library section
+        :type server_id: str
+        :param section_id: ID of the Plex library section
+        :type section_id: str
+        :param row_ids: List of row IDS to delete
+        :type row_ids: list
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -146,10 +146,10 @@ class API:
     def delete_all_user_history(self, user_id: str, row_ids: List[int] = None) -> bool:
         """
         Delete all Tautulli history for a specific user
-        :param user_id:
-        :type user_id:
-        :param row_ids:
-        :type row_ids:
+        :param user_id: ID of the Plex user
+        :type user_id: str
+        :param row_ids: List of row IDs to delete
+        :type row_ids: list
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -171,10 +171,10 @@ class API:
     def delete_export(self, export_id: int, delete_all: bool = False) -> bool:
         """
         Delete exports from Tautulli
-        :param export_id:
-        :type export_id:
-        :param delete_all:
-        :type delete_all:
+        :param export_id: Row ID of the exported file to delete
+        :type export_id: int
+        :param delete_all: Whether to delete all exported files (default: False)
+        :type delete_all: bool
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -184,8 +184,8 @@ class API:
     def delete_history(self, row_ids: List[int]) -> bool:
         """
         Delete history rows from Tautulli
-        :param row_ids:
-        :type row_ids:
+        :param row_ids: List of row IDs to delete
+        :type row_ids: list
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -196,12 +196,12 @@ class API:
     def delete_hosted_images(self, rating_key: int = None, service: str = None, delete_all: bool = False) -> bool:
         """
         Delete images uploaded to image hosting services
-        :param rating_key:
-        :type rating_key:
-        :param service:
-        :type service:
-        :param delete_all:
-        :type delete_all:
+        :param rating_key: Rating key of image
+        :type rating_key: int
+        :param service: Service to delete image from (i.e. 'imgur', 'cloudinary')
+        :type service: str
+        :param delete_all: Whether to delete all images from the service (default: False)
+        :type delete_all: bool
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -225,12 +225,12 @@ class API:
         """
         Delete library section from Tautulli.
         ALso erases library history
-        :param server_id:
-        :type server_id:
-        :param section_id:
-        :type section_id:
-        :param row_ids:
-        :type row_ids:
+        :param server_id: Plex server identifier of the library section
+        :type server_id: str
+        :param section_id: ID of the Plex library section
+        :type section_id: str
+        :param row_ids: List of row IDs to delete
+        :type row_ids: list
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -242,7 +242,7 @@ class API:
     @set_and_forget
     def delete_login_log(self) -> bool:
         """
-
+        Delete the Tautulli login logs
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -251,13 +251,13 @@ class API:
     @set_and_forget
     def delete_loopup_info(self, rating_key: int = None, service: str = None, delete_all: bool = False) -> bool:
         """
-
-        :param rating_key:
-        :type rating_key:
-        :param service:
-        :type service:
-        :param delete_all:
-        :type delete_all:
+        Delete the 3rd party API lookup info
+        :param rating_key: rating key of image to delete
+        :type rating_key: int
+        :param service: service to delete from (i.e. 'themoviedb', 'tvmaze', 'musicbrainz')
+        :type service: str
+        :param delete_all: Whether to delete all images from the service (default: False)
+        :type delete_all: bool
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -270,9 +270,9 @@ class API:
     @set_and_forget
     def delete_media_info_cache(self, section_id: str) -> bool:
         """
-
-        :param section_id:
-        :type section_id:
+        Delete media info table cache for a specific library
+        :param section_id: ID of the Plex library section
+        :type section_id: str
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -281,11 +281,11 @@ class API:
     @set_and_forget
     def delete_mobile_device(self, mobile_device_id: int = None, device_id: str = None) -> bool:
         """
-
-        :param mobile_device_id:
-        :type mobile_device_id:
-        :param device_id:
-        :type device_id:
+        Remove a mobile device from the database
+        :param mobile_device_id: Mobile device database ID to delete
+        :type mobile_device_id: int
+        :param device_id: Unique device identifier for the mobile device
+        :type device_id: str
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -300,9 +300,9 @@ class API:
     @set_and_forget
     def delete_newsletter(self, newsletter_id: int) -> bool:
         """
-
-        :param newsletter_id:
-        :type newsletter_id:
+        Remove a newsletter from the database
+        :param newsletter_id: ID of the newsletter to delete
+        :type newsletter_id: int
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -311,7 +311,7 @@ class API:
     @set_and_forget
     def delete_newsletter_log(self) -> bool:
         """
-
+        Delete the Tautulli newsletter logs
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -320,7 +320,7 @@ class API:
     @set_and_forget
     def delete_notification_log(self) -> bool:
         """
-
+        Delete the Tautulli notification logs
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -329,9 +329,9 @@ class API:
     @set_and_forget
     def delete_notifier(self, notifier_id: int) -> bool:
         """
-
-        :param notifier_id:
-        :type notifier_id:
+        Remove a notifier from the database
+        :param notifier_id: ID of the notifier to delete
+        :type notifier_id: int
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -340,7 +340,7 @@ class API:
     @set_and_forget
     def delete_recently_added(self) -> bool:
         """
-
+        Flush all of the recently added items in the database
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -349,11 +349,11 @@ class API:
     @set_and_forget
     def delete_synced_item(self, client_id: str, sync_id: str) -> bool:
         """
-
-        :param client_id:
-        :type client_id:
-        :param sync_id:
-        :type sync_id:
+        Delete a synced item from a device
+        :param client_id: Client ID of the device to delete from
+        :type client_id: str
+        :param sync_id: Sync ID of the synced item
+        :type sync_id: str
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -362,7 +362,7 @@ class API:
     @set_and_forget
     def delete_temp_sessions(self) -> bool:
         """
-
+        Flush all temporary sessions in the database
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -371,11 +371,12 @@ class API:
     @set_and_forget
     def delete_user(self, user_id: str, row_ids: List[int] = None) -> bool:
         """
-
-        :param user_id:
-        :type user_id:
-        :param row_ids:
-        :type row_ids:
+        Delete a user from Tautulli.
+        Also erases all history of the user.
+        :param user_id: ID of the Plex user
+        :type user_id: str
+        :param row_ids: List of row IDs to delete
+        :type row_ids: list
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -386,39 +387,68 @@ class API:
 
     @property
     def docs(self) -> dict:
+        """
+        Get the Tautulli API docs as a dict where commands are keys, docstring are value
+        :return: Dict of data
+        :rtype: dict
+        """
         return self._get_json(command='docs')
 
     @property
     def docs_md(self) -> str:
+        """
+        Get the Tautulli API docs formatted with markdown
+        :return: API docs str
+        :rtype: str
+        """
         response = self._get(command='docs_md')
         if response:
             return response.text
         return static.empty_string
 
     def download_config(self) -> str:
+        """
+        Download the Tautulli configuration file
+        :return: Config file string
+        :rtype: str
+        """
         response = self._get(command='download_config')
         if response:
             return response.text
         return static.empty_string
 
     def download_database(self) -> bytes:
+        """
+        Download the Tautulli database file
+        :return: Datbase file bytearray
+        :rtype: bytearray
+        """
         response = self._get(command='download_database')
         if response:
             return response.content
         return static.empty_bytes
 
     """
-    @property
-    def metadata(self) -> :
+    def download_export(self, export_id: int) -> :
     """
 
     def download_log(self) -> bytes:
+        """
+        Download the Tautulli log file
+        :return: Log file bytearray
+        :rtype: bytearray
+        """
         response = self._get(command='download_log')
         if response:
             return response.content
         return static.empty_bytes
 
     def download_plex_log(self) -> bytes:
+        """
+        Download the Plex log file
+        :return: Log file bytearray
+        :rtype: bytearray
+        """
         response = self._get(command='download_plex_log')
         if response:
             return response.content
@@ -428,15 +458,15 @@ class API:
     def edit_library(self, section_id: str, custom_thumb: str = None, custom_art: str = None,
                      keep_history: bool = True) -> bool:
         """
-
-        :param section_id:
-        :type section_id:
-        :param custom_thumb:
-        :type custom_thumb:
-        :param custom_art:
-        :type custom_art:
-        :param keep_history:
-        :type keep_history:
+        Update a library section on Tautulli
+        :param section_id: ID of the Plex library section
+        :type section_id: str
+        :param custom_thumb: URL of the custom library thumbnail
+        :type custom_thumb: str
+        :param custom_art: ULR of the custom library background art
+        :type custom_art: str
+        :param keep_history: Whether to keep library history (default: True)
+        :type keep_history: bool
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -449,17 +479,17 @@ class API:
     def edit_user(self, user_id: str, friendly_name: str = None, custom_thumb: str = None, keep_history: bool = True,
                   allow_guest: bool = False) -> bool:
         """
-
-        :param user_id:
-        :type user_id:
-        :param friendly_name:
-        :type friendly_name:
-        :param custom_thumb:
-        :type custom_thumb:
-        :param keep_history:
-        :type keep_history:
-        :param allow_guest:
-        :type allow_guest:
+        Update a user on Tautulli
+        :param user_id: ID of the Plex user
+        :type user_id: str
+        :param friendly_name: Friendly name of the user
+        :type friendly_name: str
+        :param custom_thumb: ULR of the custom user thumbnail
+        :type custom_thumb: str
+        :param keep_history: Whether to keep user history (default: True)
+        :type keep_history: bool
+        :param allow_guest: Whether to allow user as a guest (default: False)
+        :type allow_guest: bool
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -476,29 +506,29 @@ class API:
                         thumb_level: int = 0, art_level: int = 0, custom_fields: List[str] = None,
                         export_type: str = None, individual_files: bool = False) -> bool:
         """
-
-        :param section_id:
-        :type section_id:
-        :param user_id:
-        :type user_id:
-        :param rating_key:
-        :type rating_key:
-        :param file_format:
-        :type file_format:
-        :param metadata_level:
-        :type metadata_level:
-        :param media_info_level:
-        :type media_info_level:
-        :param thumb_level:
-        :type thumb_level:
-        :param art_level:
-        :type art_level:
-        :param custom_fields:
-        :type custom_fields:
-        :param export_type:
-        :type export_type:
-        :param individual_files:
-        :type individual_files:
+        Export library or media metadata to a file
+        :param section_id: Section ID of the library items to export
+        :type section_id: int
+        :param user_id: User ID of the playlist items to export
+        :type user_id: int
+        :param rating_key: Rating key of the media items to export
+        :type rating_key: int
+        :param file_format: File format for export (i.e. 'csv', 'json', 'xml', 'm3u8') (default: 'csv')
+        :type file_format: str
+        :param metadata_level: Level of metadata to export (default: 1)
+        :type metadata_level: int
+        :param media_info_level: Level of media info to export (default: 1)
+        :type media_info_level: int
+        :param thumb_level: Level of poster/cover images to export (default: 0)
+        :type thumb_level: int
+        :param art_level: Lvel of background artwork images to export (default: 0)
+        :type art_level: int
+        :param custom_fields: List of custom fields to export
+        :type custom_fields: list
+        :param export_type: Type of export (i.e. 'collection' or 'playlist' for library/user export)
+        :type export_type: str
+        :param individual_files: Export each item as an individual fiel for library/user export (default: False)
+        :type individual_files: bool
         :return: True if successful, False if unsuccessful
         :rtype: bool
         """
@@ -507,9 +537,10 @@ class API:
         if _is_invalid_choice(value=file_format, variable_name="file_format",
                               choices=static.export_file_formats):
             return False, None
-        if _is_invalid_choice(value=export_type, variable_name="export_type",
-                              choices=static.export_media_types):
-            return False, None
+        if section_id or user_id:
+            if _is_invalid_choice(value=export_type, variable_name="export_type",
+                                 choices=static.export_media_types):
+                return False, None
         if custom_fields:
             custom_fields = ','.join(custom_fields)
         params = build_optional_params(file_format=file_format, metadata_level=metadata_level,
@@ -524,10 +555,30 @@ class API:
     @property
     @raw_json
     def activity(self, session_key: int = None, session_id: str = None) -> dict:
+        """
+        Get the current activity on the Plex Media Server
+        :param session_key: Session key for the session info to return
+        :type session_key: int
+        :param session_id: Session ID of the session info to return
+        :type session_id: str
+        :return: Dict of data
+        :rtype: dict
+        """
         params = build_optional_params(session_key=session_key, session_id=session_id)
         return self._get_json(command='get_activity', params=params)
 
-    def get_apikey(self, username: str = None, password: str = None) -> str:
+    def get_api_key(self, username: str = None, password: str = None) -> str:
+        """
+        Get the Tautulli API key.
+        Username and password are required if auth is enabled.
+        Makes and saves the API key if it does not exist.
+        :param username: Tautulli username
+        :type username: str
+        :param password: Tautulli password
+        :type password: str
+        :return: API key
+        :rtype: str
+        """
         params = build_optional_params(username=username, password=password)
         json_data = self._get_json(command='get_apikey', params=params)
         if _success_result(json_data=json_data):
@@ -536,15 +587,36 @@ class API:
 
     @raw_json
     def get_collections_table(self, section_id: str) -> dict:
+        """
+        Get the data on the Tautulli collections tables
+        :param section_id: ID of the Plex library section
+        :type section_id: str
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_collections_table', {'section_id': section_id}
 
     @property
     @raw_json
     def date_formats(self) -> dict:
+        """
+        Get the data and time formats used by Tautulli
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_date_formats', None
 
     @raw_json
     def get_export_fields(self, media_type: str, sub_media_type: str = None) -> dict:
+        """
+        Get a list of available custom export fields
+        :param media_type: Media type of the fields to return
+        :type media_type: str
+        :param sub_media_type: Child media type for collections (i.e. 'movie', 'show', 'video', 'audio', 'photo')
+        :type sub_media_type: str
+        :return: Dict of data
+        :rtype: dict
+        """
         if _is_invalid_choice(value=media_type, variable_name="media_type", choices=static.export_media_types):
             return False, None
         if sub_media_type:
@@ -564,6 +636,27 @@ class API:
     def get_exports_table(self, section_id: str = None, user_id: str = None, rating_key: str = None,
                           order_column: str = None, order_direction: str = None, start: int = 0, length: int = 25,
                           search: str = None) -> dict:
+        """
+        Get the data on the Tautulli export tables
+        :param section_id: ID of the Plex library section
+        :type section_id: str
+        :param user_id: ID of the Plex user
+        :type user_id: str
+        :param rating_key: Rating key of the exported item
+        :type rating_key: str
+        :param order_column: Column to order data by (i.e. 'added_at', 'sort_title', 'last_played')
+        :type order_column: str
+        :param order_direction: Direction to order the rows ('desc' or 'asc')
+        :type order_direction: str
+        :param start: Row number to start from (default: 0)
+        :type start: int
+        :param length: Number of items to return (default: 25)
+        :type length: int
+        :param search: String to search for
+        :type search: str
+        :return: Dict of data
+        :rtype: dict
+        """
         if not _one_needed(section_id=section_id, user_id=user_id, rating_key=rating_key):
             return False, None
         if _is_invalid_choice(value=order_column, variable_name="order_column",
@@ -581,6 +674,13 @@ class API:
 
     @raw_json
     def get_geoip_lookup(self, ip_address: str) -> dict:
+        """
+        Get the Geolocation info for an IP address
+        :param ip_address: IP address to look up
+        :type ip_address: str
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_geoip_lookup', {'ip_address': ip_address}
 
     @raw_json
@@ -589,6 +689,45 @@ class API:
                     start_date: datetime = None, section_id: int = None, media_type: str = None,
                     transcode_decision: str = None, guid: str = None, order_column: str = None,
                     order_direction: str = None, start: int = 0, length: int = 25, search: str = None) -> dict:
+        """
+        Get the Tautulli history
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool
+        :param include_activity: Whether to include activity (default: False)
+        :type include_activity: bool
+        :param user: Name of user
+        :type user: str
+        :param user_id: ID of user
+        :type user_id: int
+        :param rating_key: Rating key of item
+        :type rating_key: int
+        :param parent_rating_key: Parent rating key of item
+        :type parent_rating_key: int
+        :param grandparent_rating_key: Grandparent rating key of item
+        :type grandparent_rating_key: int
+        :param start_date: Date to start results from
+        :type start_date: datetime
+        :param section_id: ID of section
+        :type section_id: int
+        :param media_type: Media type (i.e. 'movie', 'episode', 'track', 'live')
+        :type media_type: str
+        :param transcode_decision: Transcode decision (i.e. 'direct play', 'copy', 'transcode')
+        :type transcode_decision: str
+        :param guid: Plex GUID for an item (e.g. "com.plexapp.agents.thetvdb://121361/6/1")
+        :type guid: str
+        :param order_column: Column to order data by (i.e. 'date', 'platform', 'full_title')
+        :type order_column: str
+        :param order_direction: Direction to order the rows ('desc' or 'asc')
+        :type order_direction: str
+        :param start: Row number to start from (default: 0)
+        :type start: int
+        :param length: Number of items to return (default: 25)
+        :type length: int
+        :param search: String to search for
+        :type search: str
+        :return: Dict of data
+        :rtype: dict
+        """
         grouping = bool_to_int(boolean=grouping)
         include_activity = bool_to_int(boolean=include_activity)
         start_date = datetime_to_string(datetime_object=start_date)
@@ -614,7 +753,24 @@ class API:
 
     @raw_json
     def get_home_stats(self, grouping: bool = False, time_range: int = 30, stats_type: str = 'plays', start: int = 0,
-                       count=5, stat_id: str = None):
+                       count: int = 5, stat_id: str = None):
+        """
+        Get the homepage watch statistics
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool
+        :param time_range: Time range to calculate statistics (i.e. 30)
+        :type time_range: int
+        :param stats_type: Type of stats to get ('plays' or 'duration')
+        :type stats_type: str
+        :param start: Row number to start from (default: 0)
+        :type start: int
+        :param count: Number of items to return (default: 5)
+        :type count: int
+        :param stat_id: Name of a single statistic to return (i.e. 'top_movies', 'popular_tv', 'most_concurrent')
+        :type stat_id: str
+        :return: Dict of data
+        :rtype: dict
+        """
         grouping = bool_to_int(boolean=grouping)
         if _is_invalid_choice(value=stats_type, variable_name="stats_type",
                               choices=static.stats_type):
@@ -628,11 +784,33 @@ class API:
 
     @raw_json
     def libraries(self) -> dict:
+        """
+        Get a list of all libraries on your server
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_libraries', None
 
     @raw_json
     def get_libraries_table(self, grouping: bool = False, order_column: str = None, order_direction: str = None,
                             start: int = 0, length: int = 25, search: str = None) -> dict:
+        """
+        Get the data on the Tautulli libraries table
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool
+        :param order_column: Column to order rows by (i.e. 'section_name', 'count', 'last_played')
+        :type order_column: str
+        :param order_direction: Direction to order rows by ('desc' or 'asc')
+        :type order_direction: str
+        :param start: Row number to start from (default: 0)
+        :type start: int
+        :param length: Number of items to return (default: 25)
+        :type length: int
+        :param search: String to search for
+        :type search: str
+        :return: Dict of data
+        :rtype: dict
+        """
         grouping = bool_to_int(boolean=grouping)
         if _is_invalid_choice(value=order_column, variable_name="order_column",
                               choices=static.libraries_order_columns):
@@ -646,12 +824,42 @@ class API:
 
     @raw_json
     def get_library(self, section_id: str) -> dict:
+        """
+        Get a library's details
+        :param section_id: ID of the Plex library section
+        :type section_id: str
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_library', {'section_id': section_id}
 
     @raw_json
     def get_library_media_info(self, section_id: str, rating_key: str, section_type: str = None,
                                order_column: str = None, order_direction: str = None, start: int = 0, length: int = 25,
                                search: str = None, refresh: bool = False) -> dict:
+        """
+        Get the data on the Tautulli media info tables.
+        :param section_id: ID of the Plex library section
+        :type section_id: str
+        :param rating_key: Grandparent or parent rating key
+        :type rating_key: str
+        :param section_type: Type of section (i.e. 'movie', 'show', 'artist', 'photo')
+        :type section_type: str
+        :param order_column: Column to order rows by (i.e. 'added_at', 'sort_title', 'file_size')
+        :type order_column: str
+        :param order_direction: Direction to order rows ('desc' or 'asc')
+        :type order_direction: str
+        :param start: Row number to start from (default: 0)
+        :type start: int
+        :param length: Number of items to return (default: 25)
+        :type length: int
+        :param search: String to search for
+        :type search: str
+        :param refresh: Whether to refresh the media info table (default: False)
+        :type refresh: bool
+        :return: Dict of data
+        :rtype: dict
+        """
         if not _one_needed(section_id=section_id, rating_key=rating_key):
             return False, None
         if _is_invalid_choice(value=order_column, variable_name="order_column",
@@ -670,10 +878,24 @@ class API:
     @property
     @raw_json
     def library_names(self) -> dict:
+        """
+        Get list of library names and IDs on the Plex Media Server
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_library_names', None
 
     @raw_json
     def get_library_user_stats(self, section_id: str, grouping: bool = False) -> dict:
+        """
+        Get a library's user statistics
+        :param section_id: ID of the Plex library section
+        :type section_id: str
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool
+        :return: Dict of data
+        :rtype: dict
+        """
         grouping = bool_to_int(boolean=grouping)
         params = build_optional_params(grouping=grouping)
         params['section_id'] = section_id
@@ -682,6 +904,17 @@ class API:
     @raw_json
     def get_library_watch_time_stats(self, section_id: str, grouping: bool = False,
                                      query_days: List[int] = None) -> dict:
+        """
+        Get a library's watch time statistics
+        :param section_id: ID of the Plex library section
+        :type section_id: str
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool
+        :param query_days: List of days to get results for (i.e. [0, 1, 14, 30])
+        :type query_days: list
+        :return: Dict of data
+        :rtype: dict
+        """
         grouping = bool_to_int(boolean=grouping)
         params = build_optional_params(grouping=grouping)
         params['section_id'] = section_id
@@ -692,6 +925,23 @@ class API:
     @raw_json
     def get_logs(self, sort: str = None, search: str = None, order_direction: str = None, regex: str = None,
                  start: int = None, end: int = None) -> dict:
+        """
+        Get the Tautulli logs
+        :param sort: What to sort the logs by (i.e. 'time', 'thread', 'msg', 'loglevel')
+        :type sort: str
+        :param search: String to search for
+        :type search: str
+        :param order_direction: Direction to order rows ('desc' or 'asc')
+        :type order_direction: str
+        :param regex: Regex string to search for
+        :type regex: str
+        :param start: Row number to start from
+        :type start: int
+        :param end: Row number to end at
+        :type end: int
+        :return: Dict of data
+        :rtype: dict
+        """
         if _is_invalid_choice(value=sort, variable_name='sort',
                               choices=static.log_sorting):
             return False, None
@@ -704,6 +954,15 @@ class API:
 
     @raw_json
     def get_metadata(self, rating_key: str = None, sync_id: str = None) -> dict:
+        """
+        Get the metadata for a media item
+        :param rating_key: Rating key of the media item
+        :type rating_key: str
+        :param sync_id: Sync ID of a synced item
+        :type sync_id: str
+        :return: Dict of data
+        :rtype: dict
+        """
         if not _one_needed(sync_id=sync_id, rating_key=rating_key):
             return False, None
         params = {}
@@ -714,6 +973,15 @@ class API:
 
     @raw_json
     def get_new_rating_keys(self, rating_key: str, media_type: str) -> dict:
+        """
+        Get a list of new rating keys for the Plex Media Server of all of the item's parent/children
+        :param rating_key: Rating key of item
+        :type rating_key: str
+        :param media_type: Type of media (i.e. 'movie', 'show', 'episode', 'album', 'track')
+        :type media_type: str
+        :return: Dict of data
+        :rtype: dict
+        """
         if _is_invalid_choice(value=media_type, variable_name='media_type',
                               choices=static.all_media_types):
             return False, None
@@ -722,11 +990,33 @@ class API:
 
     @raw_json
     def get_newsletter_config(self, newsletter_id: int) -> dict:
+        """
+        Get the configuration for an existing newsletter agent
+        :param newsletter_id: ID of the newsletter
+        :type newsletter_id: int
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_newsletter_config', {'newsletter_id': newsletter_id}
 
     @raw_json
     def get_newsletter_log(self, order_column: str = None, order_direction: str = None, start: int = 0,
                            length: int = 25, search: str = None) -> dict:
+        """
+        Get the data on the Tautulli newsletter logs table
+        :param order_column: Column to order rows by (i.e. 'timestamp', 'newsletter_id', 'start_date')
+        :type order_column: str
+        :param order_direction: Direction to order rows ('desc' or 'asc')
+        :type order_direction: str
+        :param start: Row number to start from (default: 0)
+        :type start: int
+        :param length: Number of items to return (default: 25)
+        :type length: int
+        :param search: String to search for
+        :type search: str
+        :return: Dict of data
+        :rtype: dict
+        """
         if _is_invalid_choice(value=order_column, variable_name='order_column',
                               choices=static.newsletter_order_column):
             return False, None
@@ -740,6 +1030,11 @@ class API:
     @property
     @raw_json
     def newsletters(self) -> dict:
+        """
+        Get a list of configured newsletters
+        :return: Dict of data
+        :rtype: dict
+        """
         return 'get_newsletters', None
 
     @raw_json
