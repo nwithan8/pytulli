@@ -1,1 +1,1 @@
-from tautulli.tautulli import API
+from .tautulli import API

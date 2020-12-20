@@ -1,6 +1,9 @@
+from functools import wraps
+
 from tautulli.utils import _success_result, _get_response_data
 
 def set_and_forget(func):
+    @wraps(func)
     def wrapper(self, *args, **kwargs) -> bool:
         """
         Return if the ['response']['result'] part of the JSON response == 'success'
@@ -15,6 +18,7 @@ def set_and_forget(func):
     return wrapper
 
 def raw_json(func):
+    @wraps(func)
     def wrapper(self, *args, **kwargs) -> dict:
         """
         Return the ['response']['data'] part of the JSON response
