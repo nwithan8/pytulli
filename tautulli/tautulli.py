@@ -7,8 +7,9 @@ from datetime import datetime
 import tautulli.static as static
 from tautulli.utils import build_optional_params, _get_response_data, _success_result, int_list_to_string, \
     _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string
-from tautulli.decorators import raw_json, set_and_forget, raw_api_bool
+from tautulli.decorators import raw_json, set_and_forget, raw_api_bool, make_object, make_property_object
 import tautulli._info as package_info
+from .classes import Docs
 
 class ObjectAPI:
     def __init__(self, base_url: str, api_key: str, verbose: bool = False):
@@ -16,15 +17,53 @@ class ObjectAPI:
 
     @property
     def arnold(self) -> str:
+        """
+        Get to the chopper!
+
+        :return: Random Arnold Schwarzenegger quote
+        :rtype: str
+        """
         return self._raw_api.arnold
 
     @property
+    @make_property_object
+    def docs(self) -> Docs:
+        """
+        Get the Tautulli API docs
+
+        :return: Docs object
+        :rtype: Docs
+        """
+        return 'Docs'
+
+    @property
     def docs_md(self) -> str:
+        """
+        Get the Tautulli API docs formatted with markdown
+
+        :return: API docs str
+        :rtype: str
+        """
         return self._raw_api.docs_md
 
     @property
     def server_friendly_name(self) -> str:
+        """
+        Get the name of the Plex Media Server
+
+        :return: Name of the Plex Media Server
+        :rtype: str
+        """
         return self._raw_api.server_friendly_name
+
+    @raw_api_bool
+    def ping(self) -> bool:
+        """
+        Ping the Tautulli server
+        :return: `True` if successful, `False` if unsuccessful
+        :rtype: bool
+        """
+        return False
 
     @raw_api_bool
     def add_newsletter_config(self, agent_id: int) -> bool:

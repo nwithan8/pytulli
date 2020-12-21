@@ -1,16 +1,48 @@
+import sys
 from functools import wraps
 
 from tautulli.utils import _success_result, _get_response_data
+from tautulli.classes import *
 
 def raw_api_bool(func):
     @wraps(func)
     def wrapper(self, *args, **kwargs) -> bool:
         try:
             method = getattr(self._raw_api, func.__name__)
-            print(method)
+            # print(method)
             return method(*args, **kwargs)
         except AttributeError:
             return False
+    return wrapper
+
+def make_property_object(func):
+    @wraps(func)
+    def wrapper(self, *args, **kwargs) -> object:
+        try:
+            data = getattr(self._raw_api, func.__name__)
+            if not data:
+                return None
+            class_name = globals()[func(self)]
+            print(class_name)
+            return class_name(data=data)
+        except AttributeError:
+            return False
+    return wrapper
+
+def make_object(func):
+    @wraps(func)
+    def wrapper(self, *args, **kwargs) -> object:
+        try:
+            method = getattr(self._raw_api, func.__name__)
+            print(method)
+            data = method(*args, **kwargs)
+            if not data:
+                return None
+            class_name = getattr(sys.modules[__name__], func())
+            return class_name(data=data)
+        except AttributeError:
+            return False
+
     return wrapper
 
 def set_and_forget(func):

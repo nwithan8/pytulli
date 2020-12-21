@@ -1,5 +1,21 @@
 from typing import Union
 
+class TautulliObject:
+    def __init__(self, data: dict):
+        self._data = data
+
+class Docs(TautulliObject):
+    def __init__(self, data: dict):
+        super().__init__(data=data)
+
+
+
+
+
+
+
+
+
 
 class HomeStatsCategory:
     def __init__(self, data: dict):
