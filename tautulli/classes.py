@@ -1,20 +1,79 @@
 from typing import Union
 
+
 class TautulliObject:
     def __init__(self, data: dict):
         self._data = data
+
 
 class Docs(TautulliObject):
     def __init__(self, data: dict):
         super().__init__(data=data)
 
 
+class Activity(TautulliObject):
+    def __init__(self, data: dict):
+        super().__init__(data=data)
 
 
+class DateFormats(TautulliObject):
+    def __init__(self, data: dict):
+        super().__init__(data=data)
 
 
+class LibraryNames(TautulliObject):
+    def __init__(self, data: dict):
+        super().__init__(data=data)
 
 
+class Newsletters(TautulliObject):
+    def __init__(self, data: dict):
+        super().__init__(data=data)
+
+
+class NotifierParameters(TautulliObject):
+    def __init__(self, data: dict):
+        super().__init__(data=data)
+
+
+class PMSUpdate(TautulliObject):
+    def __init__(self, data: dict):
+        super().__init__(data=data)
+
+
+class ServerIdentity(TautulliObject):
+    def __init__(self, data: dict):
+        super().__init__(data=data)
+
+
+class ServerInfo(TautulliObject):
+    def __init__(self, data: dict):
+        super().__init__(data=data)
+
+
+class ServerList(TautulliObject):
+    def __init__(self, data: dict):
+        super().__init__(data=data)
+
+
+class ServersInfo(TautulliObject):
+    def __init__(self, data: dict):
+        super().__init__(data=data)
+
+
+class UserNames(TautulliObject):
+    def __init__(self, data: dict):
+        super().__init__(data=data)
+
+
+class Users(TautulliObject):
+    def __init__(self, data: dict):
+        super().__init__(data=data)
+
+
+class UpdateCheck(TautulliObject):
+    def __init__(self, data: dict):
+        super().__init__(data=data)
 
 
 class HomeStatsCategory:

@@ -9,7 +9,8 @@ from tautulli.utils import build_optional_params, _get_response_data, _success_r
     _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string
 from tautulli.decorators import raw_json, set_and_forget, raw_api_bool, make_object, make_property_object
 import tautulli._info as package_info
-from .classes import Docs
+from .classes import *
+
 
 class ObjectAPI:
     def __init__(self, base_url: str, api_key: str, verbose: bool = False):
@@ -24,17 +25,6 @@ class ObjectAPI:
         :rtype: str
         """
         return self._raw_api.arnold
-
-    @property
-    @make_property_object
-    def docs(self) -> Docs:
-        """
-        Get the Tautulli API docs
-
-        :return: Docs object
-        :rtype: Docs
-        """
-        return 'Docs'
 
     @property
     def docs_md(self) -> str:
@@ -55,6 +45,165 @@ class ObjectAPI:
         :rtype: str
         """
         return self._raw_api.server_friendly_name
+
+    @property
+    @make_property_object
+    def docs(self) -> Docs:
+        """
+        Get the Tautulli API docs
+
+        :return: Docs object
+        :rtype: Docs
+        """
+        return 'Docs'
+
+    @property
+    @make_property_object
+    def activity(self, session_key: int = None, session_id: str = None) -> Activity:
+        """
+        Get the current activity on the Plex Media Server
+
+        :param session_key: Session key for the session info to return
+        :type session_key: int, optional
+        :param session_id: Session ID of the session info to return
+        :type session_id: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'Activity'
+
+    @property
+    @make_property_object
+    def date_formats(self) -> DateFormats:
+        """
+        Get the data and time formats used by Tautulli
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        return "DateFormats"
+
+    @property
+    @make_property_object
+    def library_names(self) -> LibraryNames:
+        """
+        Get list of library names and IDs on the Plex Media Server
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'LibraryNames'
+
+    @property
+    @make_property_object
+    def newsletters(self) -> Newsletters:
+        """
+        Get a list of configured newsletters
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'Newsletters'
+
+    @property
+    @make_property_object
+    def notifier_parameters(self) -> NotifierParameters:
+        """
+        Get a list of available notification parameters
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'NotifierParameters'
+
+    @property
+    @make_property_object
+    def pms_update(self) -> PMSUpdate:
+        """
+        Check for updates to the Plex Media Server
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'PMSUpdate'
+
+    @property
+    @make_property_object
+    def server_identity(self) -> ServerIdentity:
+        """
+        Get info about the local server
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'ServerIdentity'
+
+    @property
+    @make_property_object
+    def server_info(self) -> ServerInfo:
+        """
+        Get the Plex Media Server information
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'ServerInfo'
+
+    @property
+    @raw_json
+    def server_list(self) -> ServerList:
+        """
+        Get all your servers that are published to Plex.tv
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'ServerList'
+
+    @property
+    @make_property_object
+    def servers_info(self) -> ServersInfo:
+        """
+        Get info about the Plex Media Server
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'ServersInfo'
+
+    @property
+    @make_property_object
+    def user_names(self) -> UserNames:
+        """
+        Get a list of all usernames and user ids
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'UserNames'
+
+    @property
+    @make_property_object
+    def users(self) -> Users:
+        """
+        Get a list of all users that have access to your server
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'Users'
+
+    @property
+    @make_property_object
+    def update_check(self) -> UpdateCheck:
+        """
+        Check for Tautulli updates
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'UpdateCheck'
+
 
     @raw_api_bool
     def ping(self) -> bool:
@@ -674,6 +823,7 @@ class ObjectAPI:
         """
         return False
 
+
 class RawAPI:
     def __init__(self, base_url: str, api_key: str, verbose: bool = False):
         if base_url.endswith("/"):
@@ -1236,7 +1386,7 @@ class RawAPI:
             return False, None
         if section_id or user_id:
             if _is_invalid_choice(value=export_type, variable_name="export_type",
-                                 choices=static.export_media_types):
+                                  choices=static.export_media_types):
                 return False, None
         if custom_fields:
             custom_fields = ','.join(custom_fields)
@@ -2534,7 +2684,8 @@ class RawAPI:
             if _is_invalid_choice(value=table_name, variable_name='table_name',
                                   choices=static.plexivity_table_names):
                 return False, None
-        params = build_optional_params(method=method, table_name=table_name, backup=backup, import_ignore_interval=import_ignore_interval)
+        params = build_optional_params(method=method, table_name=table_name, backup=backup,
+                                       import_ignore_interval=import_ignore_interval)
         params['app'] = app
         params['database_path'] = database_file_path
         return 'import_database', params
@@ -2636,7 +2787,8 @@ class RawAPI:
         if _is_invalid_choice(value=fallback, variable_name='fallback',
                               choices=static.image_fallback_types):
             return False, None
-        params = build_optional_params(width=width, height=height, opacity=opacity, background=background_hex, blur=blur,
+        params = build_optional_params(width=width, height=height, opacity=opacity, background=background_hex,
+                                       blur=blur,
                                        img_format=img_format, fallback=fallback, refresh=refresh,
                                        return_hash=return_hash)
         name, value = _which_used(img=img, rating_key=rating_key)
