@@ -205,6 +205,18 @@ class ObjectAPI:
         """
         return 'UpdateCheck'
 
+    def get_pms_token(self, username: str, password: str) -> str:
+        """
+        Get the user's Plex token used for Tautulli
+
+        :param username: Plex.tv username
+        :type username: str
+        :param password: Plex.tv password
+        :type password: str
+        :return: Plex token used for Tautulli
+        :rtype: str
+        """
+        return self._raw_api.get_pms_token(username=username, password=password)
 
     def download_config(self) -> str:
         """
@@ -245,6 +257,674 @@ class ObjectAPI:
         :rtype: bytearray
         """
         return self._raw_api.download_plex_log()
+
+    @make_object
+    def get_collections_table(self, section_id: str) -> CollectionsTable:
+        """
+        Get the data on the Tautulli collections tables
+
+        :param section_id: ID of the Plex library section
+        :type section_id: str
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'CollectionsTable'
+
+    @make_object
+    def get_export_fields(self, media_type: str, sub_media_type: str = None) -> ExportFields:
+        """
+        Get a list of available custom export fields
+
+        :param media_type: Media type of the fields to return
+        :type media_type: str, optional
+        :param sub_media_type: Child media type for collections (i.e. 'movie', 'show', 'video', 'audio', 'photo')
+        :type sub_media_type: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'ExportFields'
+
+    @make_object
+    def get_geoip_lookup(self, ip_address: str) -> GeoIPLookup:
+        """
+        Get the Geolocation info for an IP address
+
+        :param ip_address: IP address to look up
+        :type ip_address: str
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'GeoIPLookup'
+
+    @make_object
+    def get_history(self, grouping: bool = False, include_activity: bool = False, user: str = None, user_id: int = None,
+                    rating_key: int = None, parent_rating_key: int = None, grandparent_rating_key: int = None,
+                    start_date: datetime = None, section_id: int = None, media_type: str = None,
+                    transcode_decision: str = None, guid: str = None, order_column: str = None,
+                    order_direction: str = None, start: int = 0, length: int = 25, search: str = None) -> History:
+        """
+        Get the Tautulli history
+
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool, optional
+        :param include_activity: Whether to include activity (default: False)
+        :type include_activity: bool, optional
+        :param user: Name of user
+        :type user: str, optional
+        :param user_id: ID of user
+        :type user_id: int, optional
+        :param rating_key: Rating key of item
+        :type rating_key: int, optional
+        :param parent_rating_key: Parent rating key of item
+        :type parent_rating_key: int, optional
+        :param grandparent_rating_key: Grandparent rating key of item
+        :type grandparent_rating_key: int, optional
+        :param start_date: Date to start results from
+        :type start_date: datetime, optional
+        :param section_id: ID of section
+        :type section_id: int, optional
+        :param media_type: Media type (i.e. 'movie', 'episode', 'track', 'live')
+        :type media_type: str, optional
+        :param transcode_decision: Transcode decision (i.e. 'direct play', 'copy', 'transcode')
+        :type transcode_decision: str, optional
+        :param guid: Plex GUID for an item (e.g. "com.plexapp.agents.thetvdb://121361/6/1")
+        :type guid: str, optional
+        :param order_column: Column to order data by (i.e. 'date', 'platform', 'full_title')
+        :type order_column: str, optional
+        :param order_direction: Direction to order the rows ('desc' or 'asc')
+        :type order_direction: str, optional
+        :param start: Row number to start from (default: 0)
+        :type start: int, optional
+        :param length: Number of items to return (default: 25)
+        :type length: int, optional
+        :param search: String to search for
+        :type search: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'History'
+
+    @make_object
+    def get_home_stats(self, grouping: bool = False, time_range: int = 30, stats_type: str = 'plays', start: int = 0,
+                       count: int = 5, stat_id: str = None) -> HomeStats:
+        """
+        Get the homepage watch statistics
+
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool, optional
+        :param time_range: Time range to calculate statistics (i.e. 30)
+        :type time_range: int, optional
+        :param stats_type: Type of stats to get ('plays' or 'duration')
+        :type stats_type: str, optional
+        :param start: Row number to start from (default: 0)
+        :type start: int, optional
+        :param count: Number of items to return (default: 5)
+        :type count: int, optional
+        :param stat_id: Name of a single statistic to return (i.e. 'top_movies', 'popular_tv', 'most_concurrent')
+        :type stat_id: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'HomeStats'
+
+    @make_object
+    def libraries(self) -> Libraries:
+        """
+        Get a list of all libraries on your server
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'Libraries'
+
+    @make_object
+    def get_libraries_table(self, grouping: bool = False, order_column: str = None, order_direction: str = None,
+                            start: int = 0, length: int = 25, search: str = None) -> LibrariesTable:
+        """
+        Get the data on the Tautulli libraries table
+
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool, optional
+        :param order_column: Column to order rows by (i.e. 'section_name', 'count', 'last_played')
+        :type order_column: str, optional
+        :param order_direction: Direction to order rows by ('desc' or 'asc')
+        :type order_direction: str, optional
+        :param start: Row number to start from (default: 0)
+        :type start: int, optional
+        :param length: Number of items to return (default: 25)
+        :type length: int, optional
+        :param search: String to search for
+        :type search: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'LibrariesTable'
+
+    @make_object
+    def get_library(self, section_id: str) -> Library:
+        """
+        Get a library's details
+
+        :param section_id: ID of the Plex library section
+        :type section_id: str
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'Library'
+
+    @make_object
+    def get_library_media_info(self, section_id: str, rating_key: str, section_type: str = None,
+                               order_column: str = None, order_direction: str = None, start: int = 0, length: int = 25,
+                               search: str = None, refresh: bool = False) -> dict:
+        """
+        Get the data on the Tautulli media info tables.
+
+        :param section_id: ID of the Plex library section
+        :type section_id: str
+        :param rating_key: Grandparent or parent rating key
+        :type rating_key: str
+        :param section_type: Type of section (i.e. 'movie', 'show', 'artist', 'photo')
+        :type section_type: str
+        :param order_column: Column to order rows by (i.e. 'added_at', 'sort_title', 'file_size')
+        :type order_column: str, optional
+        :param order_direction: Direction to order rows ('desc' or 'asc')
+        :type order_direction: str, optional
+        :param start: Row number to start from (default: 0)
+        :type start: int, optional
+        :param length: Number of items to return (default: 25)
+        :type length: int, optional
+        :param search: String to search for
+        :type search: str, optional
+        :param refresh: Whether to refresh the media info table (default: False)
+        :type refresh: bool, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'LibraryMediaInfo'
+
+    @make_object
+    def get_library_user_stats(self, section_id: str, grouping: bool = False) -> dict:
+        """
+        Get a library's user statistics
+
+        :param section_id: ID of the Plex library section
+        :type section_id: str
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'LibraryUserStats'
+
+    @make_object
+    def get_library_watch_time_stats(self, section_id: str, grouping: bool = False,
+                                     query_days: List[int] = None) -> dict:
+        """
+        Get a library's watch time statistics
+
+        :param section_id: ID of the Plex library section
+        :type section_id: str
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool, optional
+        :param query_days: List of days to get results for (i.e. [0, 1, 14, 30])
+        :type query_days: list[int], optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'LibraryWatchTimeStats'
+
+    @make_object
+    def get_logs(self, sort: str = None, search: str = None, order_direction: str = None, regex: str = None,
+                 start: int = None, end: int = None) -> dict:
+        """
+        Get the Tautulli logs
+
+        :param sort: What to sort the logs by (i.e. 'time', 'thread', 'msg', 'loglevel')
+        :type sort: str, optional
+        :param search: String to search for
+        :type search: str, optional
+        :param order_direction: Direction to order rows ('desc' or 'asc')
+        :type order_direction: str, optional
+        :param regex: Regex string to search for
+        :type regex: str, optional
+        :param start: Row number to start from
+        :type start: int, optional
+        :param end: Row number to end at
+        :type end: int, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'Logs'
+
+    @make_object
+    def get_metadata(self, rating_key: str = None, sync_id: str = None) -> dict:
+        """
+        Get the metadata for a media item
+
+        :param rating_key: Rating key of the media item
+        :type rating_key: str, optional
+        :param sync_id: Sync ID of a synced item
+        :type sync_id: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'Metadata'
+
+    @make_object
+    def get_new_rating_keys(self, rating_key: str, media_type: str) -> dict:
+        """
+        Get a list of new rating keys for the Plex Media Server of all of the item's parent/children
+
+        :param rating_key: Rating key of item
+        :type rating_key: str
+        :param media_type: Type of media (i.e. 'movie', 'show', 'episode', 'album', 'track')
+        :type media_type: str
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'NewRatingKeys'
+
+    @make_object
+    def get_newsletter_config(self, newsletter_id: int) -> dict:
+        """
+        Get the configuration for an existing newsletter agent
+
+        :param newsletter_id: ID of the newsletter
+        :type newsletter_id: int
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'NewsletterConfig'
+
+    @make_object
+    def get_newsletter_log(self, order_column: str = None, order_direction: str = None, start: int = 0,
+                           length: int = 25, search: str = None) -> dict:
+        """
+        Get the data on the Tautulli newsletter logs table
+
+        :param order_column: Column to order rows by (i.e. 'timestamp', 'newsletter_id', 'start_date')
+        :type order_column: str, optional
+        :param order_direction: Direction to order rows ('desc' or 'asc')
+        :type order_direction: str, optional
+        :param start: Row number to start from (default: 0)
+        :type start: int, optional
+        :param length: Number of items to return (default: 25)
+        :type length: int, optional
+        :param search: String to search for
+        :type search: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'NewsletterLog'
+
+    @make_object
+    def get_notification_log(self, order_column: str = None, order_direction: str = None, start: int = 0,
+                             length: int = 25, search: str = None) -> dict:
+        """
+        Get the data on the Tautulli notification logs table
+
+        :param order_column: Column to order rows by (i.e. 'timestamp', 'agent_name', 'notifier_id')
+        :type order_column: str, optional
+        :param order_direction: Direction to order rows ('desc' or 'asc')
+        :type order_direction: str, optional
+        :param start: Row number to start from (default: 0)
+        :type start: int, optional
+        :param length: Number of items to return (default: 25)
+        :type length: int, optional
+        :param search: String to search for
+        :type search: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'NotificationLog'
+
+    @make_object
+    def get_notifier_config(self, notifier_id: int) -> dict:
+        """
+        Get the configuration for an existing notification agent
+
+        :param notifier_id: ID of the notifier
+        :type notifier_id: int
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'NotifierConfig'
+
+    @make_object
+    def get_notifiers(self, notify_action: str = None) -> dict:
+        """
+        Get a list of configured notifiers
+
+        :param notify_action: The notification action to filter out
+        :type notify_action: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'Notifiers'
+
+    @make_object
+    def get_old_rating_keys(self, rating_key: str, media_type: str) -> dict:
+        """
+        Get a list of old rating keys from the Tautulli databse for all of the item's parent/children
+        :param rating_key: Rating key of item
+        :type rating_key: str
+        :param media_type: Type of media (i.e. 'movie', 'show', 'episode', 'album', 'track')
+        :type media_type: str
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'OldRatingKeys'
+
+    @make_object
+    def get_playlists_table(self, section_id: str = None, user_id: str = None) -> dict:
+        """
+        Get the data on the Tautulli playlists tables
+
+        :param section_id: Section ID of the Plex library
+        :type section_id: str, optional
+        :param user_id: User ID of the Plex user
+        :type user_id: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'PlaylistsTable'
+
+    #TODO Get X by methods
+
+    @make_object
+    def get_plex_log(self, window: int = None, log_type: str = None) -> dict:
+        """
+        Get the Plex Media Server logs
+
+        :param window: Number of tail lines to return
+        :type window: int, optional
+        :param log_type: Log type ('server' or 'scanner')
+        :type log_type: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'PlexLog'
+
+    @make_object
+    def get_recently_added(self, count: int, start: int = 0, media_type: str = None, section_id: str = None) -> dict:
+        """
+        Get all items that were recently added to Plex
+
+        :param count: Number of item to return
+        :type count: int
+        :param start: Item number to start from
+        :type start: int, optional
+        :param media_type: Media type (i.e. 'movie', 'show', 'artist')
+        :type media_type: str, optional
+        :param section_id: ID of the Plex library section
+        :type section_id: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'RecentlyAdded'
+
+    @make_object
+    def get_server_id(self, hostname: str, port: int, ssl: bool = False, remote: bool = False) -> dict:
+        """
+        Get the Plex Media Server identifier
+
+        :param hostname: IP address of the Plex Media Server
+        :type hostname: str
+        :param port: Port of the Plex Media Server
+        :type port: int
+        :param ssl: Whether to use SSL (default: False)
+        :type ssl: bool, optional
+        :param remote: Whether the Plex Media Server is remote (default: False)
+        :type remote: bool, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'ServerID'
+
+    def get_server_pref(self, pref: str) -> str:
+        """
+        Get a specified Plex Media Server preference
+
+        :param pref: Name of preference
+        :type pref: str
+        :return: Value of preference
+        :rtype: str
+        """
+        return self._raw_api.get_server_pref(pref=pref)
+
+    @make_object
+    def get_settings(self, key: str = None) -> dict:
+        """
+        Get all settings from the config file
+
+        :param key: Name of a config section to return
+        :type key: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'Settings'
+
+    @make_object
+    def get_stream_data(self, row_id: int = None, session_key: int = None) -> dict:
+        """
+        Get the details of a stream from history or current stream
+
+        :param row_id: Row ID number for a history item
+        :type row_id: int, optional
+        :param session_key: Session key for the current stream
+        :type session_key: int, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'StreamData'
+
+
+    #TODO Get_stream_by
+
+    @make_object
+    def get_synced_items(self, machine_id: str, user_id: str = None) -> dict:
+        """
+        Get a list of synced items on the Plex Media Server
+
+        :param machine_id: Plex Media Server identifier
+        :type machine_id: str
+        :param user_id: ID of the Plex user
+        :type user_id: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'SyncedItems'
+
+    @make_object
+    def get_user(self, user_id: str) -> dict:
+        """
+        Get a user's details
+
+        :param user_id: ID of the Plex user
+        :type user_id: str
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'User'
+
+    @make_object
+    def get_user_ips(self, user_id: str, order_column: str = None, order_direction: str = None, start: int = 0,
+                     length: int = 25, search: str = None) -> dict:
+        """
+        Get the data on Tautulli's users IP table
+
+        :param user_id: ID of the Plex user
+        :type user_id: str
+        :param order_column: Column to order rows by (i.e. 'last_seen', 'ip_address', 'player')
+        :type order_column: str, optional
+        :param order_direction: Direction to order rows ('desc' or 'asc')
+        :type order_direction: str, optional
+        :param start: Row number to start from (default: 0)
+        :type start: int, optional
+        :param length: Number of items to return (default: 25)
+        :type length: int, optional
+        :param search: String to search for (e.g. "xxx.xxx.xxx.xxx")
+        :type search: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'UserIPs'
+
+    @make_object
+    def get_user_logins(self, user_id: str, order_column: str = None, order_direction: str = None, start: int = 0,
+                        length: int = 25, search: str = None) -> dict:
+        """
+        Get the data on Tautulli's user login table
+
+        :param user_id: ID of the Plex user
+        :type user_id: str
+        :param order_column: Column to order rows by (i.e. 'date', 'time', 'ip_address')
+        :type order_column: str, optional
+        :param order_direction: Direction to order rows ('desc' or 'asc')
+        :type order_direction: str, optional
+        :param start: Row number to start from (default: 0)
+        :type start: int, optional
+        :param length: Number of items to return (default: 25)
+        :type length: int, optional
+        :param search: String to search for (e.g. "xxx.xxx.xxx.xxx")
+        :type search: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'UserLogins'
+
+    @make_object
+    def get_user_player_stats(self, user_id: str, grouping: bool = False) -> dict:
+        """
+        Get a user's player statistics
+
+        :param user_id: ID of the Plex user
+        :type user_id: str
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'UserPlayerStats'
+
+    @make_object
+    def get_user_watch_time_stats(self, user_id: str, grouping: bool = False, query_days: List[int] = None) -> dict:
+        """
+        Get a user's watch time statistics
+
+        :param user_id: ID of the Plex user
+        :type user_id: str
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool, optional
+        :param query_days: List of days to get results for (e.g. [0, 1, 14, 30])
+        :type query_days: list[int], optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'UserWatchTimeStats'
+
+    @make_object
+    def get_users_table(self, grouping: bool = False, order_column: str = None, order_direction: str = None,
+                        start: int = 0, length: int = 25, search: str = None) -> dict:
+        """
+        Get the data on Tautulli's users table
+
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool, optional
+        :param order_column: Column to order rows by ('friendly_name', 'ip_address', 'player')
+        :type order_column: str, optional
+        :param order_direction: Direction to order rows ('desc' or 'asc')
+        :type order_direction: str, optional
+        :param start: Row number to start from (default: 0)
+        :type start: int, optional
+        :param length: Number of items to return (default: 25)
+        :type length: int, optional
+        :param search: String to search for
+        :type search: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'UsersTable'
+
+    @make_object
+    def get_whois_lookup(self, ip_address: str) -> dict:
+        """
+        Get the connection info for an IP address
+
+        :param ip_address: IP address
+        :type ip_address: str
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'WHOISLookup'
+
+    @make_object
+    def register_device(self, device_id: str, device_name: str, friendly_name: str = None, onesignal_id: str = None,
+                        min_version: str = None) -> dict:
+        """
+        Register the Tautulli Android App for notifications
+
+        :param device_id: Unique device identifier for the mobile device
+        :type device_id: str
+        :param device_name: Device name of the mobil device
+        :type device_name: str
+        :param friendly_name: Friendly name to identity the mobile device
+        :type friendly_name: str, optional
+        :param onesignal_id: The OneSignal ID of the mobile device
+        :type onesignal_id: str, optional
+        :param min_version: The minimum Tautulli version supported by the mobile device (e.g. "v2.5.6")
+        :type min_version: str, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'RegisteredDevice'
+
+    @make_object
+    def search(self, query: str, limit: int = None) -> dict:
+        """
+        Get search results from the Plex Media Server
+
+        :param query: String to search for
+        :type query: str
+        :param limit: Maximum number of items to return per media type
+        :type limit: int, optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'SearchResults'
+
+    @make_object
+    def sql(self, query: str) -> dict:
+        """
+        Query the Tautulli database with raw SQL.
+
+        Automatically makes a backup of the database if the latest backup is older than 24 hours.
+        `api_sql` must be manually enabled in the config file while Tautulli is shut down.
+        :param query: SQL query
+        :type query: str
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'SQLResults'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     @raw_api_bool
@@ -1650,7 +2330,7 @@ class RawAPI:
 
     @raw_json
     def get_home_stats(self, grouping: bool = False, time_range: int = 30, stats_type: str = 'plays', start: int = 0,
-                       count: int = 5, stat_id: str = None):
+                       count: int = 5, stat_id: str = None) -> dict:
         """
         Get the homepage watch statistics
 
