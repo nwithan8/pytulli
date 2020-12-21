@@ -1,1 +1,1 @@
-from .tautulli import API
+from .tautulli import ObjectAPI, RawAPI

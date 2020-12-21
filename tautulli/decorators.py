@@ -2,6 +2,17 @@ from functools import wraps
 
 from tautulli.utils import _success_result, _get_response_data
 
+def raw_api_bool(func):
+    @wraps(func)
+    def wrapper(self, *args, **kwargs) -> bool:
+        try:
+            method = getattr(self._raw_api, func.__name__)
+            print(method)
+            return method(*args, **kwargs)
+        except AttributeError:
+            return False
+    return wrapper
+
 def set_and_forget(func):
     @wraps(func)
     def wrapper(self, *args, **kwargs) -> bool:
