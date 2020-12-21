@@ -36,6 +36,7 @@ class ObjectAPI:
         """
         return self._raw_api.docs_md
 
+
     @property
     def server_friendly_name(self) -> str:
         """
@@ -203,6 +204,47 @@ class ObjectAPI:
         :rtype: dict
         """
         return 'UpdateCheck'
+
+
+    def download_config(self) -> str:
+        """
+        Download the Tautulli configuration file
+
+        :return: Config file string
+        :rtype: str
+        """
+        return self._raw_api.download_config()
+
+    def download_database(self) -> bytes:
+        """
+        Download the Tautulli database file
+
+        :return: Datbase file bytearray
+        :rtype: bytearray
+        """
+        return self._raw_api.download_database()
+
+    """
+    def download_export(self, export_id: int) -> :
+    """
+
+    def download_log(self) -> bytes:
+        """
+        Download the Tautulli log file
+
+        :return: Log file bytearray
+        :rtype: bytearray
+        """
+        return self._raw_api.download_log()
+
+    def download_plex_log(self) -> bytes:
+        """
+        Download the Plex log file
+
+        :return: Log file bytearray
+        :rtype: bytearray
+        """
+        return self._raw_api.download_plex_log()
 
 
     @raw_api_bool

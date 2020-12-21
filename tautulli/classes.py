@@ -76,6 +76,24 @@ class UpdateCheck(TautulliObject):
         super().__init__(data=data)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class HomeStatsCategory:
     def __init__(self, data: dict):
         self._data = data
