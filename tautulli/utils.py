@@ -15,6 +15,8 @@ def datetime_to_string(datetime_object: datetime, string_format: str = "%Y-%m-%d
     :return: Date in string format
     :rtype: str
     """
+    if not datetime_object:
+        return None
     return datetime_object.strftime(fmt=string_format)
 
 def build_optional_params(**kwargs):
