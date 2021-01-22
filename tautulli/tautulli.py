@@ -1,4 +1,5 @@
 import logging
+import warnings
 from typing import Union, List
 from urllib.parse import urlencode
 import requests
@@ -14,7 +15,12 @@ from .classes import *
 
 class ObjectAPI:
     def __init__(self, base_url: str, api_key: str, verbose: bool = False):
+        warnings.warn("Deprecated", DeprecationWarning)
         self._raw_api = RawAPI(base_url=base_url, api_key=api_key, verbose=verbose)
+
+    def __init_subclass__(cls, **kwargs):
+        warnings.warn("Deprecated", DeprecationWarning)
+        super().__init_subclass__(**kwargs)
 
     @property
     def arnold(self) -> str:
