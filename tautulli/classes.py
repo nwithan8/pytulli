@@ -1,5 +1,9 @@
+import os
+
+"""
 from typing import Union
 
+from tautulli import models
 
 class TautulliObject:
     def __init__(self, data: dict):
@@ -259,3 +263,4 @@ class SearchResults(TautulliObject):
 class SQLResults(TautulliObject):
     def __init__(self, data: dict):
         super().__init__(data=data)
+"""

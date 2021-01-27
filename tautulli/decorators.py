@@ -2,7 +2,7 @@ import sys
 from functools import wraps
 
 from tautulli.utils import _success_result, _get_response_data
-from tautulli.classes import *
+from tautulli.models import *
 
 def raw_api_bool(func):
     @wraps(func)
@@ -24,7 +24,10 @@ def make_property_object(func):
                 return None
             class_name = globals()[func(self)]
             print(class_name)
-            return class_name(data=data)
+            if class_name.__name__ == "Datum":
+                return [class_name(**item) for item in data]
+            else:
+                return class_name(**data)
         except AttributeError:
             return False
     return wrapper
@@ -34,7 +37,6 @@ def make_object(func):
     def wrapper(self, *args, **kwargs) -> object:
         try:
             method = getattr(self._raw_api, func.__name__)
-            print(method)
             data = method(*args, **kwargs)
             if not data:
                 return None

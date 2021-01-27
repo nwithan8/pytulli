@@ -1,1 +1,4 @@
-requests
+requests~=2.24.0
+setuptools~=51.3.3
+tautulli~=1.0.0
+pydantic~=1.7.3
