@@ -2,7 +2,7 @@ from typing import Union, List
 import logging
 from datetime import datetime
 
-import tautulli._info as package_info
+from tautulli import __title__
 
 
 def datetime_to_string(datetime_object: datetime, string_format: str = "%Y-%m-%d"):
@@ -19,6 +19,7 @@ def datetime_to_string(datetime_object: datetime, string_format: str = "%Y-%m-%d
         return None
     return datetime_object.strftime(fmt=string_format)
 
+
 def build_optional_params(**kwargs):
     """
     Build a dict with only kwargs elements that are not None
@@ -33,6 +34,7 @@ def build_optional_params(**kwargs):
             params[k] = v
     return params
 
+
 def bool_to_int(boolean: bool) -> int:
     """
     Convert a boolean to a 0/1 equivalent
@@ -45,6 +47,7 @@ def bool_to_int(boolean: bool) -> int:
         return 1
     return 0
 
+
 def int_list_to_string(int_list: List[int]):
     """
     Convert a list of ints to a comma-separated string
@@ -56,6 +59,7 @@ def int_list_to_string(int_list: List[int]):
     """
     int_list = list(map(str, int_list))
     return ','.join(int_list)
+
 
 def _one_needed(**kwargs):
     """
@@ -71,9 +75,10 @@ def _one_needed(**kwargs):
         if v:
             one_used = True
     if not one_used:
-        logger = logging.getLogger(package_info.__title__)
+        logger = logging.getLogger(__title__)
         logger.error(f"Please provide one of the following: {', '.join(kwargs.keys())}")
     return one_used
+
 
 def _which_used(**kwargs):
     """
@@ -87,6 +92,7 @@ def _which_used(**kwargs):
         if v:
             return k, v
     return None, None
+
 
 def _is_invalid_choice(value, variable_name: str, choices: List):
     """
@@ -107,6 +113,7 @@ def _is_invalid_choice(value, variable_name: str, choices: List):
         return True
     return False
 
+
 def _get_response_data(json_data: dict) -> Union[str, int, List, dict]:
     """
     Return ['response']['data'] from JSON data
@@ -116,6 +123,7 @@ def _get_response_data(json_data: dict) -> Union[str, int, List, dict]:
     :rtype: dict
     """
     return json_data.get('response', {}).get('data', {})
+
 
 def _success_result(json_data: dict) -> bool:
     """

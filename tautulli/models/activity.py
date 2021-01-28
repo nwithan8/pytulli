@@ -8,6 +8,7 @@ from typing import Any, List, Optional
 
 from pydantic import BaseModel
 
+
 class Session(BaseModel):
     session_key: str
     media_type: str
@@ -224,9 +225,6 @@ class Session(BaseModel):
     stream_subtitle_decision: str
     stream_subtitle_transient: int
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
 
 class Data(BaseModel):
     stream_count: str
@@ -238,22 +236,12 @@ class Data(BaseModel):
     lan_bandwidth: int
     wan_bandwidth: int
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
 
 class Response(BaseModel):
     result: str
     message: Any
     data: Data
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
 
 class Model(BaseModel):
     response: Response
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-

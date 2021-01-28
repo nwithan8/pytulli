@@ -130,3 +130,5 @@ dmypy.json
 
 # Custom
 test.py
+/tests/
+tests/test_tautulli.py

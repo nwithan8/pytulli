@@ -9,9 +9,9 @@ import tautulli.static as static
 from tautulli.utils import build_optional_params, _get_response_data, _success_result, int_list_to_string, \
     _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string
 from tautulli.decorators import raw_json, set_and_forget, raw_api_bool, make_object, make_property_object
-import tautulli._info as package_info
 from .jsonapi import RawAPI
 from tautulli.models import *
+
 
 class ObjectAPI:
     def __init__(self, base_url: str, api_key: str, verbose: bool = False):
@@ -42,7 +42,6 @@ class ObjectAPI:
         """
         return self._raw_api.docs_md
 
-
     @property
     def server_friendly_name(self) -> str:
         """
@@ -60,7 +59,6 @@ class ObjectAPI:
         Get the Tautulli API docs
 
         :return: Docs object
-        :rtype: Docs
         """
         return 'Docs'
 
@@ -74,8 +72,7 @@ class ObjectAPI:
         :type session_key: int, optional
         :param session_id: Session ID of the session info to return
         :type session_id: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: Activity object
         """
         return 'Activity'
 
@@ -85,8 +82,7 @@ class ObjectAPI:
         """
         Get the data and time formats used by Tautulli
 
-        :return: Dict of data
-        :rtype: dict
+        :return: DateFormats object
         """
         return "DateFormats"
 
@@ -96,8 +92,7 @@ class ObjectAPI:
         """
         Get list of library names and IDs on the Plex Media Server
 
-        :return: Dict of data
-        :rtype: dict
+        :return: LibraryNames object
         """
         return 'LibraryNames'
 
@@ -107,8 +102,7 @@ class ObjectAPI:
         """
         Get a list of configured newsletters
 
-        :return: Dict of data
-        :rtype: dict
+        :return: Newsletters object
         """
         return 'Newsletters'
 
@@ -118,8 +112,7 @@ class ObjectAPI:
         """
         Get a list of available notification parameters
 
-        :return: Dict of data
-        :rtype: dict
+        :return: NotifierParameters object
         """
         return 'NotifierParameters'
 
@@ -129,8 +122,7 @@ class ObjectAPI:
         """
         Check for updates to the Plex Media Server
 
-        :return: Dict of data
-        :rtype: dict
+        :return: PMSUpdate object
         """
         return 'PMSUpdate'
 
@@ -140,8 +132,7 @@ class ObjectAPI:
         """
         Get info about the local server
 
-        :return: Dict of data
-        :rtype: dict
+        :return: ServerIdentity object
         """
         return 'ServerIdentity'
 
@@ -151,19 +142,18 @@ class ObjectAPI:
         """
         Get the Plex Media Server information
 
-        :return: Dict of data
-        :rtype: dict
+        :return: ServerInfo object
         """
         return 'ServerInfo'
 
     @property
-    @raw_json
+    @make_property_object
     def server_list(self) -> ServerList:
         """
         Get all your servers that are published to Plex.tv
 
-        :return: Dict of data
-        :rtype: dict
+        :return: ServerList object
+
         """
         return 'ServerList'
 
@@ -173,8 +163,8 @@ class ObjectAPI:
         """
         Get info about the Plex Media Server
 
-        :return: Dict of data
-        :rtype: dict
+        :return: ServersInfo object
+
         """
         return 'ServersInfo'
 
@@ -184,8 +174,8 @@ class ObjectAPI:
         """
         Get a list of all usernames and user ids
 
-        :return: Dict of data
-        :rtype: dict
+        :return: UserNames object
+
         """
         return 'UserNames'
 
@@ -195,8 +185,8 @@ class ObjectAPI:
         """
         Get a list of all users that have access to your server
 
-        :return: Dict of data
-        :rtype: dict
+        :return: Users object
+
         """
         return 'Users'
 
@@ -206,8 +196,8 @@ class ObjectAPI:
         """
         Check for Tautulli updates
 
-        :return: Dict of data
-        :rtype: dict
+        :return: UpdateCheck object
+
         """
         return 'UpdateCheck'
 
@@ -271,8 +261,7 @@ class ObjectAPI:
 
         :param section_id: ID of the Plex library section
         :type section_id: str
-        :return: Dict of data
-        :rtype: dict
+        :return: CollectionsTable object
         """
         return 'CollectionsTable'
 
@@ -286,8 +275,7 @@ class ObjectAPI:
         :type media_type: str, optional
         :param sub_media_type: Child media type for collections (i.e. 'movie', 'show', 'video', 'audio', 'photo')
         :type sub_media_type: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: ExportFields
         """
         warnings.warn("Deprecated", DeprecationWarning)
         return None
@@ -300,8 +288,7 @@ class ObjectAPI:
 
         :param ip_address: IP address to look up
         :type ip_address: str
-        :return: Dict of data
-        :rtype: dict
+        :return: GeoIPLookup
         """
         return 'GeoIPLookup'
 
@@ -348,8 +335,7 @@ class ObjectAPI:
         :type length: int, optional
         :param search: String to search for
         :type search: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: History object
         """
         return 'History'
 
@@ -371,8 +357,8 @@ class ObjectAPI:
         :type count: int, optional
         :param stat_id: Name of a single statistic to return (i.e. 'top_movies', 'popular_tv', 'most_concurrent')
         :type stat_id: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: HomeStats object
+
         """
         return 'HomeStats'
 
@@ -381,8 +367,8 @@ class ObjectAPI:
         """
         Get a list of all libraries on your server
 
-        :return: Dict of data
-        :rtype: dict
+        :return: Libraries object
+
         """
         return 'Libraries'
 
@@ -404,8 +390,8 @@ class ObjectAPI:
         :type length: int, optional
         :param search: String to search for
         :type search: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: LibrariesTable object
+
         """
         return 'LibrariesTable'
 
@@ -416,15 +402,15 @@ class ObjectAPI:
 
         :param section_id: ID of the Plex library section
         :type section_id: str
-        :return: Dict of data
-        :rtype: dict
+        :return: Library object
+
         """
         return 'Library'
 
     @make_object
     def get_library_media_info(self, section_id: str, rating_key: str, section_type: str = None,
                                order_column: str = None, order_direction: str = None, start: int = 0, length: int = 25,
-                               search: str = None, refresh: bool = False) -> dict:
+                               search: str = None, refresh: bool = False) -> LibraryMediaInfo:
         """
         Get the data on the Tautulli media info tables.
 
@@ -446,13 +432,13 @@ class ObjectAPI:
         :type search: str, optional
         :param refresh: Whether to refresh the media info table (default: False)
         :type refresh: bool, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: LibraryMediaInfo object
+
         """
         return 'LibraryMediaInfo'
 
     @make_object
-    def get_library_user_stats(self, section_id: str, grouping: bool = False) -> dict:
+    def get_library_user_stats(self, section_id: str, grouping: bool = False) -> LibraryUserStats:
         """
         Get a library's user statistics
 
@@ -460,14 +446,14 @@ class ObjectAPI:
         :type section_id: str
         :param grouping: Whether to group results (default: False)
         :type grouping: bool, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: LibraryUserStats objects
+
         """
         return 'LibraryUserStats'
 
     @make_object
     def get_library_watch_time_stats(self, section_id: str, grouping: bool = False,
-                                     query_days: List[int] = None) -> dict:
+                                     query_days: List[int] = None) -> LibraryWatchTimeStats:
         """
         Get a library's watch time statistics
 
@@ -477,14 +463,14 @@ class ObjectAPI:
         :type grouping: bool, optional
         :param query_days: List of days to get results for (i.e. [0, 1, 14, 30])
         :type query_days: list[int], optional
-        :return: Dict of data
-        :rtype: dict
+        :return: LibraryWatchTimeStats object
+
         """
         return 'LibraryWatchTimeStats'
 
     @make_object
     def get_logs(self, sort: str = None, search: str = None, order_direction: str = None, regex: str = None,
-                 start: int = None, end: int = None) -> dict:
+                 start: int = None, end: int = None) -> Logs:
         """
         Get the Tautulli logs
 
@@ -500,13 +486,13 @@ class ObjectAPI:
         :type start: int, optional
         :param end: Row number to end at
         :type end: int, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: Logs object
+
         """
         return 'Logs'
 
     @make_object
-    def get_metadata(self, rating_key: str = None, sync_id: str = None) -> dict:
+    def get_metadata(self, rating_key: str = None, sync_id: str = None) -> Metadata:
         """
         Get the metadata for a media item
 
@@ -514,13 +500,13 @@ class ObjectAPI:
         :type rating_key: str, optional
         :param sync_id: Sync ID of a synced item
         :type sync_id: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: Metadata object
+
         """
         return 'Metadata'
 
     @make_object
-    def get_new_rating_keys(self, rating_key: str, media_type: str) -> dict:
+    def get_new_rating_keys(self, rating_key: str, media_type: str) -> NewRatingKeys:
         """
         Get a list of new rating keys for the Plex Media Server of all of the item's parent/children
 
@@ -528,26 +514,26 @@ class ObjectAPI:
         :type rating_key: str
         :param media_type: Type of media (i.e. 'movie', 'show', 'episode', 'album', 'track')
         :type media_type: str
-        :return: Dict of data
-        :rtype: dict
+        :return: NewRatingKeys object
+
         """
         return 'NewRatingKeys'
 
     @make_object
-    def get_newsletter_config(self, newsletter_id: int) -> dict:
+    def get_newsletter_config(self, newsletter_id: int) -> NewsletterConfig:
         """
         Get the configuration for an existing newsletter agent
 
         :param newsletter_id: ID of the newsletter
         :type newsletter_id: int
-        :return: Dict of data
-        :rtype: dict
+        :return: NewsletterConfig object
+
         """
         return 'NewsletterConfig'
 
     @make_object
     def get_newsletter_log(self, order_column: str = None, order_direction: str = None, start: int = 0,
-                           length: int = 25, search: str = None) -> dict:
+                           length: int = 25, search: str = None) -> NewsletterLog:
         """
         Get the data on the Tautulli newsletter logs table
 
@@ -561,14 +547,14 @@ class ObjectAPI:
         :type length: int, optional
         :param search: String to search for
         :type search: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: NewsletterLog object
+
         """
         return 'NewsletterLog'
 
     @make_object
     def get_notification_log(self, order_column: str = None, order_direction: str = None, start: int = 0,
-                             length: int = 25, search: str = None) -> dict:
+                             length: int = 25, search: str = None) -> NotificationLog:
         """
         Get the data on the Tautulli notification logs table
 
@@ -582,50 +568,50 @@ class ObjectAPI:
         :type length: int, optional
         :param search: String to search for
         :type search: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: NotificationLog object
+
         """
         return 'NotificationLog'
 
     @make_object
-    def get_notifier_config(self, notifier_id: int) -> dict:
+    def get_notifier_config(self, notifier_id: int) -> NotifierConfig:
         """
         Get the configuration for an existing notification agent
 
         :param notifier_id: ID of the notifier
         :type notifier_id: int
-        :return: Dict of data
-        :rtype: dict
+        :return: NotifierConfig object
+
         """
         return 'NotifierConfig'
 
     @make_object
-    def get_notifiers(self, notify_action: str = None) -> dict:
+    def get_notifiers(self, notify_action: str = None) -> Notifiers:
         """
         Get a list of configured notifiers
 
         :param notify_action: The notification action to filter out
         :type notify_action: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: Notifiers object
+
         """
         return 'Notifiers'
 
     @make_object
-    def get_old_rating_keys(self, rating_key: str, media_type: str) -> dict:
+    def get_old_rating_keys(self, rating_key: str, media_type: str) -> OldRatingKeys:
         """
         Get a list of old rating keys from the Tautulli databse for all of the item's parent/children
         :param rating_key: Rating key of item
         :type rating_key: str
         :param media_type: Type of media (i.e. 'movie', 'show', 'episode', 'album', 'track')
         :type media_type: str
-        :return: Dict of data
-        :rtype: dict
+        :return: OldRatingKeys object
+
         """
         return 'OldRatingKeys'
 
     @make_object
-    def get_playlists_table(self, section_id: str = None, user_id: str = None) -> dict:
+    def get_playlists_table(self, section_id: str = None, user_id: str = None) -> PlaylistsTable:
         """
         Get the data on the Tautulli playlists tables
 
@@ -633,15 +619,15 @@ class ObjectAPI:
         :type section_id: str, optional
         :param user_id: User ID of the Plex user
         :type user_id: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: PlaylistsTable object
+
         """
         return 'PlaylistsTable'
 
-    #TODO Get X by methods
+    # TODO Get X by methods
 
     @make_object
-    def get_plex_log(self, window: int = None, log_type: str = None) -> dict:
+    def get_plex_log(self, window: int = None, log_type: str = None) -> PlexLog:
         """
         Get the Plex Media Server logs
 
@@ -649,13 +635,13 @@ class ObjectAPI:
         :type window: int, optional
         :param log_type: Log type ('server' or 'scanner')
         :type log_type: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: PlexLog object
+
         """
         return 'PlexLog'
 
     @make_object
-    def get_recently_added(self, count: int, start: int = 0, media_type: str = None, section_id: str = None) -> dict:
+    def get_recently_added(self, count: int, start: int = 0, media_type: str = None, section_id: str = None) -> RecentlyAdded:
         """
         Get all items that were recently added to Plex
 
@@ -667,13 +653,13 @@ class ObjectAPI:
         :type media_type: str, optional
         :param section_id: ID of the Plex library section
         :type section_id: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: RecentlyAdded object
+
         """
         return 'RecentlyAdded'
 
     @make_object
-    def get_server_id(self, hostname: str, port: int, ssl: bool = False, remote: bool = False) -> dict:
+    def get_server_id(self, hostname: str, port: int, ssl: bool = False, remote: bool = False) -> ServerID:
         """
         Get the Plex Media Server identifier
 
@@ -685,8 +671,8 @@ class ObjectAPI:
         :type ssl: bool, optional
         :param remote: Whether the Plex Media Server is remote (default: False)
         :type remote: bool, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: ServerID object
+
         """
         return 'ServerID'
 
@@ -702,19 +688,19 @@ class ObjectAPI:
         return self._raw_api.get_server_pref(pref=pref)
 
     @make_object
-    def get_settings(self, key: str = None) -> dict:
+    def get_settings(self, key: str = None) -> Settings:
         """
         Get all settings from the config file
 
         :param key: Name of a config section to return
         :type key: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: Settings object
+
         """
         return 'Settings'
 
     @make_object
-    def get_stream_data(self, row_id: int = None, session_key: int = None) -> dict:
+    def get_stream_data(self, row_id: int = None, session_key: int = None) -> StreamData:
         """
         Get the details of a stream from history or current stream
 
@@ -722,16 +708,15 @@ class ObjectAPI:
         :type row_id: int, optional
         :param session_key: Session key for the current stream
         :type session_key: int, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: StreamData object
+
         """
         return 'StreamData'
 
-
-    #TODO Get_stream_by
+    # TODO Get_stream_by
 
     @make_object
-    def get_synced_items(self, machine_id: str, user_id: str = None) -> dict:
+    def get_synced_items(self, machine_id: str, user_id: str = None) -> SyncedItems:
         """
         Get a list of synced items on the Plex Media Server
 
@@ -739,26 +724,26 @@ class ObjectAPI:
         :type machine_id: str
         :param user_id: ID of the Plex user
         :type user_id: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: SyncedItems object
+
         """
         return 'SyncedItems'
 
     @make_object
-    def get_user(self, user_id: str) -> dict:
+    def get_user(self, user_id: str) -> User:
         """
         Get a user's details
 
         :param user_id: ID of the Plex user
         :type user_id: str
-        :return: Dict of data
-        :rtype: dict
+        :return: User object
+
         """
         return 'User'
 
     @make_object
     def get_user_ips(self, user_id: str, order_column: str = None, order_direction: str = None, start: int = 0,
-                     length: int = 25, search: str = None) -> dict:
+                     length: int = 25, search: str = None) -> UserIPs:
         """
         Get the data on Tautulli's users IP table
 
@@ -774,14 +759,14 @@ class ObjectAPI:
         :type length: int, optional
         :param search: String to search for (e.g. "xxx.xxx.xxx.xxx")
         :type search: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: UserIPs object
+
         """
         return 'UserIPs'
 
     @make_object
     def get_user_logins(self, user_id: str, order_column: str = None, order_direction: str = None, start: int = 0,
-                        length: int = 25, search: str = None) -> dict:
+                        length: int = 25, search: str = None) -> UserLogins:
         """
         Get the data on Tautulli's user login table
 
@@ -797,13 +782,13 @@ class ObjectAPI:
         :type length: int, optional
         :param search: String to search for (e.g. "xxx.xxx.xxx.xxx")
         :type search: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: UserLogins object
+
         """
         return 'UserLogins'
 
     @make_object
-    def get_user_player_stats(self, user_id: str, grouping: bool = False) -> dict:
+    def get_user_player_stats(self, user_id: str, grouping: bool = False) -> UserPlayerStats:
         """
         Get a user's player statistics
 
@@ -811,13 +796,13 @@ class ObjectAPI:
         :type user_id: str
         :param grouping: Whether to group results (default: False)
         :type grouping: bool, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: UserPlayerStats object
+
         """
         return 'UserPlayerStats'
 
     @make_object
-    def get_user_watch_time_stats(self, user_id: str, grouping: bool = False, query_days: List[int] = None) -> dict:
+    def get_user_watch_time_stats(self, user_id: str, grouping: bool = False, query_days: List[int] = None) -> UserWatchTimeStats:
         """
         Get a user's watch time statistics
 
@@ -827,14 +812,14 @@ class ObjectAPI:
         :type grouping: bool, optional
         :param query_days: List of days to get results for (e.g. [0, 1, 14, 30])
         :type query_days: list[int], optional
-        :return: Dict of data
-        :rtype: dict
+        :return: UserWatchTimeStats object
+
         """
         return 'UserWatchTimeStats'
 
     @make_object
     def get_users_table(self, grouping: bool = False, order_column: str = None, order_direction: str = None,
-                        start: int = 0, length: int = 25, search: str = None) -> dict:
+                        start: int = 0, length: int = 25, search: str = None) -> UsersTable:
         """
         Get the data on Tautulli's users table
 
@@ -850,26 +835,26 @@ class ObjectAPI:
         :type length: int, optional
         :param search: String to search for
         :type search: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: UsersTable object
+
         """
         return 'UsersTable'
 
     @make_object
-    def get_whois_lookup(self, ip_address: str) -> dict:
+    def get_whois_lookup(self, ip_address: str) -> WHOISLookup:
         """
         Get the connection info for an IP address
 
         :param ip_address: IP address
         :type ip_address: str
-        :return: Dict of data
-        :rtype: dict
+        :return: WHOISLookup object
+
         """
         return 'WHOISLookup'
 
     @make_object
     def register_device(self, device_id: str, device_name: str, friendly_name: str = None, onesignal_id: str = None,
-                        min_version: str = None) -> dict:
+                        min_version: str = None) -> RegisteredDevice:
         """
         Register the Tautulli Android App for notifications
 
@@ -883,13 +868,13 @@ class ObjectAPI:
         :type onesignal_id: str, optional
         :param min_version: The minimum Tautulli version supported by the mobile device (e.g. "v2.5.6")
         :type min_version: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: RegisteredDevice object
+
         """
         return 'RegisteredDevice'
 
     @make_object
-    def search(self, query: str, limit: int = None) -> dict:
+    def search(self, query: str, limit: int = None) -> SearchResults:
         """
         Get search results from the Plex Media Server
 
@@ -897,14 +882,14 @@ class ObjectAPI:
         :type query: str
         :param limit: Maximum number of items to return per media type
         :type limit: int, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: SearchResults object
+
         """
         return 'SearchResults'
 
     # TODO: Test to see what this returns, no schema on API docs
     @make_object
-    def sql(self, query: str) -> dict:
+    def sql(self, query: str) -> SQLResults:
         """
         Query the Tautulli database with raw SQL.
 
@@ -912,32 +897,12 @@ class ObjectAPI:
         `api_sql` must be manually enabled in the config file while Tautulli is shut down.
         :param query: SQL query
         :type query: str
-        :return: Dict of data
-        :rtype: dict
+        :return: SQLResults object
+
         """
         warnings.warn("Deprecated", DeprecationWarning)
         return None
         # return 'SQLResults'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @raw_api_bool
     def ping(self) -> bool:

@@ -9,7 +9,8 @@ import tautulli.static as static
 from tautulli.utils import build_optional_params, _get_response_data, _success_result, int_list_to_string, \
     _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string
 from tautulli.decorators import raw_json, set_and_forget, raw_api_bool, make_object, make_property_object
-import tautulli._info as package_info
+from tautulli import __title__
+
 
 class RawAPI:
     def __init__(self, base_url: str, api_key: str, verbose: bool = False):
@@ -18,7 +19,7 @@ class RawAPI:
         self._url = f"{base_url}/api/v2?apikey={api_key}"
         self._session = requests.Session()
         logging.basicConfig(format='%(levelname)s:%(message)s', level=(logging.DEBUG if verbose else logging.ERROR))
-        self._logger = logging.getLogger(package_info.__title__)
+        self._logger = logging.getLogger(__title__)
 
     def _create_url(self, command: str, params: dict = None) -> str:
         """
