@@ -8,16 +8,16 @@ with open("requirements.txt", 'r') as fh:
     requirements = fh.read().splitlines()
 
 setuptools.setup(
-    name=package_info.__title__,  # How you named your package folder (MyLib)
-    packages=[package_info.__title__],  # Choose the same as "name"
-    version=package_info.__version__,  # Start with a small number and increase it with every change you make
+    name=package_info.__title__,
+    packages=[package_info.__title__],
+    version=package_info.__version__,
     license=package_info.__license__,
-    description=package_info.__description__,  # Give a short description about your library
+    description=package_info.__description__,
     long_description=long_description,
     long_description_content_type="text/markdown",
-    author=package_info.__author__,  # Type in your name
-    author_email=package_info.__author_email__,  # Type in your E-Mail
-    url=f'https://github.com/{package_info.__github_username__}/pytulli',  # Provide either the link to your github or to your website
+    author=package_info.__author__,
+    author_email=package_info.__author_email__,
+    url=f'https://github.com/{package_info.__github_username__}/pytulli',
     download_url=f'https://github.com/{package_info.__github_username__}/pytulli/archive/{package_info.__version__}.tar.gz',
     keywords=package_info.__keywords__,
     install_requires=requirements,
