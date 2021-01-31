@@ -30,7 +30,7 @@ def make_property_object(func):
             else:
                 return class_name(**data)
         except AttributeError:
-            return False
+            return None
 
     return wrapper
 
@@ -46,7 +46,7 @@ def make_object(func):
             class_name = getattr(sys.modules[__name__], func())
             return class_name(data=data)
         except AttributeError:
-            return False
+            return None
 
     return wrapper
 
