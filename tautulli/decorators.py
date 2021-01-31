@@ -4,16 +4,18 @@ from functools import wraps
 from tautulli.utils import _success_result, _get_response_data
 from tautulli.models import *
 
+
 def raw_api_bool(func):
     @wraps(func)
     def wrapper(self, *args, **kwargs) -> bool:
         try:
             method = getattr(self._raw_api, func.__name__)
-            # print(method)
             return method(*args, **kwargs)
         except AttributeError:
             return False
+
     return wrapper
+
 
 def make_property_object(func):
     @wraps(func)
@@ -23,14 +25,15 @@ def make_property_object(func):
             if not data:
                 return None
             class_name = globals()[func(self)]
-            print(class_name)
             if class_name.__name__ == "Datum":
                 return [class_name(**item) for item in data]
             else:
                 return class_name(**data)
         except AttributeError:
             return False
+
     return wrapper
+
 
 def make_object(func):
     @wraps(func)
@@ -47,6 +50,7 @@ def make_object(func):
 
     return wrapper
 
+
 def set_and_forget(func):
     @wraps(func)
     def wrapper(self, *args, **kwargs) -> bool:
@@ -58,9 +62,10 @@ def set_and_forget(func):
         if not command:
             return False
         json_data = self._get_json(command=command, params=params)
-        # print(json_data)
         return _success_result(json_data=json_data)
+
     return wrapper
+
 
 def raw_json(func):
     @wraps(func)
@@ -73,6 +78,6 @@ def raw_json(func):
         if not command:
             return {}
         json_data = self._get_json(command=command, params=params)
-        # print(json_data)
         return _get_response_data(json_data=json_data)
+
     return wrapper
