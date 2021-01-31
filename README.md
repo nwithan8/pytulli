@@ -28,9 +28,9 @@ API calls functions that do not return data return `True`/`False` booleans to co
 Import the ``tautulli`` package as initialize the API
 Example:
 ```python
-from tautulli import tautulli
+from tautulli.api import RawAPI
 
-api = tautulli.API(base_url="http://myipaddress:port", api_key="thisisanapikey")
+api = RawAPI(base_url="http://myipaddress:port", api_key="thisisanapikey")
 ```
 
 You can optionally pass ``verbose=True`` into the API declaration to produce verbose debugging logs and error messages.

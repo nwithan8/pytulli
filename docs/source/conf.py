@@ -32,7 +32,10 @@ release = '1.0.0'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    #'sphinx_autodoc_typehints'
+    'sphinx.ext.intersphinx',
+    'sphinx-jsonschema',
+    'sphinx-pydantic',
+    'sphinx_autodoc_typehints',
 ]
 
 # Autodoc options

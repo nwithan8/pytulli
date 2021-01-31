@@ -1,4 +1,5 @@
 import logging
+import warnings
 from typing import Union, List
 from urllib.parse import urlencode
 import requests
@@ -7,18 +8,18 @@ from datetime import datetime
 import tautulli.static as static
 from tautulli.utils import build_optional_params, _get_response_data, _success_result, int_list_to_string, \
     _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string
-from tautulli.decorators import raw_json, set_and_forget
-import tautulli._info as package_info
+from tautulli.decorators import raw_json, set_and_forget, raw_api_bool, make_object, make_property_object
+from tautulli import __title__
 
 
-class API:
+class RawAPI:
     def __init__(self, base_url: str, api_key: str, verbose: bool = False):
         if base_url.endswith("/"):
             base_url = base_url[:-1]
         self._url = f"{base_url}/api/v2?apikey={api_key}"
         self._session = requests.Session()
         logging.basicConfig(format='%(levelname)s:%(message)s', level=(logging.DEBUG if verbose else logging.ERROR))
-        self._logger = logging.getLogger(package_info.__title__)
+        self._logger = logging.getLogger(__title__)
 
     def _create_url(self, command: str, params: dict = None) -> str:
         """
@@ -90,6 +91,7 @@ class API:
     def add_notifier_config(self, agent_id: int) -> bool:
         """
         Add a new notifier notification agent
+
         :param agent_id: Notification agent to add
         :type: int
         :return: `True` if successful, `False` if unsuccessful
@@ -114,6 +116,7 @@ class API:
     def backup_config(self) -> bool:
         """
         Backup the config.ini file
+
         :return: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
@@ -571,7 +574,7 @@ class API:
             return False, None
         if section_id or user_id:
             if _is_invalid_choice(value=export_type, variable_name="export_type",
-                                 choices=static.export_media_types):
+                                  choices=static.export_media_types):
                 return False, None
         if custom_fields:
             custom_fields = ','.join(custom_fields)
@@ -598,7 +601,7 @@ class API:
         :rtype: dict
         """
         params = build_optional_params(session_key=session_key, session_id=session_id)
-        return self._get_json(command='get_activity', params=params)
+        return 'get_activity', params
 
     def get_api_key(self, username: str = None, password: str = None) -> str:
         """
@@ -793,7 +796,7 @@ class API:
 
     @raw_json
     def get_home_stats(self, grouping: bool = False, time_range: int = 30, stats_type: str = 'plays', start: int = 0,
-                       count: int = 5, stat_id: str = None):
+                       count: int = 5, stat_id: str = None) -> dict:
         """
         Get the homepage watch statistics
 
@@ -1869,7 +1872,8 @@ class API:
             if _is_invalid_choice(value=table_name, variable_name='table_name',
                                   choices=static.plexivity_table_names):
                 return False, None
-        params = build_optional_params(method=method, table_name=table_name, backup=backup, import_ignore_interval=import_ignore_interval)
+        params = build_optional_params(method=method, table_name=table_name, backup=backup,
+                                       import_ignore_interval=import_ignore_interval)
         params['app'] = app
         params['database_path'] = database_file_path
         return 'import_database', params
@@ -1971,7 +1975,8 @@ class API:
         if _is_invalid_choice(value=fallback, variable_name='fallback',
                               choices=static.image_fallback_types):
             return False, None
-        params = build_optional_params(width=width, height=height, opacity=opacity, background=background_hex, blur=blur,
+        params = build_optional_params(width=width, height=height, opacity=opacity, background=background_hex,
+                                       blur=blur,
                                        img_format=img_format, fallback=fallback, refresh=refresh,
                                        return_hash=return_hash)
         name, value = _which_used(img=img, rating_key=rating_key)
