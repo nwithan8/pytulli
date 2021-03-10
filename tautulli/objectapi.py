@@ -1,13 +1,7 @@
-import logging
 import warnings
 from typing import Union, List
-from urllib.parse import urlencode
-import requests
 from datetime import datetime
 
-import tautulli.static as static
-from tautulli.utils import build_optional_params, _get_response_data, _success_result, int_list_to_string, \
-    _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string
 from tautulli.decorators import raw_json, set_and_forget, raw_api_bool, make_object, make_property_object
 from .jsonapi import RawAPI
 from tautulli.models import *
