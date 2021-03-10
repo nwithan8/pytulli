@@ -2,7 +2,6 @@ import sys
 from functools import wraps
 
 from tautulli.utils import _success_result, _get_response_data
-from tautulli.models import *
 
 
 def raw_api_bool(func):
