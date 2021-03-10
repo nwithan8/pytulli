@@ -9,7 +9,7 @@ with open("requirements.txt", 'r') as fh:
 
 setuptools.setup(
     name=__title__,
-    packages=[__title__],
+    packages=setuptools.find_packages(),
     version=__version__,
     license=__license__,
     description=__description__,
