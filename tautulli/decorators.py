@@ -42,7 +42,7 @@ def make_object(func):
             data = method(*args, **kwargs)
             if not data:
                 return None
-            class_name = getattr(sys.modules["tautulli.models"], func(self))
+            class_name = getattr(sys.modules["tautulli.models"], func(self, *args, **kwargs))
             if type(data) == list:
                 return [class_name(**item) for item in data]
             else:
