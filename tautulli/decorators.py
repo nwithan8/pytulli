@@ -46,7 +46,7 @@ def make_object(func):
             if type(data) == list:
                 return [class_name(**item) for item in data]
             else:
-                return class_name(data=data)
+                return class_name(**data)
         except AttributeError:
             return None
 
