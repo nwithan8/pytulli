@@ -36,7 +36,7 @@ class Datum(BaseModel):
     parent_title: str
     grandparent_title: str
     original_title: str
-    year: int
+    year: Union[int, str]
     media_index: Union[int, str]
     parent_media_index: Union[int, str]
     thumb: str

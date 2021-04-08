@@ -24,7 +24,7 @@ def make_property_object(func):
             if not data:
                 return None
             class_name = globals()[func(self)]
-            if class_name.__name__ == "Datum":
+            if type(data) == list:
                 return [class_name(**item) for item in data]
             else:
                 return class_name(**data)
@@ -42,8 +42,11 @@ def make_object(func):
             data = method(*args, **kwargs)
             if not data:
                 return None
-            class_name = getattr(sys.modules[__name__], func())
-            return class_name(data=data)
+            class_name = getattr(sys.modules["tautulli.models"], func(self))
+            if type(data) == list:
+                return [class_name(**item) for item in data]
+            else:
+                return class_name(**data)
         except AttributeError:
             return None
 

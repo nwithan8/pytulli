@@ -29,7 +29,6 @@ setuptools.setup(
         'Intended Audience :: Developers',  # Define that your audience are developers
         'Topic :: Software Development :: Build Tools',
         'Programming Language :: Python :: 3',  # Specify which python versions that you want to support
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
@@ -38,5 +37,5 @@ setuptools.setup(
         'Topic :: Internet :: WWW/HTTP',
         'Operating System :: OS Independent'
     ],
-    python_requires='>=3.6'
+    python_requires='>=3.7'
 )
