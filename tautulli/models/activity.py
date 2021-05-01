@@ -7,6 +7,7 @@ from __future__ import annotations
 from typing import Any, List, Optional
 
 from pydantic import BaseModel
+from tautulli import utils
 
 
 class Session(BaseModel):
@@ -224,6 +225,46 @@ class Session(BaseModel):
     stream_subtitle_language_code: str
     stream_subtitle_decision: str
     stream_subtitle_transient: int
+
+    @property
+    def progress_percentage(self):
+        if not self.duration_milliseconds:
+            return 0
+        return int(self.location_milliseconds / self.duration_milliseconds)
+
+    @property
+    def progress_marker(self):
+        if not self.location_milliseconds or not self.duration_milliseconds:
+            return ""
+        current_progress_min_sec = utils.milliseconds_to_minutes_seconds(milliseconds=self.location_milliseconds)
+        total_min_sec = utils.milliseconds_to_minutes_seconds(milliseconds=self.duration_milliseconds)
+        return f"{current_progress_min_sec}/{total_min_sec}"
+
+    @property
+    def eta(self):
+        if not self.duration_milliseconds or not self.location_milliseconds:
+            return ""
+        milliseconds_remaining = self.duration_milliseconds - self.location_milliseconds
+        eta_datetime = utils.now_plus_milliseconds(milliseconds=milliseconds_remaining)
+        eta_string = utils.datetime_to_string(datetime_object=eta_datetime, string_format="%H:%M")
+        return eta_string
+
+    @property
+    def status_icon(self):
+        """
+        Get icon for a stream state
+        :return: emoji icon
+        """
+        return utils.switcher.get(self.state, "")
+
+    @property
+    def type_icon(self):
+        if self.media_type in utils.media_type_icons:
+            return utils.media_type_icons[self.media_type]
+        # thanks twilsonco
+        elif self.live:
+            return utils.media_type_icons['live']
+        return ""
 
 
 class Data(BaseModel):
