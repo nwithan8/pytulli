@@ -1,4 +1,4 @@
-__version__ = '1.1.4'
+__version__ = '1.2.0'
 
 __title__ = "tautulli"
 __author__ = 'Nate Harris'
