@@ -1,7 +1,7 @@
 from tautulli.models.activity import Data as Activity
 from tautulli.models.docs import Data as Docs
 from tautulli.models.dateformats import Data as DateFormats
-from tautulli.models.librarynames import Data as LibraryNames
+from tautulli.models.librarynames import Data as LibraryName
 from tautulli.models.newsletters import Datum as Newsletters
 from tautulli.models.notifierparameters import Datum as NotifierParameters
 from tautulli.models.pmsupdate import Data as PMSUpdate

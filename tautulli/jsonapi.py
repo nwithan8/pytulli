@@ -937,6 +937,18 @@ class RawAPI:
         """
         return 'get_library_names', None
 
+    def get_library_by_name(self, library_name: str) -> dict:
+        """
+        Get a Plex Media Server library using its name
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        for library in self.library_names:
+            if library.get('section_name') == library_name:
+                return library
+        return {}
+
     @raw_json
     def get_library_user_stats(self, section_id: str, grouping: bool = False) -> dict:
         """
