@@ -227,6 +227,14 @@ class Session(BaseModel):
     stream_subtitle_transient: int
 
     @property
+    def duration_milliseconds(self):
+        return int(self.duration)
+
+    @property
+    def location_milliseconds(self):
+        return int(self.view_offset)
+
+    @property
     def progress_percentage(self):
         if not self.duration_milliseconds:
             return 0
