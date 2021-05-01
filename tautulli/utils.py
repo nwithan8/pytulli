@@ -1,8 +1,26 @@
 from typing import Union, List
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
+from pytz import timezone
 
 from tautulli import __title__
+
+switcher = {
+    "playing": "▶️",
+    "paused": "⏸",
+    "stopped": "⏹",
+    "buffering": "⏳",
+    "error": "⚠️"
+}
+
+media_type_icons = {
+    'episode': '📺',
+    'track': '🎧',
+    'movie': '🎞',
+    'clip': '🎬',
+    'photo': '🖼',
+    'live': '📡'
+}
 
 
 def datetime_to_string(datetime_object: datetime, string_format: str = "%Y-%m-%d"):
@@ -108,7 +126,7 @@ def _is_invalid_choice(value, variable_name: str, choices: List):
     :rtype: bool
     """
     if value and value not in choices:
-        logger = logging.getLogger(package_info.__title__)
+        logger = logging.getLogger(__title__)
         logger.error(f"Invalid '{variable_name}'. Please use one of the following: {', '.join(choices)}")
         return True
     return False
@@ -136,6 +154,25 @@ def _success_result(json_data: dict) -> bool:
     """
     if json_data.get('response', {}).get('result', "") == "success":
         return True
-    logger = logging.getLogger(package_info.__title__)
+    logger = logging.getLogger(__title__)
     logger.debug(json_data.get('response', {}).get('message', "No error message in API response"))
     return False
+
+
+def milliseconds_to_minutes_seconds(milliseconds: int):
+    seconds = int(milliseconds / 1000)
+    minutes = int(seconds / 60)
+    if minutes < 10:
+        minutes = f"0{minutes}"
+    seconds = int(seconds % 60)
+    if seconds < 10:
+        seconds = f"0{seconds}"
+    return f"{minutes}:{seconds}"
+
+
+def now_plus_milliseconds(milliseconds: int, timezone_code: str = None):
+    if timezone_code:
+        now = datetime.now(timezone(timezone_code))  # will raise exception if invalid timezone_code
+    else:
+        now = datetime.now()
+    return now + timedelta(milliseconds=milliseconds)

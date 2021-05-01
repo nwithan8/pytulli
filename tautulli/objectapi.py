@@ -82,13 +82,25 @@ class ObjectAPI:
 
     @property
     @make_property_object
-    def library_names(self) -> LibraryNames:
+    def library_names(self) -> List[LibraryName]:
         """
         Get list of library names and IDs on the Plex Media Server
 
         :return: LibraryNames object
         """
         return 'LibraryNames'
+
+    def get_library_by_name(self, library_name: str) -> Union[LibraryName, None]:
+        """
+        Get a Plex Media Server library using its name
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        for library in self.library_names:
+            if library.section_name == library_name:
+                return library
+        return None
 
     @property
     @make_property_object
