@@ -228,11 +228,17 @@ class Session(BaseModel):
 
     @property
     def duration_milliseconds(self):
-        return int(self.duration)
+        try:
+            return int(self.duration)
+        except:
+            return 0
 
     @property
     def location_milliseconds(self):
-        return int(self.view_offset)
+        try:
+            return int(self.view_offset)
+        except:
+            return 0
 
     @property
     def progress_percentage(self):
