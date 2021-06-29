@@ -83,12 +83,13 @@ class ObjectAPI:
     @property
     @make_property_object
     def library_names(self) -> List[LibraryName]:
+        # TODO Fix needed?
         """
         Get list of library names and IDs on the Plex Media Server
 
         :return: LibraryNames object
         """
-        return 'LibraryNames'
+        return 'LibraryName'
 
     def get_library_by_name(self, library_name: str) -> Union[LibraryName, None]:
         """
