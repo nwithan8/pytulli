@@ -1,4 +1,4 @@
-from typing import Union, List
+from typing import Union, List, Iterable
 import logging
 from datetime import datetime, timedelta
 from pytz import timezone
@@ -76,7 +76,11 @@ def int_list_to_string(int_list: List[int]):
     :rtype: str
     """
     int_list = list(map(str, int_list))
-    return ','.join(int_list)
+    return comma_delimit(int_list)
+
+
+def comma_delimit(items: Iterable):
+    return ','.join(items)
 
 
 def _one_needed(**kwargs):
@@ -94,7 +98,7 @@ def _one_needed(**kwargs):
             one_used = True
     if not one_used:
         logger = logging.getLogger(__title__)
-        logger.error(f"Please provide one of the following: {', '.join(kwargs.keys())}")
+        logger.error(f"Please provide one of the following: {comma_delimit(kwargs.keys())}")
     return one_used
 
 
@@ -127,7 +131,7 @@ def _is_invalid_choice(value, variable_name: str, choices: List):
     """
     if value and value not in choices:
         logger = logging.getLogger(__title__)
-        logger.error(f"Invalid '{variable_name}'. Please use one of the following: {', '.join(choices)}")
+        logger.error(f"Invalid '{variable_name}'. Please use one of the following: {comma_delimit(choices)}")
         return True
     return False
 

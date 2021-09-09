@@ -7,7 +7,7 @@ from datetime import datetime
 
 import tautulli.static as static
 from tautulli.utils import build_optional_params, _get_response_data, _success_result, int_list_to_string, \
-    _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string
+    _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string, comma_delimit
 from tautulli.decorators import raw_json, set_and_forget, raw_api_bool, make_object, make_property_object
 from tautulli import __title__
 
@@ -577,7 +577,7 @@ class RawAPI:
                                   choices=static.export_media_types):
                 return False, None
         if custom_fields:
-            custom_fields = ','.join(custom_fields)
+            custom_fields = comma_delimit(custom_fields)
         params = build_optional_params(file_format=file_format, metadata_level=metadata_level,
                                        media_info_level=media_info_level, thumb_level=thumb_level, art_level=art_level,
                                        custom_fields=custom_fields, export_type=export_type,
@@ -1426,23 +1426,6 @@ class RawAPI:
         params = build_optional_params(window=window, log_type=log_type)
         return 'get_plex_log', params
 
-    def get_pms_token(self, username: str, password: str) -> str:
-        """
-        Get the user's Plex token used for Tautulli
-
-        :param username: Plex.tv username
-        :type username: str
-        :param password: Plex.tv password
-        :type password: str
-        :return: Plex token used for Tautulli
-        :rtype: str
-        """
-        params = {'username': username, 'password': password}
-        json_data = self._get_json(command='get_pms_token', params=params)
-        if _success_result(json_data=json_data):
-            return _get_response_data(json_data=json_data)
-        return static.empty_string
-
     @property
     @raw_json
     def pms_update(self) -> dict:
@@ -1889,6 +1872,18 @@ class RawAPI:
         params['app'] = app
         params['database_path'] = database_file_path
         return 'import_database', params
+
+    @set_and_forget
+    def logout_user_session(self, row_ids: List[int]) -> bool:
+        """
+        Logout Tautulli user sessions
+
+        :param row_ids: List of row IDS to sign out
+        :type row_ids: list[int], optional
+        :return: `True` if successful, `False` if unsuccessful
+        :rtype: bool
+        """
+        return 'logout_user_session', {'row_ids': int_list_to_string(int_list=row_ids)}
 
     @set_and_forget
     def notify(self, notifier_id: int, subject: str, body: str, headers: str = None, script_args: str = None) -> bool:
