@@ -1,5 +1,5 @@
 import setuptools
-from tautulli import __title__, __description__, __version__, __author__, __author_email__, __license__, __keywords__, __github_username__, __copyright__
+from tautulli import __title__, __description__, __version__, __author__, __author_email__, __license__, __keywords__, __github_username__, __github_repo__, __copyright__
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -17,11 +17,10 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     author=__author__,
     author_email=__author_email__,
-    url=f'https://github.com/{__github_username__}/pytulli',
-    download_url=f'https://github.com/{__github_username__}/pytulli/archive/{__version__}.tar.gz',
+    url=f'https://github.com/{__github_username__}/{__github_repo__}',
+    download_url=f'https://github.com/{__github_username__}/{__github_repo__}/archive/{__version__}.tar.gz',
     keywords=__keywords__,
     install_requires=requirements,
-    # install_requires=['requests', 'pydantic'],
     classifiers=[
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Development Status :: 4 - Beta',
