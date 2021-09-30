@@ -56,8 +56,7 @@ class ObjectAPI:
         """
         return 'Docs'
 
-    @property
-    @make_property_object
+    @make_object
     def activity(self, session_key: int = None, session_id: str = None) -> Activity:
         """
         Get the current activity on the Plex Media Server
@@ -69,6 +68,28 @@ class ObjectAPI:
         :return: Activity object
         """
         return 'Activity'
+
+    @property
+    def activity_summary(self) -> ActivitySummary:
+        """
+        Get a summary of current activity on the Plex Media Server
+
+        :return: ActivitySummary object
+        :rtype: ActivitySummary
+        """
+        _activity = self.activity()
+        return build_summary_from_activity_object(activity=_activity)
+
+    @property
+    def activity_summary_message(self) -> str:
+        """
+        Get a summary message of current activity on the Plex Media Server
+
+        :return: Activity summary message
+        :rtype: str
+        """
+        _activity = self.activity()
+        return build_summary_from_activity_object(activity=_activity).message
 
     @property
     @make_property_object

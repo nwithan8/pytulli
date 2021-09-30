@@ -8,6 +8,7 @@ from datetime import datetime
 import tautulli.static as static
 from tautulli.utils import build_optional_params, _get_response_data, _success_result, int_list_to_string, \
     _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string, comma_delimit
+from tautulli.models.activitysummary import build_summary_from_activity_json
 from tautulli.decorators import raw_json, set_and_forget, raw_api_bool, make_object, make_property_object
 from tautulli import __title__
 
@@ -587,7 +588,6 @@ class RawAPI:
             params[name] = value
         return 'export_metadata', params
 
-    @property
     @raw_json
     def activity(self, session_key: int = None, session_id: str = None) -> dict:
         """
@@ -602,6 +602,29 @@ class RawAPI:
         """
         params = build_optional_params(session_key=session_key, session_id=session_id)
         return 'get_activity', params
+
+    @property
+    def activity_summary(self) -> dict:
+        """
+        Get a summary of current activity on the Plex Media Server
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        _activity_data = self.activity()
+        return build_summary_from_activity_json(activity_data=_activity_data).json()
+
+    @property
+    def activity_summary_message(self) -> str:
+        """
+        Get a summary message of current activity on the Plex Media Server
+
+        :return: Activity summary message
+        :rtype: str
+        """
+        _activity_data = self.activity()
+        # Yes, this is the JSON API using an object as a middleman.
+        return build_summary_from_activity_json(activity_data=_activity_data).message
 
     def get_api_key(self, username: str = None, password: str = None) -> str:
         """

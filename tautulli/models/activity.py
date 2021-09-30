@@ -8,6 +8,7 @@ from typing import Any, List, Optional
 
 from pydantic import BaseModel
 from tautulli import utils
+from tautulli.models.activitysummary import ActivitySummary, build_summary_from_activity_object
 
 
 class Session(BaseModel):
@@ -290,6 +291,10 @@ class Data(BaseModel):
     total_bandwidth: int
     lan_bandwidth: int
     wan_bandwidth: int
+
+    @property
+    def summary(self) -> ActivitySummary:
+        return build_summary_from_activity_object(activity=self)
 
 
 class Response(BaseModel):
