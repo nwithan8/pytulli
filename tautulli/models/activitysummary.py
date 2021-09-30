@@ -36,7 +36,7 @@ class ActivitySummary(BaseModel):
                                                               word=utils.make_plural(word='stream',
                                                                                      count=stream_count))
             if self.transcode_count > 0:
-                overview_message += f" ({utils.transcodes_message.format(transcode_count=self.transcode_count, word=utils.make_plural(word='transcode', count=self.stream_count))})"
+                overview_message += f" ({utils.transcodes_message.format(transcode_count=self.transcode_count, word=utils.make_plural(word='transcode', count=self.transcode_count))})"
 
         if self.total_bandwidth > 0:
             overview_message += f" | {utils.bandwidth_message.format(bandwidth=utils.human_bitrate(float(self.total_bandwidth)))}"
