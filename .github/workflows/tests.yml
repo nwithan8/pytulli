@@ -9,7 +9,7 @@ jobs:
   run-tests:
     runs-on: ubuntu-latest
     services:
-      dizquetv-docker:
+      tautulli-docker:
         image: tautulli/tautulli
         ports:
            - 8001:8181
