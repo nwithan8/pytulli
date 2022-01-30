@@ -10,7 +10,7 @@ from tautulli.utils import build_optional_params, _get_response_data, _success_r
     _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string, comma_delimit
 from tautulli.models.activitysummary import build_summary_from_activity_json
 from tautulli.decorators import raw_json, set_and_forget, raw_api_bool, make_object, make_property_object
-from tautulli import __title__
+from tautulli._info import __title__
 
 
 class RawAPI:

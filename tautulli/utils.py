@@ -3,7 +3,7 @@ import logging
 from datetime import datetime, timedelta
 from pytz import timezone
 
-from tautulli import __title__
+from tautulli._info import __title__
 
 switcher = {
     "playing": "▶️",
