@@ -1,5 +1,6 @@
 import setuptools
-from tautulli import __title__, __description__, __version__, __author__, __author_email__, __license__, __keywords__, __github_username__, __github_repo__, __copyright__
+from tautulli._info import __title__, __description__, __version__, __author__, __author_email__, __license__, \
+    __keywords__, __github_username__, __github_repo__, __copyright__
 
 with open("README.md", "r") as fh:
     long_description = fh.read()

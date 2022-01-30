@@ -2,7 +2,7 @@ import logging
 import warnings
 from typing import Union, List
 from urllib.parse import urlencode
-import requests
+import objectrest
 from datetime import datetime
 
 import tautulli.static as static
@@ -18,7 +18,7 @@ class RawAPI:
         if base_url.endswith("/"):
             base_url = base_url[:-1]
         self._url = f"{base_url}/api/v2?apikey={api_key}"
-        self._session = requests.Session()
+        self._session = objectrest.Session()
         logging.basicConfig(format='%(levelname)s:%(message)s', level=(logging.DEBUG if verbose else logging.ERROR))
         self._logger = logging.getLogger(__title__)
 
@@ -38,7 +38,7 @@ class RawAPI:
             url += f"&{urlencode(params)}"
         return url
 
-    def _get(self, command: str, params: dict = None) -> requests.Response:
+    def _get(self, command: str, params: dict = None) -> objectrest.Response:
         """
         Get response from API call
         :param command: Tautulli endpoint
@@ -46,7 +46,7 @@ class RawAPI:
         :param params: Dictionary of parameters to add to url
         :type params: dict, optional
         :return: Response from the API
-        :rtype: requests.Response
+        :rtype: objectrest.Response
         """
         url = self._create_url(command=command, params=params)
         return self._session.get(url=url)

@@ -28,7 +28,7 @@ API calls functions that do not return data return `True`/`False` booleans to co
 Import the ``tautulli`` package as initialize the API
 Example:
 ```python
-from tautulli.api import RawAPI
+from tautulli import RawAPI
 
 api = RawAPI(base_url="http://myipaddress:port", api_key="thisisanapikey")
 ```
