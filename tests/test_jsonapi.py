@@ -275,13 +275,6 @@ def test_server_info():
     assert type(server_info) == dict
 
 
-def test_server_list():
-    client = raw_client()
-    server_list = client.server_list
-    assert server_list is not None
-    assert type(server_list) == list
-
-
 def test_servers_info():
     client = raw_client()
     servers_info = client.servers_info
