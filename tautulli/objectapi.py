@@ -377,6 +377,7 @@ class ObjectAPI:
         """
         return 'HomeStats'
 
+    @property
     @make_object
     def libraries(self) -> Libraries:
         """

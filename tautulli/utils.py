@@ -33,7 +33,7 @@ session_details_message = """__Quality__: {quality_profile} ({bandwidth}){transc
 session_progress_message = """__Progress__: {progress} (ETA: {eta})"""
 
 
-def datetime_to_string(datetime_object: datetime, string_format: str = "%Y-%m-%d"):
+def datetime_to_string(datetime_object: datetime, string_format: str = "%Y-%m-%d") -> str:
     """
     Convert a datetime.datetime object to a string
     :param datetime_object: Datetime.datetime object to convert
@@ -48,7 +48,7 @@ def datetime_to_string(datetime_object: datetime, string_format: str = "%Y-%m-%d
     return datetime_object.strftime(fmt=string_format)
 
 
-def build_optional_params(**kwargs):
+def build_optional_params(**kwargs) -> dict:
     """
     Build a dict with only kwargs elements that are not None
     :param kwargs: All possible parameters to include in final dict
@@ -76,7 +76,7 @@ def bool_to_int(boolean: bool) -> int:
     return 0
 
 
-def int_list_to_string(int_list: List[int]):
+def int_list_to_string(int_list: List[int]) -> str:
     """
     Convert a list of ints to a comma-separated string
     e.g. [0, 1, 4] -> "0,1,4"
@@ -96,7 +96,7 @@ def _human_bitrate(number, denominator: int = 1, letter: str = "", d: int = 1):
         return f'{float(number / denominator):.{d}f} {letter}bps'
 
 
-def human_bitrate(kilobytes, d: int = 1):
+def human_bitrate(kilobytes, d: int = 1) -> str:
     # Return the given kilobytes as a human friendly bps, Kbps, Mbps, Gbps, or Tbps string
 
     KB = float(1024)
@@ -124,17 +124,17 @@ def human_bitrate(kilobytes, d: int = 1):
     return _human_bitrate(kilobytes, denominator=denominator, letter=letter, d=d)
 
 
-def comma_delimit(items: Iterable):
+def comma_delimit(items: Iterable) -> str:
     return ','.join(items)
 
 
-def make_plural(word, count: int, suffix_override: str = 's'):
+def make_plural(word, count: int, suffix_override: str = 's') -> str:
     if count > 1:
         return f"{word}{suffix_override}"
     return word
 
 
-def _one_needed(**kwargs):
+def _one_needed(**kwargs) -> bool:
     """
     Check if at least one of the kwargs is not None
     Logs error message if not.
@@ -153,7 +153,7 @@ def _one_needed(**kwargs):
     return one_used
 
 
-def _which_used(**kwargs):
+def _which_used(**kwargs) -> tuple:
     """
     Get which (first) of kwargs is not None
     :param kwargs: Dict of keyword arguments
@@ -167,7 +167,7 @@ def _which_used(**kwargs):
     return None, None
 
 
-def _is_invalid_choice(value, variable_name: str, choices: List):
+def _is_invalid_choice(value, variable_name: str, choices: List) -> bool:
     """
     Check if value is one of the possible choices
     Logs error message if not.
@@ -214,7 +214,7 @@ def _success_result(json_data: dict) -> bool:
     return False
 
 
-def milliseconds_to_minutes_seconds(milliseconds: int):
+def milliseconds_to_minutes_seconds(milliseconds: int) -> str:
     seconds = int(milliseconds / 1000)
     minutes = int(seconds / 60)
     if minutes < 10:
@@ -225,7 +225,7 @@ def milliseconds_to_minutes_seconds(milliseconds: int):
     return f"{minutes}:{seconds}"
 
 
-def now_plus_milliseconds(milliseconds: int, timezone_code: str = None):
+def now_plus_milliseconds(milliseconds: int, timezone_code: str = None) -> datetime:
     if timezone_code:
         now = datetime.now(timezone(timezone_code))  # will raise exception if invalid timezone_code
     else:

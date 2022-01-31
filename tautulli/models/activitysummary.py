@@ -63,6 +63,7 @@ def build_summary_from_activity_object(activity) -> ActivitySummary:
 
     return overview
 
+
 def build_summary_from_activity_json(activity_data: dict) -> ActivitySummary:
     """
     Create an ActivitySummary using Activity JSON data
