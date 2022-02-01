@@ -819,7 +819,7 @@ class RawAPI:
 
     @raw_json
     def get_home_stats(self, grouping: bool = False, time_range: int = 30, stats_type: str = 'plays', start: int = 0,
-                       count: int = 5, stat_id: str = None) -> list[dict]:
+                       count: int = 5, stat_id: str = None) -> List[dict]:
         """
         Get the homepage watch statistics
 
@@ -836,7 +836,7 @@ class RawAPI:
         :param stat_id: Name of a single statistic to return (i.e. 'top_movies', 'popular_tv', 'most_concurrent')
         :type stat_id: str, optional
         :return: List of data
-        :rtype: list[dict]
+        :rtype: List[dict]
         """
         grouping = bool_to_int(boolean=grouping)
         if _is_invalid_choice(value=stats_type, variable_name="stats_type",
@@ -851,12 +851,12 @@ class RawAPI:
 
     @property
     @raw_json
-    def libraries(self) -> list[dict]:
+    def libraries(self) -> List[dict]:
         """
         Get a list of all libraries on your server
 
-        :return: Dict of data
-        :rtype: dict
+        :return: List of data
+        :rtype: List[dict]
         """
         return 'get_libraries', None
 
@@ -1014,7 +1014,7 @@ class RawAPI:
 
     @raw_json
     def get_logs(self, sort: str = None, search: str = None, order_direction: str = None, regex: str = None,
-                 start: int = None, end: int = None) -> list[dict]:
+                 start: int = None, end: int = None) -> List[dict]:
         """
         Get the Tautulli logs
 
@@ -1031,7 +1031,7 @@ class RawAPI:
         :param end: Row number to end at
         :type end: int, optional
         :return: List of data
-        :rtype: list[dict]
+        :rtype: List[dict]
         """
         if _is_invalid_choice(value=sort, variable_name='sort',
                               choices=static.log_sorting):
@@ -1124,12 +1124,12 @@ class RawAPI:
 
     @property
     @raw_json
-    def newsletters(self) -> list[dict]:
+    def newsletters(self) -> List[dict]:
         """
         Get a list of configured newsletters
 
         :return: List of data
-        :rtype: list[dict]
+        :rtype: List[dict]
         """
         return 'get_newsletters', None
 
@@ -1176,24 +1176,24 @@ class RawAPI:
 
     @property
     @raw_json
-    def notifier_parameters(self) -> list[dict]:
+    def notifier_parameters(self) -> List[dict]:
         """
         Get a list of available notification parameters
 
         :return: List of data
-        :rtype: list[dict]
+        :rtype: List[dict]
         """
         return 'get_notifier_parameters', None
 
     @raw_json
-    def get_notifiers(self, notify_action: str = None) -> list[dict]:
+    def get_notifiers(self, notify_action: str = None) -> List[dict]:
         """
         Get a list of configured notifiers
 
         :param notify_action: The notification action to filter out
         :type notify_action: str, optional
         :return: List of data
-        :rtype: list[dict]
+        :rtype: List[dict]
         """
         params = build_optional_params(notify_action=notify_action)
         return 'get_notifiers', params
@@ -1544,12 +1544,12 @@ class RawAPI:
 
     @property
     @raw_json
-    def server_list(self) -> list[dict]:
+    def server_list(self) -> List[dict]:
         """
         Get all your servers that are published to Plex.tv
 
         :return: List of data
-        :rtype: list[dict]
+        :rtype: List[dict]
         """
         return 'get_server_list', None
 
@@ -1569,12 +1569,12 @@ class RawAPI:
 
     @property
     @raw_json
-    def servers_info(self) -> list[dict]:
+    def servers_info(self) -> List[dict]:
         """
         Get info about the Plex Media Server
 
         :return: List of data
-        :rtype: list[dict]
+        :rtype: List[dict]
         """
         return 'get_servers_info', None
 
@@ -1743,12 +1743,12 @@ class RawAPI:
 
     @property
     @raw_json
-    def user_names(self) -> list[dict]:
+    def user_names(self) -> List[dict]:
         """
         Get a list of all usernames and user ids
 
         :return: List of data
-        :rtype: list[dict]
+        :rtype: List[dict]
         """
         return 'get_user_names', None
 
@@ -1792,12 +1792,12 @@ class RawAPI:
 
     @property
     @raw_json
-    def users(self) -> list[dict]:
+    def users(self) -> List[dict]:
         """
         Get a list of all users that have access to your server
 
         :return: List of data
-        :rtype: list[dict]
+        :rtype: List[dict]
         """
         return 'get_users', None
 
