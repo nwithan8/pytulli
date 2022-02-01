@@ -49,3 +49,5 @@ from tautulli.models.whoislookup import Data as WHOISLookup
 from tautulli.models.registereddevice import Data as RegisteredDevice
 from tautulli.models.searchresults import Data as SearchResults
 from tautulli.models.activity import Data as SQLResults  # TODO: Need to implement
+
+from tautulli.models.activitysummary import *

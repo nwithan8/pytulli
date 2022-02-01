@@ -8,6 +8,7 @@ from typing import Any, List, Optional
 
 from pydantic import BaseModel
 from tautulli import utils
+from tautulli.models.activitysummary import ActivitySummary, build_summary_from_activity_object
 
 
 class Session(BaseModel):
@@ -280,6 +281,24 @@ class Session(BaseModel):
             return utils.media_type_icons['live']
         return ""
 
+    @property
+    def human_bandwidth(self) -> str:
+        try:
+            return utils.human_bitrate(float(self.bandwidth))
+        except:
+            return utils.human_bitrate(0)
+
+    @property
+    def transcoding_stub(self):
+        return ' (Transcode)' if self.stream_container_decision == 'transcode' else ''
+
+    @property
+    def summary(self) -> str:
+        return f"{utils.session_title_message.format(icon=self.status_icon, username=self.username, media_type_icon=self.type_icon, title=self.title)}\n" \
+               f"{utils.session_player_message.format(product=self.product, player=self.player)}\n" \
+               f"{utils.session_details_message.format(quality_profile=self.quality_profile, bandwidth=self.human_bandwidth, transcoding=self.transcoding_stub)}\n" \
+               f"{utils.session_progress_message.format(progress=self.progress_marker, eta=self.eta)}"
+
 
 class Data(BaseModel):
     stream_count: str
@@ -290,6 +309,10 @@ class Data(BaseModel):
     total_bandwidth: int
     lan_bandwidth: int
     wan_bandwidth: int
+
+    @property
+    def summary(self) -> ActivitySummary:
+        return build_summary_from_activity_object(activity=self)
 
 
 class Response(BaseModel):

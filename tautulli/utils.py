@@ -1,9 +1,9 @@
-from typing import Union, List
+from typing import Union, List, Iterable
 import logging
 from datetime import datetime, timedelta
 from pytz import timezone
 
-from tautulli import __title__
+from tautulli._info import __title__
 
 switcher = {
     "playing": "▶️",
@@ -22,8 +22,18 @@ media_type_icons = {
     'live': '📡'
 }
 
+sessions_message = """{stream_count} {word}"""
+transcodes_message = """{transcode_count} {word}"""
+bandwidth_message = """🌐 {bandwidth}"""
+lan_bandwidth_message = """(🏠 {bandwidth})"""
 
-def datetime_to_string(datetime_object: datetime, string_format: str = "%Y-%m-%d"):
+session_title_message = """{icon} {media_type_icon} {username}: *{title}*"""
+session_player_message = """__Player__: {product} ({player})"""
+session_details_message = """__Quality__: {quality_profile} ({bandwidth}){transcoding}"""
+session_progress_message = """__Progress__: {progress} (ETA: {eta})"""
+
+
+def datetime_to_string(datetime_object: datetime, string_format: str = "%Y-%m-%d") -> str:
     """
     Convert a datetime.datetime object to a string
     :param datetime_object: Datetime.datetime object to convert
@@ -38,7 +48,7 @@ def datetime_to_string(datetime_object: datetime, string_format: str = "%Y-%m-%d
     return datetime_object.strftime(fmt=string_format)
 
 
-def build_optional_params(**kwargs):
+def build_optional_params(**kwargs) -> dict:
     """
     Build a dict with only kwargs elements that are not None
     :param kwargs: All possible parameters to include in final dict
@@ -66,7 +76,7 @@ def bool_to_int(boolean: bool) -> int:
     return 0
 
 
-def int_list_to_string(int_list: List[int]):
+def int_list_to_string(int_list: List[int]) -> str:
     """
     Convert a list of ints to a comma-separated string
     e.g. [0, 1, 4] -> "0,1,4"
@@ -76,10 +86,55 @@ def int_list_to_string(int_list: List[int]):
     :rtype: str
     """
     int_list = list(map(str, int_list))
-    return ','.join(int_list)
+    return comma_delimit(int_list)
 
 
-def _one_needed(**kwargs):
+def _human_bitrate(number, denominator: int = 1, letter: str = "", d: int = 1):
+    if d <= 0:
+        return f'{int(number / denominator):d} {letter}bps'
+    else:
+        return f'{float(number / denominator):.{d}f} {letter}bps'
+
+
+def human_bitrate(kilobytes, d: int = 1) -> str:
+    # Return the given kilobytes as a human friendly bps, Kbps, Mbps, Gbps, or Tbps string
+
+    KB = float(1024)
+    MB = float(KB ** 2)  # 1,048,576
+    GB = float(KB ** 3)  # 1,073,741,824
+    TB = float(KB ** 4)  # 1,099,511,627,776
+
+    denominator = 1
+    letter = ""
+    if kilobytes < KB:
+        pass
+    elif KB <= kilobytes < MB:
+        denominator = KB
+        letter = "k"
+    elif MB <= kilobytes < GB:
+        denominator = MB
+        letter = "M"
+    elif GB <= kilobytes < TB:
+        denominator = GB
+        letter = "G"
+    else:
+        denominator = TB
+        letter = "T"
+
+    return _human_bitrate(kilobytes, denominator=denominator, letter=letter, d=d)
+
+
+def comma_delimit(items: Iterable) -> str:
+    return ','.join(items)
+
+
+def make_plural(word, count: int, suffix_override: str = 's') -> str:
+    if count > 1:
+        return f"{word}{suffix_override}"
+    return word
+
+
+def _one_needed(**kwargs) -> bool:
     """
     Check if at least one of the kwargs is not None
     Logs error message if not.
@@ -94,11 +149,11 @@ def _one_needed(**kwargs):
             one_used = True
     if not one_used:
         logger = logging.getLogger(__title__)
-        logger.error(f"Please provide one of the following: {', '.join(kwargs.keys())}")
+        logger.error(f"Please provide one of the following: {comma_delimit(kwargs.keys())}")
     return one_used
 
 
-def _which_used(**kwargs):
+def _which_used(**kwargs) -> tuple:
     """
     Get which (first) of kwargs is not None
     :param kwargs: Dict of keyword arguments
@@ -112,7 +167,7 @@ def _which_used(**kwargs):
     return None, None
 
 
-def _is_invalid_choice(value, variable_name: str, choices: List):
+def _is_invalid_choice(value, variable_name: str, choices: List) -> bool:
     """
     Check if value is one of the possible choices
     Logs error message if not.
@@ -127,7 +182,7 @@ def _is_invalid_choice(value, variable_name: str, choices: List):
     """
     if value and value not in choices:
         logger = logging.getLogger(__title__)
-        logger.error(f"Invalid '{variable_name}'. Please use one of the following: {', '.join(choices)}")
+        logger.error(f"Invalid '{variable_name}'. Please use one of the following: {comma_delimit(choices)}")
         return True
     return False
 
@@ -159,7 +214,7 @@ def _success_result(json_data: dict) -> bool:
     return False
 
 
-def milliseconds_to_minutes_seconds(milliseconds: int):
+def milliseconds_to_minutes_seconds(milliseconds: int) -> str:
     seconds = int(milliseconds / 1000)
     minutes = int(seconds / 60)
     if minutes < 10:
@@ -170,7 +225,7 @@ def milliseconds_to_minutes_seconds(milliseconds: int):
     return f"{minutes}:{seconds}"
 
 
-def now_plus_milliseconds(milliseconds: int, timezone_code: str = None):
+def now_plus_milliseconds(milliseconds: int, timezone_code: str = None) -> datetime:
     if timezone_code:
         now = datetime.now(timezone(timezone_code))  # will raise exception if invalid timezone_code
     else:

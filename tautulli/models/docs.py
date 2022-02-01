@@ -83,7 +83,6 @@ class Data(BaseModel):
     get_plays_by_top_10_users: str
     get_plays_per_month: str
     get_plex_log: str
-    get_pms_token: str
     get_pms_update: str
     get_recently_added: str
     get_server_friendly_name: str
@@ -109,6 +108,7 @@ class Data(BaseModel):
     get_whois_lookup: str
     import_config: str
     import_database: str
+    logout_user_session: str
     notify: str
     notify_newsletter: str
     notify_recently_added: str

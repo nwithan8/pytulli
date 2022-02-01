@@ -18,11 +18,8 @@ sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'tautulli'
-copyright = '2020, Nate Harris'
+copyright = "Copyright © YEARADDEDBYGITHUB - Nate Harris"
 author = 'Nate Harris'
-
-# The full version, including alpha/beta/rc tags
-release = '1.0.0'
 
 
 # -- General configuration ---------------------------------------------------

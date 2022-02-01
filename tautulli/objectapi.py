@@ -56,8 +56,7 @@ class ObjectAPI:
         """
         return 'Docs'
 
-    @property
-    @make_property_object
+    @make_object
     def activity(self, session_key: int = None, session_id: str = None) -> Activity:
         """
         Get the current activity on the Plex Media Server
@@ -69,6 +68,28 @@ class ObjectAPI:
         :return: Activity object
         """
         return 'Activity'
+
+    @property
+    def activity_summary(self) -> ActivitySummary:
+        """
+        Get a summary of current activity on the Plex Media Server
+
+        :return: ActivitySummary object
+        :rtype: ActivitySummary
+        """
+        _activity = self.activity()
+        return build_summary_from_activity_object(activity=_activity)
+
+    @property
+    def activity_summary_message(self) -> str:
+        """
+        Get a summary message of current activity on the Plex Media Server
+
+        :return: Activity summary message
+        :rtype: str
+        """
+        _activity = self.activity()
+        return build_summary_from_activity_object(activity=_activity).message
 
     @property
     @make_property_object
@@ -207,19 +228,6 @@ class ObjectAPI:
 
         """
         return 'UpdateCheck'
-
-    def get_pms_token(self, username: str, password: str) -> str:
-        """
-        Get the user's Plex token used for Tautulli
-
-        :param username: Plex.tv username
-        :type username: str
-        :param password: Plex.tv password
-        :type password: str
-        :return: Plex token used for Tautulli
-        :rtype: str
-        """
-        return self._raw_api.get_pms_token(username=username, password=password)
 
     def download_config(self) -> str:
         """
@@ -369,6 +377,7 @@ class ObjectAPI:
         """
         return 'HomeStats'
 
+    @property
     @make_object
     def libraries(self) -> Libraries:
         """
@@ -1323,6 +1332,18 @@ class ObjectAPI:
         :type backup: bool, optional
         :param import_ignore_interval: Only if app is 'plexwatch' or 'plexivity', the minimum number of seconds for a stream to import
         :type import_ignore_interval: int, optional
+        :return: `True` if successful, `False` if unsuccessful
+        :rtype: bool
+        """
+        return False
+
+    @raw_api_bool
+    def logout_user_session(self, row_ids: List[int]) -> bool:
+        """
+        Logout Tautulli user sessions
+
+        :param row_ids: List of row IDS to sign out
+        :type row_ids: list[int], optional
         :return: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """

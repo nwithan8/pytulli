@@ -2,14 +2,15 @@ import logging
 import warnings
 from typing import Union, List
 from urllib.parse import urlencode
-import requests
+import objectrest
 from datetime import datetime
 
 import tautulli.static as static
 from tautulli.utils import build_optional_params, _get_response_data, _success_result, int_list_to_string, \
-    _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string
+    _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string, comma_delimit
+from tautulli.models.activitysummary import build_summary_from_activity_json
 from tautulli.decorators import raw_json, set_and_forget, raw_api_bool, make_object, make_property_object
-from tautulli import __title__
+from tautulli._info import __title__
 
 
 class RawAPI:
@@ -17,7 +18,7 @@ class RawAPI:
         if base_url.endswith("/"):
             base_url = base_url[:-1]
         self._url = f"{base_url}/api/v2?apikey={api_key}"
-        self._session = requests.Session()
+        self._session = objectrest.Session()
         logging.basicConfig(format='%(levelname)s:%(message)s', level=(logging.DEBUG if verbose else logging.ERROR))
         self._logger = logging.getLogger(__title__)
 
@@ -37,7 +38,7 @@ class RawAPI:
             url += f"&{urlencode(params)}"
         return url
 
-    def _get(self, command: str, params: dict = None) -> requests.Response:
+    def _get(self, command: str, params: dict = None) -> objectrest.Response:
         """
         Get response from API call
         :param command: Tautulli endpoint
@@ -45,7 +46,7 @@ class RawAPI:
         :param params: Dictionary of parameters to add to url
         :type params: dict, optional
         :return: Response from the API
-        :rtype: requests.Response
+        :rtype: objectrest.Response
         """
         url = self._create_url(command=command, params=params)
         return self._session.get(url=url)
@@ -577,7 +578,7 @@ class RawAPI:
                                   choices=static.export_media_types):
                 return False, None
         if custom_fields:
-            custom_fields = ','.join(custom_fields)
+            custom_fields = comma_delimit(custom_fields)
         params = build_optional_params(file_format=file_format, metadata_level=metadata_level,
                                        media_info_level=media_info_level, thumb_level=thumb_level, art_level=art_level,
                                        custom_fields=custom_fields, export_type=export_type,
@@ -587,7 +588,6 @@ class RawAPI:
             params[name] = value
         return 'export_metadata', params
 
-    @property
     @raw_json
     def activity(self, session_key: int = None, session_id: str = None) -> dict:
         """
@@ -602,6 +602,29 @@ class RawAPI:
         """
         params = build_optional_params(session_key=session_key, session_id=session_id)
         return 'get_activity', params
+
+    @property
+    def activity_summary(self) -> dict:
+        """
+        Get a summary of current activity on the Plex Media Server
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        _activity_data = self.activity()
+        return build_summary_from_activity_json(activity_data=_activity_data).dict()
+
+    @property
+    def activity_summary_message(self) -> str:
+        """
+        Get a summary message of current activity on the Plex Media Server
+
+        :return: Activity summary message
+        :rtype: str
+        """
+        _activity_data = self.activity()
+        # Yes, this is the JSON API using an object as a middleman.
+        return build_summary_from_activity_json(activity_data=_activity_data).message
 
     def get_api_key(self, username: str = None, password: str = None) -> str:
         """
@@ -796,7 +819,7 @@ class RawAPI:
 
     @raw_json
     def get_home_stats(self, grouping: bool = False, time_range: int = 30, stats_type: str = 'plays', start: int = 0,
-                       count: int = 5, stat_id: str = None) -> dict:
+                       count: int = 5, stat_id: str = None) -> list[dict]:
         """
         Get the homepage watch statistics
 
@@ -812,8 +835,8 @@ class RawAPI:
         :type count: int, optional
         :param stat_id: Name of a single statistic to return (i.e. 'top_movies', 'popular_tv', 'most_concurrent')
         :type stat_id: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: List of data
+        :rtype: list[dict]
         """
         grouping = bool_to_int(boolean=grouping)
         if _is_invalid_choice(value=stats_type, variable_name="stats_type",
@@ -826,8 +849,9 @@ class RawAPI:
                                        count=count, stat_id=stat_id)
         return 'get_home_stats', params
 
+    @property
     @raw_json
-    def libraries(self) -> dict:
+    def libraries(self) -> list[dict]:
         """
         Get a list of all libraries on your server
 
@@ -928,12 +952,12 @@ class RawAPI:
 
     @property
     @raw_json
-    def library_names(self) -> dict:
+    def library_names(self) -> list:
         """
         Get list of library names and IDs on the Plex Media Server
 
-        :return: Dict of data
-        :rtype: dict
+        :return: List of names
+        :rtype: list[str]
         """
         return 'get_library_names', None
 
@@ -990,7 +1014,7 @@ class RawAPI:
 
     @raw_json
     def get_logs(self, sort: str = None, search: str = None, order_direction: str = None, regex: str = None,
-                 start: int = None, end: int = None) -> dict:
+                 start: int = None, end: int = None) -> list[dict]:
         """
         Get the Tautulli logs
 
@@ -1006,8 +1030,8 @@ class RawAPI:
         :type start: int, optional
         :param end: Row number to end at
         :type end: int, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: List of data
+        :rtype: list[dict]
         """
         if _is_invalid_choice(value=sort, variable_name='sort',
                               choices=static.log_sorting):
@@ -1100,12 +1124,12 @@ class RawAPI:
 
     @property
     @raw_json
-    def newsletters(self) -> dict:
+    def newsletters(self) -> list[dict]:
         """
         Get a list of configured newsletters
 
-        :return: Dict of data
-        :rtype: dict
+        :return: List of data
+        :rtype: list[dict]
         """
         return 'get_newsletters', None
 
@@ -1152,24 +1176,24 @@ class RawAPI:
 
     @property
     @raw_json
-    def notifier_parameters(self) -> dict:
+    def notifier_parameters(self) -> list[dict]:
         """
         Get a list of available notification parameters
 
-        :return: Dict of data
-        :rtype: dict
+        :return: List of data
+        :rtype: list[dict]
         """
         return 'get_notifier_parameters', None
 
     @raw_json
-    def get_notifiers(self, notify_action: str = None) -> dict:
+    def get_notifiers(self, notify_action: str = None) -> list[dict]:
         """
         Get a list of configured notifiers
 
         :param notify_action: The notification action to filter out
         :type notify_action: str, optional
-        :return: Dict of data
-        :rtype: dict
+        :return: List of data
+        :rtype: list[dict]
         """
         params = build_optional_params(notify_action=notify_action)
         return 'get_notifiers', params
@@ -1426,23 +1450,6 @@ class RawAPI:
         params = build_optional_params(window=window, log_type=log_type)
         return 'get_plex_log', params
 
-    def get_pms_token(self, username: str, password: str) -> str:
-        """
-        Get the user's Plex token used for Tautulli
-
-        :param username: Plex.tv username
-        :type username: str
-        :param password: Plex.tv password
-        :type password: str
-        :return: Plex token used for Tautulli
-        :rtype: str
-        """
-        params = {'username': username, 'password': password}
-        json_data = self._get_json(command='get_pms_token', params=params)
-        if _success_result(json_data=json_data):
-            return _get_response_data(json_data=json_data)
-        return static.empty_string
-
     @property
     @raw_json
     def pms_update(self) -> dict:
@@ -1537,12 +1544,12 @@ class RawAPI:
 
     @property
     @raw_json
-    def server_list(self) -> dict:
+    def server_list(self) -> list[dict]:
         """
         Get all your servers that are published to Plex.tv
 
-        :return: Dict of data
-        :rtype: dict
+        :return: List of data
+        :rtype: list[dict]
         """
         return 'get_server_list', None
 
@@ -1562,12 +1569,12 @@ class RawAPI:
 
     @property
     @raw_json
-    def servers_info(self) -> dict:
+    def servers_info(self) -> list[dict]:
         """
         Get info about the Plex Media Server
 
-        :return: Dict of data
-        :rtype: dict
+        :return: List of data
+        :rtype: list[dict]
         """
         return 'get_servers_info', None
 
@@ -1736,12 +1743,12 @@ class RawAPI:
 
     @property
     @raw_json
-    def user_names(self) -> dict:
+    def user_names(self) -> list[dict]:
         """
         Get a list of all usernames and user ids
 
-        :return: Dict of data
-        :rtype: dict
+        :return: List of data
+        :rtype: list[dict]
         """
         return 'get_user_names', None
 
@@ -1785,12 +1792,12 @@ class RawAPI:
 
     @property
     @raw_json
-    def users(self) -> dict:
+    def users(self) -> list[dict]:
         """
         Get a list of all users that have access to your server
 
-        :return: Dict of data
-        :rtype: dict
+        :return: List of data
+        :rtype: list[dict]
         """
         return 'get_users', None
 
@@ -1889,6 +1896,18 @@ class RawAPI:
         params['app'] = app
         params['database_path'] = database_file_path
         return 'import_database', params
+
+    @set_and_forget
+    def logout_user_session(self, row_ids: List[int]) -> bool:
+        """
+        Logout Tautulli user sessions
+
+        :param row_ids: List of row IDS to sign out
+        :type row_ids: list[int], optional
+        :return: `True` if successful, `False` if unsuccessful
+        :rtype: bool
+        """
+        return 'logout_user_session', {'row_ids': int_list_to_string(int_list=row_ids)}
 
     @set_and_forget
     def notify(self, notifier_id: int, subject: str, body: str, headers: str = None, script_args: str = None) -> bool:
