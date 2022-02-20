@@ -5,12 +5,14 @@ from urllib.parse import urlencode
 import objectrest
 from datetime import datetime
 
+import packaging.version
+
 import tautulli.static as static
 from tautulli.utils import build_optional_params, _get_response_data, _success_result, int_list_to_string, \
     _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string, comma_delimit
 from tautulli.models.activitysummary import build_summary_from_activity_json
 from tautulli.decorators import raw_json, set_and_forget, raw_api_bool, make_object, make_property_object
-from tautulli._info import __title__
+from tautulli._info import __title__, __min_api_version__
 
 
 class RawAPI:
@@ -21,6 +23,27 @@ class RawAPI:
         self._session = objectrest.Session()
         logging.basicConfig(format='%(levelname)s:%(message)s', level=(logging.DEBUG if verbose else logging.ERROR))
         self._logger = logging.getLogger(__title__)
+        if not self._verify_compatibility(min_version=__min_api_version__):
+            warnings.warn(f"Tautulli API is older than {__min_api_version__}, things may not work as expected.")
+
+    def _verify_compatibility(self, min_version: str) -> bool:
+        """
+        Verify the client version is compatible with the API
+
+        :param min_version: Minimum API version required
+        :type min_version: str
+        :return: True if compatible, False if not
+        :rtype: bool
+        """
+        try:
+            server_version_string = self.tautulli_info['tautulli_version']
+            server_version = packaging.version.parse(server_version_string)
+            min_version = packaging.version.parse(min_version)
+            return server_version >= min_version
+        except:
+            raise Exception("Unable to verify Tautulli API version")
+
+        # return self._raw_api.verify_compatibility(min_version=min_version)
 
     def _create_url(self, command: str, params: dict = None) -> str:
         """
@@ -1664,6 +1687,17 @@ class RawAPI:
         params = build_optional_params(user_id=user_id)
         params['machine_id'] = machine_id
         return 'get_synced_items', params
+
+    @property
+    @raw_json
+    def tautulli_info(self) -> dict:
+        """
+        Get the Tautulli server information
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'get_tautulli_info', None
 
     @raw_json
     def get_user(self, user_id: str) -> dict:

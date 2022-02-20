@@ -745,6 +745,17 @@ class ObjectAPI:
         """
         return 'SyncedItems'
 
+    @property
+    @make_property_object
+    def tautulli_info(self) -> TautulliInfo:
+        """
+        Get the Tautulli server information
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'TautulliInfo'
+
     @make_object
     def get_user(self, user_id: str) -> User:
         """

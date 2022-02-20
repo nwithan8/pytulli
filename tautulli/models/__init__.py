@@ -13,7 +13,7 @@ from tautulli.models.usernames import Datum as UserNames
 from tautulli.models.users import Datum as Users
 from tautulli.models.updatecheck import Data as UpdateCheck
 from tautulli.models.collectionstable import Data as CollectionsTable
-from tautulli.models.activity import Data as ExportFields # TODO: Need fix
+from tautulli.models.activity import Data as ExportFields  # TODO: Need fix
 from tautulli.models.geoiplookup import Data as GeoIPLookup
 from tautulli.models.history import Data as History
 from tautulli.models.homestats import Datum as HomeStats
@@ -29,7 +29,7 @@ from tautulli.models.newratingkeys import Data as NewRatingKeys
 from tautulli.models.newsletterconfig import Data as NewsletterConfig
 from tautulli.models.newsletterlog import Data as NewsletterLog
 from tautulli.models.notificationlog import Data as NotificationLog
-from tautulli.models.activity import Data as NotifierConfig # TODO: Revisit, generator is failing
+from tautulli.models.activity import Data as NotifierConfig  # TODO: Revisit, generator is failing
 from tautulli.models.notifiers import Datum as Notifiers
 from tautulli.models.oldratingkeys import Data as OldRatingKeys
 from tautulli.models.playliststable import Data as PlaylistsTable
@@ -49,5 +49,6 @@ from tautulli.models.whoislookup import Data as WHOISLookup
 from tautulli.models.registereddevice import Data as RegisteredDevice
 from tautulli.models.searchresults import Data as SearchResults
 from tautulli.models.activity import Data as SQLResults  # TODO: Need to implement
+from tautulli.models.tautulliinfo import Data as TautulliInfo
 
 from tautulli.models.activitysummary import *
