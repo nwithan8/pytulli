@@ -1,5 +1,5 @@
 # A Python client for Tautulli API
-[![PyPi](https://static.pepy.tech/personalized-badge/tautulli?period=total&units=international_system&left_color=grey&right_color=green&left_text=Downloads)](https://pypi.org/project/tautulli)
+[![PyPi](https://img.shields.io/pypi/dm/tautulli?label=Downloads&logo=pypi)](https://pypi.org/project/tautulli)
 [![License](https://img.shields.io/pypi/l/tautulli?color=orange&style=flat-square)](https://github.com/nwithan8/pytulli/blob/master/LICENSE)
 
 [![Open Issues](https://img.shields.io/github/issues-raw/nwithan8/pytulli?color=gold&style=flat-square)](https://github.com/nwithan8/pytulli/issues?q=is%3Aopen+is%3Aissue)
