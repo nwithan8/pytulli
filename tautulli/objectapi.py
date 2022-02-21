@@ -1102,7 +1102,7 @@ class ObjectAPI:
         return False
 
     @raw_api_bool
-    def delete_loopup_info(self, rating_key: int = None, service: str = None, delete_all: bool = False) -> bool:
+    def delete_lookup_info(self, rating_key: int = None, service: str = None, delete_all: bool = False) -> bool:
         """
         Delete the 3rd party API lookup info
 

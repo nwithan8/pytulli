@@ -288,7 +288,7 @@ class RawAPI:
         return 'delete_login_log', None
 
     @set_and_forget
-    def delete_loopup_info(self, rating_key: int = None, service: str = None, delete_all: bool = False) -> bool:
+    def delete_lookup_info(self, rating_key: int = None, service: str = None, delete_all: bool = False) -> bool:
         """
         Delete the 3rd party API lookup info
 
@@ -305,7 +305,7 @@ class RawAPI:
                               choices=static.cloud_lookup_hosts):
             return False, None
         params = build_optional_params(rating_key=rating_key, service=service, delete_all=delete_all)
-        return 'delete_hosted_images', params
+        return 'delete_lookup_info', params
 
     @set_and_forget
     def delete_media_info_cache(self, section_id: str) -> bool:
@@ -386,7 +386,7 @@ class RawAPI:
     @set_and_forget
     def delete_recently_added(self) -> bool:
         """
-        Flush all of the recently added items in the database
+        Flush all the recently added items in the database
 
         :return: `True` if successful, `False` if unsuccessful
         :rtype: bool
@@ -474,7 +474,7 @@ class RawAPI:
         """
         Download the Tautulli database file
 
-        :return: Datbase file bytearray
+        :return: Database file bytearray
         :rtype: bytearray
         """
         response = self._get(command='download_database')
@@ -486,30 +486,43 @@ class RawAPI:
     def download_export(self, export_id: int) -> :
     """
 
-    def download_log(self) -> bytes:
+    def download_log(self, logfile: str = None) -> bytes:
         """
         Download the Tautulli log file
 
+        :param logfile: Log file to download
+        :type logfile: str, optional
         :return: Log file bytearray
         :rtype: bytearray
         """
-        response = self._get(command='download_log')
+        if _is_invalid_choice(value=logfile, variable_name="logfile",
+                              choices=static.logfile_types):
+            return False, None
+        params = build_optional_params(logfile=logfile)
+        response = self._get(command='download_log', params=params)
         if response:
             return response.content
         return static.empty_bytes
 
-    def download_plex_log(self) -> bytes:
+    def download_plex_log(self, logfile: str = None) -> bytes:
         """
         Download the Plex log file
 
+        :param logfile: Log file to download
+        :type logfile: str, optional
         :return: Log file bytearray
         :rtype: bytearray
         """
-        response = self._get(command='download_plex_log')
+        if _is_invalid_choice(value=logfile, variable_name="logfile",
+                              choices=static.plex_logfile_types):
+            return False, None
+        params = build_optional_params(logfile=logfile)
+        response = self._get(command='download_plex_log', params=params)
         if response:
             return response.content
         return static.empty_bytes
 
+    # optional or required params now?
     @set_and_forget
     def edit_library(self, section_id: str, custom_thumb: str = None, custom_art: str = None,
                      keep_history: bool = True) -> bool:
@@ -532,6 +545,7 @@ class RawAPI:
         params['section_id'] = section_id
         return 'edit_library', params
 
+    # optional or required params now?
     @set_and_forget
     def edit_user(self, user_id: str, friendly_name: str = None, custom_thumb: str = None, keep_history: bool = True,
                   allow_guest: bool = False) -> bool:
@@ -580,7 +594,7 @@ class RawAPI:
         :type media_info_level: int, optional
         :param thumb_level: Level of poster/cover images to export (default: 0)
         :type thumb_level: int, optional
-        :param art_level: Lvel of background artwork images to export (default: 0)
+        :param art_level: Level of background artwork images to export (default: 0)
         :type art_level: int, optional
         :param custom_fields: List of custom fields to export
         :type custom_fields: list[str], optional
@@ -667,6 +681,20 @@ class RawAPI:
         if _success_result(json_data=json_data):
             return _get_response_data(json_data=json_data)
         return static.empty_string
+
+    @raw_json
+    def get_children_metadata(self, rating_key: str, media_type: str) -> dict:
+        """
+        Get the metadata for the children of a media item.
+
+        :param rating_key: The rating key of the media item
+        :type rating_key: str
+        :param media_type: The type of media item (movie, show, season, episode)
+        :type media_type: str
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'get_children_metadata', {'rating_key': rating_key, 'media_type': media_type}
 
     @raw_json
     def get_collections_table(self, section_id: str) -> dict:
@@ -774,9 +802,10 @@ class RawAPI:
     @raw_json
     def get_history(self, grouping: bool = False, include_activity: bool = False, user: str = None, user_id: int = None,
                     rating_key: int = None, parent_rating_key: int = None, grandparent_rating_key: int = None,
-                    start_date: datetime = None, section_id: int = None, media_type: str = None,
-                    transcode_decision: str = None, guid: str = None, order_column: str = None,
-                    order_direction: str = None, start: int = 0, length: int = 25, search: str = None) -> dict:
+                    start_date: datetime = None, before: datetime = None, after: datetime = None,
+                    section_id: int = None, media_type: str = None, transcode_decision: str = None, guid: str = None,
+                    order_column: str = None, order_direction: str = None, start: int = 0, length: int = 25,
+                    search: str = None) -> dict:
         """
         Get the Tautulli history
 
@@ -794,8 +823,12 @@ class RawAPI:
         :type parent_rating_key: int, optional
         :param grandparent_rating_key: Grandparent rating key of item
         :type grandparent_rating_key: int, optional
-        :param start_date: Date to start results from
+        :param start_date: Exact date for results
         :type start_date: datetime, optional
+        :param before: Results before and including the date
+        :type before: datetime, optional
+        :param after: Results after and including the date
+        :type after: datetime, optional
         :param section_id: ID of section
         :type section_id: int, optional
         :param media_type: Media type (i.e. 'movie', 'episode', 'track', 'live')
@@ -820,6 +853,8 @@ class RawAPI:
         grouping = bool_to_int(boolean=grouping)
         include_activity = bool_to_int(boolean=include_activity)
         start_date = datetime_to_string(datetime_object=start_date)
+        before = datetime_to_string(datetime_object=before)
+        after = datetime_to_string(datetime_object=after)
         if _is_invalid_choice(value=media_type, variable_name="media_type",
                               choices=static.history_media_types):
             return False, None
@@ -835,7 +870,7 @@ class RawAPI:
         params = build_optional_params(grouping=grouping, include_activity=include_activity, user=user, user_id=user_id,
                                        rating_key=rating_key, parent_rating_key=parent_rating_key,
                                        grandparent_rating_key=grandparent_rating_key, start_date=start_date,
-                                       section_id=section_id, media_type=media_type,
+                                       before=before, after=after,section_id=section_id, media_type=media_type,
                                        transcode_decision=transcode_decision, guid=guid, order_column=order_column,
                                        order_dir=order_direction, start=start, length=length, search=search)
         return 'get_history', params
@@ -868,9 +903,48 @@ class RawAPI:
         if _is_invalid_choice(value=stat_id, variable_name='stat_id',
                               choices=static.stats_category):
             return False, None
-        params = build_optional_params(grouping=grouping, time_range=time_range, stats_type=stats_type, start=start,
-                                       count=count, stat_id=stat_id)
+        params = build_optional_params(grouping=grouping, time_range=time_range, stats_type=stats_type, stats_start=start,
+                                       stats_count=count, stat_id=stat_id)
         return 'get_home_stats', params
+
+    @raw_json
+    def get_item_user_stats(self, rating_key: str, grouping: bool = False) -> List[dict]:
+        """
+        Get the user statistics for the media item
+
+        :param rating_key: Rating key of the media item
+        :type rating_key: str
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool, optional
+        :return: List of data
+        :rtype: List[dict]
+        """
+        grouping = bool_to_int(boolean=grouping)
+        params = build_optional_params(rating_key=rating_key, grouping=grouping)
+        return 'get_item_user_stats', params
+
+    @raw_json
+    def get_item_watch_time_stats(self, rating_key: str, grouping: bool = False, query_days: List[int] = None) -> List[dict]:
+
+        """
+        Get the watch time stats for the media item
+
+        :param rating_key: Rating key of the media item
+        :type rating_key: str
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool, optional
+        :param query_days: List of days to get results for (i.e. [0, 1, 14, 30])
+        :type query_days: list[int], optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        grouping = bool_to_int(boolean=grouping)
+        params = build_optional_params(grouping=grouping)
+        params['rating_key'] = rating_key
+        if query_days:
+            params['query_days'] = int_list_to_string(int_list=query_days)
+        return 'get_item_watch_time_stats', params
+
 
     @property
     @raw_json
@@ -916,19 +990,22 @@ class RawAPI:
         return 'get_libraries_table', params
 
     @raw_json
-    def get_library(self, section_id: str) -> dict:
+    def get_library(self, section_id: str, include_last_accessed: bool = False) -> dict:
         """
         Get a library's details
 
         :param section_id: ID of the Plex library section
         :type section_id: str
+        :param include_last_accessed: Whether to include the last_accessed value for the library (default: False)
+        :type include_last_accessed: bool, optional
         :return: Dict of data
         :rtype: dict
         """
-        return 'get_library', {'section_id': section_id}
+        params = build_optional_params(section_id=section_id, include_last_accessed=include_last_accessed)
+        return 'get_library', params
 
     @raw_json
-    def get_library_media_info(self, section_id: str, rating_key: str, section_type: str = None,
+    def get_library_media_info(self, section_id: str = None, rating_key: str = None, section_type: str = None,
                                order_column: str = None, order_direction: str = None, start: int = 0, length: int = 25,
                                search: str = None, refresh: bool = False) -> dict:
         """
@@ -1089,7 +1166,7 @@ class RawAPI:
     @raw_json
     def get_new_rating_keys(self, rating_key: str, media_type: str) -> dict:
         """
-        Get a list of new rating keys for the Plex Media Server of all of the item's parent/children
+        Get a list of new rating keys for the Plex Media Server of all the item's parent/children
 
         :param rating_key: Rating key of item
         :type rating_key: str
@@ -1224,7 +1301,7 @@ class RawAPI:
     @raw_json
     def get_old_rating_keys(self, rating_key: str, media_type: str) -> dict:
         """
-        Get a list of old rating keys from the Tautulli databse for all of the item's parent/children
+        Get a list of old rating keys from the Tautulli database for all the item's parent/children
         :param rating_key: Rating key of item
         :type rating_key: str
         :param media_type: Type of media (i.e. 'movie', 'show', 'episode', 'album', 'track')
@@ -1456,21 +1533,21 @@ class RawAPI:
                               grouping=grouping)
 
     @raw_json
-    def get_plex_log(self, window: int = None, log_type: str = None) -> dict:
+    def get_plex_log(self, window: int = None, logfile: str = None) -> dict:
         """
         Get the Plex Media Server logs
 
         :param window: Number of tail lines to return
         :type window: int, optional
-        :param log_type: Log type ('server' or 'scanner')
-        :type log_type: str, optional
+        :param logfile: Log file to download
+        :type logfile: str, optional
         :return: Dict of data
         :rtype: dict
         """
-        if _is_invalid_choice(value=log_type, variable_name='log_type',
-                              choices=static.plex_log_types):
+        if _is_invalid_choice(value=logfile, variable_name='logfile',
+                              choices=static.plex_logfile_types):
             return False, None
-        params = build_optional_params(window=window, log_type=log_type)
+        params = build_optional_params(window=window, logfile=logfile)
         return 'get_plex_log', params
 
     @property
@@ -1673,19 +1750,18 @@ class RawAPI:
                               user_id=user_id, grouping=grouping)
 
     @raw_json
-    def get_synced_items(self, machine_id: str, user_id: str = None) -> dict:
+    def get_synced_items(self, machine_id: str = None, user_id: str = None) -> dict:
         """
         Get a list of synced items on the Plex Media Server
 
         :param machine_id: Plex Media Server identifier
-        :type machine_id: str
+        :type machine_id: str, optional
         :param user_id: ID of the Plex user
         :type user_id: str, optional
         :return: Dict of data
         :rtype: dict
         """
-        params = build_optional_params(user_id=user_id)
-        params['machine_id'] = machine_id
+        params = build_optional_params(machine_id=machine_id, user_id=user_id)
         return 'get_synced_items', params
 
     @property
@@ -1700,16 +1776,19 @@ class RawAPI:
         return 'get_tautulli_info', None
 
     @raw_json
-    def get_user(self, user_id: str) -> dict:
+    def get_user(self, user_id: str, include_last_seen: bool = False) -> dict:
         """
         Get a user's details
 
         :param user_id: ID of the Plex user
         :type user_id: str
+        :param include_last_seen: Whether to include the last_seen value for the user (default: False)
+        :type include_last_seen: bool, optional
         :return: Dict of data
         :rtype: dict
         """
-        return 'get_user', {'user_id': user_id}
+        params = build_optional_params(user_id=user_id, include_last_seen=include_last_seen)
+        return 'get_user', params
 
     @raw_json
     def get_user_ips(self, user_id: str, order_column: str = None, order_direction: str = None, start: int = 0,
@@ -2070,15 +2149,19 @@ class RawAPI:
         return 'refresh_users_list', None
 
     @raw_json
-    def register_device(self, device_id: str, device_name: str, friendly_name: str = None, onesignal_id: str = None,
-                        min_version: str = None) -> dict:
+    def register_device(self, device_id: str, device_name: str, platform: str = None, version: str = None,
+                        friendly_name: str = None, onesignal_id: str = None, min_version: str = None) -> dict:
         """
         Register the Tautulli Android App for notifications
 
         :param device_id: Unique device identifier for the mobile device
         :type device_id: str
-        :param device_name: Device name of the mobil device
+        :param device_name: Device name of the mobile device
         :type device_name: str
+        :param platform: The platform of the mobile devices
+        :type platform: str, optional
+        :param version: The version of the app
+        :type version: str, optional
         :param friendly_name: Friendly name to identity the mobile device
         :type friendly_name: str, optional
         :param onesignal_id: The OneSignal ID of the mobile device
@@ -2088,7 +2171,7 @@ class RawAPI:
         :return: Dict of data
         :rtype: dict
         """
-        params = build_optional_params(friendly_name=friendly_name, onesignal_id=onesignal_id, min_version=min_version)
+        params = build_optional_params(platform=platform, version=version, friendly_name=friendly_name, onesignal_id=onesignal_id, min_version=min_version)
         params['device_id'] = device_id
         params['device_name'] = device_name
         return 'register_device', params
@@ -2118,6 +2201,17 @@ class RawAPI:
         params = build_optional_params(limit=limit)
         params['query'] = query
         return 'search', params
+
+    @property
+    @raw_json
+    def server_status(self) -> dict:
+        """
+        Get the current status of Tautulli's connection to the Plex server
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'server_status', None
 
     @set_and_forget
     def set_mobile_device_config(self, mobile_device_id: int, friendly_name: str = None) -> bool:

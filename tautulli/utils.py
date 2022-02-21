@@ -1,6 +1,7 @@
-from typing import Union, List, Iterable
 import logging
 from datetime import datetime, timedelta
+from typing import Union, List, Iterable
+
 from pytz import timezone
 
 from tautulli._info import __title__
@@ -36,6 +37,7 @@ session_progress_message = """__Progress__: {progress} (ETA: {eta})"""
 def datetime_to_string(datetime_object: datetime, string_format: str = "%Y-%m-%d") -> str:
     """
     Convert a datetime.datetime object to a string
+
     :param datetime_object: Datetime.datetime object to convert
     :type datetime_object: datetime
     :param string_format: Date format to use
@@ -51,6 +53,7 @@ def datetime_to_string(datetime_object: datetime, string_format: str = "%Y-%m-%d
 def build_optional_params(**kwargs) -> dict:
     """
     Build a dict with only kwargs elements that are not None
+
     :param kwargs: All possible parameters to include in final dict
     :type kwargs: dict
     :return: Dict of non-None parameters
@@ -66,6 +69,7 @@ def build_optional_params(**kwargs) -> dict:
 def bool_to_int(boolean: bool) -> int:
     """
     Convert a boolean to a 0/1 equivalent
+
     :param boolean: Boolean to convert
     :type boolean: bool
     :return: 0 if False, 1 if True
@@ -80,6 +84,7 @@ def int_list_to_string(int_list: List[int]) -> str:
     """
     Convert a list of ints to a comma-separated string
     e.g. [0, 1, 4] -> "0,1,4"
+
     :param int_list: List of ints to convert
     :type int_list: list
     :return: Comma-separated string of ints
@@ -138,6 +143,7 @@ def _one_needed(**kwargs) -> bool:
     """
     Check if at least one of the kwargs is not None
     Logs error message if not.
+
     :param kwargs: Dict of keyword arguments
     :type kwargs: dict
     :return: Whether at least on kwarg is not None
@@ -156,6 +162,7 @@ def _one_needed(**kwargs) -> bool:
 def _which_used(**kwargs) -> tuple:
     """
     Get which (first) of kwargs is not None
+
     :param kwargs: Dict of keyword arguments
     :type kwargs: dict
     :return: First (keyword, value) that is not None
@@ -171,6 +178,7 @@ def _is_invalid_choice(value, variable_name: str, choices: List) -> bool:
     """
     Check if value is one of the possible choices
     Logs error message if not.
+
     :param value: Value to evaluate
     :type value: object
     :param variable_name: Name of variable (for logging purposes)
@@ -190,6 +198,7 @@ def _is_invalid_choice(value, variable_name: str, choices: List) -> bool:
 def _get_response_data(json_data: dict) -> Union[str, int, List, dict]:
     """
     Return ['response']['data'] from JSON data
+
     :param json_data: JSON data to parse
     :type json_data: dict
     :return: json_data['response']['data']
@@ -202,6 +211,7 @@ def _success_result(json_data: dict) -> bool:
     """
     Return if ['response']['result'] from JSON data is 'success'
     Logs debug message if not.
+
     :param json_data: JSON data to parse
     :type json_data: dict
     :return: json_data['response']['result'] == 'success'
