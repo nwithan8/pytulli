@@ -45,22 +45,6 @@ class RawAPI:
 
         # return self._raw_api.verify_compatibility(min_version=min_version)
 
-    def _create_url(self, command: str, params: dict = None) -> str:
-        """
-        Create complete Tautulli API url
-
-        :param command: Tautulli endpoint
-        :type command: str
-        :param params: Dictionary of parameters to add to url
-        :type params: dict, optional
-        :return: Complete Tautulli API url
-        :rtype: str
-        """
-        url = f"{self._url}&cmd={command}"
-        if params:
-            url += f"&{urlencode(params)}"
-        return url
-
     def _get(self, command: str, params: dict = None) -> objectrest.Response:
         """
         Get response from API call
@@ -71,8 +55,10 @@ class RawAPI:
         :return: Response from the API
         :rtype: objectrest.Response
         """
-        url = self._create_url(command=command, params=params)
-        return self._session.get(url=url)
+        if not params:
+            params = {}
+        params['cmd'] = command
+        return self._session.get(url=self._url, params=params)
 
     def _get_json(self, command: str, params: dict = None) -> dict:
         """
@@ -870,7 +856,7 @@ class RawAPI:
         params = build_optional_params(grouping=grouping, include_activity=include_activity, user=user, user_id=user_id,
                                        rating_key=rating_key, parent_rating_key=parent_rating_key,
                                        grandparent_rating_key=grandparent_rating_key, start_date=start_date,
-                                       before=before, after=after,section_id=section_id, media_type=media_type,
+                                       before=before, after=after, section_id=section_id, media_type=media_type,
                                        transcode_decision=transcode_decision, guid=guid, order_column=order_column,
                                        order_dir=order_direction, start=start, length=length, search=search)
         return 'get_history', params
@@ -903,7 +889,8 @@ class RawAPI:
         if _is_invalid_choice(value=stat_id, variable_name='stat_id',
                               choices=static.stats_category):
             return False, None
-        params = build_optional_params(grouping=grouping, time_range=time_range, stats_type=stats_type, stats_start=start,
+        params = build_optional_params(grouping=grouping, time_range=time_range, stats_type=stats_type,
+                                       stats_start=start,
                                        stats_count=count, stat_id=stat_id)
         return 'get_home_stats', params
 
@@ -924,7 +911,8 @@ class RawAPI:
         return 'get_item_user_stats', params
 
     @raw_json
-    def get_item_watch_time_stats(self, rating_key: str, grouping: bool = False, query_days: List[int] = None) -> List[dict]:
+    def get_item_watch_time_stats(self, rating_key: str, grouping: bool = False, query_days: List[int] = None) -> List[
+        dict]:
 
         """
         Get the watch time stats for the media item
@@ -944,7 +932,6 @@ class RawAPI:
         if query_days:
             params['query_days'] = int_list_to_string(int_list=query_days)
         return 'get_item_watch_time_stats', params
-
 
     @property
     @raw_json
@@ -2171,7 +2158,8 @@ class RawAPI:
         :return: Dict of data
         :rtype: dict
         """
-        params = build_optional_params(platform=platform, version=version, friendly_name=friendly_name, onesignal_id=onesignal_id, min_version=min_version)
+        params = build_optional_params(platform=platform, version=version, friendly_name=friendly_name,
+                                       onesignal_id=onesignal_id, min_version=min_version)
         params['device_id'] = device_id
         params['device_name'] = device_name
         return 'register_device', params
