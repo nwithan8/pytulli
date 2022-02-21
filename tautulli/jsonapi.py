@@ -16,14 +16,14 @@ from tautulli._info import __title__, __min_api_version__
 
 
 class RawAPI:
-    def __init__(self, base_url: str, api_key: str, verbose: bool = False):
+    def __init__(self, base_url: str, api_key: str, verbose: bool = False, verify: bool = True):
         if base_url.endswith("/"):
             base_url = base_url[:-1]
         self._url = f"{base_url}/api/v2?apikey={api_key}"
         self._session = objectrest.Session()
         logging.basicConfig(format='%(levelname)s:%(message)s', level=(logging.DEBUG if verbose else logging.ERROR))
         self._logger = logging.getLogger(__title__)
-        if not self._verify_compatibility(min_version=__min_api_version__):
+        if verify and not self._verify_compatibility(min_version=__min_api_version__):
             warnings.warn(f"Tautulli API is older than {__min_api_version__}, things may not work as expected.")
 
     def _verify_compatibility(self, min_version: str) -> bool:

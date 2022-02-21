@@ -11,7 +11,7 @@ def raw_client(no_key: bool = False) -> tautulli.RawAPI:
     if not url:
         raise ValueError("T_URL is not set")
     if no_key:
-        return tautulli.RawAPI(base_url=url, api_key="placeholder")
+        return tautulli.RawAPI(base_url=url, api_key="placeholder", verify=False)
     else:
         key = os.getenv("T_KEY")
         if not key:
