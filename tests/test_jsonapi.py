@@ -16,6 +16,13 @@ def test_ping():
     assert res is True
 
 
+def test_tautulli_info():
+    client = raw_client()
+    tautulli_info = client.tautulli_info
+    assert tautulli_info is not None
+    assert type(tautulli_info) == dict
+
+
 def test_docs():
     client = raw_client()
     docs = client.docs

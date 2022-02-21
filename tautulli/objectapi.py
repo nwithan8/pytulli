@@ -745,6 +745,17 @@ class ObjectAPI:
         """
         return 'SyncedItems'
 
+    @property
+    @make_property_object
+    def tautulli_info(self) -> TautulliInfo:
+        """
+        Get the Tautulli server information
+
+        :return: Dict of data
+        :rtype: dict
+        """
+        return 'TautulliInfo'
+
     @make_object
     def get_user(self, user_id: str) -> User:
         """
@@ -1091,7 +1102,7 @@ class ObjectAPI:
         return False
 
     @raw_api_bool
-    def delete_loopup_info(self, rating_key: int = None, service: str = None, delete_all: bool = False) -> bool:
+    def delete_lookup_info(self, rating_key: int = None, service: str = None, delete_all: bool = False) -> bool:
         """
         Delete the 3rd party API lookup info
 

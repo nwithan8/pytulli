@@ -32,3 +32,6 @@ tautulli_database_import_methods = ['merge', 'overwrite']
 plexivity_table_names = ['processed', 'grouped']
 image_fallback_types = ["poster", "cover", "art", "poster-live", "art-live", "art-live-full"]
 library_media_info_types = ['movie', 'show', 'artist', 'photo']
+logfile_types = ["tautulli", "tautulli_api", "plex_websocket"]
+plex_logfile_types = ["Plex Media Server", "Plex Media Scanner"]
+
