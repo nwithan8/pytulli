@@ -37,7 +37,7 @@ jobs:
     - name: Install Python dependencies
       run: |
         python3 -m pip install --upgrade pip
-        pip3 install -r requirements_test.txt
+        make install
 
     - name: Test with pytest
       run: |
