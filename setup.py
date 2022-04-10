@@ -1,17 +1,28 @@
 import setuptools
 
-from tautulli._info import __title__, __description__, __version__, __author__, __author_email__, __license__, \
-    __keywords__, __github_username__, __github_repo__
+__version__ = 'VERSIONADDEDBYGITHUB'
+
+__title__ = "tautulli"
+__author__ = 'Nate Harris'
+__author_email__ = 'n8gr8gbln@gmail.com'
+__github_username__ = "nwithan8"
+__github_repo__ = "pytulli"
+__copyright__ = "Copyright © YEARADDEDBYGITHUB - Nate Harris"
+__license__ = 'GNU General Public License v3 (GPLv3)'
+__description__ = "A complete Python client for Tautulli's API"
+__keywords__ = ["Tautulli", "API", "client", "Plex", "PMS", "Plex Media Server", "media", "server", "JSON"]
+
+__min_api_version__ = "2.9.4"
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 REQUIREMENTS = [
-    "objectrest~=1.2",
-    "pydantic~=1.9",
-    "pytz~=2022.1",
-    "python-dotenv~=0.20",
-    "packaging~=21.3",
+    "objectrest==1.2.*",
+    "pydantic==1.9.*",
+    "pytz==2022.1.*",
+    "python-dotenv==0.20.*",
+    "packaging==21.3.*",
     "typing-extensions"
 ]
 
