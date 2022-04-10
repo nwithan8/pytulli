@@ -12,7 +12,7 @@ from tautulli.utils import build_optional_params, _get_response_data, _success_r
     _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string, comma_delimit
 from tautulli.models.activitysummary import build_summary_from_activity_json
 from tautulli.decorators import raw_json, set_and_forget, raw_api_bool, make_object, make_property_object
-from tautulli._info import __title__, __min_api_version__
+from tautulli._info import __min_api_version__
 
 
 class RawAPI:
@@ -22,7 +22,7 @@ class RawAPI:
         self._url = f"{base_url}/api/v2?apikey={api_key}"
         self._session = objectrest.Session()
         logging.basicConfig(format='%(levelname)s:%(message)s', level=(logging.DEBUG if verbose else logging.ERROR))
-        self._logger = logging.getLogger(__title__)
+        self._logger = logging.getLogger("tautulli")
         if verify and not self._verify_compatibility(min_version=__min_api_version__):
             warnings.warn(f"Tautulli API is older than {__min_api_version__}, things may not work as expected.")
 

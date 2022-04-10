@@ -64,6 +64,6 @@ mypy:
 
 ## test - Test the project
 test:
-	$(VIRTUAL_BIN)/pytest
+	$(VIRTUAL_BIN)/pytest --exitfirst --verbose --failed-first
 
 .PHONY: help build coverage clean black black-check format format-check install isort isort-check lint mypy test

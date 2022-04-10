@@ -4,8 +4,6 @@ from typing import Union, List, Iterable
 
 from pytz import timezone
 
-from tautulli._info import __title__
-
 switcher = {
     "playing": "▶️",
     "paused": "⏸",
@@ -154,7 +152,7 @@ def _one_needed(**kwargs) -> bool:
         if v:
             one_used = True
     if not one_used:
-        logger = logging.getLogger(__title__)
+        logger = logging.getLogger("tautulli")
         logger.error(f"Please provide one of the following: {comma_delimit(kwargs.keys())}")
     return one_used
 
@@ -189,7 +187,7 @@ def _is_invalid_choice(value, variable_name: str, choices: List) -> bool:
     :rtype: bool
     """
     if value and value not in choices:
-        logger = logging.getLogger(__title__)
+        logger = logging.getLogger("tautulli")
         logger.error(f"Invalid '{variable_name}'. Please use one of the following: {comma_delimit(choices)}")
         return True
     return False
@@ -219,7 +217,7 @@ def _success_result(json_data: dict) -> bool:
     """
     if json_data.get('response', {}).get('result', "") == "success":
         return True
-    logger = logging.getLogger(__title__)
+    logger = logging.getLogger("tautulli")
     logger.debug(json_data.get('response', {}).get('message', "No error message in API response"))
     return False
 

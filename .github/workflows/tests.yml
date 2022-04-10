@@ -40,5 +40,4 @@ jobs:
         make install
 
     - name: Test with pytest
-      run: |
-        pytest --exitfirst --verbose --failed-first
+      run: make test
