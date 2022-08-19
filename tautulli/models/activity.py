@@ -8,7 +8,7 @@ from typing import Any, List, Optional
 
 from pydantic import BaseModel
 from tautulli import utils
-from tautulli.models.activitysummary import ActivitySummary, build_summary_from_activity_object
+from tautulli.models.activity_summary import ActivitySummary, build_summary_from_activity_object
 
 
 class Session(BaseModel):
