@@ -99,6 +99,8 @@ class Data(BaseModel):
     user_rating: str
     duration: str
     year: str
+    parent_year: str
+    grandparent_year: str
     thumb: str
     parent_thumb: str
     grandparent_thumb: str
