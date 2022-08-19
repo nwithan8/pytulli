@@ -10,15 +10,15 @@ from pydantic import BaseModel
 
 
 class Data(BaseModel):
-    code: str
-    country: str
-    region: str
     city: str
-    postal_code: str
-    timezone: str
+    code: str
+    continent: str
+    country: str
     latitude: float
     longitude: float
-    continent: Any
+    postal_code: str
+    region: str
+    timezone: str
     accuracy: Any
 
 
