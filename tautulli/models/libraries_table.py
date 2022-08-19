@@ -37,9 +37,9 @@ class Datum(BaseModel):
     live: Optional[int]
     originally_available_at: Optional[str]
     guid: Optional[str]
-    do_notify: str
-    do_notify_created: str
-    keep_history: str
+    do_notify: int
+    do_notify_created: int
+    keep_history: int
     is_active: int
 
 
