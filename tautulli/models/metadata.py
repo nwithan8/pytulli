@@ -110,7 +110,9 @@ class Data(BaseModel):
     last_viewed_at: str
     guid: str
     parent_guid: str
+    parent_guids: List[str]
     grandparent_guid: str
+    grandparent_guids: List[str]
     directors: List[str]
     writers: List[str]
     actors: List[str]
