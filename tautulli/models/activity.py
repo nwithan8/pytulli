@@ -168,6 +168,8 @@ class Session(BaseModel):
     transcode_hw_encode: str
     transcode_hw_encode_title: str
     transcode_hw_full_pipeline: int
+    transcode_max_offset_available: int
+    transcode_min_offset_available: int
     audio_decision: str
     video_decision: str
     subtitle_decision: str

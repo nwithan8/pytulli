@@ -38,6 +38,8 @@ class Datum(BaseModel):
     keep_history: str
     allow_guest: str
     is_active: int
+    title: str
+    email: Optional[str]
 
 
 class Data(BaseModel):

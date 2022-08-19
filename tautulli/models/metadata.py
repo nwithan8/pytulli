@@ -21,6 +21,7 @@ class Stream(BaseModel):
     video_color_range: Optional[str] = None
     video_color_space: Optional[str] = None
     video_color_trc: Optional[str] = None
+    video_dynamic_range: Optional[str] = None
     video_frame_rate: Optional[str] = None
     video_ref_frames: Optional[str] = None
     video_height: Optional[str] = None
