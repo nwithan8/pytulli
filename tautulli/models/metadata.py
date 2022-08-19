@@ -21,6 +21,7 @@ class Stream(BaseModel):
     video_color_range: Optional[str] = None
     video_color_space: Optional[str] = None
     video_color_trc: Optional[str] = None
+    video_dynamic_range: Optional[str] = None
     video_frame_rate: Optional[str] = None
     video_ref_frames: Optional[str] = None
     video_height: Optional[str] = None
@@ -98,6 +99,8 @@ class Data(BaseModel):
     user_rating: str
     duration: str
     year: str
+    parent_year: str
+    grandparent_year: str
     thumb: str
     parent_thumb: str
     grandparent_thumb: str
@@ -109,7 +112,9 @@ class Data(BaseModel):
     last_viewed_at: str
     guid: str
     parent_guid: str
+    parent_guids: List[str]
     grandparent_guid: str
+    grandparent_guids: List[str]
     directors: List[str]
     writers: List[str]
     actors: List[str]

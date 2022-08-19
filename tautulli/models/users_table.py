@@ -34,10 +34,12 @@ class Datum(BaseModel):
     originally_available_at: Optional[str]
     guid: Optional[str]
     transcode_decision: Optional[str]
-    do_notify: str
-    keep_history: str
-    allow_guest: str
+    do_notify: int
+    keep_history: int
+    allow_guest: int
     is_active: int
+    title: str
+    email: Optional[str]
 
 
 class Data(BaseModel):

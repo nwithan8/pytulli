@@ -8,7 +8,7 @@ from typing import Any, List, Optional
 
 from pydantic import BaseModel
 from tautulli import utils
-from tautulli.models.activitysummary import ActivitySummary, build_summary_from_activity_object
+from tautulli.models.activity_summary import ActivitySummary, build_summary_from_activity_object
 
 
 class Session(BaseModel):
@@ -168,6 +168,8 @@ class Session(BaseModel):
     transcode_hw_encode: str
     transcode_hw_encode_title: str
     transcode_hw_full_pipeline: int
+    transcode_max_offset_available: int
+    transcode_min_offset_available: int
     audio_decision: str
     video_decision: str
     subtitle_decision: str

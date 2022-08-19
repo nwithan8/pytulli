@@ -10,7 +10,8 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    platform_type: str
+    platform: str
+    platform_name: str
     player_name: str
     result_id: int
     total_plays: int

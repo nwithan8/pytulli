@@ -47,7 +47,7 @@ setuptools.setup(
     author=__author__,
     author_email=__author_email__,
     url=f'https://github.com/{__github_username__}/{__github_repo__}',
-    download_url=f'https://github.com/{__github_username__}/{__github_repo__}/archive/{__version__}.tar.gz',
+    download_url=f'https://github.com/{__github_username__}/{__github_repo__}/archive/refs/tags/{__version__}.tar.gz',
     keywords=__keywords__,
     install_requires=REQUIREMENTS,
     extras_require={

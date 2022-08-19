@@ -24,8 +24,7 @@ class Datum(BaseModel):
     do_notify: int
     keep_history: int
     allow_guest: int
-    server_token: Optional[str]
-    shared_libraries: Optional[str]
+    shared_libraries: List[str]
     filter_all: Optional[str]
     filter_movies: Optional[str]
     filter_tv: Optional[str]
