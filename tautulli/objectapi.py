@@ -9,11 +9,9 @@ from tautulli.models import *
 
 class ObjectAPI:
     def __init__(self, base_url: str, api_key: str, verbose: bool = False):
-        warnings.warn("Deprecated", DeprecationWarning)
         self._raw_api = RawAPI(base_url=base_url, api_key=api_key, verbose=verbose)
 
     def __init_subclass__(cls, **kwargs):
-        warnings.warn("Deprecated", DeprecationWarning)
         super().__init_subclass__(**kwargs)
 
     @property
@@ -90,6 +88,21 @@ class ObjectAPI:
         """
         _activity = self.activity()
         return build_summary_from_activity_object(activity=_activity).message
+
+    def get_api_key(self, username: str = None, password: str = None) -> str:
+        """
+        Get the Tautulli API key.
+        Username and password are required if auth is enabled.
+        Makes and saves the API key if it does not exist.
+
+        :param username: Tautulli username
+        :type username: str, optional
+        :param password: Tautulli password
+        :type password: str, optional
+        :return: API key
+        :rtype: str
+        """
+        return self._raw_api.get_api_key(username=username, password=password)
 
     @property
     @make_property_object

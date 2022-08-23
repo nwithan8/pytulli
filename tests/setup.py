@@ -34,7 +34,7 @@ def object_client(no_key: bool = False) -> tautulli.ObjectAPI:
     else:
         key = os.getenv("T_KEY")
         if not key:
-            temp_client = tautulli.RawAPI(base_url=url, api_key="placeholder")
+            temp_client = tautulli.ObjectAPI(base_url=url, api_key="placeholder")
             key = temp_client.get_api_key()
         if key:
             os.environ["T_KEY"] = key
