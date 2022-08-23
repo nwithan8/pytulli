@@ -77,7 +77,7 @@ def test_date_formats():
     assert type(date_formats) == models.DateFormats
 
 
-@pytest.skip("This test is failing due to server-side issues")
+@pytest.mark.skip("This test is failing due to server-side issues")
 def test_get_export_fields():
     client = object_client()
     export_fields = client.get_export_fields(media_type="movie")
@@ -85,7 +85,7 @@ def test_get_export_fields():
     assert type(export_fields) == models.ExportFields
 
 
-@pytest.skip("Not implemented.")
+@pytest.mark.skip("Not implemented.")
 def test_get_exports_table():
     client = object_client()
 
@@ -181,47 +181,47 @@ def test_get_playlists_table():
     assert type(playlists) == models.PlaylistsTable
 
 
-@pytest.skip("Not implemented.")
+@pytest.mark.skip("Not implemented.")
 def test_get_plays_by_date():
     client = object_client()
 
 
-@pytest.skip("Not implemented.")
+@pytest.mark.skip("Not implemented.")
 def test_get_plays_by_day_of_week():
     client = object_client()
 
 
-@pytest.skip("Not implemented.")
+@pytest.mark.skip("Not implemented.")
 def test_get_plays_by_hour_of_day():
     client = object_client()
 
 
-@pytest.skip("Not implemented.")
+@pytest.mark.skip("Not implemented.")
 def test_get_plays_by_source_resolution():
     client = object_client()
 
 
-@pytest.skip("Not implemented.")
+@pytest.mark.skip("Not implemented.")
 def test_get_plays_by_stream_resolution():
     client = object_client()
 
 
-@pytest.skip("Not implemented.")
+@pytest.mark.skip("Not implemented.")
 def test_get_plays_by_stream_type():
     client = object_client()
 
 
-@pytest.skip("Not implemented.")
+@pytest.mark.skip("Not implemented.")
 def test_get_plays_by_top_10_platforms():
     client = object_client()
 
 
-@pytest.skip("Not implemented.")
+@pytest.mark.skip("Not implemented.")
 def test_get_plays_by_top_10_users():
     client = object_client()
 
 
-@pytest.skip("Not implemented.")
+@pytest.mark.skip("Not implemented.")
 def test_get_plays_per_month():
     client = object_client()
 
@@ -282,12 +282,12 @@ def test_get_settings():
     assert type(settings) == models.Settings
 
 
-@pytest.skip("Not implemented.")
+@pytest.mark.skip("Not implemented.")
 def test_get_stream_type_by_top_10_platforms():
     client = object_client()
 
 
-@pytest.skip("Not implemented.")
+@pytest.mark.skip("Not implemented.")
 def test_get_stream_type_by_top_10_users():
     client = object_client()
 
@@ -320,7 +320,7 @@ def test_get_whois_lookup():
     assert type(whois_lookup) == models.WHOISLookup
 
 
-@pytest.skip("Not implemented.")
+@pytest.mark.skip("Not implemented.")
 def test_status():
     client = object_client()
 
