@@ -16,25 +16,6 @@ class ObjectAPI:
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
 
-    def _verify_compatibility(self, min_version: str) -> bool:
-        """
-        Verify the client version is compatible with the API
-
-        :param min_version: Minimum API version required
-        :type min_version: str
-        :return: True if compatible, False if not
-        :rtype: bool
-        """
-        try:
-            server_version_string = self.tautulli_info.tautulli_version
-            server_version = packaging.version.parse(server_version_string)
-            min_version = packaging.version.parse(min_version)
-            return server_version >= min_version
-        except:
-            raise Exception("Unable to verify Tautulli API version")
-
-        # return self._raw_api.verify_compatibility(min_version=min_version)
-
     @property
     def arnold(self) -> str:
         """

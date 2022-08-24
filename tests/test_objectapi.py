@@ -6,6 +6,7 @@ from tautulli import models
 from tests.setup import object_client
 
 
+# TODO: troubleshoot this test
 def test_get_api_key():
     no_key_client = object_client(no_key=True)
     key = no_key_client.get_api_key()
