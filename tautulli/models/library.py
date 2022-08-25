@@ -4,19 +4,19 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Optional
 
 from pydantic import BaseModel
 
 
 class Data(BaseModel):
     row_id: int
-    server_id: str
+    server_id: Optional[str]
     section_id: int
-    section_name: str
-    section_type: str
-    library_thumb: str
-    library_art: str
+    section_name: Optional[str]
+    section_type: Optional[str]
+    library_thumb: Optional[str]
+    library_art: Optional[str]
     count: int
     parent_count: Any
     child_count: Any
@@ -28,7 +28,7 @@ class Data(BaseModel):
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

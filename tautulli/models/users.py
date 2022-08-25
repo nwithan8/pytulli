@@ -12,8 +12,8 @@ from pydantic import BaseModel
 class Datum(BaseModel):
     row_id: int
     user_id: int
-    username: str
-    friendly_name: str
+    username: Optional[str]
+    friendly_name: Optional[str]
     thumb: Optional[str]
     email: Optional[str]
     is_active: int
@@ -33,7 +33,7 @@ class Datum(BaseModel):
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: List[Datum]
 

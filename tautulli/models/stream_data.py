@@ -4,64 +4,64 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Optional
 
 from pydantic import BaseModel
 
 
 class Data(BaseModel):
     bitrate: int
-    video_full_resolution: str
-    optimized_version: str
-    optimized_version_profile: str
-    optimized_version_title: str
-    synced_version: str
-    synced_version_profile: str
-    container: str
-    video_codec: str
+    video_full_resolution: Optional[str]
+    optimized_version: Optional[str]
+    optimized_version_profile: Optional[str]
+    optimized_version_title: Optional[str]
+    synced_version: Optional[str]
+    synced_version_profile: Optional[str]
+    container: Optional[str]
+    video_codec: Optional[str]
     video_bitrate: int
     video_width: int
     video_height: int
-    video_framerate: str
-    video_dynamic_range: str
-    aspect_ratio: str
-    audio_codec: str
+    video_framerate: Optional[str]
+    video_dynamic_range: Optional[str]
+    aspect_ratio: Optional[str]
+    audio_codec: Optional[str]
     audio_bitrate: int
     audio_channels: int
-    subtitle_codec: str
+    subtitle_codec: Optional[str]
     stream_bitrate: int
-    stream_video_full_resolution: str
-    quality_profile: str
-    stream_container_decision: str
-    stream_container: str
-    stream_video_decision: str
-    stream_video_codec: str
+    stream_video_full_resolution: Optional[str]
+    quality_profile: Optional[str]
+    stream_container_decision: Optional[str]
+    stream_container: Optional[str]
+    stream_video_decision: Optional[str]
+    stream_video_codec: Optional[str]
     stream_video_bitrate: int
     stream_video_width: int
     stream_video_height: int
-    stream_video_framerate: str
-    stream_video_dynamic_range: str
-    stream_audio_decision: str
-    stream_audio_codec: str
+    stream_video_framerate: Optional[str]
+    stream_video_dynamic_range: Optional[str]
+    stream_audio_decision: Optional[str]
+    stream_audio_codec: Optional[str]
     stream_audio_bitrate: int
     stream_audio_channels: int
-    subtitles: str
-    stream_subtitle_decision: str
-    stream_subtitle_codec: str
-    transcode_hw_decoding: str
-    transcode_hw_encoding: str
-    video_decision: str
-    audio_decision: str
-    media_type: str
-    title: str
-    grandparent_title: str
-    original_title: str
+    subtitles: Optional[str]
+    stream_subtitle_decision: Optional[str]
+    stream_subtitle_codec: Optional[str]
+    transcode_hw_decoding: Optional[str]
+    transcode_hw_encoding: Optional[str]
+    video_decision: Optional[str]
+    audio_decision: Optional[str]
+    media_type: Optional[str]
+    title: Optional[str]
+    grandparent_title: Optional[str]
+    original_title: Optional[str]
     current_session: int
-    pre_tautulli: str
+    pre_tautulli: Optional[str]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

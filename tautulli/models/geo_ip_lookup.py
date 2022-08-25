@@ -4,26 +4,26 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Optional, Union
 
 from pydantic import BaseModel
 
 
 class Data(BaseModel):
-    city: str
-    code: str
-    continent: str
-    country: str
-    latitude: float
-    longitude: float
-    postal_code: str
-    region: str
-    timezone: str
+    city: Optional[str]
+    code: Optional[str]
+    continent: Optional[str]
+    country: Optional[str]
+    latitude: Union[float, None]
+    longitude: Union[float, None]
+    postal_code: Optional[str]
+    region: Optional[str]
+    timezone: Optional[str]
     accuracy: Any
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

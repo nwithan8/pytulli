@@ -4,25 +4,25 @@
 
 from __future__ import annotations
 
-from typing import Any, List
+from typing import Any, List, Optional
 
 from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    httpsRequired: str
-    clientIdentifier: str
-    label: str
-    ip: str
-    port: str
-    uri: str
-    local: str
-    value: str
-    is_cloud: bool
+    httpsRequired: Optional[str]
+    clientIdentifier: Optional[str]
+    label: Optional[str]
+    ip: Optional[str]
+    port: Optional[str]
+    uri: Optional[str]
+    local: Optional[str]
+    value: Optional[str]
+    is_cloud: Optional[bool]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: List[Datum]
 

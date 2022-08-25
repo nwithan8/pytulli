@@ -11,15 +11,15 @@ from pydantic import BaseModel
 
 class Datum(BaseModel):
     row_id: int
-    server_id: str
+    server_id: Optional[str]
     section_id: int
-    section_name: str
-    section_type: str
+    section_name: Optional[str]
+    section_type: Optional[str]
     count: Optional[int]
     parent_count: Optional[int]
     child_count: Optional[int]
-    library_thumb: str
-    library_art: str
+    library_thumb: Optional[str]
+    library_art: Optional[str]
     plays: int
     duration: int
     last_accessed: Optional[int]
@@ -51,7 +51,7 @@ class Data(BaseModel):
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

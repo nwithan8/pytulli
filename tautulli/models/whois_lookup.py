@@ -4,34 +4,34 @@
 
 from __future__ import annotations
 
-from typing import Any, List
+from typing import Any, List, Optional
 
 from pydantic import BaseModel
 
 
 class Net(BaseModel):
-    cidr: str
-    name: str
-    handle: str
-    range: str
-    description: str
-    country: str
-    state: str
-    city: str
-    address: str
-    postal_code: str
+    cidr: Optional[str]
+    name: Optional[str]
+    handle: Optional[str]
+    range: Optional[str]
+    description: Optional[str]
+    country: Optional[str]
+    state: Optional[str]
+    city: Optional[str]
+    address: Optional[str]
+    postal_code: Optional[str]
     emails: List[str]
-    created: str
-    updated: str
+    created: Optional[str]
+    updated: Optional[str]
 
 
 class Data(BaseModel):
-    host: str
+    host: Optional[str]
     nets: List[Net]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

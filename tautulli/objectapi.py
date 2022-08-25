@@ -151,7 +151,7 @@ class ObjectAPI:
 
     @property
     @make_property_object
-    def notifier_parameters(self) -> NotifierParameters:
+    def notifier_parameters(self) -> list[NotifierParameters]:
         """
         Get a list of available notification parameters
 
@@ -213,7 +213,7 @@ class ObjectAPI:
 
     @property
     @make_property_object
-    def user_names(self) -> UserNames:
+    def user_names(self) -> list[UserNames]:
         """
         Get a list of all usernames and user ids
 
@@ -224,7 +224,7 @@ class ObjectAPI:
 
     @property
     @make_property_object
-    def users(self) -> Users:
+    def users(self) -> list[Users]:
         """
         Get a list of all users that have access to your server
 
@@ -371,7 +371,7 @@ class ObjectAPI:
 
     @make_object
     def get_home_stats(self, grouping: bool = False, time_range: int = 30, stats_type: str = 'plays', start: int = 0,
-                       count: int = 5, stat_id: str = None) -> HomeStats:
+                       count: int = 5, stat_id: str = None) -> List[HomeStats]:
         """
         Get the homepage watch statistics
 
@@ -393,7 +393,7 @@ class ObjectAPI:
         return 'HomeStats'
 
     @property
-    @make_object
+    @make_property_object
     def libraries(self) -> Libraries:
         """
         Get a list of all libraries on your server
@@ -501,7 +501,7 @@ class ObjectAPI:
 
     @make_object
     def get_logs(self, sort: str = None, search: str = None, order_direction: str = None, regex: str = None,
-                 start: int = None, end: int = None) -> Logs:
+                 start: int = None, end: int = None) -> list[Logs]:
         """
         Get the Tautulli logs
 

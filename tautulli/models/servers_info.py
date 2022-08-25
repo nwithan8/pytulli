@@ -4,21 +4,21 @@
 
 from __future__ import annotations
 
-from typing import Any, List
+from typing import Any, List, Optional
 
 from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    name: str
-    machine_identifier: str
-    host: str
-    port: str
-    version: str
+    name: Optional[str]
+    machine_identifier: Optional[str]
+    host: Optional[str]
+    port: Optional[str]
+    version: Optional[str]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: List[Datum]
 

@@ -4,18 +4,18 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Optional
 
 from pydantic import BaseModel
 
 
 class Data(BaseModel):
-    machine_identifier: str
-    version: str
+    machine_identifier: Optional[str]
+    version: Optional[str]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

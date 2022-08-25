@@ -56,6 +56,7 @@ def test_activity():
     assert type(activity) == models.Activity
 
 
+@pytest.mark.skip(reason="Cannot test as properties won't exist on a fake Tautilli instance")
 def test_activity_summary():
     client = object_client()
     activity = client.activity_summary
@@ -63,6 +64,7 @@ def test_activity_summary():
     assert type(activity) == models.ActivitySummary
 
 
+@pytest.mark.skip(reason="Cannot test as properties won't exist on a fake Tautilli instance")
 def test_activity_summary_message():
     client = object_client()
     activity = client.activity_summary_message
@@ -108,7 +110,9 @@ def test_get_home_stats():
     client = object_client()
     home_stats = client.get_home_stats()
     assert home_stats is not None
-    assert type(home_stats) == models.HomeStats
+    assert type(home_stats) == list
+    for stat in home_stats:
+        assert type(stat) == models.HomeStats
 
 
 def test_libraries():
@@ -136,7 +140,9 @@ def test_get_logs():
     client = object_client()
     logs = client.get_logs()
     assert logs is not None
-    assert type(logs) == models.Logs
+    assert type(logs) == list
+    for log in logs:
+        assert type(log) == models.Logs
 
 
 def test_get_newsletter_log():
@@ -164,7 +170,9 @@ def test_notifier_parameters():
     client = object_client()
     notifier_parameters = client.notifier_parameters
     assert notifier_parameters is not None
-    assert type(notifier_parameters) == models.NotifierParameters
+    assert type(notifier_parameters) == list
+    for parameter in notifier_parameters:
+        assert type(parameter) == models.NotifierParameters
 
 
 def test_get_notifiers():
@@ -296,14 +304,18 @@ def test_user_names():
     client = object_client()
     user_names = client.user_names
     assert user_names is not None
-    assert type(user_names) == models.UserNames
+    assert type(user_names) == list
+    for user_name in user_names:
+        assert type(user_name) == models.UserNames
 
 
 def test_users():
     client = object_client()
     users = client.users
     assert users is not None
-    assert type(users) == models.Users
+    assert type(users) == list
+    for user in users:
+        assert type(user) == models.Users
 
 
 def test_get_users_table():

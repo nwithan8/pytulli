@@ -4,17 +4,19 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 from pydantic import BaseModel
 
 
 class Data(BaseModel):
-    update: bool
-    install_type: str
+    update: Optional[bool]
+    install_type: Optional[str]
 
 
 class Response(BaseModel):
-    result: str
-    message: str
+    result: Optional[str]
+    message: Optional[str]
     data: Data
 
 

@@ -4,7 +4,7 @@
 
 from __future__ import annotations
 
-from typing import Any, List
+from typing import Any, List, Optional
 
 from pydantic import BaseModel
 
@@ -16,7 +16,7 @@ class Datum(BaseModel):
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: List[Datum]
 

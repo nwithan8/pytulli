@@ -4,39 +4,39 @@
 
 from __future__ import annotations
 
-from typing import Any, List
+from typing import Any, List, Optional
 
 from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    audio_bitrate: str
-    client_id: str
-    content_type: str
-    device_name: str
-    failure: str
-    item_complete_count: str
-    item_count: str
-    item_downloaded_count: str
+    audio_bitrate: Optional[str]
+    client_id: Optional[str]
+    content_type: Optional[str]
+    device_name: Optional[str]
+    failure: Optional[str]
+    item_complete_count: Optional[str]
+    item_count: Optional[str]
+    item_downloaded_count: Optional[str]
     item_downloaded_percent_complete: int
-    metadata_type: str
-    photo_quality: str
-    platform: str
-    rating_key: str
-    root_title: str
-    state: str
-    sync_id: str
-    sync_title: str
-    total_size: str
-    user: str
-    user_id: str
-    username: str
-    video_bitrate: str
-    video_quality: str
+    metadata_type: Optional[str]
+    photo_quality: Optional[str]
+    platform: Optional[str]
+    rating_key: Optional[str]
+    root_title: Optional[str]
+    state: Optional[str]
+    sync_id: Optional[str]
+    sync_title: Optional[str]
+    total_size: Optional[str]
+    user: Optional[str]
+    user_id: Optional[str]
+    username: Optional[str]
+    video_bitrate: Optional[str]
+    video_quality: Optional[str]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: List[Datum]
 

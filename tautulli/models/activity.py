@@ -12,50 +12,50 @@ from tautulli.models.activity_summary import ActivitySummary, build_summary_from
 
 
 class Session(BaseModel):
-    session_key: str
-    media_type: str
-    view_offset: str
-    progress_percent: str
-    quality_profile: str
-    synced_version_profile: str
-    optimized_version_profile: str
-    user: str
+    session_key: Optional[str]
+    media_type: Optional[str]
+    view_offset: Optional[str]
+    progress_percent: Optional[str]
+    quality_profile: Optional[str]
+    synced_version_profile: Optional[str]
+    optimized_version_profile: Optional[str]
+    user: Optional[str]
     channel_stream: int
-    section_id: str
-    library_name: str
-    rating_key: str
-    parent_rating_key: str
-    grandparent_rating_key: str
-    title: str
-    parent_title: str
-    grandparent_title: str
-    original_title: str
-    sort_title: str
-    media_index: str
-    parent_media_index: str
-    studio: str
-    content_rating: str
-    summary: str
-    tagline: str
-    rating: str
-    rating_image: str
-    audience_rating: str
-    audience_rating_image: str
-    user_rating: str
-    duration: str
-    year: str
-    thumb: str
-    parent_thumb: str
-    grandparent_thumb: str
-    art: str
-    banner: str
-    originally_available_at: str
-    added_at: str
-    updated_at: str
-    last_viewed_at: str
-    guid: str
-    parent_guid: str
-    grandparent_guid: str
+    section_id: Optional[str]
+    library_name: Optional[str]
+    rating_key: Optional[str]
+    parent_rating_key: Optional[str]
+    grandparent_rating_key: Optional[str]
+    title: Optional[str]
+    parent_title: Optional[str]
+    grandparent_title: Optional[str]
+    original_title: Optional[str]
+    sort_title: Optional[str]
+    media_index: Optional[str]
+    parent_media_index: Optional[str]
+    studio: Optional[str]
+    content_rating: Optional[str]
+    summary: Optional[str]
+    tagline: Optional[str]
+    rating: Optional[str]
+    rating_image: Optional[str]
+    audience_rating: Optional[str]
+    audience_rating_image: Optional[str]
+    user_rating: Optional[str]
+    duration: Optional[str]
+    year: Optional[str]
+    thumb: Optional[str]
+    parent_thumb: Optional[str]
+    grandparent_thumb: Optional[str]
+    art: Optional[str]
+    banner: Optional[str]
+    originally_available_at: Optional[str]
+    added_at: Optional[str]
+    updated_at: Optional[str]
+    last_viewed_at: Optional[str]
+    guid: Optional[str]
+    parent_guid: Optional[str]
+    grandparent_guid: Optional[str]
     directors: List
     writers: List
     actors: List
@@ -63,66 +63,66 @@ class Session(BaseModel):
     labels: List
     collections: List
     guids: List
-    full_title: str
+    full_title: Optional[str]
     children_count: int
     live: int
-    id: str
-    container: str
-    bitrate: str
-    height: str
-    width: str
-    aspect_ratio: str
-    video_codec: str
-    video_resolution: str
-    video_full_resolution: str
-    video_framerate: str
-    video_profile: str
-    audio_codec: str
-    audio_channels: str
-    audio_channel_layout: str
-    audio_profile: str
+    id: Optional[str]
+    container: Optional[str]
+    bitrate: Optional[str]
+    height: Optional[str]
+    width: Optional[str]
+    aspect_ratio: Optional[str]
+    video_codec: Optional[str]
+    video_resolution: Optional[str]
+    video_full_resolution: Optional[str]
+    video_framerate: Optional[str]
+    video_profile: Optional[str]
+    audio_codec: Optional[str]
+    audio_channels: Optional[str]
+    audio_channel_layout: Optional[str]
+    audio_profile: Optional[str]
     optimized_version: int
-    channel_call_sign: str
-    channel_identifier: str
-    channel_thumb: str
-    file: str
-    file_size: str
+    channel_call_sign: Optional[str]
+    channel_identifier: Optional[str]
+    channel_thumb: Optional[str]
+    file: Optional[str]
+    file_size: Optional[str]
     indexes: int
     selected: int
-    type: str
-    video_codec_level: str
-    video_bitrate: str
-    video_bit_depth: str
-    video_chroma_subsampling: str
-    video_color_primaries: str
-    video_color_range: str
-    video_color_space: str
-    video_color_trc: str
-    video_frame_rate: str
-    video_ref_frames: str
-    video_height: str
-    video_width: str
-    video_language: str
-    video_language_code: str
-    video_scan_type: str
-    audio_bitrate: str
-    audio_bitrate_mode: str
-    audio_sample_rate: str
-    audio_language: str
-    audio_language_code: str
-    subtitle_codec: str
-    subtitle_container: str
-    subtitle_format: str
+    type: Optional[str]
+    video_codec_level: Optional[str]
+    video_bitrate: Optional[str]
+    video_bit_depth: Optional[str]
+    video_chroma_subsampling: Optional[str]
+    video_color_primaries: Optional[str]
+    video_color_range: Optional[str]
+    video_color_space: Optional[str]
+    video_color_trc: Optional[str]
+    video_frame_rate: Optional[str]
+    video_ref_frames: Optional[str]
+    video_height: Optional[str]
+    video_width: Optional[str]
+    video_language: Optional[str]
+    video_language_code: Optional[str]
+    video_scan_type: Optional[str]
+    audio_bitrate: Optional[str]
+    audio_bitrate_mode: Optional[str]
+    audio_sample_rate: Optional[str]
+    audio_language: Optional[str]
+    audio_language_code: Optional[str]
+    subtitle_codec: Optional[str]
+    subtitle_container: Optional[str]
+    subtitle_format: Optional[str]
     subtitle_forced: int
-    subtitle_location: str
-    subtitle_language: str
-    subtitle_language_code: str
+    subtitle_location: Optional[str]
+    subtitle_language: Optional[str]
+    subtitle_language_code: Optional[str]
     row_id: int
     user_id: int
-    username: str
-    friendly_name: str
-    user_thumb: str
-    email: str
+    username: Optional[str]
+    friendly_name: Optional[str]
+    user_thumb: Optional[str]
+    email: Optional[str]
     is_active: int
     is_admin: int
     is_home_user: int
@@ -133,100 +133,100 @@ class Session(BaseModel):
     deleted_user: int
     allow_guest: int
     shared_libraries: List[str]
-    ip_address: str
-    ip_address_public: str
-    device: str
-    platform: str
-    platform_name: str
-    platform_version: str
-    product: str
-    product_version: str
-    profile: str
-    player: str
-    machine_id: str
-    state: str
+    ip_address: Optional[str]
+    ip_address_public: Optional[str]
+    device: Optional[str]
+    platform: Optional[str]
+    platform_name: Optional[str]
+    platform_version: Optional[str]
+    product: Optional[str]
+    product_version: Optional[str]
+    profile: Optional[str]
+    player: Optional[str]
+    machine_id: Optional[str]
+    state: Optional[str]
     local: int
     relayed: int
     secure: int
-    session_id: str
-    bandwidth: str
-    location: str
-    transcode_key: str
+    session_id: Optional[str]
+    bandwidth: Optional[str]
+    location: Optional[str]
+    transcode_key: Optional[str]
     transcode_throttled: int
     transcode_progress: int
-    transcode_speed: str
-    transcode_audio_channels: str
-    transcode_audio_codec: str
-    transcode_video_codec: str
-    transcode_width: str
-    transcode_height: str
-    transcode_container: str
-    transcode_protocol: str
+    transcode_speed: Optional[str]
+    transcode_audio_channels: Optional[str]
+    transcode_audio_codec: Optional[str]
+    transcode_video_codec: Optional[str]
+    transcode_width: Optional[str]
+    transcode_height: Optional[str]
+    transcode_container: Optional[str]
+    transcode_protocol: Optional[str]
     transcode_hw_requested: int
-    transcode_hw_decode: str
-    transcode_hw_decode_title: str
-    transcode_hw_encode: str
-    transcode_hw_encode_title: str
+    transcode_hw_decode: Optional[str]
+    transcode_hw_decode_title: Optional[str]
+    transcode_hw_encode: Optional[str]
+    transcode_hw_encode_title: Optional[str]
     transcode_hw_full_pipeline: int
     transcode_max_offset_available: int
     transcode_min_offset_available: int
-    audio_decision: str
-    video_decision: str
-    subtitle_decision: str
-    throttled: str
+    audio_decision: Optional[str]
+    video_decision: Optional[str]
+    subtitle_decision: Optional[str]
+    throttled: Optional[str]
     transcode_hw_decoding: int
     transcode_hw_encoding: int
-    stream_container: str
-    stream_bitrate: str
-    stream_aspect_ratio: str
-    stream_audio_codec: str
-    stream_audio_channels: str
-    stream_audio_channel_layout: str
-    stream_video_codec: str
-    stream_video_framerate: str
-    stream_video_resolution: str
-    stream_video_height: str
-    stream_video_width: str
-    stream_duration: str
-    stream_container_decision: str
-    optimized_version_title: str
+    stream_container: Optional[str]
+    stream_bitrate: Optional[str]
+    stream_aspect_ratio: Optional[str]
+    stream_audio_codec: Optional[str]
+    stream_audio_channels: Optional[str]
+    stream_audio_channel_layout: Optional[str]
+    stream_video_codec: Optional[str]
+    stream_video_framerate: Optional[str]
+    stream_video_resolution: Optional[str]
+    stream_video_height: Optional[str]
+    stream_video_width: Optional[str]
+    stream_duration: Optional[str]
+    stream_container_decision: Optional[str]
+    optimized_version_title: Optional[str]
     synced_version: int
-    live_uuid: str
-    bif_thumb: str
+    live_uuid: Optional[str]
+    bif_thumb: Optional[str]
     subtitles: int
-    transcode_decision: str
-    container_decision: str
+    transcode_decision: Optional[str]
+    container_decision: Optional[str]
     stream_video_full_resolution: Optional[str] = None
-    video_dynamic_range: str
-    stream_video_dynamic_range: str
-    stream_video_bitrate: str
-    stream_video_bit_depth: str
-    stream_video_chroma_subsampling: str
-    stream_video_color_primaries: str
-    stream_video_color_range: str
-    stream_video_color_space: str
-    stream_video_color_trc: str
-    stream_video_codec_level: str
-    stream_video_ref_frames: str
-    stream_video_language: str
-    stream_video_language_code: str
-    stream_video_scan_type: str
-    stream_video_decision: str
-    stream_audio_bitrate: str
-    stream_audio_bitrate_mode: str
-    stream_audio_sample_rate: str
-    stream_audio_channel_layout_: str
-    stream_audio_language: str
-    stream_audio_language_code: str
-    stream_audio_decision: str
-    stream_subtitle_codec: str
-    stream_subtitle_container: str
-    stream_subtitle_format: str
+    video_dynamic_range: Optional[str]
+    stream_video_dynamic_range: Optional[str]
+    stream_video_bitrate: Optional[str]
+    stream_video_bit_depth: Optional[str]
+    stream_video_chroma_subsampling: Optional[str]
+    stream_video_color_primaries: Optional[str]
+    stream_video_color_range: Optional[str]
+    stream_video_color_space: Optional[str]
+    stream_video_color_trc: Optional[str]
+    stream_video_codec_level: Optional[str]
+    stream_video_ref_frames: Optional[str]
+    stream_video_language: Optional[str]
+    stream_video_language_code: Optional[str]
+    stream_video_scan_type: Optional[str]
+    stream_video_decision: Optional[str]
+    stream_audio_bitrate: Optional[str]
+    stream_audio_bitrate_mode: Optional[str]
+    stream_audio_sample_rate: Optional[str]
+    stream_audio_channel_layout_: Optional[str]
+    stream_audio_language: Optional[str]
+    stream_audio_language_code: Optional[str]
+    stream_audio_decision: Optional[str]
+    stream_subtitle_codec: Optional[str]
+    stream_subtitle_container: Optional[str]
+    stream_subtitle_format: Optional[str]
     stream_subtitle_forced: int
-    stream_subtitle_location: str
-    stream_subtitle_language: str
-    stream_subtitle_language_code: str
-    stream_subtitle_decision: str
+    stream_subtitle_location: Optional[str]
+    stream_subtitle_language: Optional[str]
+    stream_subtitle_language_code: Optional[str]
+    stream_subtitle_decision: Optional[str]
     stream_subtitle_transient: int
 
     @property
@@ -303,7 +303,7 @@ class Session(BaseModel):
 
 
 class Data(BaseModel):
-    stream_count: str
+    stream_count: Optional[str]
     sessions: List[Session]
     stream_count_direct_play: int
     stream_count_direct_stream: int
@@ -318,7 +318,7 @@ class Data(BaseModel):
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

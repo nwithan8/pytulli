@@ -10,20 +10,20 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    section_id: str
-    section_name: str
-    section_type: str
-    agent: str
-    thumb: str
-    art: str
-    count: str
+    section_id: Optional[str]
+    section_name: Optional[str]
+    section_type: Optional[str]
+    agent: Optional[str]
+    thumb: Optional[str]
+    art: Optional[str]
+    count: Optional[str]
     is_active: int
     parent_count: Optional[str] = None
     child_count: Optional[str] = None
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: List[Datum]
 

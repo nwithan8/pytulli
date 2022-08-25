@@ -10,25 +10,25 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    addedAt: str
+    addedAt: Optional[str]
     art: Any
     childCount: int
     collectionMode: int
     collectionSort: int
     contentRating: Optional[str]
-    guid: str
-    librarySectionID: str
-    librarySectionTitle: str
+    guid: Optional[str]
+    librarySectionID: Optional[str]
+    librarySectionTitle: Optional[str]
     maxYear: Optional[int]
     minYear: Optional[int]
     ratingKey: int
-    subtype: str
-    summary: str
-    thumb: str
-    title: str
-    titleSort: str
-    type: str
-    updatedAt: str
+    subtype: Optional[str]
+    summary: Optional[str]
+    thumb: Optional[str]
+    title: Optional[str]
+    titleSort: Optional[str]
+    type: Optional[str]
+    updatedAt: Optional[str]
 
 
 class Data(BaseModel):
@@ -39,7 +39,7 @@ class Data(BaseModel):
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

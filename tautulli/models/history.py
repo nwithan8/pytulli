@@ -4,7 +4,7 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Union
+from typing import Any, List, Union, Optional
 
 from pydantic import BaseModel
 
@@ -19,34 +19,34 @@ class Datum(BaseModel):
     duration: int
     paused_counter: int
     user_id: int
-    user: str
-    friendly_name: str
-    platform: str
-    product: str
-    player: str
-    ip_address: str
+    user: Optional[str]
+    friendly_name: Optional[str]
+    platform: Optional[str]
+    product: Optional[str]
+    player: Optional[str]
+    ip_address: Optional[str]
     live: int
-    machine_id: str
-    media_type: str
+    machine_id: Optional[str]
+    media_type: Optional[str]
     rating_key: int
     parent_rating_key: Union[int, str]
     grandparent_rating_key: Union[int, str]
-    full_title: str
-    title: str
-    parent_title: str
-    grandparent_title: str
-    original_title: str
+    full_title: Optional[str]
+    title: Optional[str]
+    parent_title: Optional[str]
+    grandparent_title: Optional[str]
+    original_title: Optional[str]
     year: Union[int, str]
     media_index: Union[int, str]
     parent_media_index: Union[int, str]
-    thumb: str
-    originally_available_at: str
-    guid: str
-    transcode_decision: str
+    thumb: Optional[str]
+    originally_available_at: Optional[str]
+    guid: Optional[str]
+    transcode_decision: Optional[str]
     percent_complete: int
     watched_status: float
     group_count: int
-    group_ids: str
+    group_ids: Optional[str]
     state: Any
     session_key: Any
 
@@ -56,12 +56,12 @@ class Data(BaseModel):
     recordsTotal: int
     data: List[Datum]
     draw: int
-    filter_duration: str
-    total_duration: str
+    filter_duration: Optional[str]
+    total_duration: Optional[str]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

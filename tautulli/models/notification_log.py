@@ -4,7 +4,7 @@
 
 from __future__ import annotations
 
-from typing import Any, List
+from typing import Any, List, Optional
 
 from pydantic import BaseModel
 
@@ -15,13 +15,13 @@ class Datum(BaseModel):
     session_key: int
     rating_key: int
     user_id: int
-    user: str
+    user: Optional[str]
     notifier_id: int
     agent_id: int
-    agent_name: str
-    notify_action: str
-    subject_text: str
-    body_text: str
+    agent_name: Optional[str]
+    notify_action: Optional[str]
+    subject_text: Optional[str]
+    body_text: Optional[str]
     success: int
 
 
@@ -33,7 +33,7 @@ class Data(BaseModel):
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

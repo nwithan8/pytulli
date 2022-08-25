@@ -11,7 +11,7 @@ from tautulli import utils
 
 
 class ActivitySummary(BaseModel):
-    stream_count: str = "0"
+    stream_count: Optional[str] = "0"
     transcode_count: int = 0
     total_bandwidth: int = 0
     lan_bandwidth: int = 0
@@ -22,7 +22,7 @@ class ActivitySummary(BaseModel):
         Get activity summary message
 
         :return: Summary message
-        :rtype: str
+        :rtype: Optional[str]
         """
         overview_message = ""
         stream_count = 0

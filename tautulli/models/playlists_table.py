@@ -4,25 +4,25 @@
 
 from __future__ import annotations
 
-from typing import Any, List
+from typing import Any, List, Optional
 
 from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    addedAt: str
-    composite: str
+    addedAt: Optional[str]
+    composite: Optional[str]
     duration: int
-    guid: str
+    guid: Optional[str]
     leafCount: int
-    librarySectionID: str
-    playlistType: str
+    librarySectionID: Optional[str]
+    playlistType: Optional[str]
     ratingKey: int
-    smart: bool
-    summary: str
-    title: str
-    type: str
-    updatedAt: str
+    smart: Optional[bool]
+    summary: Optional[str]
+    title: Optional[str]
+    type: Optional[str]
+    updatedAt: Optional[str]
     userID: Any
 
 
@@ -34,7 +34,7 @@ class Data(BaseModel):
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

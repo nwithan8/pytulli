@@ -4,14 +4,14 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 from pydantic import BaseModel
 
 
 class Response(BaseModel):
-    result: str
-    message: str
+    result: Optional[str]
+    message: Optional[str]
     data: Dict[str, Any]
 
 

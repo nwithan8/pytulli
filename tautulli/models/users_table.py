@@ -12,9 +12,9 @@ from pydantic import BaseModel
 class Datum(BaseModel):
     row_id: int
     user_id: int
-    username: str
-    friendly_name: str
-    user_thumb: str
+    username: Optional[str]
+    friendly_name: Optional[str]
+    user_thumb: Optional[str]
     plays: int
     duration: int
     last_seen: Optional[int]
@@ -38,7 +38,7 @@ class Datum(BaseModel):
     keep_history: int
     allow_guest: int
     is_active: int
-    title: str
+    title: Optional[str]
     email: Optional[str]
 
 
@@ -50,7 +50,7 @@ class Data(BaseModel):
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

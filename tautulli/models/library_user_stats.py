@@ -4,21 +4,21 @@
 
 from __future__ import annotations
 
-from typing import Any, List
+from typing import Any, List, Optional
 
 from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    friendly_name: str
+    friendly_name: Optional[str]
     user_id: int
-    user_thumb: str
-    username: str
+    user_thumb: Optional[str]
+    username: Optional[str]
     total_plays: int
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: List[Datum]
 

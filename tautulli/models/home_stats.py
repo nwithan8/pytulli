@@ -10,7 +10,7 @@ from pydantic import BaseModel
 
 
 class Row(BaseModel):
-    title: str
+    title: Optional[str]
     users_watched: Optional[Union[int, str]] = None
     rating_key: Optional[Union[int, str]] = None
     last_play: Optional[int] = None
@@ -40,14 +40,14 @@ class Row(BaseModel):
 
 
 class Datum(BaseModel):
-    stat_id: str
-    stat_title: str
+    stat_id: Optional[str]
+    stat_title: Optional[str]
     rows: List[Row]
     stat_type: Optional[str] = None
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: List[Datum]
 

@@ -4,28 +4,28 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Optional
 
 from pydantic import BaseModel
 
 
 class Data(BaseModel):
-    update_available: bool
-    platform: str
+    update_available: Optional[bool]
+    platform: Optional[str]
     release_date: int
-    version: str
-    requirements: str
-    extra_info: str
-    changelog_added: str
-    changelog_fixed: str
-    label: str
-    distro: str
-    distro_build: str
-    download_url: str
+    version: Optional[str]
+    requirements: Optional[str]
+    extra_info: Optional[str]
+    changelog_added: Optional[str]
+    changelog_fixed: Optional[str]
+    label: Optional[str]
+    distro: Optional[str]
+    distro_build: Optional[str]
+    download_url: Optional[str]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

@@ -12,25 +12,25 @@ from pydantic import BaseModel, Field
 class Config(BaseModel):
     custom_cron: int
     time_frame: int
-    time_frame_units: str
+    time_frame_units: Optional[str]
     formatted: int
     threaded: int
     notifier_id: int
-    filename: str
+    filename: Optional[str]
     save_only: int
     incl_libraries: List[str]
 
 
 class EmailConfig(BaseModel):
-    from_name: str
-    from_: str = Field(..., alias='from')
+    from_name: Optional[str]
+    from_: Optional[str] = Field(..., alias='from')
     to: List[str]
     cc: List
     bcc: List
-    smtp_server: str
+    smtp_server: Optional[str]
     smtp_port: int
-    smtp_user: str
-    smtp_password: str
+    smtp_user: Optional[str]
+    smtp_password: Optional[str]
     tls: int
     html_support: int
     notifier_id: int
@@ -38,22 +38,22 @@ class EmailConfig(BaseModel):
 
 class MovieLibrary(BaseModel):
     value: int
-    text: str
+    text: Optional[str]
 
 
 class TVShowLibrary(BaseModel):
     value: int
-    text: str
+    text: Optional[str]
 
 
 class MusicLibrary(BaseModel):
     value: int
-    text: str
+    text: Optional[str]
 
 
 class OtherVideoLibrary(BaseModel):
     value: int
-    text: str
+    text: Optional[str]
 
 
 class SelectOptions(BaseModel):
@@ -66,39 +66,39 @@ class SelectOptions(BaseModel):
 
 
 class ConfigOption(BaseModel):
-    label: str
+    label: Optional[str]
     value: List[str]
-    description: str
-    name: str
-    input_type: str
+    description: Optional[str]
+    name: Optional[str]
+    input_type: Optional[str]
     select_options: SelectOptions
 
 
 class SelectOption(BaseModel):
-    value: str
-    text: str
+    value: Optional[str]
+    text: Optional[str]
 
 
 class EmailConfigOption(BaseModel):
-    label: str
+    label: Optional[str]
     value: Union[Union[int, str], List[str]]
-    name: str
-    description: str
-    input_type: str
+    name: Optional[str]
+    description: Optional[str]
+    input_type: Optional[str]
     select_options: Optional[List[SelectOption]] = None
 
 
 class Data(BaseModel):
     id: int
     agent_id: int
-    agent_name: str
-    agent_label: str
-    friendly_name: str
-    cron: str
+    agent_name: Optional[str]
+    agent_label: Optional[str]
+    friendly_name: Optional[str]
+    cron: Optional[str]
     active: int
-    id_name: str
-    subject: str
-    body: str
+    id_name: Optional[str]
+    subject: Optional[str]
+    body: Optional[str]
     config: Config
     email_config: EmailConfig
     config_options: List[ConfigOption]
@@ -106,8 +106,8 @@ class Data(BaseModel):
 
 
 class Response(BaseModel):
-    result: str
-    message: str
+    result: Optional[str]
+    message: Optional[str]
     data: Data
 
 
