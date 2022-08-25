@@ -649,7 +649,7 @@ class RawAPI:
         # Yes, this is the JSON API using an object as a middleman.
         return build_summary_from_activity_json(activity_data=_activity_data).message
 
-    def get_api_key(self, username: str = None, password: str = None) -> str:
+    def get_api_key(self, username: str = None, password: str = None) -> Union[str, None]:
         """
         Get the Tautulli API key.
         Username and password are required if auth is enabled.
@@ -660,13 +660,13 @@ class RawAPI:
         :param password: Tautulli password
         :type password: str, optional
         :return: API key
-        :rtype: str
+        :rtype: str or None
         """
         params = build_optional_params(username=username, password=password)
         json_data = self._get_json(command='get_apikey', params=params)
         if _success_result(json_data=json_data):
             return _get_response_data(json_data=json_data)
-        return static.empty_string
+        return None
 
     @raw_json
     def get_children_metadata(self, rating_key: str, media_type: str) -> dict:

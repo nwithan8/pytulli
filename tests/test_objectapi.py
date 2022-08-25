@@ -11,7 +11,6 @@ def test_get_api_key():
     no_key_client = object_client(no_key=True)
     key = no_key_client.get_api_key()
     assert key is not None
-    assert key != ''
 
 
 def test_ping():

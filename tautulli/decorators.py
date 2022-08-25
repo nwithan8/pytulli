@@ -23,11 +23,12 @@ def make_property_object(func):
             data = getattr(self._raw_api, func.__name__)
             if not data:
                 return None
-            class_name = globals()[func(self)]
+            class_name_str = func(self)
+            clazz = getattr(sys.modules["tautulli.models"], class_name_str)
             if type(data) == list:
-                return [class_name(**item) for item in data]
+                return [clazz(**item) for item in data]
             else:
-                return class_name(**data)
+                return clazz(**data)
         except AttributeError:
             return None
 

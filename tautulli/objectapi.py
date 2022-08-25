@@ -10,8 +10,8 @@ from tautulli.models import *
 
 
 class ObjectAPI:
-    def __init__(self, base_url: str, api_key: str, verbose: bool = False):
-        self._raw_api = RawAPI(base_url=base_url, api_key=api_key, verbose=verbose)
+    def __init__(self, base_url: str, api_key: str, verbose: bool = False, verify: bool = True):
+        self._raw_api = RawAPI(base_url=base_url, api_key=api_key, verbose=verbose, verify=verify)
 
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
@@ -91,7 +91,7 @@ class ObjectAPI:
         _activity = self.activity()
         return build_summary_from_activity_object(activity=_activity).message
 
-    def get_api_key(self, username: str = None, password: str = None) -> str:
+    def get_api_key(self, username: str = None, password: str = None) -> Union[str, None]:
         """
         Get the Tautulli API key.
         Username and password are required if auth is enabled.
@@ -102,7 +102,7 @@ class ObjectAPI:
         :param password: Tautulli password
         :type password: str, optional
         :return: API key
-        :rtype: str
+        :rtype: str or None
         """
         return self._raw_api.get_api_key(username=username, password=password)
 
