@@ -10,52 +10,52 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    reference_id: int
-    row_id: int
-    id: int
-    date: int
-    started: int
-    stopped: int
-    duration: int
-    paused_counter: int
-    user_id: int
+    reference_id: Optional[int]
+    row_id: Optional[int]
+    id: Optional[int]
+    date: Optional[int]
+    started: Optional[int]
+    stopped: Optional[int]
+    duration: Optional[int]
+    paused_counter: Optional[int]
+    user_id: Optional[int]
     user: Optional[str]
     friendly_name: Optional[str]
     platform: Optional[str]
     product: Optional[str]
     player: Optional[str]
     ip_address: Optional[str]
-    live: int
+    live: Optional[int]
     machine_id: Optional[str]
     media_type: Optional[str]
-    rating_key: int
-    parent_rating_key: Union[int, str]
-    grandparent_rating_key: Union[int, str]
+    rating_key: Optional[int]
+    parent_rating_key: Optional[Union[int, str]]
+    grandparent_rating_key: Optional[Union[int, str]]
     full_title: Optional[str]
     title: Optional[str]
     parent_title: Optional[str]
     grandparent_title: Optional[str]
     original_title: Optional[str]
-    year: Union[int, str]
-    media_index: Union[int, str]
-    parent_media_index: Union[int, str]
+    year: Optional[Union[int, str]]
+    media_index: Optional[Union[int, str]]
+    parent_media_index: Optional[Union[int, str]]
     thumb: Optional[str]
     originally_available_at: Optional[str]
     guid: Optional[str]
     transcode_decision: Optional[str]
-    percent_complete: int
-    watched_status: float
-    group_count: int
+    percent_complete: Optional[int]
+    watched_status: Optional[float]
+    group_count: Optional[int]
     group_ids: Optional[str]
-    state: Any
-    session_key: Any
+    state: Optional[Any]
+    session_key: Optional[Any]
 
 
 class Data(BaseModel):
-    recordsFiltered: int
-    recordsTotal: int
-    data: List[Datum]
-    draw: int
+    recordsFiltered: Optional[int]
+    recordsTotal: Optional[int]
+    data: Optional[List[Datum]]
+    draw: Optional[int]
     filter_duration: Optional[str]
     total_duration: Optional[str]
 

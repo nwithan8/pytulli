@@ -19,7 +19,7 @@ class Datum(BaseModel):
     bitrate: Optional[str]
     video_codec: Optional[str]
     section_type: Optional[str]
-    section_id: int
+    section_id: Optional[int]
     added_at: Optional[str]
     sort_title: Optional[str]
     file_size: Optional[str]
@@ -36,12 +36,12 @@ class Datum(BaseModel):
 
 
 class Data(BaseModel):
-    recordsFiltered: int
-    recordsTotal: int
-    data: List[Datum]
-    draw: int
-    filtered_file_size: int
-    total_file_size: int
+    recordsFiltered: Optional[int]
+    recordsTotal: Optional[int]
+    data: Optional[List[Datum]]
+    draw: Optional[int]
+    filtered_file_size: Optional[int]
+    total_file_size: Optional[int]
 
 
 class Response(BaseModel):

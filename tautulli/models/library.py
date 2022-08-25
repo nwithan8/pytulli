@@ -10,21 +10,21 @@ from pydantic import BaseModel
 
 
 class Data(BaseModel):
-    row_id: int
+    row_id: Optional[int]
     server_id: Optional[str]
-    section_id: int
+    section_id: Optional[int]
     section_name: Optional[str]
     section_type: Optional[str]
     library_thumb: Optional[str]
     library_art: Optional[str]
-    count: int
-    parent_count: Any
-    child_count: Any
-    is_active: int
-    do_notify: int
-    do_notify_created: int
-    keep_history: int
-    deleted_section: int
+    count: Optional[int]
+    parent_count: Optional[Any]
+    child_count: Optional[Any]
+    is_active: Optional[int]
+    do_notify: Optional[int]
+    do_notify_created: Optional[int]
+    keep_history: Optional[int]
+    deleted_section: Optional[int]
 
 
 class Response(BaseModel):

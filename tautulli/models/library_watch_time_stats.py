@@ -10,9 +10,9 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    query_days: int
-    total_time: int
-    total_plays: int
+    query_days: Optional[int]
+    total_time: Optional[int]
+    total_plays: Optional[int]
 
 
 class Response(BaseModel):

@@ -11,10 +11,10 @@ from pydantic import BaseModel
 
 class Datum(BaseModel):
     friendly_name: Optional[str]
-    user_id: int
+    user_id: Optional[int]
     user_thumb: Optional[str]
     username: Optional[str]
-    total_plays: int
+    total_plays: Optional[int]
 
 
 class Response(BaseModel):

@@ -911,8 +911,7 @@ class RawAPI:
         return 'get_item_user_stats', params
 
     @raw_json
-    def get_item_watch_time_stats(self, rating_key: str, grouping: bool = False, query_days: List[int] = None) -> List[
-        dict]:
+    def get_item_watch_time_stats(self, rating_key: str, grouping: bool = False, query_days: List[int] = None) -> List[dict]:
 
         """
         Get the watch time stats for the media item
@@ -1039,7 +1038,7 @@ class RawAPI:
 
     @property
     @raw_json
-    def library_names(self) -> list:
+    def library_names(self) -> List[dict]:
         """
         Get list of library names and IDs on the Plex Media Server
 

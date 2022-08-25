@@ -20,14 +20,14 @@ class Net(BaseModel):
     city: Optional[str]
     address: Optional[str]
     postal_code: Optional[str]
-    emails: List[str]
+    emails: Optional[List[str]]
     created: Optional[str]
     updated: Optional[str]
 
 
 class Data(BaseModel):
     host: Optional[str]
-    nets: List[Net]
+    nets: Optional[List[Net]]
 
 
 class Response(BaseModel):

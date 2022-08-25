@@ -14,13 +14,13 @@ class Data(BaseModel):
     pms_version: Optional[str]
     pms_platform: Optional[str]
     pms_ip: Optional[str]
-    pms_port: int
-    pms_ssl: int
-    pms_is_remote: int
+    pms_port: Optional[int]
+    pms_ssl: Optional[int]
+    pms_is_remote: Optional[int]
     pms_url: Optional[str]
-    pms_url_manual: int
+    pms_url_manual: Optional[int]
     pms_identifier: Optional[str]
-    pms_plexpass: int
+    pms_plexpass: Optional[int]
 
 
 class Response(BaseModel):

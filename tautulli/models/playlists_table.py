@@ -12,25 +12,25 @@ from pydantic import BaseModel
 class Datum(BaseModel):
     addedAt: Optional[str]
     composite: Optional[str]
-    duration: int
+    duration: Optional[int]
     guid: Optional[str]
-    leafCount: int
+    leafCount: Optional[int]
     librarySectionID: Optional[str]
     playlistType: Optional[str]
-    ratingKey: int
+    ratingKey: Optional[int]
     smart: Optional[bool]
     summary: Optional[str]
     title: Optional[str]
     type: Optional[str]
     updatedAt: Optional[str]
-    userID: Any
+    userID: Optional[Any]
 
 
 class Data(BaseModel):
-    recordsFiltered: int
-    recordsTotal: int
-    data: List[Datum]
-    draw: int
+    recordsFiltered: Optional[int]
+    recordsTotal: Optional[int]
+    data: Optional[List[Datum]]
+    draw: Optional[int]
 
 
 class Response(BaseModel):

@@ -141,7 +141,7 @@ class ObjectAPI:
 
     @property
     @make_property_object
-    def newsletters(self) -> Newsletters:
+    def newsletters(self) -> List[Newsletters]:
         """
         Get a list of configured newsletters
 
@@ -151,7 +151,7 @@ class ObjectAPI:
 
     @property
     @make_property_object
-    def notifier_parameters(self) -> list[NotifierParameters]:
+    def notifier_parameters(self) -> List[NotifierParameters]:
         """
         Get a list of available notification parameters
 
@@ -191,7 +191,7 @@ class ObjectAPI:
 
     @property
     @make_property_object
-    def server_list(self) -> ServerList:
+    def server_list(self) -> List[ServerList]:
         """
         Get all your servers that are published to Plex.tv
 
@@ -202,7 +202,7 @@ class ObjectAPI:
 
     @property
     @make_property_object
-    def servers_info(self) -> ServersInfo:
+    def servers_info(self) -> List[ServersInfo]:
         """
         Get info about the Plex Media Server
 
@@ -213,7 +213,7 @@ class ObjectAPI:
 
     @property
     @make_property_object
-    def user_names(self) -> list[UserNames]:
+    def user_names(self) -> List[UserNames]:
         """
         Get a list of all usernames and user ids
 
@@ -224,7 +224,7 @@ class ObjectAPI:
 
     @property
     @make_property_object
-    def users(self) -> list[Users]:
+    def users(self) -> List[Users]:
         """
         Get a list of all users that have access to your server
 
@@ -392,9 +392,40 @@ class ObjectAPI:
         """
         return 'HomeStats'
 
+    @make_object
+    def get_item_user_stats(self, rating_key: str, grouping: bool = False) -> List[dict]:
+        """
+        Get the user statistics for the media item
+
+        :param rating_key: Rating key of the media item
+        :type rating_key: str
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool, optional
+        :return: List of data
+        :rtype: List[dict]
+        """
+        # TODO: Implement model
+
+    @make_object
+    def get_item_watch_time_stats(self, rating_key: str, grouping: bool = False, query_days: List[int] = None) -> List[dict]:
+
+        """
+        Get the watch time stats for the media item
+
+        :param rating_key: Rating key of the media item
+        :type rating_key: str
+        :param grouping: Whether to group results (default: False)
+        :type grouping: bool, optional
+        :param query_days: List of days to get results for (i.e. [0, 1, 14, 30])
+        :type query_days: list[int], optional
+        :return: Dict of data
+        :rtype: dict
+        """
+        # TODO: Implement model
+
     @property
     @make_property_object
-    def libraries(self) -> Libraries:
+    def libraries(self) -> List[Libraries]:
         """
         Get a list of all libraries on your server
 
@@ -501,7 +532,7 @@ class ObjectAPI:
 
     @make_object
     def get_logs(self, sort: str = None, search: str = None, order_direction: str = None, regex: str = None,
-                 start: int = None, end: int = None) -> list[Logs]:
+                 start: int = None, end: int = None) -> List[Logs]:
         """
         Get the Tautulli logs
 
@@ -617,7 +648,7 @@ class ObjectAPI:
         return 'NotifierConfig'
 
     @make_object
-    def get_notifiers(self, notify_action: str = None) -> Notifiers:
+    def get_notifiers(self, notify_action: str = None) -> List[Notifiers]:
         """
         Get a list of configured notifiers
 

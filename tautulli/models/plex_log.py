@@ -10,7 +10,7 @@ from pydantic import BaseModel
 
 
 class Data(BaseModel):
-    data: List
+    data: Optional[List]
 
 
 class Response(BaseModel):

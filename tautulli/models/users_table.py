@@ -10,13 +10,13 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    row_id: int
-    user_id: int
+    row_id: Optional[int]
+    user_id: Optional[int]
     username: Optional[str]
     friendly_name: Optional[str]
     user_thumb: Optional[str]
-    plays: int
-    duration: int
+    plays: Optional[int]
+    duration: Optional[int]
     last_seen: Optional[int]
     last_played: Optional[str]
     history_row_id: Optional[int]
@@ -34,19 +34,19 @@ class Datum(BaseModel):
     originally_available_at: Optional[str]
     guid: Optional[str]
     transcode_decision: Optional[str]
-    do_notify: int
-    keep_history: int
-    allow_guest: int
-    is_active: int
+    do_notify: Optional[int]
+    keep_history: Optional[int]
+    allow_guest: Optional[int]
+    is_active: Optional[int]
     title: Optional[str]
     email: Optional[str]
 
 
 class Data(BaseModel):
-    recordsFiltered: int
-    recordsTotal: int
-    data: List[Datum]
-    draw: int
+    recordsFiltered: Optional[int]
+    recordsTotal: Optional[int]
+    data: Optional[List[Datum]]
+    draw: Optional[int]
 
 
 class Response(BaseModel):

@@ -10,11 +10,11 @@ from pydantic import BaseModel, Field
 
 
 class Field0(BaseModel):
-    rating_key: int
+    rating_key: Optional[int]
 
 
 class Data(BaseModel):
-    field_0: Field0 = Field(..., alias='0')
+    field_0: Optional[Field0] = Field(..., alias='0')
 
 
 class Response(BaseModel):

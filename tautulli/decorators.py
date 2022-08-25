@@ -21,8 +21,6 @@ def make_property_object(func):
     def wrapper(self, *args, **kwargs) -> object:
         try:
             data = getattr(self._raw_api, func.__name__)
-            if not data:
-                return None
             class_name = func(self)
             clazz = getattr(sys.modules["tautulli.models"], class_name)
             if type(data) == list:
@@ -41,8 +39,6 @@ def make_object(func):
         try:
             method = getattr(self._raw_api, func.__name__)
             data = method(*args, **kwargs)
-            if not data:
-                return None
             class_name = func(self, *args, **kwargs)
             clazz = getattr(sys.modules["tautulli.models"], class_name)
             if type(data) == list:

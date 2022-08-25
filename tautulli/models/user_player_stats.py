@@ -13,8 +13,8 @@ class Datum(BaseModel):
     platform: Optional[str]
     platform_name: Optional[str]
     player_name: Optional[str]
-    result_id: int
-    total_plays: int
+    result_id: Optional[int]
+    total_plays: Optional[int]
 
 
 class Response(BaseModel):

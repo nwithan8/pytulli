@@ -42,7 +42,7 @@ class Row(BaseModel):
 class Datum(BaseModel):
     stat_id: Optional[str]
     stat_title: Optional[str]
-    rows: List[Row]
+    rows: Optional[List[Row]]
     stat_type: Optional[str] = None
 
 

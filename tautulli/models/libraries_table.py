@@ -10,9 +10,9 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    row_id: int
+    row_id: Optional[int]
     server_id: Optional[str]
-    section_id: int
+    section_id: Optional[int]
     section_name: Optional[str]
     section_type: Optional[str]
     count: Optional[int]
@@ -20,8 +20,8 @@ class Datum(BaseModel):
     child_count: Optional[int]
     library_thumb: Optional[str]
     library_art: Optional[str]
-    plays: int
-    duration: int
+    plays: Optional[int]
+    duration: Optional[int]
     last_accessed: Optional[int]
     history_row_id: Optional[int]
     last_played: Optional[str]
@@ -33,21 +33,21 @@ class Datum(BaseModel):
     media_index: Optional[Union[int, str]]
     parent_media_index: Optional[Union[int, str]]
     content_rating: Optional[str]
-    labels: List
+    labels: Optional[List]
     live: Optional[int]
     originally_available_at: Optional[str]
     guid: Optional[str]
-    do_notify: int
-    do_notify_created: int
-    keep_history: int
-    is_active: int
+    do_notify: Optional[int]
+    do_notify_created: Optional[int]
+    keep_history: Optional[int]
+    is_active: Optional[int]
 
 
 class Data(BaseModel):
-    recordsFiltered: int
-    recordsTotal: int
-    data: List[Datum]
-    draw: int
+    recordsFiltered: Optional[int]
+    recordsTotal: Optional[int]
+    data: Optional[List[Datum]]
+    draw: Optional[int]
 
 
 class Response(BaseModel):

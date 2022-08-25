@@ -10,7 +10,7 @@ from pydantic import BaseModel
 
 
 class Data(BaseModel):
-    section_id: int
+    section_id: Optional[int]
     section_name: Optional[str]
     section_type: Optional[str]
     agent: Optional[str]

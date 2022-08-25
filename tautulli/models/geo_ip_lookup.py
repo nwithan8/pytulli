@@ -14,12 +14,12 @@ class Data(BaseModel):
     code: Optional[str]
     continent: Optional[str]
     country: Optional[str]
-    latitude: Union[float, None]
-    longitude: Union[float, None]
+    latitude: Optional[Union[float, None]]
+    longitude: Optional[Union[float, None]]
     postal_code: Optional[str]
     region: Optional[str]
     timezone: Optional[str]
-    accuracy: Any
+    accuracy: Optional[Any]
 
 
 class Response(BaseModel):

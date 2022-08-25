@@ -29,7 +29,7 @@ class Stream(BaseModel):
     video_language_code: Optional[str] = None
     video_profile: Optional[str] = None
     video_scan_type: Optional[str] = None
-    selected: int
+    selected: Optional[int]
     audio_codec: Optional[str] = None
     audio_bitrate: Optional[str] = None
     audio_bitrate_mode: Optional[str] = None
@@ -52,9 +52,9 @@ class Part(BaseModel):
     id: Optional[str]
     file: Optional[str]
     file_size: Optional[str]
-    indexes: int
-    streams: List[Stream]
-    selected: int
+    indexes: Optional[int]
+    streams: Optional[List[Stream]]
+    selected: Optional[int]
 
 
 class MediaInfoItem(BaseModel):
@@ -73,11 +73,11 @@ class MediaInfoItem(BaseModel):
     audio_channels: Optional[str]
     audio_channel_layout: Optional[str]
     audio_profile: Optional[str]
-    optimized_version: int
+    optimized_version: Optional[int]
     channel_call_sign: Optional[str]
     channel_identifier: Optional[str]
     channel_thumb: Optional[str]
-    parts: List[Part]
+    parts: Optional[List[Part]]
 
 
 class MovieItem(BaseModel):
@@ -117,17 +117,17 @@ class MovieItem(BaseModel):
     guid: Optional[str]
     parent_guid: Optional[str]
     grandparent_guid: Optional[str]
-    directors: List
-    writers: List
-    actors: List
-    genres: List
-    labels: List
-    collections: List
-    guids: List
+    directors: Optional[List]
+    writers: Optional[List]
+    actors: Optional[List]
+    genres: Optional[List]
+    labels: Optional[List]
+    collections: Optional[List]
+    guids: Optional[List]
     full_title: Optional[str]
-    children_count: int
-    live: int
-    media_info: List[MediaInfoItem]
+    children_count: Optional[int]
+    live: Optional[int]
+    media_info: Optional[List[MediaInfoItem]]
 
 
 class ShowItem(BaseModel):
@@ -167,17 +167,17 @@ class ShowItem(BaseModel):
     guid: Optional[str]
     parent_guid: Optional[str]
     grandparent_guid: Optional[str]
-    directors: List
-    writers: List
-    actors: List[str]
-    genres: List[str]
-    labels: List
-    collections: List
-    guids: List
+    directors: Optional[List]
+    writers: Optional[List]
+    actors: Optional[List[str]]
+    genres: Optional[List[str]]
+    labels: Optional[List]
+    collections: Optional[List]
+    guids: Optional[List]
     full_title: Optional[str]
-    children_count: int
-    live: int
-    media_info: List
+    children_count: Optional[int]
+    live: Optional[int]
+    media_info: Optional[List]
 
 
 class SeasonItem(BaseModel):
@@ -217,17 +217,17 @@ class SeasonItem(BaseModel):
     guid: Optional[str]
     parent_guid: Optional[str]
     grandparent_guid: Optional[str]
-    directors: List
-    writers: List
-    actors: List[str]
-    genres: List[str]
-    labels: List
-    collections: List
-    guids: List
+    directors: Optional[List]
+    writers: Optional[List]
+    actors: Optional[List[str]]
+    genres: Optional[List[str]]
+    labels: Optional[List]
+    collections: Optional[List]
+    guids: Optional[List]
     full_title: Optional[str]
-    children_count: int
-    live: int
-    media_info: List
+    children_count: Optional[int]
+    live: Optional[int]
+    media_info: Optional[List]
 
 
 class EpisodeItem(BaseModel):
@@ -267,33 +267,33 @@ class EpisodeItem(BaseModel):
     guid: Optional[str]
     parent_guid: Optional[str]
     grandparent_guid: Optional[str]
-    directors: List[str]
-    writers: List[str]
-    actors: List[str]
-    genres: List[str]
-    labels: List
-    collections: List
-    guids: List
+    directors: Optional[List[str]]
+    writers: Optional[List[str]]
+    actors: Optional[List[str]]
+    genres: Optional[List[str]]
+    labels: Optional[List]
+    collections: Optional[List]
+    guids: Optional[List]
     full_title: Optional[str]
-    children_count: int
-    live: int
-    media_info: List[MediaInfoItem]
+    children_count: Optional[int]
+    live: Optional[int]
+    media_info: Optional[List[MediaInfoItem]]
 
 
 class ResultsList(BaseModel):
-    movie: List[MovieItem]
-    show: List[ShowItem]
-    season: List[SeasonItem]
-    episode: List[EpisodeItem]
-    artist: List
-    album: List
-    track: List
-    collection: List
+    movie: Optional[List[MovieItem]]
+    show: Optional[List[ShowItem]]
+    season: Optional[List[SeasonItem]]
+    episode: Optional[List[EpisodeItem]]
+    artist: Optional[List]
+    album: Optional[List]
+    track: Optional[List]
+    collection: Optional[List]
 
 
 class Data(BaseModel):
-    results_count: int
-    results_list: ResultsList
+    results_count: Optional[int]
+    results_list: Optional[ResultsList]
 
 
 class Response(BaseModel):

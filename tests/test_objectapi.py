@@ -119,7 +119,9 @@ def test_libraries():
     client = object_client()
     libraries = client.libraries
     assert libraries is not None
-    assert type(libraries) == models.Libraries
+    assert type(libraries) == list
+    for library in libraries:
+        assert type(library) == models.Libraries
 
 
 def test_get_libraries_table():
@@ -133,7 +135,9 @@ def test_library_names():
     client = object_client()
     library_names = client.library_names
     assert library_names is not None
-    assert type(library_names) == List[models.LibraryName]
+    assert type(library_names) == list
+    for name in library_names:
+        assert type(name) == models.LibraryName
 
 
 def test_get_logs():
@@ -156,7 +160,9 @@ def test_newsletters():
     client = object_client()
     newsletters = client.newsletters
     assert newsletters is not None
-    assert type(newsletters) == models.Newsletters
+    assert type(newsletters) == list
+    for newsletter in newsletters:
+        assert type(newsletter) == models.Newsletters
 
 
 def test_get_notification_log():
@@ -179,7 +185,9 @@ def test_get_notifiers():
     client = object_client()
     notifiers = client.get_notifiers()
     assert notifiers is not None
-    assert type(notifiers) == models.Notifiers
+    assert type(notifiers) == list
+    for notifier in notifiers:
+        assert type(notifier) == models.Notifiers
 
 
 def test_get_playlists_table():
@@ -280,7 +288,9 @@ def test_servers_info():
     client = object_client()
     servers_info = client.servers_info
     assert servers_info is not None
-    assert type(servers_info) == models.ServersInfo
+    assert type(servers_info) == list
+    for server_info in servers_info:
+        assert type(server_info) == models.ServerInfo
 
 
 def test_get_settings():

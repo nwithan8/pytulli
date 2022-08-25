@@ -10,7 +10,7 @@ from pydantic import BaseModel
 
 
 class Data(BaseModel):
-    recently_added: List
+    recently_added: Optional[List]
 
 
 class Response(BaseModel):

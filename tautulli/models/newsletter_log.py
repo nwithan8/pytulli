@@ -10,10 +10,10 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    id: int
-    timestamp: int
-    newsletter_id: int
-    agent_id: int
+    id: Optional[int]
+    timestamp: Optional[int]
+    newsletter_id: Optional[int]
+    agent_id: Optional[int]
     agent_name: Optional[str]
     notify_action: Optional[str]
     subject_text: Optional[str]
@@ -21,14 +21,14 @@ class Datum(BaseModel):
     start_date: Optional[str]
     end_date: Optional[str]
     uuid: Optional[str]
-    success: int
+    success: Optional[int]
 
 
 class Data(BaseModel):
-    recordsFiltered: int
-    recordsTotal: int
-    data: List[Datum]
-    draw: int
+    recordsFiltered: Optional[int]
+    recordsTotal: Optional[int]
+    data: Optional[List[Datum]]
+    draw: Optional[int]
 
 
 class Response(BaseModel):

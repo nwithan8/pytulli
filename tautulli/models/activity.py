@@ -20,7 +20,7 @@ class Session(BaseModel):
     synced_version_profile: Optional[str]
     optimized_version_profile: Optional[str]
     user: Optional[str]
-    channel_stream: int
+    channel_stream: Optional[int]
     section_id: Optional[str]
     library_name: Optional[str]
     rating_key: Optional[str]
@@ -56,16 +56,16 @@ class Session(BaseModel):
     guid: Optional[str]
     parent_guid: Optional[str]
     grandparent_guid: Optional[str]
-    directors: List
-    writers: List
-    actors: List
-    genres: List[str]
-    labels: List
-    collections: List
-    guids: List
+    directors: Optional[List]
+    writers: Optional[List]
+    actors: Optional[List]
+    genres: Optional[List[str]]
+    labels: Optional[List]
+    collections: Optional[List]
+    guids: Optional[List]
     full_title: Optional[str]
-    children_count: int
-    live: int
+    children_count: Optional[int]
+    live: Optional[int]
     id: Optional[str]
     container: Optional[str]
     bitrate: Optional[str]
@@ -81,14 +81,14 @@ class Session(BaseModel):
     audio_channels: Optional[str]
     audio_channel_layout: Optional[str]
     audio_profile: Optional[str]
-    optimized_version: int
+    optimized_version: Optional[int]
     channel_call_sign: Optional[str]
     channel_identifier: Optional[str]
     channel_thumb: Optional[str]
     file: Optional[str]
     file_size: Optional[str]
-    indexes: int
-    selected: int
+    indexes: Optional[int]
+    selected: Optional[int]
     type: Optional[str]
     video_codec_level: Optional[str]
     video_bitrate: Optional[str]
@@ -113,26 +113,26 @@ class Session(BaseModel):
     subtitle_codec: Optional[str]
     subtitle_container: Optional[str]
     subtitle_format: Optional[str]
-    subtitle_forced: int
+    subtitle_forced: Optional[int]
     subtitle_location: Optional[str]
     subtitle_language: Optional[str]
     subtitle_language_code: Optional[str]
-    row_id: int
-    user_id: int
+    row_id: Optional[int]
+    user_id: Optional[int]
     username: Optional[str]
     friendly_name: Optional[str]
     user_thumb: Optional[str]
     email: Optional[str]
-    is_active: int
-    is_admin: int
-    is_home_user: int
-    is_allow_sync: int
-    is_restricted: int
-    do_notify: int
-    keep_history: int
-    deleted_user: int
-    allow_guest: int
-    shared_libraries: List[str]
+    is_active: Optional[int]
+    is_admin: Optional[int]
+    is_home_user: Optional[int]
+    is_allow_sync: Optional[int]
+    is_restricted: Optional[int]
+    do_notify: Optional[int]
+    keep_history: Optional[int]
+    deleted_user: Optional[int]
+    allow_guest: Optional[int]
+    shared_libraries: Optional[List[str]]
     ip_address: Optional[str]
     ip_address_public: Optional[str]
     device: Optional[str]
@@ -145,15 +145,15 @@ class Session(BaseModel):
     player: Optional[str]
     machine_id: Optional[str]
     state: Optional[str]
-    local: int
-    relayed: int
-    secure: int
+    local: Optional[int]
+    relayed: Optional[int]
+    secure: Optional[int]
     session_id: Optional[str]
     bandwidth: Optional[str]
     location: Optional[str]
     transcode_key: Optional[str]
-    transcode_throttled: int
-    transcode_progress: int
+    transcode_throttled: Optional[int]
+    transcode_progress: Optional[int]
     transcode_speed: Optional[str]
     transcode_audio_channels: Optional[str]
     transcode_audio_codec: Optional[str]
@@ -162,20 +162,20 @@ class Session(BaseModel):
     transcode_height: Optional[str]
     transcode_container: Optional[str]
     transcode_protocol: Optional[str]
-    transcode_hw_requested: int
+    transcode_hw_requested: Optional[int]
     transcode_hw_decode: Optional[str]
     transcode_hw_decode_title: Optional[str]
     transcode_hw_encode: Optional[str]
     transcode_hw_encode_title: Optional[str]
-    transcode_hw_full_pipeline: int
-    transcode_max_offset_available: int
-    transcode_min_offset_available: int
+    transcode_hw_full_pipeline: Optional[int]
+    transcode_max_offset_available: Optional[int]
+    transcode_min_offset_available: Optional[int]
     audio_decision: Optional[str]
     video_decision: Optional[str]
     subtitle_decision: Optional[str]
     throttled: Optional[str]
-    transcode_hw_decoding: int
-    transcode_hw_encoding: int
+    transcode_hw_decoding: Optional[int]
+    transcode_hw_encoding: Optional[int]
     stream_container: Optional[str]
     stream_bitrate: Optional[str]
     stream_aspect_ratio: Optional[str]
@@ -190,10 +190,10 @@ class Session(BaseModel):
     stream_duration: Optional[str]
     stream_container_decision: Optional[str]
     optimized_version_title: Optional[str]
-    synced_version: int
+    synced_version: Optional[int]
     live_uuid: Optional[str]
     bif_thumb: Optional[str]
-    subtitles: int
+    subtitles: Optional[int]
     transcode_decision: Optional[str]
     container_decision: Optional[str]
     stream_video_full_resolution: Optional[str] = None
@@ -222,12 +222,12 @@ class Session(BaseModel):
     stream_subtitle_codec: Optional[str]
     stream_subtitle_container: Optional[str]
     stream_subtitle_format: Optional[str]
-    stream_subtitle_forced: int
+    stream_subtitle_forced: Optional[int]
     stream_subtitle_location: Optional[str]
     stream_subtitle_language: Optional[str]
     stream_subtitle_language_code: Optional[str]
     stream_subtitle_decision: Optional[str]
-    stream_subtitle_transient: int
+    stream_subtitle_transient: Optional[int]
 
     @property
     def duration_milliseconds(self):
@@ -304,13 +304,13 @@ class Session(BaseModel):
 
 class Data(BaseModel):
     stream_count: Optional[str]
-    sessions: List[Session]
-    stream_count_direct_play: int
-    stream_count_direct_stream: int
-    stream_count_transcode: int
-    total_bandwidth: int
-    lan_bandwidth: int
-    wan_bandwidth: int
+    sessions: Optional[List[Session]]
+    stream_count_direct_play: Optional[int]
+    stream_count_direct_stream: Optional[int]
+    stream_count_transcode: Optional[int]
+    total_bandwidth: Optional[int]
+    lan_bandwidth: Optional[int]
+    wan_bandwidth: Optional[int]
 
     @property
     def summary(self) -> ActivitySummary:

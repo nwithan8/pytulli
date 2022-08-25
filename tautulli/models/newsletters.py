@@ -10,13 +10,13 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    id: int
-    agent_id: int
+    id: Optional[int]
+    agent_id: Optional[int]
     agent_name: Optional[str]
     agent_label: Optional[str]
     friendly_name: Optional[str]
     cron: Optional[str]
-    active: int
+    active: Optional[int]
 
 
 class Response(BaseModel):

@@ -57,20 +57,20 @@ class PMS(BaseModel):
     pms_update_distro: Optional[str]
     pms_name: Optional[str]
     pms_logs_folder: Optional[str]
-    pms_plexpass: int
+    pms_plexpass: Optional[int]
     pms_token: Optional[str] = None
-    pms_port: int
-    pms_is_remote: int
+    pms_port: Optional[int]
+    pms_is_remote: Optional[int]
     pms_identifier: Optional[str]
-    pms_ssl: int
+    pms_ssl: Optional[int]
     pms_version: Optional[str]
     pms_update_distro_build: Optional[str]
     pms_ip: Optional[str]
     pms_logs_line_cap: Optional[str]
     pms_platform: Optional[str]
-    pms_url_manual: int
+    pms_url_manual: Optional[int]
     pms_web_url: Optional[str]
-    pms_is_cloud: int
+    pms_is_cloud: Optional[int]
     pms_url_override: Optional[str]
 
 
@@ -154,14 +154,14 @@ class Monitoring(BaseModel):
 
 
 class GetFileSizesHold(BaseModel):
-    section_ids: List
-    rating_keys: List
+    section_ids: Optional[List]
+    rating_keys: Optional[List]
 
 
 class General(BaseModel):
     week_start_monday: Optional[bool]
     git_token: Optional[str]
-    home_stats_cards: List[str]
+    home_stats_cards: Optional[List[str]]
     backup_interval: Optional[str]
     graph_days: Optional[str]
     graph_type: Optional[str]
@@ -207,7 +207,7 @@ class General(BaseModel):
     allow_guest_access: Optional[bool]
     time_format: Optional[str]
     cache_dir: Optional[str]
-    home_sections: List[str]
+    home_sections: Optional[List[str]]
     backup_days: Optional[str]
     https_cert: Optional[str]
     api_key: Optional[str]
@@ -218,12 +218,12 @@ class General(BaseModel):
     history_table_activity: Optional[bool]
     https_key: Optional[str]
     http_hash_password: Optional[bool]
-    home_library_cards: List[str]
+    home_library_cards: Optional[List[str]]
     http_hashed_password: Optional[bool]
     git_branch: Optional[str]
     anon_redirect: Optional[str]
     http_plex_admin: Optional[bool]
-    update_show_changelog: int
+    update_show_changelog: Optional[int]
     show_advanced_settings: Optional[bool]
     git_remote: Optional[str]
     https_cert_chain: Optional[str]
@@ -248,8 +248,8 @@ class General(BaseModel):
     http_rate_limit_attempts: Optional[str]
     http_rate_limit_attempts_interval: Optional[str]
     http_rate_limit_lockout_time: Optional[str]
-    get_file_sizes_hold: GetFileSizesHold
-    interface_list: List[str]
+    get_file_sizes_hold: Optional[GetFileSizesHold]
+    interface_list: Optional[List[str]]
 
 
 class Slack(BaseModel):

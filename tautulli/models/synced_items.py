@@ -18,7 +18,7 @@ class Datum(BaseModel):
     item_complete_count: Optional[str]
     item_count: Optional[str]
     item_downloaded_count: Optional[str]
-    item_downloaded_percent_complete: int
+    item_downloaded_percent_complete: Optional[int]
     metadata_type: Optional[str]
     photo_quality: Optional[str]
     platform: Optional[str]

@@ -10,21 +10,21 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    row_id: int
-    user_id: int
+    row_id: Optional[int]
+    user_id: Optional[int]
     username: Optional[str]
     friendly_name: Optional[str]
     thumb: Optional[str]
     email: Optional[str]
-    is_active: int
-    is_admin: int
+    is_active: Optional[int]
+    is_admin: Optional[int]
     is_home_user: Optional[int]
     is_allow_sync: Optional[int]
     is_restricted: Optional[int]
-    do_notify: int
-    keep_history: int
-    allow_guest: int
-    shared_libraries: List[str]
+    do_notify: Optional[int]
+    keep_history: Optional[int]
+    allow_guest: Optional[int]
+    shared_libraries: Optional[List[str]]
     filter_all: Optional[str]
     filter_movies: Optional[str]
     filter_tv: Optional[str]

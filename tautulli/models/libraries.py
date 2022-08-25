@@ -17,7 +17,7 @@ class Datum(BaseModel):
     thumb: Optional[str]
     art: Optional[str]
     count: Optional[str]
-    is_active: int
+    is_active: Optional[int]
     parent_count: Optional[str] = None
     child_count: Optional[str] = None
 

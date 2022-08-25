@@ -12,9 +12,9 @@ from tautulli import utils
 
 class ActivitySummary(BaseModel):
     stream_count: Optional[str] = "0"
-    transcode_count: int = 0
-    total_bandwidth: int = 0
-    lan_bandwidth: int = 0
+    transcode_count: Optional[int] = 0
+    total_bandwidth: Optional[int] = 0
+    lan_bandwidth: Optional[int] = 0
 
     @property
     def message(self):

@@ -12,32 +12,32 @@ from pydantic import BaseModel
 class Datum(BaseModel):
     friendly_name: Optional[str]
     guid: Optional[str]
-    id: int
+    id: Optional[int]
     ip_address: Optional[str]
     last_played: Optional[str]
-    last_seen: int
-    first_seen: int
-    live: int
-    media_index: int
+    last_seen: Optional[int]
+    first_seen: Optional[int]
+    live: Optional[int]
+    media_index: Optional[int]
     media_type: Optional[str]
     originally_available_at: Optional[str]
-    parent_media_index: int
+    parent_media_index: Optional[int]
     parent_title: Optional[str]
     platform: Optional[str]
-    play_count: int
+    play_count: Optional[int]
     player: Optional[str]
-    rating_key: int
+    rating_key: Optional[int]
     thumb: Optional[str]
     transcode_decision: Optional[str]
-    user_id: int
-    year: int
+    user_id: Optional[int]
+    year: Optional[int]
 
 
 class Data(BaseModel):
-    draw: int
-    recordsTotal: int
-    recordsFiltered: int
-    data: List[Datum]
+    draw: Optional[int]
+    recordsTotal: Optional[int]
+    recordsFiltered: Optional[int]
+    data: Optional[List[Datum]]
 
 
 class Response(BaseModel):

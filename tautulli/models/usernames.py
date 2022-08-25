@@ -10,7 +10,7 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    user_id: int
+    user_id: Optional[int]
     friendly_name: Optional[str]
 
 

@@ -10,68 +10,68 @@ from pydantic import BaseModel, Field
 
 
 class Config(BaseModel):
-    custom_cron: int
-    time_frame: int
+    custom_cron: Optional[int]
+    time_frame: Optional[int]
     time_frame_units: Optional[str]
-    formatted: int
-    threaded: int
-    notifier_id: int
+    formatted: Optional[int]
+    threaded: Optional[int]
+    notifier_id: Optional[int]
     filename: Optional[str]
-    save_only: int
-    incl_libraries: List[str]
+    save_only: Optional[int]
+    incl_libraries: Optional[List[str]]
 
 
 class EmailConfig(BaseModel):
     from_name: Optional[str]
     from_: Optional[str] = Field(..., alias='from')
-    to: List[str]
-    cc: List
-    bcc: List
+    to: Optional[List[str]]
+    cc: Optional[List]
+    bcc: Optional[List]
     smtp_server: Optional[str]
-    smtp_port: int
+    smtp_port: Optional[int]
     smtp_user: Optional[str]
     smtp_password: Optional[str]
-    tls: int
-    html_support: int
-    notifier_id: int
+    tls: Optional[int]
+    html_support: Optional[int]
+    notifier_id: Optional[int]
 
 
 class MovieLibrary(BaseModel):
-    value: int
+    value: Optional[int]
     text: Optional[str]
 
 
 class TVShowLibrary(BaseModel):
-    value: int
+    value: Optional[int]
     text: Optional[str]
 
 
 class MusicLibrary(BaseModel):
-    value: int
+    value: Optional[int]
     text: Optional[str]
 
 
 class OtherVideoLibrary(BaseModel):
-    value: int
+    value: Optional[int]
     text: Optional[str]
 
 
 class SelectOptions(BaseModel):
-    Movie_Libraries: List[MovieLibrary] = Field(..., alias='Movie Libraries')
-    TV_Show_Libraries: List[TVShowLibrary] = Field(..., alias='TV Show Libraries')
-    Music_Libraries: List[MusicLibrary] = Field(..., alias='Music Libraries')
-    Other_Video_Libraries: List[OtherVideoLibrary] = Field(
+    Movie_Libraries: Optional[List[MovieLibrary]] = Field(..., alias='Movie Libraries')
+    TV_Show_Libraries: Optional[List[TVShowLibrary]] = Field(..., alias='TV Show Libraries')
+    Music_Libraries: Optional[List[MusicLibrary]] = Field(..., alias='Music Libraries')
+    Other_Video_Libraries: Optional[List[OtherVideoLibrary]] = Field(
         ..., alias='Other Video Libraries'
     )
 
 
 class ConfigOption(BaseModel):
     label: Optional[str]
-    value: List[str]
+    value: Optional[List[str]]
     description: Optional[str]
     name: Optional[str]
     input_type: Optional[str]
-    select_options: SelectOptions
+    select_options: Optional[SelectOptions]
 
 
 class SelectOption(BaseModel):
@@ -81,7 +81,7 @@ class SelectOption(BaseModel):
 
 class EmailConfigOption(BaseModel):
     label: Optional[str]
-    value: Union[Union[int, str], List[str]]
+    value: Optional[Union[Union[int, str], List[str]]]
     name: Optional[str]
     description: Optional[str]
     input_type: Optional[str]
@@ -89,20 +89,20 @@ class EmailConfigOption(BaseModel):
 
 
 class Data(BaseModel):
-    id: int
-    agent_id: int
+    id: Optional[int]
+    agent_id: Optional[int]
     agent_name: Optional[str]
     agent_label: Optional[str]
     friendly_name: Optional[str]
     cron: Optional[str]
-    active: int
+    active: Optional[int]
     id_name: Optional[str]
     subject: Optional[str]
     body: Optional[str]
-    config: Config
-    email_config: EmailConfig
-    config_options: List[ConfigOption]
-    email_config_options: List[EmailConfigOption]
+    config: Optional[Config]
+    email_config: Optional[EmailConfig]
+    config_options: Optional[List[ConfigOption]]
+    email_config_options: Optional[List[EmailConfigOption]]
 
 
 class Response(BaseModel):

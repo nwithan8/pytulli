@@ -30,7 +30,7 @@ class Stream(BaseModel):
     video_language_code: Optional[str] = None
     video_profile: Optional[str] = None
     video_scan_type: Optional[str] = None
-    selected: int
+    selected: Optional[int]
     audio_codec: Optional[str] = None
     audio_bitrate: Optional[str] = None
     audio_bitrate_mode: Optional[str] = None
@@ -46,9 +46,9 @@ class Part(BaseModel):
     id: Optional[str]
     file: Optional[str]
     file_size: Optional[str]
-    indexes: int
-    streams: List[Stream]
-    selected: int
+    indexes: Optional[int]
+    streams: Optional[List[Stream]]
+    selected: Optional[int]
 
 
 class MediaInfoItem(BaseModel):
@@ -67,11 +67,11 @@ class MediaInfoItem(BaseModel):
     audio_channels: Optional[str]
     audio_channel_layout: Optional[str]
     audio_profile: Optional[str]
-    optimized_version: int
+    optimized_version: Optional[int]
     channel_call_sign: Optional[str]
     channel_identifier: Optional[str]
     channel_thumb: Optional[str]
-    parts: List[Part]
+    parts: Optional[List[Part]]
 
 
 class Data(BaseModel):
@@ -112,20 +112,20 @@ class Data(BaseModel):
     last_viewed_at: Optional[str]
     guid: Optional[str]
     parent_guid: Optional[str]
-    parent_guids: List[str]
+    parent_guids: Optional[List[str]]
     grandparent_guid: Optional[str]
-    grandparent_guids: List[str]
-    directors: List[str]
-    writers: List[str]
-    actors: List[str]
-    genres: List[str]
-    labels: List
-    collections: List
-    guids: List[str]
+    grandparent_guids: Optional[List[str]]
+    directors: Optional[List[str]]
+    writers: Optional[List[str]]
+    actors: Optional[List[str]]
+    genres: Optional[List[str]]
+    labels: Optional[List]
+    collections: Optional[List]
+    guids: Optional[List[str]]
     full_title: Optional[str]
-    children_count: int
-    live: int
-    media_info: List[MediaInfoItem]
+    children_count: Optional[int]
+    live: Optional[int]
+    media_info: Optional[List[MediaInfoItem]]
 
 
 class Response(BaseModel):

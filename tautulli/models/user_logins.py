@@ -15,18 +15,18 @@ class Datum(BaseModel):
     host: Optional[str]
     ip_address: Optional[str]
     os: Optional[str]
-    timestamp: int
+    timestamp: Optional[int]
     user: Optional[str]
     user_agent: Optional[str]
     user_group: Optional[str]
-    user_id: int
+    user_id: Optional[int]
 
 
 class Data(BaseModel):
-    draw: int
-    recordsTotal: int
-    recordsFiltered: int
-    data: List[Datum]
+    draw: Optional[int]
+    recordsTotal: Optional[int]
+    recordsFiltered: Optional[int]
+    data: Optional[List[Datum]]
 
 
 class Response(BaseModel):

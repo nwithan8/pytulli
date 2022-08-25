@@ -12,7 +12,7 @@ from pydantic import BaseModel
 class Data(BaseModel):
     update_available: Optional[bool]
     platform: Optional[str]
-    release_date: int
+    release_date: Optional[int]
     version: Optional[str]
     requirements: Optional[str]
     extra_info: Optional[str]
