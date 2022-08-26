@@ -6,7 +6,7 @@ from tautulli import models
 from tests.setup import object_client
 
 
-# TODO: troubleshoot this test
+# TODO: Test every single method
 def test_get_api_key():
     no_key_client = object_client(no_key=True)
     key = no_key_client.get_api_key()
@@ -56,7 +56,6 @@ def test_activity():
     assert type(activity) == models.Activity
 
 
-@pytest.mark.skip(reason="Cannot test as properties won't exist on a fake Tautilli instance")
 def test_activity_summary():
     client = object_client()
     activity = client.activity_summary
@@ -64,7 +63,6 @@ def test_activity_summary():
     assert type(activity) == models.ActivitySummary
 
 
-@pytest.mark.skip(reason="Cannot test as properties won't exist on a fake Tautilli instance")
 def test_activity_summary_message():
     client = object_client()
     activity = client.activity_summary_message
@@ -79,7 +77,6 @@ def test_date_formats():
     assert type(date_formats) == models.DateFormats
 
 
-@pytest.mark.skip("This test is failing due to server-side issues")
 def test_get_export_fields():
     client = object_client()
     export_fields = client.get_export_fields(media_type="movie")
@@ -112,7 +109,7 @@ def test_get_home_stats():
     assert home_stats is not None
     assert type(home_stats) == list
     for stat in home_stats:
-        assert type(stat) == models.HomeStats
+        assert type(stat) == models.HomeStat
 
 
 def test_libraries():
@@ -121,7 +118,7 @@ def test_libraries():
     assert libraries is not None
     assert type(libraries) == list
     for library in libraries:
-        assert type(library) == models.Libraries
+        assert type(library) == models.LibrariesEntry
 
 
 def test_get_libraries_table():
@@ -146,7 +143,7 @@ def test_get_logs():
     assert logs is not None
     assert type(logs) == list
     for log in logs:
-        assert type(log) == models.Logs
+        assert type(log) == models.LogEntry
 
 
 def test_get_newsletter_log():
@@ -162,7 +159,7 @@ def test_newsletters():
     assert newsletters is not None
     assert type(newsletters) == list
     for newsletter in newsletters:
-        assert type(newsletter) == models.Newsletters
+        assert type(newsletter) == models.Newsletter
 
 
 def test_get_notification_log():
@@ -178,7 +175,7 @@ def test_notifier_parameters():
     assert notifier_parameters is not None
     assert type(notifier_parameters) == list
     for parameter in notifier_parameters:
-        assert type(parameter) == models.NotifierParameters
+        assert type(parameter) == models.NotifierParameter
 
 
 def test_get_notifiers():
@@ -187,7 +184,7 @@ def test_get_notifiers():
     assert notifiers is not None
     assert type(notifiers) == list
     for notifier in notifiers:
-        assert type(notifier) == models.Notifiers
+        assert type(notifier) == models.Notifier
 
 
 def test_get_playlists_table():
@@ -316,7 +313,7 @@ def test_user_names():
     assert user_names is not None
     assert type(user_names) == list
     for user_name in user_names:
-        assert type(user_name) == models.UserNames
+        assert type(user_name) == models.UserName
 
 
 def test_users():
@@ -325,7 +322,7 @@ def test_users():
     assert users is not None
     assert type(users) == list
     for user in users:
-        assert type(user) == models.Users
+        assert type(user) == models.User
 
 
 def test_get_users_table():
