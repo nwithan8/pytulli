@@ -308,7 +308,7 @@ def test_servers_info():
     assert servers_info is not None
     assert type(servers_info) == list
     for server_info in servers_info:
-        assert type(server_info) == models.ServerInfo
+        assert type(server_info) == models.ServersInfoEntry
 
 
 def test_get_settings():

@@ -6,9 +6,9 @@ from tautulli.models.newsletter import Datum as Newsletter
 from tautulli.models.notifier_parameters import Datum as NotifierParameter
 from tautulli.models.pms_update import Data as PMSUpdate
 from tautulli.models.server_identity import Data as ServerIdentity
-from tautulli.models.server_info import Data as ServerInfo
 from tautulli.models.server_list import Datum as ServerListEntry
 from tautulli.models.servers_info import Datum as ServersInfoEntry
+from tautulli.models.server_info import Data as ServerInfo
 from tautulli.models.usernames import Datum as UserName
 from tautulli.models.users import Datum as User
 from tautulli.models.update_check import Data as UpdateCheck

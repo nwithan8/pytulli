@@ -27,7 +27,7 @@ class Datum(BaseModel):
     media_type: Optional[str]
     thumb: Optional[str]
     parent_title: Optional[str]
-    year: Optional[int]
+    year: Optional[Any]
     media_index: Optional[Union[int, str]]
     parent_media_index: Optional[Union[int, str]]
     live: Optional[int]
