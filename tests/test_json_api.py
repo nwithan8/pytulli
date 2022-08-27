@@ -484,6 +484,7 @@ def test_server_info():
     assert type(server_info) == dict
 
 
+@pytest.mark.skip(reason="Will fail if no Plex Media Servers are configured.")
 def test_get_server_list():
     client = raw_client()
     server_list = client.server_list

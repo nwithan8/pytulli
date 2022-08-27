@@ -18,7 +18,7 @@ def test_shortcuts_from_object_client():
     assert type(shortcuts) == APIShortcuts
 
 
-# @pytest.mark.skip(reason="Ping will return false because no Plex Media Server exists")
+@pytest.mark.skip(reason="Ping will return false because no Plex Media Server exists")
 def test_ping():
     client = raw_client()
     res = client.shortcuts.ping()
