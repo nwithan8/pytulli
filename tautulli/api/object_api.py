@@ -1713,6 +1713,7 @@ class ObjectAPI:
         return 'SearchResults'
 
     @property
+    @make_property_object
     def server_status(self) -> ServerStatus:
         """
         Get the current status of Tautulli's connection to the Plex server

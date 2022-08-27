@@ -1,32 +1,134 @@
-from typing import List
-
 import pytest
 
 from tautulli import models
 from tests.setup import object_client
 
 
-# TODO: Test every single method
-def test_get_api_key():
-    no_key_client = object_client(no_key=True)
-    key = no_key_client.get_api_key()
-    assert key is not None
-
-
-@pytest.mark.skip(reason="Ping will return false because no Plex Media Server exists")
-def test_ping():
+@pytest.mark.skip(reason="Can't test add.")
+def test_add_newsletter_config():
     client = object_client()
-    res = client.shortcuts.ping()
-    assert res is not None
-    assert type(res) == bool
-    assert res is True
 
 
-def test_tautulli_info():
+@pytest.mark.skip(reason="Can't test add.")
+def test_add_notifier_config():
     client = object_client()
-    tautulli_info = client.tautulli_info
-    assert tautulli_info is not None
-    assert type(tautulli_info) == models.TautulliInfo
+
+
+def test_arnold():
+    client = object_client()
+    arnold_quote = client.arnold
+    assert arnold_quote is not None
+    assert type(arnold_quote) == str
+
+
+@pytest.mark.skip(reason="Can't test backup.")
+def test_backup_config():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test backup.")
+def test_backup_database():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_all_library_history():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_all_user_history():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_cache():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_export():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_history():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_hosted_images():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_image_cache():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_library():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_login_log():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_lookup_info():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_media_info_cache():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_mobile_device():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_newsletter():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_newsletter_log():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_notification_log():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_notifier():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_recently_added():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_synced_item():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_temp_sessions():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test delete.")
+def test_delete_user():
+    client = object_client()
 
 
 def test_docs():
@@ -43,11 +145,44 @@ def test_docs_md():
     assert type(docs) == str
 
 
-def test_arnold():
+@pytest.mark.skip(reason="Can't test download.")
+def test_download_config():
     client = object_client()
-    arnold_quote = client.arnold
-    assert arnold_quote is not None
-    assert type(arnold_quote) == str
+
+
+@pytest.mark.skip(reason="Can't test download.")
+def test_download_database():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test download.")
+def test_download_export():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test download.")
+def test_download_log():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test download.")
+def test_download_plex_log():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test edit.")
+def test_edit_library():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test edit.")
+def test_edit_user():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test export.")
+def test_export_metadata():
+    client = object_client()
 
 
 def test_activity():
@@ -57,18 +192,20 @@ def test_activity():
     assert type(activity) == models.Activity
 
 
-def test_activity_summary():
-    client = object_client()
-    activity = client.shortcuts.activity_summary
-    assert activity is not None
-    assert type(activity) == dict
+def test_get_api_key():
+    no_key_client = object_client(no_key=True)
+    key = no_key_client.get_api_key()
+    assert key is not None
 
 
-def test_activity_summary_message():
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_children_metadata():
     client = object_client()
-    activity = client.shortcuts.activity_summary_message
-    assert activity is not None
-    assert type(activity) == str
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_collections_table():
+    client = object_client()
 
 
 def test_date_formats():
@@ -115,6 +252,16 @@ def test_get_home_stats():
         assert type(stat) == models.HomeStat
 
 
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_item_user_stats():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_item_watch_time_stats():
+    client = object_client()
+
+
 def test_libraries():
     client = object_client()
     libraries = client.libraries
@@ -131,13 +278,33 @@ def test_get_libraries_table():
     assert type(libraries) == models.LibrariesTable
 
 
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_library():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_library_media_info():
+    client = object_client()
+
+
 def test_library_names():
     client = object_client()
     library_names = client.library_names
     assert library_names is not None
     assert type(library_names) == list
-    for name in library_names:
-        assert type(name) == models.LibraryName
+    for library_name in library_names:
+        assert type(library_name) == models.LibraryName
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_library_user_stats():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_library_watch_time_stats():
+    client = object_client()
 
 
 def test_get_logs():
@@ -147,6 +314,21 @@ def test_get_logs():
     assert type(logs) == list
     for log in logs:
         assert type(log) == models.LogEntry
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_metadata():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_new_rating_keys():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_newsletter_config():
+    client = object_client()
 
 
 def test_get_newsletter_log():
@@ -172,6 +354,11 @@ def test_get_notification_log():
     assert type(notification_log) == models.NotificationLog
 
 
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_notifier_config():
+    client = object_client()
+
+
 def test_notifier_parameters():
     client = object_client()
     notifier_parameters = client.notifier_parameters
@@ -188,6 +375,11 @@ def test_get_notifiers():
     assert type(notifiers) == list
     for notifier in notifiers:
         assert type(notifier) == models.Notifier
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_old_rating_keys():
+    client = object_client()
 
 
 def test_get_playlists_table():
@@ -288,6 +480,11 @@ def test_server_friendly_name():
     assert type(server_friendly_name) == str
 
 
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_server_id():
+    client = object_client()
+
+
 def test_server_identity():
     client = object_client()
     server_identity = client.server_identity
@@ -302,13 +499,27 @@ def test_server_info():
     assert type(server_info) == models.ServerInfo
 
 
+def test_get_server_list():
+    client = object_client()
+    server_list = client.server_list
+    assert server_list is not None
+    assert type(server_list) == list
+    for server in server_list:
+        assert type(server) == models.ServerListEntry
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_server_pref():
+    client = object_client()
+
+
 def test_servers_info():
     client = object_client()
     servers_info = client.servers_info
     assert servers_info is not None
     assert type(servers_info) == list
-    for server_info in servers_info:
-        assert type(server_info) == models.ServersInfoEntry
+    for server in servers_info:
+        assert type(server) == models.ServersInfoEntry
 
 
 def test_get_settings():
@@ -316,6 +527,11 @@ def test_get_settings():
     settings = client.get_settings()
     assert settings is not None
     assert type(settings) == models.Settings
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_stream_data():
+    client = object_client()
 
 
 def test_get_stream_type_by_top_10_platforms():
@@ -332,6 +548,33 @@ def test_get_stream_type_by_top_10_users():
     assert type(stream_type_by_top_10_users) == models.PlaysOrStreamTypesBy
 
 
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_synced_items():
+    client = object_client()
+
+
+def test_tautulli_info():
+    client = object_client()
+    tautulli_info = client.tautulli_info
+    assert tautulli_info is not None
+    assert type(tautulli_info) == models.TautulliInfo
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_user():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_user_ips():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_user_logins():
+    client = object_client()
+
+
 def test_user_names():
     client = object_client()
     user_names = client.user_names
@@ -339,6 +582,16 @@ def test_user_names():
     assert type(user_names) == list
     for user_name in user_names:
         assert type(user_name) == models.UserName
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_user_player_stats():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_get_user_watch_time_stats():
+    client = object_client()
 
 
 def test_users():
@@ -364,6 +617,93 @@ def test_get_whois_lookup():
     assert type(whois_lookup) == models.WHOISLookup
 
 
+@pytest.mark.skip(reason="Can't test import")
+def test_import_config():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test import")
+def test_import_database():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_logout_user_session():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_notify():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_notify_newsletter():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_notify_recently_added():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_pms_image_proxy():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test update.")
+def test_refresh_libraries():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test update.")
+def test_refresh_users_list():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test update.")
+def test_register_device():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test update.")
+def test_restart():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_search():
+    client = object_client()
+
+
+def test_server_status():
+    client = object_client()
+    status = client.server_status
+    assert status is not None
+    assert type(status) == models.ServerStatus
+
+
+@pytest.mark.skip(reason="Can't test update.")
+def test_set_mobile_device_config():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test update.")
+def test_set_newsletter_config():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test update.")
+def test_set_notifier_config():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Requires parameters.")
+def test_sql():
+    client = object_client()
+
+
 def test_status():
     client = object_client()
     status = client.status()
@@ -371,8 +711,33 @@ def test_status():
     assert type(status) == models.Status
 
 
+@pytest.mark.skip(reason="Can't test update.")
+def test_terminate_session():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test update.")
+def test_undelete_library():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test update.")
+def test_undelete_user():
+    client = object_client()
+
+
+@pytest.mark.skip(reason="Can't test update.")
+def test_update():
+    client = object_client()
+
+
 def test_update_check():
     client = object_client()
     update_check = client.update_check
     assert update_check is not None
     assert type(update_check) == models.UpdateCheck
+
+
+@pytest.mark.skip(reason="Can't test update.")
+def test_update_metadata_details():
+    client = object_client()
