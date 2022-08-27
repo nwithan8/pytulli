@@ -1,3 +1,5 @@
+import pytest
+
 from tests.setup import raw_client
 
 
@@ -8,9 +10,10 @@ def test_get_api_key():
     assert key is not None
 
 
+@pytest.mark.skip(reason="Ping will return false because no Plex Media Server exists")
 def test_ping():
     client = raw_client()
-    res = client.ping()
+    res = client.shortcuts.ping()
     assert res is not None
     assert type(res) == bool
     assert res is True
@@ -53,14 +56,14 @@ def test_activity():
 
 def test_activity_summary():
     client = raw_client()
-    activity = client.activity_summary
+    activity = client.shortcuts.activity_summary
     assert activity is not None
     assert type(activity) == dict
 
 
 def test_activity_summary_message():
     client = raw_client()
-    activity = client.activity_summary_message
+    activity = client.shortcuts.activity_summary_message
     assert activity is not None
     assert type(activity) == str
 

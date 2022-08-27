@@ -7,8 +7,10 @@ from __future__ import annotations
 from typing import Any, List, Optional
 
 from pydantic import BaseModel
-from tautulli import utils
-from tautulli.models.activity_summary import ActivitySummary, build_summary_from_activity_object
+
+from tautulli.internal import utils as internal_utils, static
+from tautulli.models.activity_summary import build_summary_from_activity_object
+from tautulli.tools.utils import to_human_bitrate
 
 
 class Session(BaseModel):
@@ -253,8 +255,9 @@ class Session(BaseModel):
     def progress_marker(self):
         if not self.location_milliseconds or not self.duration_milliseconds:
             return ""
-        current_progress_min_sec = utils.milliseconds_to_minutes_seconds(milliseconds=self.location_milliseconds)
-        total_min_sec = utils.milliseconds_to_minutes_seconds(milliseconds=self.duration_milliseconds)
+        current_progress_min_sec = internal_utils.milliseconds_to_minutes_seconds(
+            milliseconds=self.location_milliseconds)
+        total_min_sec = internal_utils.milliseconds_to_minutes_seconds(milliseconds=self.duration_milliseconds)
         return f"{current_progress_min_sec}/{total_min_sec}"
 
     @property
@@ -262,8 +265,8 @@ class Session(BaseModel):
         if not self.duration_milliseconds or not self.location_milliseconds:
             return ""
         milliseconds_remaining = self.duration_milliseconds - self.location_milliseconds
-        eta_datetime = utils.now_plus_milliseconds(milliseconds=milliseconds_remaining)
-        eta_string = utils.datetime_to_string(datetime_object=eta_datetime, string_format="%H:%M")
+        eta_datetime = internal_utils.now_plus_milliseconds(milliseconds=milliseconds_remaining)
+        eta_string = internal_utils.datetime_to_string(datetime_object=eta_datetime, string_format="%H:%M")
         return eta_string
 
     @property
@@ -272,23 +275,23 @@ class Session(BaseModel):
         Get icon for a stream state
         :return: emoji icon
         """
-        return utils.switcher.get(self.state, "")
+        return static.switcher.get(self.state, "")
 
     @property
     def type_icon(self):
-        if self.media_type in utils.media_type_icons:
-            return utils.media_type_icons[self.media_type]
+        if self.media_type in static.media_type_icons:
+            return static.media_type_icons[self.media_type]
         # thanks twilsonco
         elif self.live:
-            return utils.media_type_icons['live']
+            return static.media_type_icons['live']
         return ""
 
     @property
     def human_bandwidth(self) -> str:
         try:
-            return utils.human_bitrate(float(self.bandwidth))
+            return to_human_bitrate(float(self.bandwidth))
         except:
-            return utils.human_bitrate(0)
+            return to_human_bitrate(0)
 
     @property
     def transcoding_stub(self):
@@ -296,10 +299,10 @@ class Session(BaseModel):
 
     @property
     def summary(self) -> str:
-        return f"{utils.session_title_message.format(icon=self.status_icon, username=self.username, media_type_icon=self.type_icon, title=self.title)}\n" \
-               f"{utils.session_player_message.format(product=self.product, player=self.player)}\n" \
-               f"{utils.session_details_message.format(quality_profile=self.quality_profile, bandwidth=self.human_bandwidth, transcoding=self.transcoding_stub)}\n" \
-               f"{utils.session_progress_message.format(progress=self.progress_marker, eta=self.eta)}"
+        return f"{static.session_title_message.format(icon=self.status_icon, username=self.username, media_type_icon=self.type_icon, title=self.title)}\n" \
+               f"{static.session_player_message.format(product=self.product, player=self.player)}\n" \
+               f"{static.session_details_message.format(quality_profile=self.quality_profile, bandwidth=self.human_bandwidth, transcoding=self.transcoding_stub)}\n" \
+               f"{static.session_progress_message.format(progress=self.progress_marker, eta=self.eta)}"
 
 
 class Data(BaseModel):
@@ -313,7 +316,7 @@ class Data(BaseModel):
     wan_bandwidth: Optional[int]
 
     @property
-    def summary(self) -> ActivitySummary:
+    def summary(self) -> "ActivitySummary":
         return build_summary_from_activity_object(activity=self)
 
 

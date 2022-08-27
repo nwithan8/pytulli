@@ -13,9 +13,10 @@ def test_get_api_key():
     assert key is not None
 
 
+@pytest.mark.skip(reason="Ping will return false because no Plex Media Server exists")
 def test_ping():
     client = object_client()
-    res = client.ping()
+    res = client.shortcuts.ping()
     assert res is not None
     assert type(res) == bool
     assert res is True
@@ -58,14 +59,14 @@ def test_activity():
 
 def test_activity_summary():
     client = object_client()
-    activity = client.activity_summary
+    activity = client.shortcuts.activity_summary
     assert activity is not None
-    assert type(activity) == models.ActivitySummary
+    assert type(activity) == dict
 
 
 def test_activity_summary_message():
     client = object_client()
-    activity = client.activity_summary_message
+    activity = client.shortcuts.activity_summary_message
     assert activity is not None
     assert type(activity) == str
 
@@ -84,9 +85,11 @@ def test_get_export_fields():
     assert type(export_fields) == models.ExportFields
 
 
-@pytest.mark.skip("Not implemented.")
 def test_get_exports_table():
     client = object_client()
+    exports = client.get_exports_table()
+    assert exports is not None
+    assert type(exports) == models.ExportsTable
 
 
 def test_get_geoip_lookup():
@@ -194,49 +197,67 @@ def test_get_playlists_table():
     assert type(playlists) == models.PlaylistsTable
 
 
-@pytest.mark.skip("Not implemented.")
 def test_get_plays_by_date():
     client = object_client()
+    plays_by_date = client.get_plays_by_date()
+    assert plays_by_date is not None
+    assert type(plays_by_date) == models.PlaysOrStreamTypesBy
 
 
-@pytest.mark.skip("Not implemented.")
 def test_get_plays_by_day_of_week():
     client = object_client()
+    plays_by_day_of_week = client.get_plays_by_day_of_week()
+    assert plays_by_day_of_week is not None
+    assert type(plays_by_day_of_week) == models.PlaysOrStreamTypesBy
 
 
-@pytest.mark.skip("Not implemented.")
 def test_get_plays_by_hour_of_day():
     client = object_client()
+    plays_by_hour_of_day = client.get_plays_by_hour_of_day()
+    assert plays_by_hour_of_day is not None
+    assert type(plays_by_hour_of_day) == models.PlaysOrStreamTypesBy
 
 
-@pytest.mark.skip("Not implemented.")
 def test_get_plays_by_source_resolution():
     client = object_client()
+    plays_by_source_resolution = client.get_plays_by_source_resolution()
+    assert plays_by_source_resolution is not None
+    assert type(plays_by_source_resolution) == models.PlaysOrStreamTypesBy
 
 
-@pytest.mark.skip("Not implemented.")
 def test_get_plays_by_stream_resolution():
     client = object_client()
+    plays_by_stream_resolution = client.get_plays_by_stream_resolution()
+    assert plays_by_stream_resolution is not None
+    assert type(plays_by_stream_resolution) == models.PlaysOrStreamTypesBy
 
 
-@pytest.mark.skip("Not implemented.")
 def test_get_plays_by_stream_type():
     client = object_client()
+    plays_by_stream_type = client.get_plays_by_stream_type()
+    assert plays_by_stream_type is not None
+    assert type(plays_by_stream_type) == models.PlaysOrStreamTypesBy
 
 
-@pytest.mark.skip("Not implemented.")
 def test_get_plays_by_top_10_platforms():
     client = object_client()
+    plays_by_top_10_platforms = client.get_plays_by_top_10_platforms()
+    assert plays_by_top_10_platforms is not None
+    assert type(plays_by_top_10_platforms) == models.PlaysOrStreamTypesBy
 
 
-@pytest.mark.skip("Not implemented.")
 def test_get_plays_by_top_10_users():
     client = object_client()
+    plays_by_top_10_users = client.get_plays_by_top_10_users()
+    assert plays_by_top_10_users is not None
+    assert type(plays_by_top_10_users) == models.PlaysOrStreamTypesBy
 
 
-@pytest.mark.skip("Not implemented.")
 def test_get_plays_per_month():
     client = object_client()
+    plays_per_month = client.get_plays_per_month()
+    assert plays_per_month is not None
+    assert type(plays_per_month) == models.PlaysOrStreamTypesBy
 
 
 def test_get_plex_log():
@@ -297,14 +318,18 @@ def test_get_settings():
     assert type(settings) == models.Settings
 
 
-@pytest.mark.skip("Not implemented.")
 def test_get_stream_type_by_top_10_platforms():
     client = object_client()
+    stream_type_by_top_10_platforms = client.get_stream_type_by_top_10_platforms()
+    assert stream_type_by_top_10_platforms is not None
+    assert type(stream_type_by_top_10_platforms) == models.PlaysOrStreamTypesBy
 
 
-@pytest.mark.skip("Not implemented.")
 def test_get_stream_type_by_top_10_users():
     client = object_client()
+    stream_type_by_top_10_users = client.get_stream_type_by_top_10_users()
+    assert stream_type_by_top_10_users is not None
+    assert type(stream_type_by_top_10_users) == models.PlaysOrStreamTypesBy
 
 
 def test_user_names():
@@ -339,9 +364,11 @@ def test_get_whois_lookup():
     assert type(whois_lookup) == models.WHOISLookup
 
 
-@pytest.mark.skip("Not implemented.")
 def test_status():
     client = object_client()
+    status = client.status()
+    assert status is not None
+    assert type(status) == models.Status
 
 
 def test_update_check():

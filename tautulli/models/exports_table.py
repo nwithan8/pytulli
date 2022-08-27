@@ -10,34 +10,34 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    timestamp: int
-    art_level: int
-    complete: int
+    timestamp: Optional[int]
+    art_level: Optional[int]
+    complete: Optional[int]
     custom_fields: str
-    exists: bool
-    export_id: int
-    exported_items: int
-    file_format: str
-    file_size: int
-    filename: Any
-    individual_files: int
-    media_info_level: int
-    media_type: str
-    media_type_title: str
-    metadata_level: int
-    rating_key: Any
-    section_id: int
-    thumb_level: int
-    title: str
-    total_items: int
-    user_id: Any
+    exists: Optional[bool]
+    export_id: Optional[int]
+    exported_items: Optional[int]
+    file_format: Optional[str]
+    file_size: Optional[int]
+    filename: Optional[Any]
+    individual_files: Optional[int]
+    media_info_level: Optional[int]
+    media_type: Optional[str]
+    media_type_title: Optional[str]
+    metadata_level: Optional[int]
+    rating_key: Optional[Any]
+    section_id: Optional[int]
+    thumb_level: Optional[int]
+    title: Optional[str]
+    total_items: Optional[int]
+    user_id: Optional[Any]
 
 
 class Data(BaseModel):
-    draw: int
-    recordsTotal: int
-    recordsFiltered: int
-    data: List[Datum]
+    draw: Optional[int]
+    recordsTotal: Optional[int]
+    recordsFiltered: Optional[int]
+    data: Optional[List[Datum]]
 
 
 class Response(BaseModel):

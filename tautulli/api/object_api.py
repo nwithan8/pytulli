@@ -2,9 +2,9 @@ import warnings
 from typing import Union, List
 from datetime import datetime
 
-from tautulli.decorators import raw_api_bool, make_object, make_property_object
-from .api_helper import APIHelper
-from .json_api import RawAPI
+from tautulli.internal.decorators import raw_api_bool, make_object, make_property_object
+from tautulli.tools.api_helper import APIShortcuts
+from tautulli.api.json_api import RawAPI
 from tautulli.models import *
 
 
@@ -17,14 +17,14 @@ class ObjectAPI:
         super().__init_subclass__(**kwargs)
 
     @property
-    def extras(self) -> APIHelper:
+    def shortcuts(self) -> APIShortcuts:
         """
-        Extra API utilities
+        Shortcuts for common API actions
 
-        :return: Extra API utilities
-        :rtype: APIHelper
+        :return: Access to API shortcuts
+        :rtype: APIShortcuts
         """
-        return APIHelper(api=self)
+        return self._raw_api.shortcuts
 
     @raw_api_bool
     def add_newsletter_config(self, agent_id: int) -> bool:
@@ -1191,8 +1191,8 @@ class ObjectAPI:
         :param section_id: ID of the Plex library section
         :type section_id: str, optional
         :return: RecentlyAdded object
-
         """
+        return 'RecentlyAdded'
 
     @property
     def server_friendly_name(self) -> str:

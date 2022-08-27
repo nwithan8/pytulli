@@ -35,6 +35,8 @@ api = RawAPI(base_url="http://myipaddress:port", api_key="thisisanapikey")
 
 You can optionally pass ``verbose=True`` into the API declaration to produce verbose debugging logs and error messages.
 
+Additional utilities and shortcuts can be accessed via the `tautulli.tools` module.
+
 # Documentation
 
 Documentation available on [ReadTheDocs](https://pytulli.readthedocs.io/en/latest/documentation.html)

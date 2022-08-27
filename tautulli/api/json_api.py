@@ -6,12 +6,11 @@ from datetime import datetime
 
 import packaging.version
 
-import tautulli.static as static
-from tautulli.api_helper import APIHelper
-from tautulli.utils import build_optional_params, _get_response_data, _success_result, int_list_to_string, \
+import tautulli.internal.static as static
+from tautulli.tools.api_helper import APIShortcuts
+from tautulli.internal.utils import build_optional_params, _get_response_data, _success_result, int_list_to_string, \
     _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string, comma_delimit
-from tautulli.models.activity_summary import build_summary_from_activity_json
-from tautulli.decorators import raw_json, set_and_forget
+from tautulli.internal.decorators import raw_json, set_and_forget
 from tautulli._info import __min_api_version__
 
 
@@ -104,14 +103,14 @@ class RawAPI:
         return endpoint, params
 
     @property
-    def extras(self) -> APIHelper:
+    def shortcuts(self) -> APIShortcuts:
         """
-        Extra API utilities
+        Shortcuts for common API actions
 
-        :return: Extra API utilities
-        :rtype: APIHelper
+        :return: Access to API shortcuts
+        :rtype: APIShortcuts
         """
-        return APIHelper(api=self)
+        return APIShortcuts(api=self)
 
     @set_and_forget
     def add_newsletter_config(self, agent_id: int) -> bool:

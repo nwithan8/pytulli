@@ -35,3 +35,30 @@ library_media_info_types = ['movie', 'show', 'artist', 'photo']
 logfile_types = ["tautulli", "tautulli_api", "plex_websocket"]
 plex_logfile_types = ["Plex Media Server", "Plex Media Scanner"]
 
+switcher = {
+    "playing": "▶️",
+    "paused": "⏸",
+    "stopped": "⏹",
+    "buffering": "⏳",
+    "error": "⚠️"
+}
+
+media_type_icons = {
+    'episode': '📺',
+    'track': '🎧',
+    'movie': '🎞',
+    'clip': '🎬',
+    'photo': '🖼',
+    'live': '📡'
+}
+
+sessions_message = """{stream_count} {word}"""
+transcodes_message = """{transcode_count} {word}"""
+bandwidth_message = """🌐 {bandwidth}"""
+lan_bandwidth_message = """(🏠 {bandwidth})"""
+
+session_title_message = """{icon} {media_type_icon} {username}: *{title}*"""
+session_player_message = """__Player__: {product} ({player})"""
+session_details_message = """__Quality__: {quality_profile} ({bandwidth}){transcoding}"""
+session_progress_message = """__Progress__: {progress} (ETA: {eta})"""
+

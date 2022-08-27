@@ -1,12 +1,10 @@
-from typing import Union
-
-from tautulli import RawAPI, static
-from tautulli.models import build_summary_from_activity_json
+from tautulli.internal import static
+from tautulli.models.activity_summary import build_summary_from_activity_json
 
 
 # noinspection PyTypeChecker
-class APIHelper:
-    def __init__(self, api: RawAPI):
+class APIShortcuts:
+    def __init__(self, api: "RawAPI"):
         self._api = api
 
     def __init_subclass__(cls, **kwargs):
