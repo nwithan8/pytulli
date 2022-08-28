@@ -4,27 +4,27 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Optional
 
 from pydantic import BaseModel
 
 
 class Data(BaseModel):
-    pms_name: str
-    pms_version: str
-    pms_platform: str
-    pms_ip: str
-    pms_port: int
-    pms_ssl: int
-    pms_is_remote: int
-    pms_url: str
-    pms_url_manual: int
-    pms_identifier: str
-    pms_plexpass: int
+    pms_name: Optional[str]
+    pms_version: Optional[str]
+    pms_platform: Optional[str]
+    pms_ip: Optional[str]
+    pms_port: Optional[int]
+    pms_ssl: Optional[int]
+    pms_is_remote: Optional[int]
+    pms_url: Optional[str]
+    pms_url_manual: Optional[int]
+    pms_identifier: Optional[str]
+    pms_plexpass: Optional[int]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

@@ -4,44 +4,44 @@
 
 from __future__ import annotations
 
-from typing import Any, List
+from typing import Any, List, Optional
 
 from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    friendly_name: str
-    guid: str
-    id: int
-    ip_address: str
-    last_played: str
-    last_seen: int
-    first_seen: int
-    live: int
-    media_index: int
-    media_type: str
-    originally_available_at: str
-    parent_media_index: int
-    parent_title: str
-    platform: str
-    play_count: int
-    player: str
-    rating_key: int
-    thumb: str
-    transcode_decision: str
-    user_id: int
-    year: int
+    friendly_name: Optional[str]
+    guid: Optional[str]
+    id: Optional[int]
+    ip_address: Optional[str]
+    last_played: Optional[str]
+    last_seen: Optional[int]
+    first_seen: Optional[int]
+    live: Optional[int]
+    media_index: Optional[int]
+    media_type: Optional[str]
+    originally_available_at: Optional[str]
+    parent_media_index: Optional[int]
+    parent_title: Optional[str]
+    platform: Optional[str]
+    play_count: Optional[int]
+    player: Optional[str]
+    rating_key: Optional[int]
+    thumb: Optional[str]
+    transcode_decision: Optional[str]
+    user_id: Optional[int]
+    year: Optional[int]
 
 
 class Data(BaseModel):
-    draw: int
-    recordsTotal: int
-    recordsFiltered: int
-    data: List[Datum]
+    draw: Optional[int]
+    recordsTotal: Optional[int]
+    recordsFiltered: Optional[int]
+    data: Optional[List[Datum]]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

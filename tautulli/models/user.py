@@ -4,32 +4,32 @@
 
 from __future__ import annotations
 
-from typing import Any, List
+from typing import Any, List, Optional
 
 from pydantic import BaseModel
 
 
 class Data(BaseModel):
-    row_id: int
-    user_id: int
-    username: str
-    friendly_name: str
-    user_thumb: str
-    email: str
-    is_active: int
-    is_admin: str
-    is_home_user: int
-    is_allow_sync: int
-    is_restricted: int
-    do_notify: int
-    keep_history: int
-    allow_guest: int
-    deleted_user: int
-    shared_libraries: List
+    row_id: Optional[int]
+    user_id: Optional[int]
+    username: Optional[str]
+    friendly_name: Optional[str]
+    user_thumb: Optional[str]
+    email: Optional[str]
+    is_active: Optional[int]
+    is_admin: Optional[str]
+    is_home_user: Optional[int]
+    is_allow_sync: Optional[int]
+    is_restricted: Optional[int]
+    do_notify: Optional[int]
+    keep_history: Optional[int]
+    allow_guest: Optional[int]
+    deleted_user: Optional[int]
+    shared_libraries: Optional[List]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

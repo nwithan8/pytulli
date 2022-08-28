@@ -1,20 +1,20 @@
 import logging
 import warnings
 from typing import Union, List
-from urllib.parse import urlencode
 import objectrest
 from datetime import datetime
 
 import packaging.version
 
-import tautulli.static as static
-from tautulli.utils import build_optional_params, _get_response_data, _success_result, int_list_to_string, \
+import tautulli.internal.static as static
+from tautulli.tools.api_helper import APIShortcuts
+from tautulli.internal.utils import build_optional_params, _get_response_data, _success_result, int_list_to_string, \
     _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string, comma_delimit
-from tautulli.models.activity_summary import build_summary_from_activity_json
-from tautulli.decorators import raw_json, set_and_forget, raw_api_bool, make_object, make_property_object
+from tautulli.internal.decorators import raw_json, set_and_forget
 from tautulli._info import __min_api_version__
 
 
+# noinspection PyTypeChecker
 class RawAPI:
     def __init__(self, base_url: str, api_key: str, verbose: bool = False, verify: bool = True):
         if base_url.endswith("/"):
@@ -76,21 +76,48 @@ class RawAPI:
             return response.json()
         return static.empty_dict
 
-    @set_and_forget
-    def ping(self) -> bool:
+    @raw_json
+    def _get_x_by(self, endpoint: str, time_range: int = None, y_axis: str = None, user_id: str = None,
+                  grouping: bool = False) -> dict:
         """
-        Ping the Tautulli server
-        :return: `True` if successful, `False` if unsuccessful
-        :rtype: bool
+        Abstract method for the get_plays_by_X and get_streams_by_X functions
+
+        :param endpoint: Tautulli endpoint
+        :type endpoint: str
+        :param time_range: Number of days of data to return
+        :type time_range: int, optional
+        :param y_axis: Stat type ('plays' or 'duration')
+        :type y_axis: str, optional
+        :param user_id: User ID to filter data
+        :type user_id: str, optional
+        :param grouping: Whether to group the results (default: False)
+        :type grouping: bool, optional
+        :return: Dict of data
+        :rtype: dict
         """
-        return "get_server_friendly_name", None
+        grouping = bool_to_int(boolean=grouping)
+        if _is_invalid_choice(value=y_axis, variable_name='y_axis',
+                              choices=static.stats_type):
+            return False, None
+        params = build_optional_params(time_range=time_range, y_axis=y_axis, user_id=user_id, grouping=grouping)
+        return endpoint, params
+
+    @property
+    def shortcuts(self) -> APIShortcuts:
+        """
+        Shortcuts for common API actions
+
+        :return: Access to API shortcuts
+        :rtype: APIShortcuts
+        """
+        return APIShortcuts(api=self)
 
     @set_and_forget
     def add_newsletter_config(self, agent_id: int) -> bool:
         """
         Add a new newsletter notification agent
 
-        :param agent_id: Newletter type to add
+        :param agent_id: Newsletter type to add
         :type agent_id: int
         :return: `True` if successful, `False` if unsuccessful
         :rtype: bool
@@ -460,17 +487,26 @@ class RawAPI:
         """
         Download the Tautulli database file
 
-        :return: Database file bytearray
-        :rtype: bytearray
+        :return: Database file byte array
+        :rtype: bytes
         """
         response = self._get(command='download_database')
         if response:
             return response.content
         return static.empty_bytes
 
-    """
-    def download_export(self, export_id: int) -> :
-    """
+    def download_export(self, export_id: int) -> bytes:
+        """
+        Download an exported metadata file
+
+        :return: Metadata file byte array
+        :rtype: bytes
+        """
+        params = {'export_id': export_id}
+        response = self._get(command='download_export', params=params)
+        if response:
+            return response.content
+        return static.empty_bytes
 
     def download_log(self, logfile: str = None) -> bytes:
         """
@@ -626,30 +662,7 @@ class RawAPI:
         params = build_optional_params(session_key=session_key, session_id=session_id)
         return 'get_activity', params
 
-    @property
-    def activity_summary(self) -> dict:
-        """
-        Get a summary of current activity on the Plex Media Server
-
-        :return: Dict of data
-        :rtype: dict
-        """
-        _activity_data = self.activity()
-        return build_summary_from_activity_json(activity_data=_activity_data).dict()
-
-    @property
-    def activity_summary_message(self) -> str:
-        """
-        Get a summary message of current activity on the Plex Media Server
-
-        :return: Activity summary message
-        :rtype: str
-        """
-        _activity_data = self.activity()
-        # Yes, this is the JSON API using an object as a middleman.
-        return build_summary_from_activity_json(activity_data=_activity_data).message
-
-    def get_api_key(self, username: str = None, password: str = None) -> str:
+    def get_api_key(self, username: str = None, password: str = None) -> Union[str, None]:
         """
         Get the Tautulli API key.
         Username and password are required if auth is enabled.
@@ -660,13 +673,13 @@ class RawAPI:
         :param password: Tautulli password
         :type password: str, optional
         :return: API key
-        :rtype: str
+        :rtype: str or None
         """
         params = build_optional_params(username=username, password=password)
         json_data = self._get_json(command='get_apikey', params=params)
         if _success_result(json_data=json_data):
             return _get_response_data(json_data=json_data)
-        return static.empty_string
+        return None
 
     @raw_json
     def get_children_metadata(self, rating_key: str, media_type: str) -> dict:
@@ -911,8 +924,8 @@ class RawAPI:
         return 'get_item_user_stats', params
 
     @raw_json
-    def get_item_watch_time_stats(self, rating_key: str, grouping: bool = False, query_days: List[int] = None) -> List[
-        dict]:
+    def get_item_watch_time_stats(self, rating_key: str, grouping: bool = False, query_days: List[int] = None) \
+            -> List[dict]:
 
         """
         Get the watch time stats for the media item
@@ -1039,7 +1052,7 @@ class RawAPI:
 
     @property
     @raw_json
-    def library_names(self) -> list:
+    def library_names(self) -> List[dict]:
         """
         Get list of library names and IDs on the Plex Media Server
 
@@ -1047,18 +1060,6 @@ class RawAPI:
         :rtype: list[str]
         """
         return 'get_library_names', None
-
-    def get_library_by_name(self, library_name: str) -> dict:
-        """
-        Get a Plex Media Server library using its name
-
-        :return: Dict of data
-        :rtype: dict
-        """
-        for library in self.library_names:
-            if library.get('section_name') == library_name:
-                return library
-        return {}
 
     @raw_json
     def get_library_user_stats(self, section_id: str, grouping: bool = False) -> dict:
@@ -1322,32 +1323,6 @@ class RawAPI:
             params[name] = value
         return 'get_playlists_table', params
 
-    @raw_json
-    def _get_X_by(self, endpoint: str, time_range: int = None, y_axis: str = None, user_id: str = None,
-                  grouping: bool = False) -> dict:
-        """
-        Abstract method for the get_plays_by_X and get_streams_by_X functions
-
-        :param endpoint: Tautulli endpoint
-        :type endpoint: str
-        :param time_range: Number of days of data to return
-        :type time_range: int, optional
-        :param y_axis: Stat type ('plays' or 'duration')
-        :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
-        :param grouping: Whether to group the results (default: False)
-        :type grouping: bool, optional
-        :return: Dict of data
-        :rtype: dict
-        """
-        grouping = bool_to_int(boolean=grouping)
-        if _is_invalid_choice(value=y_axis, variable_name='y_axis',
-                              choices=static.stats_type):
-            return False, None
-        params = build_optional_params(time_range=time_range, y_axis=y_axis, user_id=user_id, grouping=grouping)
-        return endpoint, params
-
     def get_plays_by_date(self, time_range: int = None, y_axis: str = None, user_id: str = None,
                           grouping: bool = False) -> dict:
         """
@@ -1364,7 +1339,7 @@ class RawAPI:
         :return: Dict of data
         :rtype: dict
         """
-        return self._get_X_by(endpoint='get_plays_by_date', time_range=time_range, y_axis=y_axis, user_id=user_id,
+        return self._get_x_by(endpoint='get_plays_by_date', time_range=time_range, y_axis=y_axis, user_id=user_id,
                               grouping=grouping)
 
     def get_plays_by_day_of_week(self, time_range: int = None, y_axis: str = None, user_id: str = None,
@@ -1383,7 +1358,7 @@ class RawAPI:
         :return: Dict of data
         :rtype: dict
         """
-        return self._get_X_by(endpoint='get_plays_by_dayofweek', time_range=time_range, y_axis=y_axis, user_id=user_id,
+        return self._get_x_by(endpoint='get_plays_by_dayofweek', time_range=time_range, y_axis=y_axis, user_id=user_id,
                               grouping=grouping)
 
     def get_plays_by_hour_of_day(self, time_range: int = None, y_axis: str = None, user_id: str = None,
@@ -1402,7 +1377,8 @@ class RawAPI:
         :return: Dict of data
         :rtype: dict
         """
-        return self._get_X_by(endpoint='get_plays_by_hourofday', time_range=time_range, y_axis=y_axis, user_id=user_id,
+        # noinspection SpellCheckingInspection
+        return self._get_x_by(endpoint='get_plays_by_hourofday', time_range=time_range, y_axis=y_axis, user_id=user_id,
                               grouping=grouping)
 
     def get_plays_by_source_resolution(self, time_range: int = None, y_axis: str = None, user_id: str = None,
@@ -1421,7 +1397,7 @@ class RawAPI:
         :return: Dict of data
         :rtype: dict
         """
-        return self._get_X_by(endpoint='get_plays_by_source_resolution', time_range=time_range, y_axis=y_axis,
+        return self._get_x_by(endpoint='get_plays_by_source_resolution', time_range=time_range, y_axis=y_axis,
                               user_id=user_id, grouping=grouping)
 
     def get_plays_by_stream_resolution(self, time_range: int = None, y_axis: str = None, user_id: str = None,
@@ -1440,7 +1416,7 @@ class RawAPI:
         :return: Dict of data
         :rtype: dict
         """
-        return self._get_X_by(endpoint='get_plays_by_stream_resolution', time_range=time_range, y_axis=y_axis,
+        return self._get_x_by(endpoint='get_plays_by_stream_resolution', time_range=time_range, y_axis=y_axis,
                               user_id=user_id, grouping=grouping)
 
     def get_plays_by_stream_type(self, time_range: int = None, y_axis: str = None, user_id: str = None,
@@ -1459,7 +1435,7 @@ class RawAPI:
         :return: Dict of data
         :rtype: dict
         """
-        return self._get_X_by(endpoint='get_plays_by_stream_type', time_range=time_range, y_axis=y_axis,
+        return self._get_x_by(endpoint='get_plays_by_stream_type', time_range=time_range, y_axis=y_axis,
                               user_id=user_id, grouping=grouping)
 
     def get_plays_by_top_10_platforms(self, time_range: int = None, y_axis: str = None, user_id: str = None,
@@ -1478,7 +1454,7 @@ class RawAPI:
         :return: Dict of data
         :rtype: dict
         """
-        return self._get_X_by(endpoint='get_plays_by_top_10_platforms', time_range=time_range, y_axis=y_axis,
+        return self._get_x_by(endpoint='get_plays_by_top_10_platforms', time_range=time_range, y_axis=y_axis,
                               user_id=user_id, grouping=grouping)
 
     def get_plays_by_top_10_users(self, time_range: int = None, y_axis: str = None, user_id: str = None,
@@ -1497,7 +1473,7 @@ class RawAPI:
         :return: Dict of data
         :rtype: dict
         """
-        return self._get_X_by(endpoint='get_plays_by_top_10_users', time_range=time_range, y_axis=y_axis,
+        return self._get_x_by(endpoint='get_plays_by_top_10_users', time_range=time_range, y_axis=y_axis,
                               user_id=user_id, grouping=grouping)
 
     def get_plays_per_month(self, time_range: int = None, y_axis: str = None, user_id: str = None,
@@ -1516,7 +1492,7 @@ class RawAPI:
         :return: Dict of data
         :rtype: dict
         """
-        return self._get_X_by(endpoint='get_plays_per_month', time_range=time_range, y_axis=y_axis, user_id=user_id,
+        return self._get_x_by(endpoint='get_plays_per_month', time_range=time_range, y_axis=y_axis, user_id=user_id,
                               grouping=grouping)
 
     @raw_json
@@ -1714,7 +1690,7 @@ class RawAPI:
         :return: Dict of data
         :rtype: dict
         """
-        return self._get_X_by(endpoint='get_stream_type_by_top_10_platforms', time_range=time_range, y_axis=y_axis,
+        return self._get_x_by(endpoint='get_stream_type_by_top_10_platforms', time_range=time_range, y_axis=y_axis,
                               user_id=user_id, grouping=grouping)
 
     def get_stream_type_by_top_10_users(self, time_range: int = None, y_axis: str = None, user_id: str = None,
@@ -1733,7 +1709,7 @@ class RawAPI:
         :return: Dict of data
         :rtype: dict
         """
-        return self._get_X_by(endpoint='get_stream_type_by_top_10_users', time_range=time_range, y_axis=y_axis,
+        return self._get_x_by(endpoint='get_stream_type_by_top_10_users', time_range=time_range, y_axis=y_axis,
                               user_id=user_id, grouping=grouping)
 
     @raw_json
@@ -1952,7 +1928,7 @@ class RawAPI:
 
         :param config_file_path: Full path to the config file to import
         :type config_file_path: str
-        :param backup: Whether to backup the current config before importing (default: True)
+        :param backup: Whether to back up the current config before importing (default: True)
         :type backup: bool, optional
         :return: `True` if successful, `False` if unsuccessful
         :rtype: bool
@@ -1973,9 +1949,10 @@ class RawAPI:
         :type method: str, optional
         :param table_name: Only if app is 'plexwatch' or 'plexivity', table name to import ('processed' or 'grouped')
         :type table_name: str, optional
-        :param backup: Whether to backup the current database before importing (default: True)
+        :param backup: Whether to back up the current database before importing (default: True)
         :type backup: bool, optional
-        :param import_ignore_interval: Only if app is 'plexwatch' or 'plexivity', the minimum number of seconds for a stream to import
+        :param import_ignore_interval: Only if app is 'plexwatch' or 'plexivity',
+        the minimum number of seconds for a stream to import
         :type import_ignore_interval: int, optional
         :return: `True` if successful, `False` if unsuccessful
         :rtype: bool
@@ -2060,7 +2037,8 @@ class RawAPI:
 
         :param rating_key: Rating key for the media item
         :type rating_key: int
-        :param notifier_id: ID of the notification agent. Notification will be send to all enabled notification agents if notifier_id is not provided.
+        :param notifier_id: ID of the notification agent.
+        Notification will be sent to all enabled notification agents if notifier_id is not provided.
         :type notifier_id: int, optional
         :return: `True` if successful, `False` if unsuccessful
         :rtype: bool
@@ -2217,22 +2195,47 @@ class RawAPI:
         params['mobile_device_id'] = mobile_device_id
         return 'set_mobile_device_config', params
 
-    """
     @set_and_forget
     def set_newsletter_config(self, newsletter_id: int, agent_id: int, **kwargs) -> bool:
+        """
+        Configure an existing newsletter agent
+
+        :param newsletter_id: ID of the newsletter config to update
+        :type newsletter_id: int
+        :param agent_id: Type of the newsletter to update
+        :type agent_id: int
+        :return: `True` if successful, `False` if unsuccessful
+        :rtype: bool
+        """
         params = {}
         for k, v in kwargs.items():
             params[f"newsletter_config_{k}"] = v
-            params[f"newsletter_email_{k}"] = v
+            params[f"newsletter_email_{k}"] = v  # TODO: Confirm this is correct
         params['newsletter_id'] = newsletter_id
         params['agent_id'] = agent_id
         return 'set_newsletter_config', params
-    """
 
-    """
     @set_and_forget
-    def set_notifier_config(self, notifier_id: int, agent_id: int, **kwargs) -> bool:
-    """
+    def set_notifier_config(self, agent: str, notifier_id: int, agent_id: int, **kwargs) -> bool:
+        """
+        Configure an existing notification agent
+
+        :param agent: Type of the notification agent to update
+        :type agent: str
+        :param notifier_id: ID of the notifier config to update
+        :type notifier_id: int
+        :param agent_id: Agent of the notifier to update
+        :type agent_id: int
+        :return: `True` if successful, `False` if unsuccessful
+        :rtype: bool
+        """
+        params = {}
+        for k, v in kwargs.items():
+            params[f"{agent}_{k}"] = v
+            # TODO: If I know the valid agents, we can do validation on this (look up name by ID)
+        params['notifier_id'] = notifier_id
+        params['agent_id'] = agent_id
+        return 'set_notifier_config', params
 
     @raw_json
     def sql(self, query: str) -> dict:

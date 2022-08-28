@@ -4,33 +4,33 @@
 
 from __future__ import annotations
 
-from typing import Any, List
+from typing import Any, List, Optional
 
 from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    browser: str
-    friendly_name: str
-    host: str
-    ip_address: str
-    os: str
-    timestamp: int
-    user: str
-    user_agent: str
-    user_group: str
-    user_id: int
+    browser: Optional[str]
+    friendly_name: Optional[str]
+    host: Optional[str]
+    ip_address: Optional[str]
+    os: Optional[str]
+    timestamp: Optional[int]
+    user: Optional[str]
+    user_agent: Optional[str]
+    user_group: Optional[str]
+    user_id: Optional[int]
 
 
 class Data(BaseModel):
-    draw: int
-    recordsTotal: int
-    recordsFiltered: int
-    data: List[Datum]
+    draw: Optional[int]
+    recordsTotal: Optional[int]
+    recordsFiltered: Optional[int]
+    data: Optional[List[Datum]]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

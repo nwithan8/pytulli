@@ -10,36 +10,36 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    addedAt: str
-    art: Any
-    childCount: int
-    collectionMode: int
-    collectionSort: int
+    addedAt: Optional[str]
+    art: Optional[Any]
+    childCount: Optional[int]
+    collectionMode: Optional[int]
+    collectionSort: Optional[int]
     contentRating: Optional[str]
-    guid: str
-    librarySectionID: str
-    librarySectionTitle: str
+    guid: Optional[str]
+    librarySectionID: Optional[str]
+    librarySectionTitle: Optional[str]
     maxYear: Optional[int]
     minYear: Optional[int]
-    ratingKey: int
-    subtype: str
-    summary: str
-    thumb: str
-    title: str
-    titleSort: str
-    type: str
-    updatedAt: str
+    ratingKey: Optional[int]
+    subtype: Optional[str]
+    summary: Optional[str]
+    thumb: Optional[str]
+    title: Optional[str]
+    titleSort: Optional[str]
+    type: Optional[str]
+    updatedAt: Optional[str]
 
 
 class Data(BaseModel):
-    recordsFiltered: int
-    recordsTotal: int
-    data: List[Datum]
-    draw: int
+    recordsFiltered: Optional[int]
+    recordsTotal: Optional[int]
+    data: Optional[List[Datum]]
+    draw: Optional[int]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

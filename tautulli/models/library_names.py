@@ -10,14 +10,14 @@ from pydantic import BaseModel
 
 
 class Data(BaseModel):
-    section_id: int
-    section_name: str
-    section_type: str
+    section_id: Optional[int]
+    section_name: Optional[str]
+    section_type: Optional[str]
     agent: Optional[str]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: List[Data]
 

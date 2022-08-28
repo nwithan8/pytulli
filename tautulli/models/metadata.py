@@ -10,8 +10,8 @@ from pydantic import BaseModel
 
 
 class Stream(BaseModel):
-    id: str
-    type: str
+    id: Optional[str]
+    type: Optional[str]
     video_codec: Optional[str] = None
     video_codec_level: Optional[str] = None
     video_bitrate: Optional[str] = None
@@ -30,7 +30,7 @@ class Stream(BaseModel):
     video_language_code: Optional[str] = None
     video_profile: Optional[str] = None
     video_scan_type: Optional[str] = None
-    selected: int
+    selected: Optional[int]
     audio_codec: Optional[str] = None
     audio_bitrate: Optional[str] = None
     audio_bitrate_mode: Optional[str] = None
@@ -43,93 +43,93 @@ class Stream(BaseModel):
 
 
 class Part(BaseModel):
-    id: str
-    file: str
-    file_size: str
-    indexes: int
-    streams: List[Stream]
-    selected: int
+    id: Optional[str]
+    file: Optional[str]
+    file_size: Optional[str]
+    indexes: Optional[int]
+    streams: Optional[List[Stream]]
+    selected: Optional[int]
 
 
 class MediaInfoItem(BaseModel):
-    id: str
-    container: str
-    bitrate: str
-    height: str
-    width: str
-    aspect_ratio: str
-    video_codec: str
-    video_resolution: str
-    video_full_resolution: str
-    video_framerate: str
-    video_profile: str
-    audio_codec: str
-    audio_channels: str
-    audio_channel_layout: str
-    audio_profile: str
-    optimized_version: int
-    channel_call_sign: str
-    channel_identifier: str
-    channel_thumb: str
-    parts: List[Part]
+    id: Optional[str]
+    container: Optional[str]
+    bitrate: Optional[str]
+    height: Optional[str]
+    width: Optional[str]
+    aspect_ratio: Optional[str]
+    video_codec: Optional[str]
+    video_resolution: Optional[str]
+    video_full_resolution: Optional[str]
+    video_framerate: Optional[str]
+    video_profile: Optional[str]
+    audio_codec: Optional[str]
+    audio_channels: Optional[str]
+    audio_channel_layout: Optional[str]
+    audio_profile: Optional[str]
+    optimized_version: Optional[int]
+    channel_call_sign: Optional[str]
+    channel_identifier: Optional[str]
+    channel_thumb: Optional[str]
+    parts: Optional[List[Part]]
 
 
 class Data(BaseModel):
-    media_type: str
-    section_id: str
-    library_name: str
-    rating_key: str
-    parent_rating_key: str
-    grandparent_rating_key: str
-    title: str
-    parent_title: str
-    grandparent_title: str
-    original_title: str
-    sort_title: str
-    media_index: str
-    parent_media_index: str
-    studio: str
-    content_rating: str
-    summary: str
-    tagline: str
-    rating: str
-    rating_image: str
-    audience_rating: str
-    audience_rating_image: str
-    user_rating: str
-    duration: str
-    year: str
-    parent_year: str
-    grandparent_year: str
-    thumb: str
-    parent_thumb: str
-    grandparent_thumb: str
-    art: str
-    banner: str
-    originally_available_at: str
-    added_at: str
-    updated_at: str
-    last_viewed_at: str
-    guid: str
-    parent_guid: str
-    parent_guids: List[str]
-    grandparent_guid: str
-    grandparent_guids: List[str]
-    directors: List[str]
-    writers: List[str]
-    actors: List[str]
-    genres: List[str]
-    labels: List
-    collections: List
-    guids: List[str]
-    full_title: str
-    children_count: int
-    live: int
-    media_info: List[MediaInfoItem]
+    media_type: Optional[str]
+    section_id: Optional[str]
+    library_name: Optional[str]
+    rating_key: Optional[str]
+    parent_rating_key: Optional[str]
+    grandparent_rating_key: Optional[str]
+    title: Optional[str]
+    parent_title: Optional[str]
+    grandparent_title: Optional[str]
+    original_title: Optional[str]
+    sort_title: Optional[str]
+    media_index: Optional[str]
+    parent_media_index: Optional[str]
+    studio: Optional[str]
+    content_rating: Optional[str]
+    summary: Optional[str]
+    tagline: Optional[str]
+    rating: Optional[str]
+    rating_image: Optional[str]
+    audience_rating: Optional[str]
+    audience_rating_image: Optional[str]
+    user_rating: Optional[str]
+    duration: Optional[str]
+    year: Optional[str]
+    parent_year: Optional[str]
+    grandparent_year: Optional[str]
+    thumb: Optional[str]
+    parent_thumb: Optional[str]
+    grandparent_thumb: Optional[str]
+    art: Optional[str]
+    banner: Optional[str]
+    originally_available_at: Optional[str]
+    added_at: Optional[str]
+    updated_at: Optional[str]
+    last_viewed_at: Optional[str]
+    guid: Optional[str]
+    parent_guid: Optional[str]
+    parent_guids: Optional[List[str]]
+    grandparent_guid: Optional[str]
+    grandparent_guids: Optional[List[str]]
+    directors: Optional[List[str]]
+    writers: Optional[List[str]]
+    actors: Optional[List[str]]
+    genres: Optional[List[str]]
+    labels: Optional[List]
+    collections: Optional[List]
+    guids: Optional[List[str]]
+    full_title: Optional[str]
+    children_count: Optional[int]
+    live: Optional[int]
+    media_info: Optional[List[MediaInfoItem]]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

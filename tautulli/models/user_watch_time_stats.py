@@ -4,19 +4,19 @@
 
 from __future__ import annotations
 
-from typing import Any, List
+from typing import Any, List, Optional
 
 from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    query_days: int
-    total_plays: int
-    total_time: int
+    query_days: Optional[int]
+    total_plays: Optional[int]
+    total_time: Optional[int]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: List[Datum]
 

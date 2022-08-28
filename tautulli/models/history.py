@@ -4,64 +4,64 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Union
+from typing import Any, List, Union, Optional
 
 from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    reference_id: int
-    row_id: int
-    id: int
-    date: int
-    started: int
-    stopped: int
-    duration: int
-    paused_counter: int
-    user_id: int
-    user: str
-    friendly_name: str
-    platform: str
-    product: str
-    player: str
-    ip_address: str
-    live: int
-    machine_id: str
-    media_type: str
-    rating_key: int
-    parent_rating_key: Union[int, str]
-    grandparent_rating_key: Union[int, str]
-    full_title: str
-    title: str
-    parent_title: str
-    grandparent_title: str
-    original_title: str
-    year: Union[int, str]
-    media_index: Union[int, str]
-    parent_media_index: Union[int, str]
-    thumb: str
-    originally_available_at: str
-    guid: str
-    transcode_decision: str
-    percent_complete: int
-    watched_status: float
-    group_count: int
-    group_ids: str
-    state: Any
-    session_key: Any
+    reference_id: Optional[int]
+    row_id: Optional[int]
+    id: Optional[int]
+    date: Optional[int]
+    started: Optional[int]
+    stopped: Optional[int]
+    duration: Optional[int]
+    paused_counter: Optional[int]
+    user_id: Optional[int]
+    user: Optional[str]
+    friendly_name: Optional[str]
+    platform: Optional[str]
+    product: Optional[str]
+    player: Optional[str]
+    ip_address: Optional[str]
+    live: Optional[int]
+    machine_id: Optional[str]
+    media_type: Optional[str]
+    rating_key: Optional[int]
+    parent_rating_key: Optional[Union[int, str]]
+    grandparent_rating_key: Optional[Union[int, str]]
+    full_title: Optional[str]
+    title: Optional[str]
+    parent_title: Optional[str]
+    grandparent_title: Optional[str]
+    original_title: Optional[str]
+    year: Optional[Union[int, str]]
+    media_index: Optional[Union[int, str]]
+    parent_media_index: Optional[Union[int, str]]
+    thumb: Optional[str]
+    originally_available_at: Optional[str]
+    guid: Optional[str]
+    transcode_decision: Optional[str]
+    percent_complete: Optional[int]
+    watched_status: Optional[float]
+    group_count: Optional[int]
+    group_ids: Optional[str]
+    state: Optional[Any]
+    session_key: Optional[Any]
 
 
 class Data(BaseModel):
-    recordsFiltered: int
-    recordsTotal: int
-    data: List[Datum]
-    draw: int
-    filter_duration: str
-    total_duration: str
+    recordsFiltered: Optional[int]
+    recordsTotal: Optional[int]
+    data: Optional[List[Datum]]
+    draw: Optional[int]
+    filter_duration: Optional[str]
+    total_duration: Optional[str]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

@@ -4,35 +4,8 @@ from typing import Union, List, Iterable
 
 from pytz import timezone
 
-switcher = {
-    "playing": "▶️",
-    "paused": "⏸",
-    "stopped": "⏹",
-    "buffering": "⏳",
-    "error": "⚠️"
-}
 
-media_type_icons = {
-    'episode': '📺',
-    'track': '🎧',
-    'movie': '🎞',
-    'clip': '🎬',
-    'photo': '🖼',
-    'live': '📡'
-}
-
-sessions_message = """{stream_count} {word}"""
-transcodes_message = """{transcode_count} {word}"""
-bandwidth_message = """🌐 {bandwidth}"""
-lan_bandwidth_message = """(🏠 {bandwidth})"""
-
-session_title_message = """{icon} {media_type_icon} {username}: *{title}*"""
-session_player_message = """__Player__: {product} ({player})"""
-session_details_message = """__Quality__: {quality_profile} ({bandwidth}){transcoding}"""
-session_progress_message = """__Progress__: {progress} (ETA: {eta})"""
-
-
-def datetime_to_string(datetime_object: datetime, string_format: str = "%Y-%m-%d") -> str:
+def datetime_to_string(datetime_object: datetime, string_format: str = "%Y-%m-%d") -> Union[str, None]:
     """
     Convert a datetime.datetime object to a string
 
@@ -90,41 +63,6 @@ def int_list_to_string(int_list: List[int]) -> str:
     """
     int_list = list(map(str, int_list))
     return comma_delimit(int_list)
-
-
-def _human_bitrate(number, denominator: int = 1, letter: str = "", d: int = 1):
-    if d <= 0:
-        return f'{int(number / denominator):d} {letter}bps'
-    else:
-        return f'{float(number / denominator):.{d}f} {letter}bps'
-
-
-def human_bitrate(kilobytes, d: int = 1) -> str:
-    # Return the given kilobytes as a human friendly bps, Kbps, Mbps, Gbps, or Tbps string
-
-    KB = float(1024)
-    MB = float(KB ** 2)  # 1,048,576
-    GB = float(KB ** 3)  # 1,073,741,824
-    TB = float(KB ** 4)  # 1,099,511,627,776
-
-    denominator = 1
-    letter = ""
-    if kilobytes < KB:
-        pass
-    elif KB <= kilobytes < MB:
-        denominator = KB
-        letter = "k"
-    elif MB <= kilobytes < GB:
-        denominator = MB
-        letter = "M"
-    elif GB <= kilobytes < TB:
-        denominator = GB
-        letter = "G"
-    else:
-        denominator = TB
-        letter = "T"
-
-    return _human_bitrate(kilobytes, denominator=denominator, letter=letter, d=d)
 
 
 def comma_delimit(items: Iterable) -> str:

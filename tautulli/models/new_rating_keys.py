@@ -4,21 +4,21 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Optional
 
 from pydantic import BaseModel, Field
 
 
 class Field0(BaseModel):
-    rating_key: int
+    rating_key: Optional[int]
 
 
 class Data(BaseModel):
-    field_0: Field0 = Field(..., alias='0')
+    field_0: Optional[Field0] = Field(..., alias='0')
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

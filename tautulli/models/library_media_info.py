@@ -10,42 +10,42 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    video_resolution: str
-    audio_channels: str
-    container: str
-    thumb: str
-    media_index: str
-    title: str
-    bitrate: str
-    video_codec: str
-    section_type: str
-    section_id: int
-    added_at: str
-    sort_title: str
-    file_size: str
-    parent_rating_key: str
-    audio_codec: str
-    year: str
-    media_type: str
-    parent_media_index: str
-    grandparent_rating_key: str
-    rating_key: str
-    video_framerate: str
+    video_resolution: Optional[str]
+    audio_channels: Optional[str]
+    container: Optional[str]
+    thumb: Optional[str]
+    media_index: Optional[str]
+    title: Optional[str]
+    bitrate: Optional[str]
+    video_codec: Optional[str]
+    section_type: Optional[str]
+    section_id: Optional[int]
+    added_at: Optional[str]
+    sort_title: Optional[str]
+    file_size: Optional[str]
+    parent_rating_key: Optional[str]
+    audio_codec: Optional[str]
+    year: Optional[str]
+    media_type: Optional[str]
+    parent_media_index: Optional[str]
+    grandparent_rating_key: Optional[str]
+    rating_key: Optional[str]
+    video_framerate: Optional[str]
     last_played: Optional[int]
     play_count: Optional[int]
 
 
 class Data(BaseModel):
-    recordsFiltered: int
-    recordsTotal: int
-    data: List[Datum]
-    draw: int
-    filtered_file_size: int
-    total_file_size: int
+    recordsFiltered: Optional[int]
+    recordsTotal: Optional[int]
+    data: Optional[List[Datum]]
+    draw: Optional[int]
+    filtered_file_size: Optional[int]
+    total_file_size: Optional[int]
 
 
 class Response(BaseModel):
-    result: str
+    result: Optional[str]
     message: Any
     data: Data
 

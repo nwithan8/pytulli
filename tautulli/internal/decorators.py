@@ -1,7 +1,7 @@
 import sys
 from functools import wraps
 
-from tautulli.utils import _success_result, _get_response_data
+from tautulli.internal.utils import _success_result, _get_response_data
 
 
 def raw_api_bool(func):
@@ -21,13 +21,12 @@ def make_property_object(func):
     def wrapper(self, *args, **kwargs) -> object:
         try:
             data = getattr(self._raw_api, func.__name__)
-            if not data:
-                return None
-            class_name = globals()[func(self)]
+            class_name = func(self)
+            clazz = getattr(sys.modules["tautulli.models"], class_name)
             if type(data) == list:
-                return [class_name(**item) for item in data]
+                return [clazz(**item) for item in data]
             else:
-                return class_name(**data)
+                return clazz(**data)
         except AttributeError:
             return None
 
@@ -40,13 +39,12 @@ def make_object(func):
         try:
             method = getattr(self._raw_api, func.__name__)
             data = method(*args, **kwargs)
-            if not data:
-                return None
-            class_name = getattr(sys.modules["tautulli.models"], func(self, *args, **kwargs))
+            class_name = func(self, *args, **kwargs)
+            clazz = getattr(sys.modules["tautulli.models"], class_name)
             if type(data) == list:
-                return [class_name(**item) for item in data]
+                return [clazz(**item) for item in data]
             else:
-                return class_name(**data)
+                return clazz(**data)
         except AttributeError:
             return None
 

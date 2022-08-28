@@ -1,3 +1,2 @@
-from tautulli.jsonapi import RawAPI
-from tautulli.objectapi import ObjectAPI
-
+from tautulli.api.json_api import RawAPI
+from tautulli.api.object_api import ObjectAPI
