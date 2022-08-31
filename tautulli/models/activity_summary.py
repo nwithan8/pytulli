@@ -8,7 +8,7 @@ from typing import Optional
 
 from pydantic import BaseModel
 
-from tautulli.internal import static, utils as internal_utils
+from tautulli.internal import utils as internal_utils, static
 from tautulli.tools.utils import to_human_bitrate
 
 
