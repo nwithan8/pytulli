@@ -35,15 +35,21 @@ class RawAPI:
         :return: True if compatible, False if not
         :rtype: bool
         """
-        try:
-            server_version_string = self.tautulli_info['tautulli_version']
-            server_version = packaging.version.parse(server_version_string)
-            min_version = packaging.version.parse(min_version)
-            return server_version >= min_version
-        except:
-            raise Exception("Unable to verify Tautulli API version")
+        server_version_string: Union[str, None] = self.tautulli_info.get('tautulli_version', None)
 
-        # return self._raw_api.verify_compatibility(min_version=min_version)
+        if server_version_string is None:
+            raise Exception("Tautulli did not report a version number.")
+        try:
+            server_version = packaging.version.parse(server_version_string)
+        except:
+            raise Exception("Could not parse Tautulli version number.")
+
+        try:
+            min_version = packaging.version.parse(min_version)
+        except:
+            raise Exception("Could not parse minimum compatible version number.")
+
+        return server_version >= min_version
 
     def _get(self, command: str, params: dict = None) -> objectrest.Response:
         """
