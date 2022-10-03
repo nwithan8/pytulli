@@ -16,6 +16,9 @@ class ObjectAPI:
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
 
+    def __str__(self):
+        return f"ObjectAPI(url={self._raw_api._redacted_url})"
+
     @property
     def shortcuts(self) -> APIShortcuts:
         """

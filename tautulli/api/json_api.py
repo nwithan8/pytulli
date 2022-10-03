@@ -12,6 +12,7 @@ from tautulli.internal.utils import build_optional_params, _get_response_data, _
     _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string, comma_delimit
 from tautulli.internal.decorators import raw_json, set_and_forget
 from tautulli._info import __min_api_version__
+from tautulli.tools.utils import redact
 
 
 # noinspection PyTypeChecker
@@ -19,12 +20,17 @@ class RawAPI:
     def __init__(self, base_url: str, api_key: str, verbose: bool = False, verify: bool = True):
         if base_url.endswith("/"):
             base_url = base_url[:-1]
+        # Zero knowledge of the API key is kept
         self._url = f"{base_url}/api/v2?apikey={api_key}"
+        self._redacted_url = f"{base_url}/api/v2?apikey={redact(full_string=api_key, to_redact=api_key)}"
         self._session = objectrest.Session()
         logging.basicConfig(format='%(levelname)s:%(message)s', level=(logging.DEBUG if verbose else logging.ERROR))
         self._logger = logging.getLogger("tautulli")
         if verify and not self._verify_compatibility(min_version=__min_api_version__):
             warnings.warn(f"Tautulli API is older than {__min_api_version__}, things may not work as expected.")
+
+    def __str__(self):
+        return f"RawAPI(url={self._redacted_url})"
 
     def _verify_compatibility(self, min_version: str) -> bool:
         """
