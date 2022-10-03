@@ -16,7 +16,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 REQUIREMENTS = [
-    "objectrest==1.2.*",
+    "objectrest==2.0.*",
     "pydantic==1.9.*",
     "pytz==2022.1.*",
     "python-dotenv==0.20.*",
