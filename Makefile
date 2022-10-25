@@ -66,4 +66,10 @@ mypy:
 test:
 	$(VIRTUAL_BIN)/pytest --exitfirst --verbose --failed-first
 
-.PHONY: help build coverage clean black black-check format format-check install isort isort-check lint mypy test
+## test-compatibility - Test the project against multiple Python versions
+test-compatibility:
+	pyenv local 3.7.15 3.8.15 3.9.15 3.10.8 3.11.0 # install Python versions
+	$(VIRTUAL_BIN)/pip install tox
+	$(VIRTUAL_BIN)/tox
+
+.PHONY: help build coverage clean black black-check format format-check install isort isort-check lint mypy test test-compatibility

@@ -16,8 +16,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 REQUIREMENTS = [
-    "objectrest==1.2.*",
-    "pydantic==1.9.*",
+    "objectrest==2.0.*",
+    "pydantic==1.10.*",
     "pytz==2022.1.*",
     "python-dotenv==0.20.*",
     "packaging==21.3.*",
@@ -38,7 +38,7 @@ DEV_REQUIREMENTS = [
 
 setuptools.setup(
     name=__title__,
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(exclude=["tests"]),
     version=__version__,
     license=__license__,
     description=__description__,
@@ -64,6 +64,8 @@ setuptools.setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
         'Topic :: Multimedia :: Video',
         'Topic :: Multimedia',
         'Topic :: Internet :: WWW/HTTP',

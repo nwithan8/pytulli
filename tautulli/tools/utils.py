@@ -32,3 +32,19 @@ def to_human_bitrate(kilobytes, d: int = 1) -> str:
         letter = "T"
 
     return _human_bitrate(kilobytes, denominator=denominator, letter=letter, d=d)
+
+
+def redact(full_string: str, to_redact: str, redaction: str = "[REDACTED]") -> str:
+    """
+    Redact a string from a full string
+
+    :param full_string: Full string to redact from
+    :type full_string: str
+    :param to_redact: String to redact
+    :type to_redact: str
+    :param redaction: String to replace the redacted string with
+    :type redaction: str
+    :return: Redacted string
+    :rtype: str
+    """
+    return full_string.replace(to_redact, redaction)
