@@ -15,6 +15,24 @@ __keywords__ = ["Tautulli", "API", "client", "Plex", "PMS", "Plex Media Server",
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+
+def python_versions():
+    """Return a list of supported Python versions."""
+    with open("tautulli/PYTHON_VERSIONS") as f:
+        versions = f.read().splitlines()
+    version_strings = ['Programming Language :: Python :: 3']
+    for version in versions:
+        version_strings.append(f"Programming Language :: Python :: {version}")
+    return version_strings
+
+
+def python3_range():
+    """Return a string of the supported Python version range."""
+    with open("tautulli/PYTHON_VERSIONS") as f:
+        versions = f.read().splitlines()
+    return f">={versions[0]}, <4"
+
+
 REQUIREMENTS = [
     "objectrest==2.0.*",
     "pydantic==1.10.*",
@@ -36,6 +54,19 @@ DEV_REQUIREMENTS = [
     "vcrpy==4.*",
 ]
 
+classifiers = [
+    'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+    'Development Status :: 4 - Beta',
+    # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
+    'Intended Audience :: Developers',  # Define that your audience are developers
+    'Topic :: Software Development :: Build Tools',
+    'Topic :: Multimedia :: Video',
+    'Topic :: Multimedia',
+    'Topic :: Internet :: WWW/HTTP',
+    'Operating System :: OS Independent'
+]
+classifiers.extend(python_versions())
+
 setuptools.setup(
     name=__title__,
     packages=setuptools.find_packages(exclude=["tests"]),
@@ -54,22 +85,6 @@ setuptools.setup(
         "dev": DEV_REQUIREMENTS,
     },
     test_suite="test",
-    classifiers=[
-        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
-        'Development Status :: 4 - Beta',
-        # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
-        'Intended Audience :: Developers',  # Define that your audience are developers
-        'Topic :: Software Development :: Build Tools',
-        'Programming Language :: Python :: 3',  # Specify which python versions that you want to support
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
-        'Programming Language :: Python :: 3.10',
-        'Programming Language :: Python :: 3.11',
-        'Topic :: Multimedia :: Video',
-        'Topic :: Multimedia',
-        'Topic :: Internet :: WWW/HTTP',
-        'Operating System :: OS Independent'
-    ],
-    python_requires='>=3.7, <4'
+    classifiers=classifiers,
+    python_requires=python3_range(),
 )
