@@ -19,36 +19,6 @@ jobs:
         run: echo "::set-output name=python_versions::$(cat tautulli/PYTHON_VERSIONS | jq -R -s -c 'split("\n")')"
 
   unit-tests:
-    runs-on: ubuntu-latest
-    services:
-      tautulli-docker:
-        image: tautulli/tautulli:latest
-        ports:
-           - 8001:8181
-    steps:
-    - name: Sleep for 30 seconds
-      uses: jakejarvis/wait-action@master
-      with:
-        time: '30s'
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Make envfile
-      uses: SpicyPizza/create-envfile@v1
-      with:
-        envkey_T_URL: http://localhost:8001
-        file_name: .env
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: "3.10"
-    - name: Install Python dependencies
-      run: |
-        python3 -m pip install --upgrade pip
-        make install
-    - name: Test with pytest
-      run: make test
-
-  compatibility:
     needs: versions
     runs-on: ubuntu-latest
     strategy:
@@ -84,5 +54,5 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           make install
-      - name: Test compatibility with tox
-        run: make test-compatibility
+      - name: Test with pytest
+        run: make test

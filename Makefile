@@ -77,9 +77,4 @@ mypy:
 test:
 	$(VIRTUAL_BIN)/pytest --exitfirst --verbose --failed-first
 
-## test-compatibility - Test the project
-test-compatibility:
-	$(VIRTUAL_BIN)/pip install tox
-	$(VIRTUAL_BIN)/tox
-
-.PHONY: help build coverage clean black black-check format format-check install install-pypy install-pyenv change-python isort isort-check lint mypy test test-compatibility
+.PHONY: help build coverage clean black black-check format format-check install install-pypy install-pyenv change-python isort isort-check lint mypy test
