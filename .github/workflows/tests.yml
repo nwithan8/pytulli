@@ -80,13 +80,9 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python_version }}
-      - name: Install pyenv
-        uses: gabrielfalcao/pyenv-action@v9
-        with:
-          default: "${{ matrix.python }}:latest"
       - name: Install Python dependencies
         run: |
           python3 -m pip install --upgrade pip
           make install
       - name: Test compatibility with tox
-        run: make test-compatibility py=${{ matrix.python_version }}
+        run: make test-compatibility

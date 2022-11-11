@@ -51,6 +51,12 @@ install-pypy:
 install-pyenv:
 	curl https://pyenv.run | bash
 
+## change-python - Change the python version used by pyenv
+# params:
+# py-= The python version to use
+change-python:
+	pyenv local $(py)
+
 ## isort - Sorts imports throughout the project
 isort:
 	$(VIRTUAL_BIN)/isort $(PROJECT_NAME)/ $(TEST_DIR)/
@@ -71,12 +77,9 @@ mypy:
 test:
 	$(VIRTUAL_BIN)/pytest --exitfirst --verbose --failed-first
 
-## test-compatibility - Test the project against multiple Python versions
-# @parameters:
-# py= - The Python version to use
+## test-compatibility - Test the project
 test-compatibility:
-	pyenv local ${py}:latest # install Python versions
 	$(VIRTUAL_BIN)/pip install tox
 	$(VIRTUAL_BIN)/tox
 
-.PHONY: help build coverage clean black black-check format format-check install install-pypy install-pyenv isort isort-check lint mypy test test-compatibility
+.PHONY: help build coverage clean black black-check format format-check install install-pypy install-pyenv change-python isort isort-check lint mypy test test-compatibility
