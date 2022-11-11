@@ -52,7 +52,7 @@ jobs:
     strategy:
       matrix:
         image_version: ${{ fromJson(needs.versions.outputs.server_versions) }}
-        python_version: ${{ fromJson(needs.versions.outputs.python_versions) }}
+        python_version: ${{ needs.versions.outputs.python_versions }}
     services:
       tautulli-docker:
         image: tautulli/tautulli:${{ matrix.image_version }}
