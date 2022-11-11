@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       server_versions: ${{ steps.set-server-versions.outputs.server_versions }}
-      python_versions: ["3.7", "3.8", "3.9", "3.10", "3.11"]
     steps:
       - uses: actions/checkout@v2
       - id: set-server-versions
@@ -52,7 +51,7 @@ jobs:
     strategy:
       matrix:
         image_version: ${{ fromJson(needs.versions.outputs.server_versions) }}
-        python_version: ${{ needs.versions.outputs.python_versions }}
+        python_version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
     services:
       tautulli-docker:
         image: tautulli/tautulli:${{ matrix.image_version }}
