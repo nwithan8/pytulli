@@ -20,6 +20,7 @@ class ChildrenListItem(BaseModel):
     directors: Optional[List]
     duration: Optional[str]
     full_title: Optional[str]
+    collections: Optional[List]
     genres: Optional[List]
     grandparent_rating_key: Optional[str]
     grandparent_thumb: Optional[str]

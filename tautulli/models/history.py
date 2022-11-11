@@ -21,6 +21,7 @@ class Datum(BaseModel):
     user_id: Optional[int]
     user: Optional[str]
     friendly_name: Optional[str]
+    user_thumb: Optional[str]
     platform: Optional[str]
     product: Optional[str]
     player: Optional[str]

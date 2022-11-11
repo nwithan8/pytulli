@@ -86,6 +86,7 @@ class Data(BaseModel):
     grandparent_title: Optional[str]
     original_title: Optional[str]
     sort_title: Optional[str]
+    edition_title: Optional[str]
     media_index: Optional[str]
     parent_media_index: Optional[str]
     studio: Optional[str]
