@@ -26,8 +26,9 @@ class RawAPI:
         self._session = objectrest.Session()
         logging.basicConfig(format='%(levelname)s:%(message)s', level=(logging.DEBUG if verbose else logging.ERROR))
         self._logger = logging.getLogger("tautulli")
-        if verify and not self._verify_compatibility(min_version=__min_api_version__):
-            warnings.warn(f"Tautulli API is older than {__min_api_version__}, things may not work as expected.")
+        min_api_version = __min_api_version__()
+        if verify and not self._verify_compatibility(min_version=min_api_version):
+            warnings.warn(f"Tautulli API is older than {min_api_version}, things may not work as expected.")
 
     def __str__(self):
         return f"RawAPI(url={self._redacted_url})"

@@ -6,74 +6,81 @@ on:
   pull_request: ~
 
 jobs:
+  versions:
+    runs-on: ubuntu-latest
+    outputs:
+      server_versions: ${{ steps.set-server-versions.outputs.server_versions }}
+      python_versions: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+    steps:
+      - uses: actions/checkout@v2
+      - id: set-server-versions
+        run: echo "::set-output name=server_versions::$(cat tautulli/API_VERSIONS | jq -R -s -c 'split("\n")[]')"
+
   unit-tests:
     runs-on: ubuntu-latest
     services:
       tautulli-docker:
-        image: tautulli/tautulli
+        image: tautulli/tautulli:latest
         ports:
            - 8001:8181
-
     steps:
     - name: Sleep for 30 seconds
       uses: jakejarvis/wait-action@master
       with:
         time: '30s'
-
     - name: Checkout code
       uses: actions/checkout@v2
-
     - name: Make envfile
       uses: SpicyPizza/create-envfile@v1
       with:
         envkey_T_URL: http://localhost:8001
         file_name: .env
-
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: "3.10"
-
     - name: Install Python dependencies
       run: |
         python3 -m pip install --upgrade pip
         make install
-
     - name: Test with pytest
       run: make test
 
   compatibility:
+    needs: versions
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image_version: ${{ fromJson(needs.versions.outputs.server_versions) }}
+        python_version: ${{ fromJson(needs.versions.outputs.python_versions) }}
     services:
       tautulli-docker:
-        image: tautulli/tautulli
+        image: tautulli/tautulli:${{ matrix.image_version }}
         ports:
           - 8001:8181
-
     steps:
+      - name: Matrix => (${{ matrix.image_version }} ${{ matrix.python_version}})
+        run: |
+          echo ${{ matrix.image_version }}
+          echo ${{ matrix.python_version }}
       - name: Sleep for 30 seconds
         uses: jakejarvis/wait-action@master
         with:
           time: '30s'
-
       - name: Checkout code
         uses: actions/checkout@v2
-
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1
         with:
           envkey_T_URL: http://localhost:8001
           file_name: .env
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.10"
-
+          python-version: ${{ matrix.python_version }}
       - name: Install Python dependencies
         run: |
           python3 -m pip install --upgrade pip
           make install
-
       - name: Test compatibility with tox
         run: make test-compatibility
