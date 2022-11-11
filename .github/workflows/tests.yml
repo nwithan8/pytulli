@@ -54,7 +54,7 @@ jobs:
         python_version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
     services:
       tautulli-docker:
-        image: tautulli/tautulli:${{ matrix.image_version }}
+        image: tautulli/tautulli:v${{ matrix.image_version }}
         ports:
           - 8001:8181
     steps:
