@@ -46,6 +46,11 @@ install:
 install-pypy:
 	$(PYTHON_BINARY) -m venv $(VIRTUAL_ENV)
 	$(VIRTUAL_BIN)/pip install -e ."[pypy_dev]"
+
+## install-pyenv - Install pyenv
+install-pyenv:
+	curl https://pyenv.run | bash
+
 ## isort - Sorts imports throughout the project
 isort:
 	$(VIRTUAL_BIN)/isort $(PROJECT_NAME)/ $(TEST_DIR)/
@@ -67,9 +72,11 @@ test:
 	$(VIRTUAL_BIN)/pytest --exitfirst --verbose --failed-first
 
 ## test-compatibility - Test the project against multiple Python versions
+# @parameters:
+# py= - The Python version to use
 test-compatibility:
-	pyenv local 3.7.15 3.8.15 3.9.15 3.10.8 3.11.0 # install Python versions
+	pyenv local ${py}:latest # install Python versions
 	$(VIRTUAL_BIN)/pip install tox
 	$(VIRTUAL_BIN)/tox
 
-.PHONY: help build coverage clean black black-check format format-check install isort isort-check lint mypy test test-compatibility
+.PHONY: help build coverage clean black black-check format format-check install install-pypy install-pyenv isort isort-check lint mypy test test-compatibility
