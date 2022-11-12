@@ -70,6 +70,7 @@ classifiers.extend(python_versions())
 setuptools.setup(
     name=__title__,
     packages=setuptools.find_packages(exclude=["tests"]),
+    include_package_data=True,
     version=__version__,
     license=__license__,
     description=__description__,
