@@ -1,0 +1,3 @@
+include LICENSE
+include tautulli/API_VERSIONS
+include tautulli/PYTHON_VERSIONS
