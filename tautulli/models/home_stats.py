@@ -39,7 +39,7 @@ class Row(BaseModel):
     player: Optional[str] = None
 
 
-class Datum(BaseModel):
+class HomeStat(BaseModel):
     stat_id: Optional[str]
     stat_title: Optional[str]
     rows: Optional[List[Row]]
@@ -49,7 +49,7 @@ class Datum(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: List[Datum]
+    data: List[HomeStat]
 
 
 class Model(BaseModel):

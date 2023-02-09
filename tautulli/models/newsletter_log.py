@@ -24,7 +24,7 @@ class Datum(BaseModel):
     success: Optional[int]
 
 
-class Data(BaseModel):
+class NewsletterLog(BaseModel):
     recordsFiltered: Optional[int]
     recordsTotal: Optional[int]
     data: Optional[List[Datum]]
@@ -34,7 +34,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: NewsletterLog
 
 
 class Model(BaseModel):

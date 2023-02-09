@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Datum(BaseModel):
+class ServersInfoEntry(BaseModel):
     name: Optional[str]
     machine_identifier: Optional[str]
     host: Optional[str]
@@ -20,7 +20,7 @@ class Datum(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: List[Datum]
+    data: List[ServersInfoEntry]
 
 
 class Model(BaseModel):

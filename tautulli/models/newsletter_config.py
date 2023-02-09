@@ -88,7 +88,7 @@ class EmailConfigOption(BaseModel):
     select_options: Optional[List[SelectOption]] = None
 
 
-class Data(BaseModel):
+class NewsletterConfig(BaseModel):
     id: Optional[int]
     agent_id: Optional[int]
     agent_name: Optional[str]
@@ -108,7 +108,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Optional[str]
-    data: Data
+    data: NewsletterConfig
 
 
 class Model(BaseModel):

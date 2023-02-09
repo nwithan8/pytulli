@@ -43,7 +43,7 @@ class Datum(BaseModel):
     is_active: Optional[int]
 
 
-class Data(BaseModel):
+class LibrariesTable(BaseModel):
     recordsFiltered: Optional[int]
     recordsTotal: Optional[int]
     data: Optional[List[Datum]]
@@ -53,7 +53,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: LibrariesTable
 
 
 class Model(BaseModel):

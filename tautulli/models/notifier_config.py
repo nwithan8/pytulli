@@ -38,7 +38,7 @@ class NotifyText(BaseModel):
     on_stop: Optional[OnStop]
 
 
-class Data(BaseModel):
+class NotifierConfig(BaseModel):
     id: Optional[int]
     agent_id: Optional[int]
     agent_name: Optional[str]
@@ -53,7 +53,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: NotifierConfig
 
 
 class Model(BaseModel):

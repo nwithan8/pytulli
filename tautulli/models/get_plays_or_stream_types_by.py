@@ -14,7 +14,7 @@ class Series(BaseModel):
     data: Optional[List]
 
 
-class Data(BaseModel):
+class PlaysOrStreamTypesBy(BaseModel):
     categories: Optional[List[str]]
     series: Optional[List[Series]]
 
@@ -22,7 +22,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: PlaysOrStreamTypesBy
 
 
 class Model(BaseModel):

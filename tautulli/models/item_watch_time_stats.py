@@ -9,7 +9,7 @@ from typing import List, Optional, Any
 from pydantic import BaseModel
 
 
-class Datum(BaseModel):
+class ItemWatchTimeStat(BaseModel):
     query_days: Optional[int]
     total_time: Optional[int]
     total_plays: Optional[int]
@@ -18,7 +18,7 @@ class Datum(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: List[Datum]
+    data: List[ItemWatchTimeStat]
 
 
 class Model(BaseModel):

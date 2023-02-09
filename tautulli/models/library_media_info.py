@@ -35,7 +35,7 @@ class Datum(BaseModel):
     play_count: Optional[int]
 
 
-class Data(BaseModel):
+class LibraryMediaInfo(BaseModel):
     recordsFiltered: Optional[int]
     recordsTotal: Optional[int]
     data: Optional[List[Datum]]
@@ -47,7 +47,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: LibraryMediaInfo
 
 
 class Model(BaseModel):

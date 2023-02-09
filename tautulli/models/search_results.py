@@ -291,7 +291,7 @@ class ResultsList(BaseModel):
     collection: Optional[List]
 
 
-class Data(BaseModel):
+class SearchResults(BaseModel):
     results_count: Optional[int]
     results_list: Optional[ResultsList]
 
@@ -299,7 +299,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: SearchResults
 
 
 class Model(BaseModel):

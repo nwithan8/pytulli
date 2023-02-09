@@ -33,7 +33,7 @@ class Datum(BaseModel):
     user_id: Optional[Any]
 
 
-class Data(BaseModel):
+class ExportsTable(BaseModel):
     draw: Optional[int]
     recordsTotal: Optional[int]
     recordsFiltered: Optional[int]
@@ -43,7 +43,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: str
     message: Any
-    data: Data
+    data: ExportsTable
 
 
 class Model(BaseModel):

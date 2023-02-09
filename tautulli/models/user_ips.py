@@ -33,7 +33,7 @@ class Datum(BaseModel):
     year: Optional[int]
 
 
-class Data(BaseModel):
+class UserIPs(BaseModel):
     draw: Optional[int]
     recordsTotal: Optional[int]
     recordsFiltered: Optional[int]
@@ -43,7 +43,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: UserIPs
 
 
 class Model(BaseModel):

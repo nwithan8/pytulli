@@ -25,7 +25,7 @@ class Net(BaseModel):
     updated: Optional[str]
 
 
-class Data(BaseModel):
+class WHOISLookup(BaseModel):
     host: Optional[str]
     nets: Optional[List[Net]]
 
@@ -33,7 +33,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: WHOISLookup
 
 
 class Model(BaseModel):

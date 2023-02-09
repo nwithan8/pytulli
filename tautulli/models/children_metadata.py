@@ -53,7 +53,7 @@ class ChildrenListItem(BaseModel):
     year: Optional[str]
 
 
-class Data(BaseModel):
+class ChildrenMetadata(BaseModel):
     children_count: Optional[int]
     children_type: Optional[str]
     title: Optional[str]
@@ -63,7 +63,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: ChildrenMetadata
 
 
 class Model(BaseModel):

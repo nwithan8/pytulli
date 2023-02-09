@@ -9,7 +9,7 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class Data(BaseModel):
+class TautulliInfo(BaseModel):
     tautulli_install_type: Optional[str]
     tautulli_version: Optional[str]
     tautulli_branch: Optional[str]
@@ -25,4 +25,4 @@ class Data(BaseModel):
 class Model(BaseModel):
     result: Optional[str]
     message: Optional[str]
-    data: Data
+    data: TautulliInfo
