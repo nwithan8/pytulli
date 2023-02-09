@@ -9,10 +9,10 @@ from typing import Any, Optional, Union
 from pydantic import BaseModel
 
 
-class Response(BaseModel):
+class Status(BaseModel):
     result: Optional[str]
     message: Any
 
 
 class Model(BaseModel):
-    response: Response
+    response: Status

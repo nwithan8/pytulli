@@ -272,7 +272,8 @@ class Session(BaseModel):
     def status_icon(self):
         """
         Get icon for a stream state
-        :return: emoji icon
+
+        :returns: emoji icon
         """
         return static.switcher.get(self.state, "")
 
@@ -328,6 +329,7 @@ class Response(BaseModel):
 class Model(BaseModel):
     response: Response
 
+
 class ActivitySummary(BaseModel):
     stream_count: Optional[str] = "0"
     transcode_count: Optional[int] = 0
@@ -339,7 +341,7 @@ class ActivitySummary(BaseModel):
         """
         Get activity summary message
 
-        :return: Summary message
+        :returns: Summary message
         :rtype: Optional[str]
         """
         overview_message = ""
@@ -370,7 +372,7 @@ def build_summary_from_activity_object(activity: Activity) -> ActivitySummary:
 
     :param activity: Activity object to use for Overview
     :type activity: Activity
-    :return: ActivitySummary object
+    :returns: ActivitySummary object
     :rtype: ActivitySummary
     """
     overview = ActivitySummary()
@@ -388,7 +390,7 @@ def build_summary_from_activity_json(activity_data: dict) -> ActivitySummary:
 
     :param activity_data: Activity JSON data to use for Overview
     :type activity_data: dict
-    :return: ActivitySummary object
+    :returns: ActivitySummary object
     :rtype: ActivitySummary
     """
     return ActivitySummary(**activity_data)
