@@ -13,7 +13,7 @@ def datetime_to_string(datetime_object: datetime, string_format: str = "%Y-%m-%d
     :type datetime_object: datetime
     :param string_format: Date format to use
     :type string_format: str
-    :return: Date in string format
+    :returns: Date in string format
     :rtype: str
     """
     if not datetime_object:
@@ -27,7 +27,7 @@ def build_optional_params(**kwargs) -> dict:
 
     :param kwargs: All possible parameters to include in final dict
     :type kwargs: dict
-    :return: Dict of non-None parameters
+    :returns: Dict of non-None parameters
     :rtype: dict
     """
     params = {}
@@ -43,7 +43,7 @@ def bool_to_int(boolean: bool) -> int:
 
     :param boolean: Boolean to convert
     :type boolean: bool
-    :return: 0 if False, 1 if True
+    :returns: 0 if False, 1 if True
     :rtype: int
     """
     if boolean:
@@ -58,7 +58,7 @@ def int_list_to_string(int_list: List[int]) -> str:
 
     :param int_list: List of ints to convert
     :type int_list: list
-    :return: Comma-separated string of ints
+    :returns: Comma-separated string of ints
     :rtype: str
     """
     int_list = list(map(str, int_list))
@@ -82,7 +82,7 @@ def _one_needed(**kwargs) -> bool:
 
     :param kwargs: Dict of keyword arguments
     :type kwargs: dict
-    :return: Whether at least on kwarg is not None
+    :returns: Whether at least on kwarg is not None
     :rtype: bool
     """
     one_used = False
@@ -101,7 +101,7 @@ def _which_used(**kwargs) -> tuple:
 
     :param kwargs: Dict of keyword arguments
     :type kwargs: dict
-    :return: First (keyword, value) that is not None
+    :returns: First (keyword, value) that is not None
     :rtype: tuple
     """
     for k, v in kwargs.items():
@@ -121,7 +121,7 @@ def _is_invalid_choice(value, variable_name: str, choices: List) -> bool:
     :type variable_name: str
     :param choices: Options for value
     :type choices: list
-    :return: If value is in choices
+    :returns: If value is in choices
     :rtype: bool
     """
     if value and value not in choices:
@@ -137,7 +137,7 @@ def _get_response_data(json_data: dict) -> Union[str, int, List, dict]:
 
     :param json_data: JSON data to parse
     :type json_data: dict
-    :return: json_data['response']['data']
+    :returns: json_data['response']['data']
     :rtype: dict
     """
     return json_data.get('response', {}).get('data', {})
@@ -150,7 +150,7 @@ def _success_result(json_data: dict) -> bool:
 
     :param json_data: JSON data to parse
     :type json_data: dict
-    :return: json_data['response']['result'] == 'success'
+    :returns: json_data['response']['result'] == 'success'
     :rtype: bool
     """
     if json_data.get('response', {}).get('result', "") == "success":

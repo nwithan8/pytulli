@@ -1,11 +1,11 @@
 import warnings
-from typing import Union, List
 from datetime import datetime
+from typing import Union, List
 
-from tautulli.internal.decorators import raw_api_bool, make_object, make_property_object
-from tautulli.tools.api_helper import APIShortcuts
 from tautulli.api.json_api import RawAPI
+from tautulli.internal.decorators import raw_api_bool, make_object, make_property_object
 from tautulli.models import *
+from tautulli.tools.api_helper import APIShortcuts
 
 
 # noinspection PyTypeChecker,PyUnusedLocal
@@ -24,7 +24,7 @@ class ObjectAPI:
         """
         Shortcuts for common API actions
 
-        :return: Access to API shortcuts
+        :returns: Access to API shortcuts
         :rtype: APIShortcuts
         """
         return self._raw_api.shortcuts
@@ -36,7 +36,7 @@ class ObjectAPI:
 
         :param agent_id: Newsletter type to add
         :type agent_id: int
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -48,7 +48,7 @@ class ObjectAPI:
 
         :param agent_id: Notification agent to add
         :type: int
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -58,7 +58,7 @@ class ObjectAPI:
         """
         Get to the chopper!
 
-        :return: Random Arnold Schwarzenegger quote
+        :returns: Random Arnold Schwarzenegger quote
         :rtype: str
         """
         return self._raw_api.arnold
@@ -68,7 +68,7 @@ class ObjectAPI:
         """
         Backup the config.ini file
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -78,7 +78,7 @@ class ObjectAPI:
         """
         Backup the plexpy.db database
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -94,7 +94,7 @@ class ObjectAPI:
         :type section_id: str
         :param row_ids: List of row IDS to delete
         :type row_ids: list[int], optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -108,7 +108,7 @@ class ObjectAPI:
         :type user_id: str
         :param row_ids: List of row IDs to delete
         :type row_ids: list[int], optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -117,7 +117,8 @@ class ObjectAPI:
     def delete_cache(self) -> bool:
         """
         Delete the cache directory
-        :return: `True` if successful, `False` if unsuccessful
+
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -131,7 +132,7 @@ class ObjectAPI:
         :type export_id: int
         :param delete_all: Whether to delete all exported files (default: False)
         :type delete_all: bool
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -143,7 +144,7 @@ class ObjectAPI:
 
         :param row_ids: List of row IDs to delete
         :type row_ids: list[int]
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -159,7 +160,7 @@ class ObjectAPI:
         :type service: str, optional
         :param delete_all: Whether to delete all images from the service (default: False)
         :type delete_all: bool, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -168,7 +169,8 @@ class ObjectAPI:
     def delete_image_cache(self) -> bool:
         """
         Delete image cache directory
-        :return: `True` if successful, `False` if unsuccessful
+
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -178,14 +180,15 @@ class ObjectAPI:
         """
         Delete library section from Tautulli.
 
-        ALso erases library history
+        Also erases library history.
+
         :param server_id: Plex server identifier of the library section
         :type server_id: str
         :param section_id: ID of the Plex library section
         :type section_id: str
         :param row_ids: List of row IDs to delete
         :type row_ids: list[int], optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -195,7 +198,7 @@ class ObjectAPI:
         """
         Delete the Tautulli login logs
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -211,7 +214,7 @@ class ObjectAPI:
         :type service: str, optional
         :param delete_all: Whether to delete all images from the service (default: False)
         :type delete_all: bool, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -223,7 +226,7 @@ class ObjectAPI:
 
         :param section_id: ID of the Plex library section
         :type section_id: str
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -237,7 +240,7 @@ class ObjectAPI:
         :type mobile_device_id: int, optional
         :param device_id: Unique device identifier for the mobile device
         :type device_id: str, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -249,7 +252,7 @@ class ObjectAPI:
 
         :param newsletter_id: ID of the newsletter to delete
         :type newsletter_id: int
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -259,7 +262,7 @@ class ObjectAPI:
         """
         Delete the Tautulli newsletter logs
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -269,7 +272,7 @@ class ObjectAPI:
         """
         Delete the Tautulli notification logs
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -281,7 +284,7 @@ class ObjectAPI:
 
         :param notifier_id: ID of the notifier to delete
         :type notifier_id: int
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -291,7 +294,7 @@ class ObjectAPI:
         """
         Flush all the recently added items in the database
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -305,7 +308,7 @@ class ObjectAPI:
         :type client_id: str
         :param sync_id: Sync ID of the synced item
         :type sync_id: str
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -315,7 +318,7 @@ class ObjectAPI:
         """
         Flush all temporary sessions in the database
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -330,7 +333,7 @@ class ObjectAPI:
         :type user_id: str
         :param row_ids: List of row IDs to delete
         :type row_ids: list[int], optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -340,7 +343,7 @@ class ObjectAPI:
         """
         Get the Tautulli API docs formatted with markdown
 
-        :return: API docs str
+        :returns: API docs str
         :rtype: str
         """
         return self._raw_api.docs_md
@@ -351,7 +354,7 @@ class ObjectAPI:
         """
         Get the Tautulli API docs
 
-        :return: Docs object
+        :returns: Docs object
         """
         return 'Docs'
 
@@ -359,7 +362,7 @@ class ObjectAPI:
         """
         Download the Tautulli configuration file
 
-        :return: Config file string
+        :returns: Config file string
         :rtype: str
         """
         return self._raw_api.download_config()
@@ -368,7 +371,7 @@ class ObjectAPI:
         """
         Download the Tautulli database file
 
-        :return: Database file bytearray
+        :returns: Database file bytearray
         :rtype: bytearray
         """
         return self._raw_api.download_database()
@@ -377,7 +380,7 @@ class ObjectAPI:
         """
         Download an exported metadata file
 
-        :return: Metadata file byte array
+        :returns: Metadata file byte array
         :rtype: bytes
         """
         return self._raw_api.download_export(export_id=export_id)
@@ -386,7 +389,7 @@ class ObjectAPI:
         """
         Download the Tautulli log file
 
-        :return: Log file bytearray
+        :returns: Log file bytearray
         :rtype: bytearray
         """
         return self._raw_api.download_log()
@@ -395,7 +398,7 @@ class ObjectAPI:
         """
         Download the Plex log file
 
-        :return: Log file bytearray
+        :returns: Log file bytearray
         :rtype: bytearray
         """
         return self._raw_api.download_plex_log()
@@ -414,7 +417,7 @@ class ObjectAPI:
         :type custom_art: str, optional
         :param keep_history: Whether to keep library history (default: True)
         :type keep_history: bool, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -435,7 +438,7 @@ class ObjectAPI:
         :type keep_history: bool, optional
         :param allow_guest: Whether to allow user as a guest (default: False)
         :type allow_guest: bool, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -470,7 +473,7 @@ class ObjectAPI:
         :type export_type: str, optional
         :param individual_files: Export each item as an individual field for library/user export (default: False)
         :type individual_files: bool, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -484,7 +487,7 @@ class ObjectAPI:
         :type session_key: int, optional
         :param session_id: Session ID of the session info to return
         :type session_id: str, optional
-        :return: Activity object
+        :returns: Activity object
         """
         return 'Activity'
 
@@ -498,7 +501,7 @@ class ObjectAPI:
         :type username: str, optional
         :param password: Tautulli password
         :type password: str, optional
-        :return: API key
+        :returns: API key
         :rtype: str or None
         """
         return self._raw_api.get_api_key(username=username, password=password)
@@ -512,7 +515,7 @@ class ObjectAPI:
         :type rating_key: str
         :param media_type: The type of media item (movie, show, season, episode)
         :type media_type: str
-        :return: ChildrenMetadata object
+        :returns: ChildrenMetadata object
         :rtype: ChildrenMetadata
         """
         return 'ChildrenMetadata'
@@ -524,7 +527,7 @@ class ObjectAPI:
 
         :param section_id: ID of the Plex library section
         :type section_id: str
-        :return: CollectionsTable object
+        :returns: CollectionsTable object
         """
         return 'CollectionsTable'
 
@@ -534,7 +537,7 @@ class ObjectAPI:
         """
         Get the data and time formats used by Tautulli
 
-        :return: DateFormats object
+        :returns: DateFormats object
         """
         return "DateFormats"
 
@@ -547,7 +550,7 @@ class ObjectAPI:
         :type media_type: str, optional
         :param sub_media_type: Child media type for collections (i.e. 'movie', 'show', 'video', 'audio', 'photo')
         :type sub_media_type: str, optional
-        :return: ExportFields
+        :returns: ExportFields
         """
         return 'ExportFields'
 
@@ -574,7 +577,7 @@ class ObjectAPI:
         :type length: int, optional
         :param search: String to search for
         :type search: str, optional
-        :return: ExportsTable object
+        :returns: ExportsTable object
         :rtype: ExportsTable
         """
         return 'ExportsTable'
@@ -586,7 +589,7 @@ class ObjectAPI:
 
         :param ip_address: IP address to look up
         :type ip_address: str
-        :return: GeoIPLookup
+        :returns: GeoIPLookup
         """
         return 'GeoIPLookup'
 
@@ -633,7 +636,7 @@ class ObjectAPI:
         :type length: int, optional
         :param search: String to search for
         :type search: str, optional
-        :return: History object
+        :returns: History object
         """
         return 'History'
 
@@ -655,7 +658,7 @@ class ObjectAPI:
         :type count: int, optional
         :param stat_id: Name of a single statistic to return (i.e. 'top_movies', 'popular_tv', 'most_concurrent')
         :type stat_id: str, optional
-        :return: List of HomeStat object
+        :returns: List of HomeStat object
 
         """
         return 'HomeStat'
@@ -669,7 +672,7 @@ class ObjectAPI:
         :type rating_key: str
         :param grouping: Whether to group results (default: False)
         :type grouping: bool, optional
-        :return: List of ItemUserStat objects
+        :returns: List of ItemUserStat objects
         :rtype: List[ItemUserStat]
         """
         return 'ItemUserStat'
@@ -686,7 +689,7 @@ class ObjectAPI:
         :type grouping: bool, optional
         :param query_days: List of days to get results for (i.e. [0, 1, 14, 30])
         :type query_days: list[int], optional
-        :return: List of ItemWatchTimeStat objects
+        :returns: List of ItemWatchTimeStat objects
         :rtype: List[ItemWatchTimeStat]
         """
         return 'ItemWatchTimeStat'
@@ -697,7 +700,7 @@ class ObjectAPI:
         """
         Get a list of all libraries on your server
 
-        :return: List of LibrariesEntry objects
+        :returns: List of LibrariesEntry objects
 
         """
         return 'LibrariesEntry'
@@ -720,7 +723,7 @@ class ObjectAPI:
         :type length: int, optional
         :param search: String to search for
         :type search: str, optional
-        :return: LibrariesTable object
+        :returns: LibrariesTable object
 
         """
         return 'LibrariesTable'
@@ -732,7 +735,7 @@ class ObjectAPI:
 
         :param section_id: ID of the Plex library section
         :type section_id: str
-        :return: Library object
+        :returns: Library object
 
         """
         return 'Library'
@@ -762,7 +765,7 @@ class ObjectAPI:
         :type search: str, optional
         :param refresh: Whether to refresh the media info table (default: False)
         :type refresh: bool, optional
-        :return: LibraryMediaInfo object
+        :returns: LibraryMediaInfo object
 
         """
         return 'LibraryMediaInfo'
@@ -773,7 +776,7 @@ class ObjectAPI:
         """
         Get list of library names and IDs on the Plex Media Server
 
-        :return: List of LibraryName objects
+        :returns: List of LibraryName objects
         """
         return 'LibraryName'
 
@@ -786,7 +789,7 @@ class ObjectAPI:
         :type section_id: str
         :param grouping: Whether to group results (default: False)
         :type grouping: bool, optional
-        :return: LibraryUserStats objects
+        :returns: LibraryUserStats objects
 
         """
         return 'LibraryUserStats'
@@ -803,7 +806,7 @@ class ObjectAPI:
         :type grouping: bool, optional
         :param query_days: List of days to get results for (i.e. [0, 1, 14, 30])
         :type query_days: list[int], optional
-        :return: LibraryWatchTimeStats object
+        :returns: LibraryWatchTimeStats object
 
         """
         return 'LibraryWatchTimeStats'
@@ -826,7 +829,7 @@ class ObjectAPI:
         :type start: int, optional
         :param end: Row number to end at
         :type end: int, optional
-        :return: List of LogEntry objects
+        :returns: List of LogEntry objects
 
         """
         return 'LogEntry'
@@ -840,7 +843,7 @@ class ObjectAPI:
         :type rating_key: str, optional
         :param sync_id: Sync ID of a synced item
         :type sync_id: str, optional
-        :return: Metadata object
+        :returns: Metadata object
 
         """
         return 'Metadata'
@@ -854,7 +857,7 @@ class ObjectAPI:
         :type rating_key: str
         :param media_type: Type of media (i.e. 'movie', 'show', 'episode', 'album', 'track')
         :type media_type: str
-        :return: NewRatingKeys object
+        :returns: NewRatingKeys object
 
         """
         return 'NewRatingKeys'
@@ -866,7 +869,7 @@ class ObjectAPI:
 
         :param newsletter_id: ID of the newsletter
         :type newsletter_id: int
-        :return: NewsletterConfig object
+        :returns: NewsletterConfig object
 
         """
         return 'NewsletterConfig'
@@ -887,7 +890,7 @@ class ObjectAPI:
         :type length: int, optional
         :param search: String to search for
         :type search: str, optional
-        :return: NewsletterLog object
+        :returns: NewsletterLog object
 
         """
         return 'NewsletterLog'
@@ -898,7 +901,7 @@ class ObjectAPI:
         """
         Get a list of configured newsletters
 
-        :return: List of Newsletter objects
+        :returns: List of Newsletter objects
         """
         return 'Newsletter'
 
@@ -918,7 +921,7 @@ class ObjectAPI:
         :type length: int, optional
         :param search: String to search for
         :type search: str, optional
-        :return: NotificationLog object
+        :returns: NotificationLog object
 
         """
         return 'NotificationLog'
@@ -930,7 +933,7 @@ class ObjectAPI:
 
         :param notifier_id: ID of the notifier
         :type notifier_id: int
-        :return: NotifierConfig object
+        :returns: NotifierConfig object
 
         """
         return 'NotifierConfig'
@@ -941,7 +944,7 @@ class ObjectAPI:
         """
         Get a list of available notification parameters
 
-        :return: List of NotifierParameter objects
+        :returns: List of NotifierParameter objects
         """
         return 'NotifierParameter'
 
@@ -952,7 +955,7 @@ class ObjectAPI:
 
         :param notify_action: The notification action to filter out
         :type notify_action: str, optional
-        :return: List of Notifier objects
+        :returns: List of Notifier objects
 
         """
         return 'Notifier'
@@ -961,12 +964,12 @@ class ObjectAPI:
     def get_old_rating_keys(self, rating_key: str, media_type: str) -> OldRatingKeys:
         """
         Get a list of old rating keys from the Tautulli database for all the item's parent/children
+
         :param rating_key: Rating key of item
         :type rating_key: str
         :param media_type: Type of media (i.e. 'movie', 'show', 'episode', 'album', 'track')
         :type media_type: str
-        :return: OldRatingKeys object
-
+        :returns: OldRatingKeys object
         """
         return 'OldRatingKeys'
 
@@ -979,7 +982,7 @@ class ObjectAPI:
         :type section_id: str, optional
         :param user_id: User ID of the Plex user
         :type user_id: str, optional
-        :return: PlaylistsTable object
+        :returns: PlaylistsTable object
 
         """
         return 'PlaylistsTable'
@@ -998,7 +1001,7 @@ class ObjectAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: PlaysOrStreamTypesBy object
+        :returns: PlaysOrStreamTypesBy object
         :rtype: PlaysOrStreamTypesBy
         """
         return 'PlaysOrStreamTypesBy'
@@ -1017,7 +1020,7 @@ class ObjectAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: PlaysOrStreamTypesBy object
+        :returns: PlaysOrStreamTypesBy object
         :rtype: PlaysOrStreamTypesBy
         """
         return 'PlaysOrStreamTypesBy'
@@ -1036,7 +1039,7 @@ class ObjectAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: PlaysOrStreamTypesBy object
+        :returns: PlaysOrStreamTypesBy object
         :rtype: PlaysOrStreamTypesBy
         """
         return 'PlaysOrStreamTypesBy'
@@ -1055,7 +1058,7 @@ class ObjectAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: PlaysOrStreamTypesBy object
+        :returns: PlaysOrStreamTypesBy object
         :rtype: PlaysOrStreamTypesBy
         """
         return 'PlaysOrStreamTypesBy'
@@ -1074,7 +1077,7 @@ class ObjectAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: PlaysOrStreamTypesBy object
+        :returns: PlaysOrStreamTypesBy object
         :rtype: PlaysOrStreamTypesBy
         """
         return 'PlaysOrStreamTypesBy'
@@ -1093,7 +1096,7 @@ class ObjectAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: PlaysOrStreamTypesBy object
+        :returns: PlaysOrStreamTypesBy object
         :rtype: PlaysOrStreamTypesBy
         """
         return 'PlaysOrStreamTypesBy'
@@ -1112,7 +1115,7 @@ class ObjectAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: PlaysOrStreamTypesBy object
+        :returns: PlaysOrStreamTypesBy object
         :rtype: PlaysOrStreamTypesBy
         """
         return 'PlaysOrStreamTypesBy'
@@ -1131,7 +1134,7 @@ class ObjectAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: PlaysOrStreamTypesBy object
+        :returns: PlaysOrStreamTypesBy object
         :rtype: PlaysOrStreamTypesBy
         """
         return 'PlaysOrStreamTypesBy'
@@ -1150,7 +1153,7 @@ class ObjectAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: PlaysOrStreamTypesBy object
+        :returns: PlaysOrStreamTypesBy object
         :rtype: PlaysOrStreamTypesBy
         """
         return 'PlaysOrStreamTypesBy'
@@ -1164,7 +1167,7 @@ class ObjectAPI:
         :type window: int, optional
         :param log_type: Log type ('server' or 'scanner')
         :type log_type: str, optional
-        :return: PlexLog object
+        :returns: PlexLog object
 
         """
         return 'PlexLog'
@@ -1175,7 +1178,7 @@ class ObjectAPI:
         """
         Check for updates to the Plex Media Server
 
-        :return: PMSUpdate object
+        :returns: PMSUpdate object
         """
         return 'PMSUpdate'
 
@@ -1193,7 +1196,7 @@ class ObjectAPI:
         :type media_type: str, optional
         :param section_id: ID of the Plex library section
         :type section_id: str, optional
-        :return: RecentlyAdded object
+        :returns: RecentlyAdded object
         """
         return 'RecentlyAdded'
 
@@ -1202,7 +1205,7 @@ class ObjectAPI:
         """
         Get the name of the Plex Media Server
 
-        :return: Name of the Plex Media Server
+        :returns: Name of the Plex Media Server
         :rtype: str
         """
         return self._raw_api.server_friendly_name
@@ -1220,7 +1223,7 @@ class ObjectAPI:
         :type ssl: bool, optional
         :param remote: Whether the Plex Media Server is remote (default: False)
         :type remote: bool, optional
-        :return: ServerID object
+        :returns: ServerID object
 
         """
         return 'ServerID'
@@ -1231,7 +1234,7 @@ class ObjectAPI:
         """
         Get info about the local server
 
-        :return: ServerIdentity object
+        :returns: ServerIdentity object
         """
         return 'ServerIdentity'
 
@@ -1241,7 +1244,7 @@ class ObjectAPI:
         """
         Get the Plex Media Server information
 
-        :return: ServerInfo object
+        :returns: ServerInfo object
         """
         return 'ServerInfo'
 
@@ -1251,7 +1254,7 @@ class ObjectAPI:
         """
         Get all your servers that are published to Plex.tv
 
-        :return: List of ServerListEntry objects
+        :returns: List of ServerListEntry objects
 
         """
         return 'ServerListEntry'
@@ -1262,7 +1265,7 @@ class ObjectAPI:
 
         :param pref: Name of preference
         :type pref: str
-        :return: Value of preference
+        :returns: Value of preference
         :rtype: str
         """
         return self._raw_api.get_server_pref(pref=pref)
@@ -1273,7 +1276,7 @@ class ObjectAPI:
         """
         Get info about the Plex Media Server
 
-        :return: List of ServersInfoEntry objects
+        :returns: List of ServersInfoEntry objects
 
         """
         return 'ServersInfoEntry'
@@ -1285,7 +1288,7 @@ class ObjectAPI:
 
         :param key: Name of a config section to return
         :type key: str, optional
-        :return: Settings object
+        :returns: Settings object
 
         """
         return 'Settings'
@@ -1299,7 +1302,7 @@ class ObjectAPI:
         :type row_id: int, optional
         :param session_key: Session key for the current stream
         :type session_key: int, optional
-        :return: StreamData object
+        :returns: StreamData object
 
         """
         return 'StreamData'
@@ -1318,7 +1321,7 @@ class ObjectAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: PlaysOrStreamTypesBy object
+        :returns: PlaysOrStreamTypesBy object
         :rtype: PlaysOrStreamTypesBy
         """
         return 'PlaysOrStreamTypesBy'
@@ -1337,7 +1340,7 @@ class ObjectAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: PlaysOrStreamTypesBy object
+        :returns: PlaysOrStreamTypesBy object
         :rtype: PlaysOrStreamTypesBy
         """
         return 'PlaysOrStreamTypesBy'
@@ -1351,7 +1354,7 @@ class ObjectAPI:
         :type machine_id: str
         :param user_id: ID of the Plex user
         :type user_id: str, optional
-        :return: SyncedItems object
+        :returns: SyncedItems object
 
         """
         return 'SyncedItems'
@@ -1362,7 +1365,7 @@ class ObjectAPI:
         """
         Get the Tautulli server information
 
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return 'TautulliInfo'
@@ -1374,7 +1377,7 @@ class ObjectAPI:
 
         :param user_id: ID of the Plex user
         :type user_id: str
-        :return: User object
+        :returns: User object
 
         """
         return 'User'
@@ -1397,7 +1400,7 @@ class ObjectAPI:
         :type length: int, optional
         :param search: String to search for (e.g. "xxx.xxx.xxx.xxx")
         :type search: str, optional
-        :return: UserIPs object
+        :returns: UserIPs object
 
         """
         return 'UserIPs'
@@ -1420,7 +1423,7 @@ class ObjectAPI:
         :type length: int, optional
         :param search: String to search for (e.g. "xxx.xxx.xxx.xxx")
         :type search: str, optional
-        :return: UserLogins object
+        :returns: UserLogins object
 
         """
         return 'UserLogins'
@@ -1431,7 +1434,7 @@ class ObjectAPI:
         """
         Get a list of all usernames and user ids
 
-        :return: List of UserName objects
+        :returns: List of UserName objects
 
         """
         return 'UserName'
@@ -1445,7 +1448,7 @@ class ObjectAPI:
         :type user_id: str
         :param grouping: Whether to group results (default: False)
         :type grouping: bool, optional
-        :return: UserPlayerStats object
+        :returns: UserPlayerStats object
 
         """
         return 'UserPlayerStats'
@@ -1462,7 +1465,7 @@ class ObjectAPI:
         :type grouping: bool, optional
         :param query_days: List of days to get results for (e.g. [0, 1, 14, 30])
         :type query_days: list[int], optional
-        :return: UserWatchTimeStats object
+        :returns: UserWatchTimeStats object
 
         """
         return 'UserWatchTimeStats'
@@ -1473,7 +1476,7 @@ class ObjectAPI:
         """
         Get a list of all users that have access to your server
 
-        :return: List of User objects
+        :returns: List of User objects
 
         """
         return 'User'
@@ -1496,7 +1499,7 @@ class ObjectAPI:
         :type length: int, optional
         :param search: String to search for
         :type search: str, optional
-        :return: UsersTable object
+        :returns: UsersTable object
 
         """
         return 'UsersTable'
@@ -1508,7 +1511,7 @@ class ObjectAPI:
 
         :param ip_address: IP address
         :type ip_address: str
-        :return: WHOISLookup object
+        :returns: WHOISLookup object
 
         """
         return 'WHOISLookup'
@@ -1522,7 +1525,7 @@ class ObjectAPI:
         :type config_file_path: str
         :param backup: Whether to back up the current config before importing (default: True)
         :type backup: bool, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -1543,10 +1546,9 @@ class ObjectAPI:
         :type table_name: str, optional
         :param backup: Whether to back up the current database before importing (default: True)
         :type backup: bool, optional
-        :param import_ignore_interval: Only if app is 'plexwatch' or 'plexivity',
-        the minimum number of seconds for a stream to import
+        :param import_ignore_interval: Only if app is 'plexwatch' or 'plexivity', the minimum number of seconds for a stream to import
         :type import_ignore_interval: int, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -1558,7 +1560,7 @@ class ObjectAPI:
 
         :param row_ids: List of row IDS to sign out
         :type row_ids: list[int], optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -1578,7 +1580,7 @@ class ObjectAPI:
         :type headers: str, optional
         :param script_args: Arguments for script notifications
         :type script_args: str, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -1596,7 +1598,7 @@ class ObjectAPI:
         :type body: str, optional
         :param message: Message of the newsletter
         :type message: str, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -1608,10 +1610,9 @@ class ObjectAPI:
 
         :param rating_key: Rating key for the media item
         :type rating_key: int
-        :param notifier_id: ID of the notification agent.
-        Notification will be sent to all enabled notification agents if notifier_id is not provided.
+        :param notifier_id: ID of the notification agent. Notification will be sent to all enabled notification agents if notifier_id is not provided.
         :type notifier_id: int, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -1645,7 +1646,7 @@ class ObjectAPI:
         :type refresh: bool, optional
         :param return_hash: Whether to return the self-hosted image hash instead of the image (default: False)
         :type return_hash: bool, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -1655,7 +1656,7 @@ class ObjectAPI:
         """
         Refresh the Tautulli libraries list
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -1665,7 +1666,7 @@ class ObjectAPI:
         """
         Refresh the Tautulli users list
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -1686,7 +1687,7 @@ class ObjectAPI:
         :type onesignal_id: str, optional
         :param min_version: The minimum Tautulli version supported by the mobile device (e.g. "v2.5.6")
         :type min_version: str, optional
-        :return: RegisteredDevice object
+        :returns: RegisteredDevice object
 
         """
         return 'RegisteredDevice'
@@ -1696,7 +1697,7 @@ class ObjectAPI:
         """
         Restart Tautulli
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -1710,7 +1711,7 @@ class ObjectAPI:
         :type query: str
         :param limit: Maximum number of items to return per media type
         :type limit: int, optional
-        :return: SearchResults object
+        :returns: SearchResults object
 
         """
         return 'SearchResults'
@@ -1721,7 +1722,7 @@ class ObjectAPI:
         """
         Get the current status of Tautulli's connection to the Plex server
 
-        :return: ServerStatus object
+        :returns: ServerStatus object
         :rtype: ServerStatus
         """
         return 'ServerStatus'
@@ -1735,7 +1736,7 @@ class ObjectAPI:
         :type mobile_device_id: int
         :param friendly_name: Friendly name to identify the mobile device
         :type friendly_name: str, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -1749,7 +1750,7 @@ class ObjectAPI:
         :type newsletter_id: int
         :param agent_id: Type of the newsletter to update
         :type agent_id: int
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -1765,22 +1766,24 @@ class ObjectAPI:
         :type notifier_id: int
         :param agent_id: Agent of the notifier to update
         :type agent_id: int
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
 
     # TODO: Test to see what this returns, no schema on API docs
     @make_object
-    def sql(self, query: str) -> SQLResults:
+    def sql(self, query: str) -> None:
         """
         Query the Tautulli database with raw SQL.
 
         Automatically makes a backup of the database if the latest backup is older than 24 hours.
+
         `api_sql` must be manually enabled in the config file while Tautulli is shut down.
+
         :param query: SQL query
         :type query: str
-        :return: SQLResults object
+        :returns: SQLResults object
 
         """
         warnings.warn("Deprecated", DeprecationWarning)
@@ -1794,7 +1797,7 @@ class ObjectAPI:
 
         :param check: What to check (i.e. 'database')
         :type check: str, optional
-        :return: Status object
+        :returns: Status object
         :rtype: Status
         """
         return 'Status'
@@ -1810,7 +1813,7 @@ class ObjectAPI:
         :type session_id: str, optional
         :param message: Custom message to send to the client
         :type message: str, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -1824,7 +1827,7 @@ class ObjectAPI:
         :type section_id: str
         :param section_name: Name of the Plex library section
         :type section_name: str, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -1838,7 +1841,7 @@ class ObjectAPI:
         :type user_id: str
         :param username: Username of the Plex user
         :type username: str
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -1848,7 +1851,7 @@ class ObjectAPI:
         """
         Update Tautulli
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False
@@ -1859,7 +1862,7 @@ class ObjectAPI:
         """
         Check for Tautulli updates
 
-        :return: UpdateCheck object
+        :returns: UpdateCheck object
 
         """
         return 'UpdateCheck'
@@ -1870,13 +1873,14 @@ class ObjectAPI:
         Update the metadata in the Tautulli database by matching rating keys.
 
         Also updates all parents or children of the media item if it is a show/season/episode or artist/album/track.
+
         :param old_rating_key: Old rating key for item
         :type old_rating_key: str
         :param new_rating_key: New rating key for item
         :type new_rating_key: str
         :param media_type: Type of media (i.e. 'movie', 'show', 'episode', 'album', 'track')
         :type media_type: str
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return False

@@ -26,7 +26,7 @@ class Datum(BaseModel):
     userID: Optional[Any]
 
 
-class Data(BaseModel):
+class PlaylistsTable(BaseModel):
     recordsFiltered: Optional[int]
     recordsTotal: Optional[int]
     data: Optional[List[Datum]]
@@ -36,7 +36,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: PlaylistsTable
 
 
 class Model(BaseModel):

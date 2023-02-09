@@ -74,7 +74,7 @@ class MediaInfoItem(BaseModel):
     parts: Optional[List[Part]]
 
 
-class Data(BaseModel):
+class Metadata(BaseModel):
     media_type: Optional[str]
     section_id: Optional[str]
     library_name: Optional[str]
@@ -132,7 +132,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: Metadata
 
 
 class Model(BaseModel):

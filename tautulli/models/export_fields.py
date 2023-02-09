@@ -19,7 +19,7 @@ class MediaInfoField(BaseModel):
     level: Optional[int]
 
 
-class Data(BaseModel):
+class ExportFields(BaseModel):
     metadata_fields: Optional[List[MetadataField]]
     media_info_fields: Optional[List[MediaInfoField]]
 
@@ -27,7 +27,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: str
     message: Any
-    data: Data
+    data: ExportFields
 
 
 class Model(BaseModel):

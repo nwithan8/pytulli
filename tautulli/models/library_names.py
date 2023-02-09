@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Data(BaseModel):
+class LibraryName(BaseModel):
     section_id: Optional[int]
     section_name: Optional[str]
     section_type: Optional[str]
@@ -19,7 +19,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: List[Data]
+    data: List[LibraryName]
 
 
 class Model(BaseModel):

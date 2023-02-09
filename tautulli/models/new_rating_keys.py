@@ -13,14 +13,14 @@ class Field0(BaseModel):
     rating_key: Optional[int]
 
 
-class Data(BaseModel):
+class NewRatingKeys(BaseModel):
     field_0: Optional[Field0] = Field(..., alias='0')
 
 
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: NewRatingKeys
 
 
 class Model(BaseModel):

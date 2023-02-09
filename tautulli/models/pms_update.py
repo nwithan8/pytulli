@@ -9,7 +9,7 @@ from typing import Any, Optional
 from pydantic import BaseModel
 
 
-class Data(BaseModel):
+class PMSUpdate(BaseModel):
     update_available: Optional[bool]
     platform: Optional[str]
     release_date: Optional[int]
@@ -27,7 +27,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: PMSUpdate
 
 
 class Model(BaseModel):

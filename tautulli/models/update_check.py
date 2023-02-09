@@ -9,7 +9,7 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class Data(BaseModel):
+class UpdateCheck(BaseModel):
     update: Optional[bool]
     install_type: Optional[str]
 
@@ -17,7 +17,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Optional[str]
-    data: Data
+    data: UpdateCheck
 
 
 class Model(BaseModel):

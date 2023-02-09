@@ -1,5 +1,5 @@
 from tautulli.internal import static
-from tautulli.models.activity_summary import build_summary_from_activity_json
+from tautulli.models.activity import build_summary_from_activity_json
 
 
 # noinspection PyTypeChecker
@@ -13,7 +13,8 @@ class APIShortcuts:
     def ping(self) -> bool:
         """
         Ping the Tautulli server
-        :return: `True` if successful, `False` if unsuccessful
+
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         name = self._api.server_friendly_name
@@ -23,7 +24,7 @@ class APIShortcuts:
         """
         Get a Plex Media Server library using its name
 
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         for library in self._api.library_names:
@@ -36,7 +37,7 @@ class APIShortcuts:
         """
         Get a summary of current activity on the Plex Media Server
 
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         _activity_data = self._api.activity()
@@ -47,7 +48,7 @@ class APIShortcuts:
         """
         Get a summary message of current activity on the Plex Media Server
 
-        :return: Activity summary message
+        :returns: Activity summary message
         :rtype: str
         """
         _activity_data = self._api.activity()

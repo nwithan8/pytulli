@@ -52,7 +52,7 @@ class Datum(BaseModel):
     session_key: Optional[Any]
 
 
-class Data(BaseModel):
+class History(BaseModel):
     recordsFiltered: Optional[int]
     recordsTotal: Optional[int]
     data: Optional[List[Datum]]
@@ -64,7 +64,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: History
 
 
 class Model(BaseModel):

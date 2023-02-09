@@ -9,14 +9,14 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Data(BaseModel):
+class PlexLog(BaseModel):
     data: Optional[List]
 
 
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: PlexLog
 
 
 class Model(BaseModel):

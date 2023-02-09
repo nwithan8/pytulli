@@ -38,8 +38,12 @@ extensions = [
 # Autodoc options
 autodoc_default_options = {
     'member-order': 'groupwise',
-    'undoc-members': True
+    'undoc-members': False
 }
+
+# Autoapi options
+autoapi_dirs = ['../../tautulli']
+autoapi_type = 'python'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

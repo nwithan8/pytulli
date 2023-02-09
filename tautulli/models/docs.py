@@ -9,7 +9,7 @@ from typing import Any, Optional
 from pydantic import BaseModel
 
 
-class Data(BaseModel):
+class Docs(BaseModel):
     add_newsletter_config: Optional[str]
     add_notifier_config: Optional[str]
     arnold: Optional[str]
@@ -135,7 +135,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: Docs
 
 
 class Model(BaseModel):

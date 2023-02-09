@@ -9,14 +9,14 @@ from typing import Any, Optional
 from pydantic import BaseModel
 
 
-class Data(BaseModel):
+class ServerID(BaseModel):
     identifier: Optional[Any]
 
 
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: ServerID
 
 
 class Model(BaseModel):

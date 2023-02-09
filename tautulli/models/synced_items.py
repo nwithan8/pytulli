@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Datum(BaseModel):
+class SyncedItems(BaseModel):
     audio_bitrate: Optional[str]
     client_id: Optional[str]
     content_type: Optional[str]
@@ -38,7 +38,7 @@ class Datum(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: List[Datum]
+    data: List[SyncedItems]
 
 
 class Model(BaseModel):

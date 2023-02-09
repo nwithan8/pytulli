@@ -22,7 +22,7 @@ class Datum(BaseModel):
     user_id: Optional[int]
 
 
-class Data(BaseModel):
+class UserLogins(BaseModel):
     draw: Optional[int]
     recordsTotal: Optional[int]
     recordsFiltered: Optional[int]
@@ -32,7 +32,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: UserLogins
 
 
 class Model(BaseModel):

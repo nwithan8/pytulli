@@ -713,7 +713,7 @@ class Cloudinary(BaseModel):
     cloudinary_api_secret: Optional[str]
 
 
-class Data(BaseModel):
+class Settings(BaseModel):
     IFTTT: Optional[IFTTT]
     Growl: Optional[Growl]
     PMS: Optional[PMS]
@@ -746,7 +746,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: Settings
 
 
 class Model(BaseModel):

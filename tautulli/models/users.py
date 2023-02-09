@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Datum(BaseModel):
+class User(BaseModel):
     row_id: Optional[int]
     user_id: Optional[int]
     username: Optional[str]
@@ -35,7 +35,7 @@ class Datum(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: List[Datum]
+    data: List[User]
 
 
 class Model(BaseModel):

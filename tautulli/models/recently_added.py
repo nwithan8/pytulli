@@ -9,14 +9,14 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Data(BaseModel):
+class RecentlyAdded(BaseModel):
     recently_added: Optional[List]
 
 
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: RecentlyAdded
 
 
 class Model(BaseModel):

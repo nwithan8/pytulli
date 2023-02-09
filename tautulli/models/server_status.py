@@ -9,7 +9,7 @@ from typing import Any, Optional
 from pydantic import BaseModel
 
 
-class Data(BaseModel):
+class ServerStatus(BaseModel):
     result: Optional[str]
     connected: Optional[bool]
 
@@ -17,7 +17,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: str
     message: Any
-    data: Data
+    data: ServerStatus
 
 
 class Model(BaseModel):

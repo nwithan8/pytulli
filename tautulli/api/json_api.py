@@ -1,17 +1,17 @@
 import logging
 import warnings
-from typing import Union, List
-import objectrest
 from datetime import datetime
+from typing import Union, List
 
+import objectrest
 import packaging.version
 
 import tautulli.internal.static as static
-from tautulli.tools.api_helper import APIShortcuts
+from tautulli._info import __min_api_version__
+from tautulli.internal.decorators import raw_json, set_and_forget
 from tautulli.internal.utils import build_optional_params, _get_response_data, _success_result, int_list_to_string, \
     _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string, comma_delimit
-from tautulli.internal.decorators import raw_json, set_and_forget
-from tautulli._info import __min_api_version__
+from tautulli.tools.api_helper import APIShortcuts
 from tautulli.tools.utils import redact
 
 
@@ -39,7 +39,7 @@ class RawAPI:
 
         :param min_version: Minimum API version required
         :type min_version: str
-        :return: True if compatible, False if not
+        :returns: True if compatible, False if not
         :rtype: bool
         """
         server_version_string: Union[str, None] = self.tautulli_info.get('tautulli_version', None)
@@ -61,11 +61,12 @@ class RawAPI:
     def _get(self, command: str, params: dict = None) -> objectrest.Response:
         """
         Get response from API call
+
         :param command: Tautulli endpoint
         :type command: str
         :param params: Dictionary of parameters to add to url
         :type params: dict, optional
-        :return: Response from the API
+        :returns: Response from the API
         :rtype: objectrest.Response
         """
         if not params:
@@ -81,7 +82,7 @@ class RawAPI:
         :type command: str
         :param params: Dictionary of parameters to add to url
         :type params: dict, optional
-        :return: JSON data from the API response
+        :returns: JSON data from the API response
         :rtype: dict
         """
         response = self._get(command=command, params=params)
@@ -105,7 +106,7 @@ class RawAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         grouping = bool_to_int(boolean=grouping)
@@ -120,7 +121,7 @@ class RawAPI:
         """
         Shortcuts for common API actions
 
-        :return: Access to API shortcuts
+        :returns: Access to API shortcuts
         :rtype: APIShortcuts
         """
         return APIShortcuts(api=self)
@@ -132,7 +133,7 @@ class RawAPI:
 
         :param agent_id: Newsletter type to add
         :type agent_id: int
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'add_newsletter_config', {'agent_id': agent_id}
@@ -144,7 +145,7 @@ class RawAPI:
 
         :param agent_id: Notification agent to add
         :type: int
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'add_notifier_config', {'agent_id': agent_id}
@@ -154,7 +155,7 @@ class RawAPI:
         """
         Get to the chopper!
 
-        :return: Random Arnold Schwarzenegger quote
+        :returns: Random Arnold Schwarzenegger quote
         :rtype: str
         """
         json_data = self._get_json(command='arnold')
@@ -167,7 +168,7 @@ class RawAPI:
         """
         Backup the config.ini file
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return "backup_config", None
@@ -177,7 +178,7 @@ class RawAPI:
         """
         Backup the plexpy.db database
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return "backup_db", None
@@ -193,7 +194,7 @@ class RawAPI:
         :type section_id: str
         :param row_ids: List of row IDS to delete
         :type row_ids: list[int], optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         params = {'server_id': server_id, 'section_id': section_id}
@@ -210,7 +211,7 @@ class RawAPI:
         :type user_id: str
         :param row_ids: List of row IDs to delete
         :type row_ids: list[int], optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         params = {'user_id': user_id}
@@ -222,7 +223,8 @@ class RawAPI:
     def delete_cache(self) -> bool:
         """
         Delete the cache directory
-        :return: `True` if successful, `False` if unsuccessful
+
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return "delete_cache", None
@@ -236,7 +238,7 @@ class RawAPI:
         :type export_id: int
         :param delete_all: Whether to delete all exported files (default: False)
         :type delete_all: bool
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return "delete_export", {'export_id': export_id, 'delete_all': delete_all}
@@ -248,7 +250,7 @@ class RawAPI:
 
         :param row_ids: List of row IDs to delete
         :type row_ids: list[int]
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         params = {'row_ids': int_list_to_string(int_list=row_ids)}
@@ -265,7 +267,7 @@ class RawAPI:
         :type service: str, optional
         :param delete_all: Whether to delete all images from the service (default: False)
         :type delete_all: bool, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         if _is_invalid_choice(value=service, variable_name="service",
@@ -278,7 +280,8 @@ class RawAPI:
     def delete_image_cache(self) -> bool:
         """
         Delete image cache directory
-        :return: `True` if successful, `False` if unsuccessful
+
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'delete_image_cache', None
@@ -288,14 +291,15 @@ class RawAPI:
         """
         Delete library section from Tautulli.
 
-        ALso erases library history
+        Also erases library history.
+
         :param server_id: Plex server identifier of the library section
         :type server_id: str
         :param section_id: ID of the Plex library section
         :type section_id: str
         :param row_ids: List of row IDs to delete
         :type row_ids: list[int], optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         params = {'server_id': server_id, 'section_id': section_id}
@@ -308,7 +312,7 @@ class RawAPI:
         """
         Delete the Tautulli login logs
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'delete_login_log', None
@@ -324,7 +328,7 @@ class RawAPI:
         :type service: str, optional
         :param delete_all: Whether to delete all images from the service (default: False)
         :type delete_all: bool, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         if _is_invalid_choice(value=service, variable_name="service",
@@ -340,7 +344,7 @@ class RawAPI:
 
         :param section_id: ID of the Plex library section
         :type section_id: str
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'delete_media_info_cache', {'section_id': section_id}
@@ -354,7 +358,7 @@ class RawAPI:
         :type mobile_device_id: int, optional
         :param device_id: Unique device identifier for the mobile device
         :type device_id: str, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         if not _one_needed(mobile_device_id=mobile_device_id, device_id=device_id):
@@ -372,7 +376,7 @@ class RawAPI:
 
         :param newsletter_id: ID of the newsletter to delete
         :type newsletter_id: int
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'delete_newsletter', {'newsletter_id': newsletter_id}
@@ -382,7 +386,7 @@ class RawAPI:
         """
         Delete the Tautulli newsletter logs
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'delete_newsletter_log', None
@@ -392,7 +396,7 @@ class RawAPI:
         """
         Delete the Tautulli notification logs
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'delete_notification_log', None
@@ -404,7 +408,7 @@ class RawAPI:
 
         :param notifier_id: ID of the notifier to delete
         :type notifier_id: int
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'delete_notifier', {'notifier_id': notifier_id}
@@ -414,7 +418,7 @@ class RawAPI:
         """
         Flush all the recently added items in the database
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'delete_recently_added', None
@@ -428,7 +432,7 @@ class RawAPI:
         :type client_id: str
         :param sync_id: Sync ID of the synced item
         :type sync_id: str
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'delete_synced_item', {'client_id': client_id, 'sync_id': sync_id}
@@ -438,7 +442,7 @@ class RawAPI:
         """
         Flush all temporary sessions in the database
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'delete_temp_sessions', None
@@ -453,7 +457,7 @@ class RawAPI:
         :type user_id: str
         :param row_ids: List of row IDs to delete
         :type row_ids: list[int], optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         params = {'user_id': user_id}
@@ -466,7 +470,7 @@ class RawAPI:
         """
         Get the Tautulli API docs as a dict where commands are keys, docstring are value
 
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return self._get_json(command='docs')
@@ -476,7 +480,7 @@ class RawAPI:
         """
         Get the Tautulli API docs formatted with markdown
 
-        :return: API docs str
+        :returns: API docs str
         :rtype: str
         """
         response = self._get(command='docs_md')
@@ -488,7 +492,7 @@ class RawAPI:
         """
         Download the Tautulli configuration file
 
-        :return: Config file string
+        :returns: Config file string
         :rtype: str
         """
         response = self._get(command='download_config')
@@ -500,7 +504,7 @@ class RawAPI:
         """
         Download the Tautulli database file
 
-        :return: Database file byte array
+        :returns: Database file byte array
         :rtype: bytes
         """
         response = self._get(command='download_database')
@@ -512,7 +516,7 @@ class RawAPI:
         """
         Download an exported metadata file
 
-        :return: Metadata file byte array
+        :returns: Metadata file byte array
         :rtype: bytes
         """
         params = {'export_id': export_id}
@@ -527,8 +531,8 @@ class RawAPI:
 
         :param logfile: Log file to download
         :type logfile: str, optional
-        :return: Log file bytearray
-        :rtype: bytearray
+        :returns: Log file byte array
+        :rtype: bytes
         """
         if _is_invalid_choice(value=logfile, variable_name="logfile",
                               choices=static.logfile_types):
@@ -545,8 +549,8 @@ class RawAPI:
 
         :param logfile: Log file to download
         :type logfile: str, optional
-        :return: Log file bytearray
-        :rtype: bytearray
+        :returns: Log file byte array
+        :rtype: bytes
         """
         if _is_invalid_choice(value=logfile, variable_name="logfile",
                               choices=static.plex_logfile_types):
@@ -572,7 +576,7 @@ class RawAPI:
         :type custom_art: str, optional
         :param keep_history: Whether to keep library history (default: True)
         :type keep_history: bool, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         keep_history = bool_to_int(boolean=keep_history)
@@ -597,7 +601,7 @@ class RawAPI:
         :type keep_history: bool, optional
         :param allow_guest: Whether to allow user as a guest (default: False)
         :type allow_guest: bool, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         keep_history = bool_to_int(boolean=keep_history)
@@ -637,7 +641,7 @@ class RawAPI:
         :type export_type: str, optional
         :param individual_files: Export each item as an individual field for library/user export (default: False)
         :type individual_files: bool, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         if not _one_needed(section_id=section_id, user_id=user_id, rating_key=rating_key):
@@ -669,7 +673,7 @@ class RawAPI:
         :type session_key: int, optional
         :param session_id: Session ID of the session info to return
         :type session_id: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         params = build_optional_params(session_key=session_key, session_id=session_id)
@@ -685,7 +689,7 @@ class RawAPI:
         :type username: str, optional
         :param password: Tautulli password
         :type password: str, optional
-        :return: API key
+        :returns: API key
         :rtype: str or None
         """
         params = build_optional_params(username=username, password=password)
@@ -703,7 +707,7 @@ class RawAPI:
         :type rating_key: str
         :param media_type: The type of media item (movie, show, season, episode)
         :type media_type: str
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return 'get_children_metadata', {'rating_key': rating_key, 'media_type': media_type}
@@ -715,7 +719,7 @@ class RawAPI:
 
         :param section_id: ID of the Plex library section
         :type section_id: str
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return 'get_collections_table', {'section_id': section_id}
@@ -726,7 +730,7 @@ class RawAPI:
         """
         Get the data and time formats used by Tautulli
 
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return 'get_date_formats', None
@@ -740,7 +744,7 @@ class RawAPI:
         :type media_type: str, optional
         :param sub_media_type: Child media type for collections (i.e. 'movie', 'show', 'video', 'audio', 'photo')
         :type sub_media_type: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         if _is_invalid_choice(value=media_type, variable_name="media_type", choices=static.export_media_types):
@@ -781,7 +785,7 @@ class RawAPI:
         :type length: int, optional
         :param search: String to search for
         :type search: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         if not _one_needed(section_id=section_id, user_id=user_id, rating_key=rating_key):
@@ -806,7 +810,7 @@ class RawAPI:
 
         :param ip_address: IP address to look up
         :type ip_address: str
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return 'get_geoip_lookup', {'ip_address': ip_address}
@@ -859,7 +863,7 @@ class RawAPI:
         :type length: int, optional
         :param search: String to search for
         :type search: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         grouping = bool_to_int(boolean=grouping)
@@ -905,7 +909,7 @@ class RawAPI:
         :type count: int, optional
         :param stat_id: Name of a single statistic to return (i.e. 'top_movies', 'popular_tv', 'most_concurrent')
         :type stat_id: str, optional
-        :return: List of data
+        :returns: List of data
         :rtype: List[dict]
         """
         grouping = bool_to_int(boolean=grouping)
@@ -929,7 +933,7 @@ class RawAPI:
         :type rating_key: str
         :param grouping: Whether to group results (default: False)
         :type grouping: bool, optional
-        :return: List of data
+        :returns: List of data
         :rtype: List[dict]
         """
         grouping = bool_to_int(boolean=grouping)
@@ -949,7 +953,7 @@ class RawAPI:
         :type grouping: bool, optional
         :param query_days: List of days to get results for (i.e. [0, 1, 14, 30])
         :type query_days: list[int], optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         grouping = bool_to_int(boolean=grouping)
@@ -965,7 +969,7 @@ class RawAPI:
         """
         Get a list of all libraries on your server
 
-        :return: List of data
+        :returns: List of data
         :rtype: List[dict]
         """
         return 'get_libraries', None
@@ -988,7 +992,7 @@ class RawAPI:
         :type length: int, optional
         :param search: String to search for
         :type search: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         grouping = bool_to_int(boolean=grouping)
@@ -1011,7 +1015,7 @@ class RawAPI:
         :type section_id: str
         :param include_last_accessed: Whether to include the last_accessed value for the library (default: False)
         :type include_last_accessed: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         params = build_optional_params(section_id=section_id, include_last_accessed=include_last_accessed)
@@ -1042,7 +1046,7 @@ class RawAPI:
         :type search: str, optional
         :param refresh: Whether to refresh the media info table (default: False)
         :type refresh: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         if not _one_needed(section_id=section_id, rating_key=rating_key):
@@ -1069,7 +1073,7 @@ class RawAPI:
         """
         Get list of library names and IDs on the Plex Media Server
 
-        :return: List of names
+        :returns: List of names
         :rtype: list[str]
         """
         return 'get_library_names', None
@@ -1083,7 +1087,7 @@ class RawAPI:
         :type section_id: str
         :param grouping: Whether to group results (default: False)
         :type grouping: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         grouping = bool_to_int(boolean=grouping)
@@ -1103,7 +1107,7 @@ class RawAPI:
         :type grouping: bool, optional
         :param query_days: List of days to get results for (i.e. [0, 1, 14, 30])
         :type query_days: list[int], optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         grouping = bool_to_int(boolean=grouping)
@@ -1131,7 +1135,7 @@ class RawAPI:
         :type start: int, optional
         :param end: Row number to end at
         :type end: int, optional
-        :return: List of data
+        :returns: List of data
         :rtype: List[dict]
         """
         if _is_invalid_choice(value=sort, variable_name='sort',
@@ -1153,7 +1157,7 @@ class RawAPI:
         :type rating_key: str, optional
         :param sync_id: Sync ID of a synced item
         :type sync_id: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         if not _one_needed(sync_id=sync_id, rating_key=rating_key):
@@ -1173,7 +1177,7 @@ class RawAPI:
         :type rating_key: str
         :param media_type: Type of media (i.e. 'movie', 'show', 'episode', 'album', 'track')
         :type media_type: str
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         if _is_invalid_choice(value=media_type, variable_name='media_type',
@@ -1189,7 +1193,7 @@ class RawAPI:
 
         :param newsletter_id: ID of the newsletter
         :type newsletter_id: int
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return 'get_newsletter_config', {'newsletter_id': newsletter_id}
@@ -1210,7 +1214,7 @@ class RawAPI:
         :type length: int, optional
         :param search: String to search for
         :type search: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         if _is_invalid_choice(value=order_column, variable_name='order_column',
@@ -1229,7 +1233,7 @@ class RawAPI:
         """
         Get a list of configured newsletters
 
-        :return: List of data
+        :returns: List of data
         :rtype: List[dict]
         """
         return 'get_newsletters', None
@@ -1250,7 +1254,7 @@ class RawAPI:
         :type length: int, optional
         :param search: String to search for
         :type search: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         if _is_invalid_choice(value=order_column, variable_name='order_column',
@@ -1270,7 +1274,7 @@ class RawAPI:
 
         :param notifier_id: ID of the notifier
         :type notifier_id: int
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return 'get_notifier_config', {'notifier_id': notifier_id}
@@ -1281,7 +1285,7 @@ class RawAPI:
         """
         Get a list of available notification parameters
 
-        :return: List of data
+        :returns: List of data
         :rtype: List[dict]
         """
         return 'get_notifier_parameters', None
@@ -1293,7 +1297,7 @@ class RawAPI:
 
         :param notify_action: The notification action to filter out
         :type notify_action: str, optional
-        :return: List of data
+        :returns: List of data
         :rtype: List[dict]
         """
         params = build_optional_params(notify_action=notify_action)
@@ -1303,11 +1307,12 @@ class RawAPI:
     def get_old_rating_keys(self, rating_key: str, media_type: str) -> dict:
         """
         Get a list of old rating keys from the Tautulli database for all the item's parent/children
+
         :param rating_key: Rating key of item
         :type rating_key: str
         :param media_type: Type of media (i.e. 'movie', 'show', 'episode', 'album', 'track')
         :type media_type: str
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         if _is_invalid_choice(value=media_type, variable_name='media_type',
@@ -1325,7 +1330,7 @@ class RawAPI:
         :type section_id: str, optional
         :param user_id: User ID of the Plex user
         :type user_id: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         if not _one_needed(section_id=section_id, user_id=user_id):
@@ -1349,7 +1354,7 @@ class RawAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return self._get_x_by(endpoint='get_plays_by_date', time_range=time_range, y_axis=y_axis, user_id=user_id,
@@ -1368,7 +1373,7 @@ class RawAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return self._get_x_by(endpoint='get_plays_by_dayofweek', time_range=time_range, y_axis=y_axis, user_id=user_id,
@@ -1387,7 +1392,7 @@ class RawAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         # noinspection SpellCheckingInspection
@@ -1407,7 +1412,7 @@ class RawAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return self._get_x_by(endpoint='get_plays_by_source_resolution', time_range=time_range, y_axis=y_axis,
@@ -1426,7 +1431,7 @@ class RawAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return self._get_x_by(endpoint='get_plays_by_stream_resolution', time_range=time_range, y_axis=y_axis,
@@ -1445,7 +1450,7 @@ class RawAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return self._get_x_by(endpoint='get_plays_by_stream_type', time_range=time_range, y_axis=y_axis,
@@ -1464,7 +1469,7 @@ class RawAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return self._get_x_by(endpoint='get_plays_by_top_10_platforms', time_range=time_range, y_axis=y_axis,
@@ -1483,7 +1488,7 @@ class RawAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return self._get_x_by(endpoint='get_plays_by_top_10_users', time_range=time_range, y_axis=y_axis,
@@ -1502,7 +1507,7 @@ class RawAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return self._get_x_by(endpoint='get_plays_per_month', time_range=time_range, y_axis=y_axis, user_id=user_id,
@@ -1517,7 +1522,7 @@ class RawAPI:
         :type window: int, optional
         :param logfile: Log file to download
         :type logfile: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         if _is_invalid_choice(value=logfile, variable_name='logfile',
@@ -1532,7 +1537,7 @@ class RawAPI:
         """
         Check for updates to the Plex Media Server
 
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return 'get_pms_update', None
@@ -1550,7 +1555,7 @@ class RawAPI:
         :type media_type: str, optional
         :param section_id: ID of the Plex library section
         :type section_id: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         if _is_invalid_choice(value=media_type, variable_name='media_type',
@@ -1565,7 +1570,7 @@ class RawAPI:
         """
         Get the name of the Plex Media Server
 
-        :return: Name of the Plex Media Server
+        :returns: Name of the Plex Media Server
         :rtype: str
         """
         json_data = self._get_json(command='get_server_friendly_name')
@@ -1586,7 +1591,7 @@ class RawAPI:
         :type ssl: bool, optional
         :param remote: Whether the Plex Media Server is remote (default: False)
         :type remote: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         ssl = bool_to_int(boolean=ssl)
@@ -1602,7 +1607,7 @@ class RawAPI:
         """
         Get info about the local server
 
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return 'get_server_identity', None
@@ -1613,7 +1618,7 @@ class RawAPI:
         """
         Get the Plex Media Server information
 
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return 'get_server_info', None
@@ -1624,7 +1629,7 @@ class RawAPI:
         """
         Get all your servers that are published to Plex.tv
 
-        :return: List of data
+        :returns: List of data
         :rtype: List[dict]
         """
         return 'get_server_list', None
@@ -1635,7 +1640,7 @@ class RawAPI:
 
         :param pref: Name of preference
         :type pref: str
-        :return: Value of preference
+        :returns: Value of preference
         :rtype: str
         """
         json_data = self._get_json(command='get_server_pref', params={'pref': pref})
@@ -1649,7 +1654,7 @@ class RawAPI:
         """
         Get info about the Plex Media Server
 
-        :return: List of data
+        :returns: List of data
         :rtype: List[dict]
         """
         return 'get_servers_info', None
@@ -1661,7 +1666,7 @@ class RawAPI:
 
         :param key: Name of a config section to return
         :type key: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         params = build_optional_params(key=key)
@@ -1676,7 +1681,7 @@ class RawAPI:
         :type row_id: int, optional
         :param session_key: Session key for the current stream
         :type session_key: int, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         if not _one_needed(row_id=row_id, session_key=session_key):
@@ -1700,7 +1705,7 @@ class RawAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return self._get_x_by(endpoint='get_stream_type_by_top_10_platforms', time_range=time_range, y_axis=y_axis,
@@ -1719,7 +1724,7 @@ class RawAPI:
         :type user_id: str, optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return self._get_x_by(endpoint='get_stream_type_by_top_10_users', time_range=time_range, y_axis=y_axis,
@@ -1734,7 +1739,7 @@ class RawAPI:
         :type machine_id: str, optional
         :param user_id: ID of the Plex user
         :type user_id: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         params = build_optional_params(machine_id=machine_id, user_id=user_id)
@@ -1746,7 +1751,7 @@ class RawAPI:
         """
         Get the Tautulli server information
 
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return 'get_tautulli_info', None
@@ -1760,7 +1765,7 @@ class RawAPI:
         :type user_id: str
         :param include_last_seen: Whether to include the last_seen value for the user (default: False)
         :type include_last_seen: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         params = build_optional_params(user_id=user_id, include_last_seen=include_last_seen)
@@ -1784,7 +1789,7 @@ class RawAPI:
         :type length: int, optional
         :param search: String to search for (e.g. "xxx.xxx.xxx.xxx")
         :type search: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         if _is_invalid_choice(value=order_column, variable_name='order_column',
@@ -1816,7 +1821,7 @@ class RawAPI:
         :type length: int, optional
         :param search: String to search for (e.g. "xxx.xxx.xxx.xxx")
         :type search: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         if _is_invalid_choice(value=order_column, variable_name='order_column',
@@ -1836,7 +1841,7 @@ class RawAPI:
         """
         Get a list of all usernames and user ids
 
-        :return: List of data
+        :returns: List of data
         :rtype: List[dict]
         """
         return 'get_user_names', None
@@ -1850,7 +1855,7 @@ class RawAPI:
         :type user_id: str
         :param grouping: Whether to group results (default: False)
         :type grouping: bool, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         grouping = bool_to_int(boolean=grouping)
@@ -1869,7 +1874,7 @@ class RawAPI:
         :type grouping: bool, optional
         :param query_days: List of days to get results for (e.g. [0, 1, 14, 30])
         :type query_days: list[int], optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         grouping = bool_to_int(boolean=grouping)
@@ -1885,7 +1890,7 @@ class RawAPI:
         """
         Get a list of all users that have access to your server
 
-        :return: List of data
+        :returns: List of data
         :rtype: List[dict]
         """
         return 'get_users', None
@@ -1908,7 +1913,7 @@ class RawAPI:
         :type length: int, optional
         :param search: String to search for
         :type search: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         grouping = bool_to_int(boolean=grouping)
@@ -1929,7 +1934,7 @@ class RawAPI:
 
         :param ip_address: IP address
         :type ip_address: str
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return 'get_whois_lookup', {'ip_address': ip_address}
@@ -1943,7 +1948,7 @@ class RawAPI:
         :type config_file_path: str
         :param backup: Whether to back up the current config before importing (default: True)
         :type backup: bool, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'import_config', {'config_path': config_file_path, 'backup': backup}
@@ -1964,10 +1969,9 @@ class RawAPI:
         :type table_name: str, optional
         :param backup: Whether to back up the current database before importing (default: True)
         :type backup: bool, optional
-        :param import_ignore_interval: Only if app is 'plexwatch' or 'plexivity',
-        the minimum number of seconds for a stream to import
+        :param import_ignore_interval: Only if app is 'plexwatch' or 'plexivity', the minimum number of seconds for a stream to import
         :type import_ignore_interval: int, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         if _is_invalid_choice(value=app, variable_name='app',
@@ -1994,7 +1998,7 @@ class RawAPI:
 
         :param row_ids: List of row IDS to sign out
         :type row_ids: list[int], optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'logout_user_session', {'row_ids': int_list_to_string(int_list=row_ids)}
@@ -2014,7 +2018,7 @@ class RawAPI:
         :type headers: str, optional
         :param script_args: Arguments for script notifications
         :type script_args: str, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         params = build_optional_params(headers=headers, script_args=script_args)
@@ -2036,7 +2040,7 @@ class RawAPI:
         :type body: str, optional
         :param message: Message of the newsletter
         :type message: str, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         params = build_optional_params(subject=subject, body=body, message=message)
@@ -2050,10 +2054,9 @@ class RawAPI:
 
         :param rating_key: Rating key for the media item
         :type rating_key: int
-        :param notifier_id: ID of the notification agent.
-        Notification will be sent to all enabled notification agents if notifier_id is not provided.
+        :param notifier_id: ID of the notification agent. Notification will be sent to all enabled notification agents if notifier_id is not provided.
         :type notifier_id: int, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         params = build_optional_params(notifier_id=notifier_id)
@@ -2089,7 +2092,7 @@ class RawAPI:
         :type refresh: bool, optional
         :param return_hash: Whether to return the self-hosted image hash instead of the image (default: False)
         :type return_hash: bool, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         if not _one_needed(img=img, rating_key=rating_key):
@@ -2111,7 +2114,7 @@ class RawAPI:
         """
         Refresh the Tautulli libraries list
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'refresh_libraries_list', None
@@ -2121,7 +2124,7 @@ class RawAPI:
         """
         Refresh the Tautulli users list
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'refresh_users_list', None
@@ -2146,7 +2149,7 @@ class RawAPI:
         :type onesignal_id: str, optional
         :param min_version: The minimum Tautulli version supported by the mobile device (e.g. "v2.5.6")
         :type min_version: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         params = build_optional_params(platform=platform, version=version, friendly_name=friendly_name,
@@ -2160,7 +2163,7 @@ class RawAPI:
         """
         Restart Tautulli
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'restart', None
@@ -2174,7 +2177,7 @@ class RawAPI:
         :type query: str
         :param limit: Maximum number of items to return per media type
         :type limit: int, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         params = build_optional_params(limit=limit)
@@ -2187,7 +2190,7 @@ class RawAPI:
         """
         Get the current status of Tautulli's connection to the Plex server
 
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return 'server_status', None
@@ -2201,7 +2204,7 @@ class RawAPI:
         :type mobile_device_id: int
         :param friendly_name: Friendly name to identify the mobile device
         :type friendly_name: str, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         params = build_optional_params(friendly_name=friendly_name)
@@ -2217,7 +2220,7 @@ class RawAPI:
         :type newsletter_id: int
         :param agent_id: Type of the newsletter to update
         :type agent_id: int
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         params = {}
@@ -2239,7 +2242,7 @@ class RawAPI:
         :type notifier_id: int
         :param agent_id: Agent of the notifier to update
         :type agent_id: int
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         params = {}
@@ -2256,10 +2259,12 @@ class RawAPI:
         Query the Tautulli database with raw SQL.
 
         Automatically makes a backup of the database if the latest backup is older than 24 hours.
+
         `api_sql` must be manually enabled in the config file while Tautulli is shut down.
+
         :param query: SQL query
         :type query: str
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return 'sql', {'query': query}
@@ -2271,7 +2276,7 @@ class RawAPI:
 
         :param check: What to check (i.e. 'database')
         :type check: str, optional
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         params = build_optional_params(check=check)
@@ -2288,7 +2293,7 @@ class RawAPI:
         :type session_id: str, optional
         :param message: Custom message to send to the client
         :type message: str, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         if not _one_needed(session_key=session_key, session_id=session_id):
@@ -2308,7 +2313,7 @@ class RawAPI:
         :type section_id: str
         :param section_name: Name of the Plex library section
         :type section_name: str, optional
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'undelete_library', {'section_id': section_id, 'section_name': section_name}
@@ -2322,7 +2327,7 @@ class RawAPI:
         :type user_id: str
         :param username: Username of the Plex user
         :type username: str
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'undelete_user', {'user_id': user_id, 'username': username}
@@ -2332,7 +2337,7 @@ class RawAPI:
         """
         Update Tautulli
 
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         return 'update', None
@@ -2343,7 +2348,7 @@ class RawAPI:
         """
         Check for Tautulli updates
 
-        :return: Dict of data
+        :returns: Dict of data
         :rtype: dict
         """
         return 'update_check', None
@@ -2354,13 +2359,14 @@ class RawAPI:
         Update the metadata in the Tautulli database by matching rating keys.
 
         Also updates all parents or children of the media item if it is a show/season/episode or artist/album/track.
+
         :param old_rating_key: Old rating key for item
         :type old_rating_key: str
         :param new_rating_key: New rating key for item
         :type new_rating_key: str
         :param media_type: Type of media (i.e. 'movie', 'show', 'episode', 'album', 'track')
         :type media_type: str
-        :return: `True` if successful, `False` if unsuccessful
+        :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
         if _is_invalid_choice(value=media_type, variable_name='media_type',

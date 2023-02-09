@@ -9,7 +9,7 @@ from typing import Any, Optional
 from pydantic import BaseModel
 
 
-class Data(BaseModel):
+class ServerIdentity(BaseModel):
     machine_identifier: Optional[str]
     version: Optional[str]
 
@@ -17,7 +17,7 @@ class Data(BaseModel):
 class Response(BaseModel):
     result: Optional[str]
     message: Any
-    data: Data
+    data: ServerIdentity
 
 
 class Model(BaseModel):

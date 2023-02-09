@@ -44,7 +44,7 @@ def redact(full_string: str, to_redact: str, redaction: str = "[REDACTED]") -> s
     :type to_redact: str
     :param redaction: String to replace the redacted string with
     :type redaction: str
-    :return: Redacted string
+    :returns: Redacted string
     :rtype: str
     """
     return full_string.replace(to_redact, redaction)
