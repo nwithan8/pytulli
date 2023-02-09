@@ -1,3 +1,7 @@
 sphinx-jsonschema
 sphinx-pydantic
 sphinx_autodoc_typehints
+objectrest
+pytz
+pydantic
+python-dotenv
