@@ -40,6 +40,7 @@ class LibraryMediaInfo(BaseModel):
     recordsTotal: Optional[int]
     data: Optional[List[Datum]]
     draw: Optional[int]
+    last_refreshed: Optional[int]
     filtered_file_size: Optional[int]
     total_file_size: Optional[int]
 

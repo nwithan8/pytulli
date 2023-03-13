@@ -51,6 +51,7 @@ class ChildrenListItem(BaseModel):
     user_rating: Optional[str]
     writers: Optional[List]
     year: Optional[str]
+    collections: Optional[List]
 
 
 class ChildrenMetadata(BaseModel):

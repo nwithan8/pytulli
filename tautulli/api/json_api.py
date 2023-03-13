@@ -625,7 +625,7 @@ class RawAPI:
         :type user_id: int, optional
         :param rating_key: Rating key of the media items to export
         :type rating_key: int, optional
-        :param file_format: File format for export (i.e. 'csv', 'json', 'xml', 'm3u8') (default: 'csv')
+        :param file_format: File format for export (i.e. 'csv', 'json', 'xml', 'm3u') (default: 'csv')
         :type file_format: str, optional
         :param metadata_level: Level of metadata to export (default: 1)
         :type metadata_level: int, optional
@@ -847,7 +847,7 @@ class RawAPI:
         :type after: datetime, optional
         :param section_id: ID of section
         :type section_id: int, optional
-        :param media_type: Media type (i.e. 'movie', 'episode', 'track', 'live')
+        :param media_type: Media type (i.e. 'movie', 'episode', 'track', 'live', 'collection', 'playlist')
         :type media_type: str, optional
         :param transcode_decision: Transcode decision (i.e. 'direct play', 'copy', 'transcode')
         :type transcode_decision: str, optional
@@ -893,7 +893,7 @@ class RawAPI:
 
     @raw_json
     def get_home_stats(self, grouping: bool = False, time_range: int = 30, stats_type: str = 'plays', start: int = 0,
-                       count: int = 5, stat_id: str = None) -> List[dict]:
+                       count: int = 5, stat_id: str = None, user_id: int = None, section_id: int = None) -> List[dict]:
         """
         Get the homepage watch statistics
 
@@ -909,6 +909,10 @@ class RawAPI:
         :type count: int, optional
         :param stat_id: Name of a single statistic to return (i.e. 'top_movies', 'popular_tv', 'most_concurrent')
         :type stat_id: str, optional
+        :param user_id: The ID of the Plex user
+        :type user_id: int, optional
+        :param section_id: The ID of the Plex library section
+        :type section_id: int, optional
         :returns: List of data
         :rtype: List[dict]
         """
@@ -920,12 +924,12 @@ class RawAPI:
                               choices=static.stats_category):
             return False, None
         params = build_optional_params(grouping=grouping, time_range=time_range, stats_type=stats_type,
-                                       stats_start=start,
-                                       stats_count=count, stat_id=stat_id)
+                                       stats_start=start, stats_count=count, stat_id=stat_id, section_id=section_id,
+                                       user_id=user_id)
         return 'get_home_stats', params
 
     @raw_json
-    def get_item_user_stats(self, rating_key: str, grouping: bool = False) -> List[dict]:
+    def get_item_user_stats(self, rating_key: str, grouping: bool = False, media_type: str = None) -> List[dict]:
         """
         Get the user statistics for the media item
 
@@ -933,15 +937,18 @@ class RawAPI:
         :type rating_key: str
         :param grouping: Whether to group results (default: False)
         :type grouping: bool, optional
+        :param media_type: Media type of the item (only required for a collection)
+        :type media_type: str, optional
         :returns: List of data
         :rtype: List[dict]
         """
         grouping = bool_to_int(boolean=grouping)
-        params = build_optional_params(rating_key=rating_key, grouping=grouping)
+        params = build_optional_params(rating_key=rating_key, grouping=grouping, media_type=media_type)
         return 'get_item_user_stats', params
 
     @raw_json
-    def get_item_watch_time_stats(self, rating_key: str, grouping: bool = False, query_days: List[int] = None) \
+    def get_item_watch_time_stats(self, rating_key: str, grouping: bool = False, query_days: List[int] = None,
+                                  media_type: str = None) \
             -> List[dict]:
 
         """
@@ -953,11 +960,13 @@ class RawAPI:
         :type grouping: bool, optional
         :param query_days: List of days to get results for (i.e. [0, 1, 14, 30])
         :type query_days: list[int], optional
+        :param media_type: Media type of the item (only required for a collection)
+        :type media_type: str, optional
         :returns: Dict of data
         :rtype: dict
         """
         grouping = bool_to_int(boolean=grouping)
-        params = build_optional_params(grouping=grouping)
+        params = build_optional_params(grouping=grouping, media_type=media_type)
         params['rating_key'] = rating_key
         if query_days:
             params['query_days'] = int_list_to_string(int_list=query_days)

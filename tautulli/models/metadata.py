@@ -73,6 +73,13 @@ class MediaInfoItem(BaseModel):
     channel_thumb: Optional[str]
     parts: Optional[List[Part]]
 
+class Marker(BaseModel):
+    id: Optional[int]
+    type: Optional[str]
+    start_time_offset: Optional[int]
+    end_time_offset: Optional[int]
+    first: Optional[bool]
+    final: Optional[bool]
 
 class Metadata(BaseModel):
     media_type: Optional[str]
@@ -127,6 +134,8 @@ class Metadata(BaseModel):
     children_count: Optional[int]
     live: Optional[int]
     media_info: Optional[List[MediaInfoItem]]
+    edition_title: Optional[str]
+    markers: Optional[Marker]
 
 
 class Response(BaseModel):
