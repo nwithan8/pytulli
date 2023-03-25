@@ -1,3 +1,7 @@
+import json
+import os
+from typing import List
+
 import setuptools
 
 __version__ = 'VERSIONADDEDBYGITHUB'
@@ -15,21 +19,24 @@ __keywords__ = ["Tautulli", "API", "client", "Plex", "PMS", "Plex Media Server",
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-
-def python_versions():
+def __supported_python_versions__() -> List[str]:
     """Return a list of supported Python versions."""
-    with open("tautulli/PYTHON_VERSIONS") as f:
-        versions = f.read().splitlines()
+    with open(os.path.join(os.path.dirname(__file__), "tautulli", "PYTHON_VERSIONS.json")) as f:
+        versions = f.read()
+        return json.loads(versions)
+
+def python_versions() -> List[str]:
+    """Return a list of supported Python versions."""
+    versions = __supported_python_versions__()
     version_strings = ['Programming Language :: Python :: 3']
     for version in versions:
         version_strings.append(f"Programming Language :: Python :: {version}")
     return version_strings
 
 
-def python3_range():
+def python3_range() -> str:
     """Return a string of the supported Python version range."""
-    with open("tautulli/PYTHON_VERSIONS") as f:
-        versions = f.read().splitlines()
+    versions = __supported_python_versions__()
     return f">={versions[0]}, <4"
 
 

@@ -1,7 +1,7 @@
 import pytest
 
+from tautulli._info import __min_api_version__
 from tests.setup import raw_client
-
 
 @pytest.mark.skip(reason="Can't test add.")
 def test_add_newsletter_config():
@@ -721,3 +721,10 @@ def test_update_check():
 @pytest.mark.skip(reason="Can't test update.")
 def test_update_metadata_details():
     client = raw_client()
+
+
+def test__verify_compatibility():
+    client = raw_client()
+    min_api_version = __min_api_version__()
+    passes = client._verify_compatibility(min_version=min_api_version)
+    assert passes is True

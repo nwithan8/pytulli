@@ -56,6 +56,7 @@ class RawAPI:
         except:
             raise Exception("Could not parse minimum compatible version number.")
 
+        self._logger.debug(f"Server version: {server_version}, minimum version: {min_version}")
         return server_version >= min_version
 
     def _get(self, command: str, params: dict = None) -> objectrest.Response:
@@ -72,7 +73,10 @@ class RawAPI:
         if not params:
             params = {}
         params['cmd'] = command
-        return self._session.get(url=self._url, params=params)
+        self._logger.debug(f"Making request to {self._redacted_url} with params {params}")
+        response = self._session.get(url=self._url, params=params)
+        self._logger.debug(f"Response: {response}")
+        return response
 
     def _get_json(self, command: str, params: dict = None) -> dict:
         """
@@ -87,7 +91,12 @@ class RawAPI:
         """
         response = self._get(command=command, params=params)
         if response:
-            return response.json()
+            try:
+                return response.json()
+            except:
+                # TODO: Do we want to just log an error and return an empty dict, or raise an exception?
+                self._logger.error(f"Could not parse JSON from response: {response.text}")
+                return static.empty_dict
         return static.empty_dict
 
     @raw_json
