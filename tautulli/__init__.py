@@ -1,3 +1,4 @@
+import json
 import os
 from typing import List
 
@@ -18,9 +19,16 @@ __keywords__ = ["Tautulli", "API", "client", "Plex", "PMS", "Plex Media Server",
 
 
 def __supported_api_versions__() -> List[str]:
-    with open(os.path.join(os.path.dirname(__file__), "API_VERSIONS")) as f:
-        return f.read().splitlines()
-
+    with open(os.path.join(os.path.dirname(__file__), "API_VERSIONS.json")) as f:
+        versions = f.read()
+        return json.loads(versions)
 
 def __min_api_version__() -> str:
     return __supported_api_versions__()[0]
+
+
+def __supported_python_versions__() -> List[str]:
+    """Return a list of supported Python versions."""
+    with open(os.path.join(os.path.dirname(__file__), "PYTHON_VERSIONS.json")) as f:
+        versions = f.read()
+        return json.loads(versions)

@@ -1,3 +1,5 @@
+from typing import List
+
 import setuptools
 
 from tautulli import (
@@ -9,27 +11,26 @@ from tautulli import (
     __author_email__,
     __github_username__,
     __github_repo__,
-    __keywords__
+    __keywords__,
+    __supported_api_versions__,
+    __supported_python_versions__,
 )
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-
-def python_versions():
+def python_versions() -> List[str]:
     """Return a list of supported Python versions."""
-    with open("tautulli/PYTHON_VERSIONS") as f:
-        versions = f.read().splitlines()
+    versions = __supported_python_versions__()
     version_strings = ['Programming Language :: Python :: 3']
     for version in versions:
         version_strings.append(f"Programming Language :: Python :: {version}")
     return version_strings
 
 
-def python3_range():
+def python3_range() -> str:
     """Return a string of the supported Python version range."""
-    with open("tautulli/PYTHON_VERSIONS") as f:
-        versions = f.read().splitlines()
+    versions = __supported_python_versions__()
     return f">={versions[0]}, <4"
 
 
