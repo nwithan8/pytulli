@@ -26,6 +26,12 @@ def test_ping():
     assert type(res) == bool
     assert res is True
 
+def test_api_version():
+    client = raw_client()
+    version = client.shortcuts.api_version
+    assert version is not None
+    assert type(version) == str
+
 
 def test_activity_summary():
     client = raw_client()

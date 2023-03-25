@@ -20,7 +20,8 @@ class APIShortcuts:
         name = self._api.server_friendly_name
         return name is not None and name is not static.empty_string
 
-    def get_api_version(self) -> str:
+    @property
+    def api_version(self) -> str:
         """
         Get the Tautulli API version
 
