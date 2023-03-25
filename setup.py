@@ -1,16 +1,16 @@
 import setuptools
 
-__version__ = 'VERSIONADDEDBYGITHUB'
-
-__title__ = "tautulli"
-__author__ = 'Nate Harris'
-__author_email__ = 'n8gr8gbln@gmail.com'
-__github_username__ = "nwithan8"
-__github_repo__ = "pytulli"
-__copyright__ = "Copyright © YEARADDEDBYGITHUB - Nate Harris"
-__license__ = 'GNU General Public License v3 (GPLv3)'
-__description__ = "A complete Python client for Tautulli's API"
-__keywords__ = ["Tautulli", "API", "client", "Plex", "PMS", "Plex Media Server", "media", "server", "JSON"]
+from tautulli import (
+    __title__,
+    __version__,
+    __license__,
+    __description__,
+    __author__,
+    __author_email__,
+    __github_username__,
+    __github_repo__,
+    __keywords__
+)
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
