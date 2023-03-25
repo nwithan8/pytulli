@@ -20,6 +20,15 @@ class APIShortcuts:
         name = self._api.server_friendly_name
         return name is not None and name is not static.empty_string
 
+    def get_api_version(self) -> str:
+        """
+        Get the Tautulli API version
+
+        :returns: API version
+        :rtype: str
+        """
+        return self._api.tautulli_info.get('tautulli_version', None)
+
     def get_library_by_name(self, library_name: str) -> dict:
         """
         Get a Plex Media Server library using its name
