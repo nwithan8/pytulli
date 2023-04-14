@@ -16,7 +16,8 @@ class Datum(BaseModel):
     date: Optional[int]
     started: Optional[int]
     stopped: Optional[int]
-    duration: Optional[int]
+    duration: Optional[int] # Keep for backwards compatibility
+    play_duration: Optional[int]
     paused_counter: Optional[int]
     user_id: Optional[int]
     user: Optional[str]
