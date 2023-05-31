@@ -1572,8 +1572,8 @@ class ObjectAPI:
         """
         return False
 
-    @raw_api_bool
-    def notify(self, notifier_id: int, subject: str, body: str, headers: str = None, script_args: str = None) -> bool:
+    @make_object
+    def notify(self, notifier_id: int, subject: str, body: str, headers: str = None, script_args: str = None) -> Notification:
         """
         Send a notification using Tautulli
 
@@ -1587,13 +1587,13 @@ class ObjectAPI:
         :type headers: str, optional
         :param script_args: Arguments for script notifications
         :type script_args: str, optional
-        :returns: `True` if successful, `False` if unsuccessful
-        :rtype: bool
-        """
-        return False
+        :returns: Notification object
 
-    @raw_api_bool
-    def notify_newsletter(self, newsletter_id: int, subject: str = None, body: str = None, message: str = None) -> bool:
+        """
+        return 'Notification'
+
+    @make_object
+    def notify_newsletter(self, newsletter_id: int, subject: str = None, body: str = None, message: str = None) -> NewsletterNotification:
         """
         Send a newsletter using Tautulli
 
@@ -1605,10 +1605,10 @@ class ObjectAPI:
         :type body: str, optional
         :param message: Message of the newsletter
         :type message: str, optional
-        :returns: `True` if successful, `False` if unsuccessful
-        :rtype: bool
+        :returns: NewsletterNotification object
+
         """
-        return False
+        return 'NewsletterNotification'
 
     @raw_api_bool
     def notify_recently_added(self, rating_key: int, notifier_id: int = None) -> bool:

@@ -2021,8 +2021,8 @@ class RawAPI:
         """
         return 'logout_user_session', {'row_ids': int_list_to_string(int_list=row_ids)}
 
-    @set_and_forget
-    def notify(self, notifier_id: int, subject: str, body: str, headers: str = None, script_args: str = None) -> bool:
+    @raw_json
+    def notify(self, notifier_id: int, subject: str, body: str, headers: str = None, script_args: str = None) -> dict:
         """
         Send a notification using Tautulli
 
@@ -2036,8 +2036,8 @@ class RawAPI:
         :type headers: str, optional
         :param script_args: Arguments for script notifications
         :type script_args: str, optional
-        :returns: `True` if successful, `False` if unsuccessful
-        :rtype: bool
+        :returns: Dict of data
+        :rtype: dict
         """
         params = build_optional_params(headers=headers, script_args=script_args)
         params['notifier_id'] = notifier_id
@@ -2045,8 +2045,8 @@ class RawAPI:
         params['body'] = body
         return 'notify', params
 
-    @set_and_forget
-    def notify_newsletter(self, newsletter_id: int, subject: str = None, body: str = None, message: str = None) -> bool:
+    @raw_json
+    def notify_newsletter(self, newsletter_id: int, subject: str = None, body: str = None, message: str = None) -> dict:
         """
         Send a newsletter using Tautulli
 
@@ -2058,8 +2058,8 @@ class RawAPI:
         :type body: str, optional
         :param message: Message of the newsletter
         :type message: str, optional
-        :returns: `True` if successful, `False` if unsuccessful
-        :rtype: bool
+        :returns: Dict of data
+        :rtype: dict
         """
         params = build_optional_params(subject=subject, body=body, message=message)
         params['newsletter_id'] = newsletter_id

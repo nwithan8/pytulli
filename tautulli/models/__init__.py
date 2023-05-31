@@ -32,6 +32,8 @@ from tautulli.models.metadata import Metadata
 from tautulli.models.new_rating_keys import NewRatingKeys
 from tautulli.models.newsletter_config import NewsletterConfig
 from tautulli.models.newsletter_log import NewsletterLog
+from tautulli.models.newsletter_notification import NewsletterNotification
+from tautulli.models.notification import Notification
 from tautulli.models.notification_log import NotificationLog
 from tautulli.models.notifier_config import NotifierConfig
 from tautulli.models.notifiers import Notifier
