@@ -14,16 +14,20 @@ from tautulli.internal.utils import build_optional_params, _get_response_data, _
 from tautulli.tools.api_helper import APIShortcuts
 from tautulli.tools.utils import redact
 
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # noinspection PyTypeChecker
 class RawAPI:
-    def __init__(self, base_url: str, api_key: str, verbose: bool = False, verify: bool = True):
+    def __init__(self, base_url: str, api_key: str, verbose: bool = False, verify: bool = True, ssl_verify: bool = True):
         if base_url.endswith("/"):
             base_url = base_url[:-1]
         # Zero knowledge of the API key is kept
         self._url = f"{base_url}/api/v2?apikey={api_key}"
         self._redacted_url = f"{base_url}/api/v2?apikey={redact(full_string=api_key, to_redact=api_key)}"
         self._session = objectrest.Session()
+        self._ssl_verify = ssl_verify
         logging.basicConfig(format='%(levelname)s:%(message)s', level=(logging.DEBUG if verbose else logging.ERROR))
         self._logger = logging.getLogger("tautulli")
         min_api_version = __min_api_version__()
@@ -74,7 +78,7 @@ class RawAPI:
             params = {}
         params['cmd'] = command
         self._logger.debug(f"Making request to {self._redacted_url} with params {params}")
-        response = self._session.get(url=self._url, params=params)
+        response = self._session.get(url=self._url, params=params, verify=self._ssl_verify) # Optionally ignore SSL errors for self-signed certificates
         self._logger.debug(f"Response: {response}")
         return response
 

@@ -41,6 +41,12 @@ jobs:
           time: '30s'
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Replace version stand-in
+        uses: jacobtomlinson/gha-find-replace@2.0.0
+        with:
+          find: "VERSIONADDEDBYGITHUB"
+          replace: "1000.0.0"
+          regex: false
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1
         with:
