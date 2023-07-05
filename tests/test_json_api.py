@@ -1,7 +1,16 @@
 import pytest
 
 from tautulli._info import __min_api_version__
-from tests.setup import raw_client
+from tests.setup import raw_client, no_ssl_client
+
+def test_ssl():
+    client = raw_client()
+    assert client._ssl_verify is True
+    client = no_ssl_client()
+    assert client._ssl_verify is False
+    arnold_quote = client.arnold # attempt to use the client
+    assert arnold_quote is not None
+    assert type(arnold_quote) == str
 
 @pytest.mark.skip(reason="Can't test add.")
 def test_add_newsletter_config():

@@ -10,8 +10,10 @@ from tautulli.tools.api_helper import APIShortcuts
 
 # noinspection PyTypeChecker,PyUnusedLocal
 class ObjectAPI:
-    def __init__(self, base_url: str, api_key: str, verbose: bool = False, verify: bool = True):
-        self._raw_api = RawAPI(base_url=base_url, api_key=api_key, verbose=verbose, verify=verify)
+    def __init__(self, base_url: str, api_key: str, verbose: bool = False, verify: bool = True,
+                 ssl_verify: bool = True):
+        self._raw_api = RawAPI(base_url=base_url, api_key=api_key, verbose=verbose, verify=verify,
+                               ssl_verify=ssl_verify)
 
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
@@ -642,7 +644,8 @@ class ObjectAPI:
 
     @make_object
     def get_home_stats(self, grouping: bool = False, time_range: int = 30, stats_type: str = 'plays', start: int = 0,
-                       count: int = 5, stat_id: str = None, user_id: int = None, section_id: int = None) -> List[HomeStat]:
+                       count: int = 5, stat_id: str = None, user_id: int = None, section_id: int = None) -> List[
+        HomeStat]:
         """
         Get the homepage watch statistics
 
@@ -667,7 +670,8 @@ class ObjectAPI:
         return 'HomeStat'
 
     @make_object
-    def get_item_user_stats(self, rating_key: str, grouping: bool = False, media_type: str = None) -> List[ItemUserStat]:
+    def get_item_user_stats(self, rating_key: str, grouping: bool = False, media_type: str = None) -> List[
+        ItemUserStat]:
         """
         Get the user statistics for the media item
 
@@ -683,7 +687,8 @@ class ObjectAPI:
         return 'ItemUserStat'
 
     @make_object
-    def get_item_watch_time_stats(self, rating_key: str, grouping: bool = False, query_days: List[int] = None, media_type: str = None) \
+    def get_item_watch_time_stats(self, rating_key: str, grouping: bool = False, query_days: List[int] = None,
+                                  media_type: str = None) \
             -> List[ItemWatchTimeStat]:
         """
         Get the watch time stats for the media item
@@ -1573,7 +1578,8 @@ class ObjectAPI:
         return False
 
     @make_object
-    def notify(self, notifier_id: int, subject: str, body: str, headers: str = None, script_args: str = None) -> Notification:
+    def notify(self, notifier_id: int, subject: str, body: str, headers: str = None,
+               script_args: str = None) -> Notification:
         """
         Send a notification using Tautulli
 
@@ -1593,7 +1599,8 @@ class ObjectAPI:
         return 'Notification'
 
     @make_object
-    def notify_newsletter(self, newsletter_id: int, subject: str = None, body: str = None, message: str = None) -> NewsletterNotification:
+    def notify_newsletter(self, newsletter_id: int, subject: str = None, body: str = None,
+                          message: str = None) -> NewsletterNotification:
         """
         Send a newsletter using Tautulli
 
