@@ -1707,6 +1707,16 @@ class ObjectAPI:
         return 'RegisteredDevice'
 
     @raw_api_bool
+    def regroup_history(self) -> bool:
+        """
+        Regroup play history in the database
+
+        :returns: `True` if successful, `False` if unsuccessful
+        :rtype: bool
+        """
+        return False
+
+    @raw_api_bool
     def restart(self) -> bool:
         """
         Restart Tautulli

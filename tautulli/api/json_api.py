@@ -2183,6 +2183,16 @@ class RawAPI:
         return 'register_device', params
 
     @set_and_forget
+    def regroup_history(self) -> bool:
+        """
+        Regroup play history in the database
+
+        :returns: `True` if successful, `False` if unsuccessful
+        :rtype: bool
+        """
+        return 'regroup_history', None
+
+    @set_and_forget
     def restart(self) -> bool:
         """
         Restart Tautulli
