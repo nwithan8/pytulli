@@ -1000,7 +1000,7 @@ class ObjectAPI:
         return 'PlaylistsTable'
 
     @make_object
-    def get_plays_by_date(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_by_date(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                           grouping: bool = False) -> PlaysOrStreamTypesBy:
         """
         Get graph data by date
@@ -1009,8 +1009,8 @@ class ObjectAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: PlaysOrStreamTypesBy object
@@ -1019,7 +1019,7 @@ class ObjectAPI:
         return 'PlaysOrStreamTypesBy'
 
     @make_object
-    def get_plays_by_day_of_week(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_by_day_of_week(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                  grouping: bool = False) -> PlaysOrStreamTypesBy:
         """
         Get graph data by day of the week
@@ -1028,8 +1028,8 @@ class ObjectAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: PlaysOrStreamTypesBy object
@@ -1038,7 +1038,7 @@ class ObjectAPI:
         return 'PlaysOrStreamTypesBy'
 
     @make_object
-    def get_plays_by_hour_of_day(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_by_hour_of_day(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                  grouping: bool = False) -> PlaysOrStreamTypesBy:
         """
         Get graph data by hour of the day
@@ -1047,8 +1047,8 @@ class ObjectAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: PlaysOrStreamTypesBy object
@@ -1057,7 +1057,7 @@ class ObjectAPI:
         return 'PlaysOrStreamTypesBy'
 
     @make_object
-    def get_plays_by_source_resolution(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_by_source_resolution(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                        grouping: bool = False) -> PlaysOrStreamTypesBy:
         """
         Get graph data by source resolution
@@ -1066,8 +1066,8 @@ class ObjectAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: PlaysOrStreamTypesBy object
@@ -1076,7 +1076,7 @@ class ObjectAPI:
         return 'PlaysOrStreamTypesBy'
 
     @make_object
-    def get_plays_by_stream_resolution(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_by_stream_resolution(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                        grouping: bool = False) -> PlaysOrStreamTypesBy:
         """
         Get graph data by stream resolution
@@ -1085,8 +1085,8 @@ class ObjectAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: PlaysOrStreamTypesBy object
@@ -1095,7 +1095,7 @@ class ObjectAPI:
         return 'PlaysOrStreamTypesBy'
 
     @make_object
-    def get_plays_by_stream_type(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_by_stream_type(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                  grouping: bool = False) -> PlaysOrStreamTypesBy:
         """
         Get graph data by stream type
@@ -1104,8 +1104,8 @@ class ObjectAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: PlaysOrStreamTypesBy object
@@ -1114,7 +1114,7 @@ class ObjectAPI:
         return 'PlaysOrStreamTypesBy'
 
     @make_object
-    def get_plays_by_top_10_platforms(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_by_top_10_platforms(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                       grouping: bool = False) -> PlaysOrStreamTypesBy:
         """
         Get graph data by top 10 platforms
@@ -1123,8 +1123,8 @@ class ObjectAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: PlaysOrStreamTypesBy object
@@ -1133,7 +1133,7 @@ class ObjectAPI:
         return 'PlaysOrStreamTypesBy'
 
     @make_object
-    def get_plays_by_top_10_users(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_by_top_10_users(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                   grouping: bool = False) -> PlaysOrStreamTypesBy:
         """
         Get graph data by top 10 users
@@ -1142,8 +1142,8 @@ class ObjectAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: PlaysOrStreamTypesBy object
@@ -1152,7 +1152,7 @@ class ObjectAPI:
         return 'PlaysOrStreamTypesBy'
 
     @make_object
-    def get_plays_per_month(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_per_month(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                             grouping: bool = False) -> PlaysOrStreamTypesBy:
         """
         Get graph data by month
@@ -1161,8 +1161,8 @@ class ObjectAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: PlaysOrStreamTypesBy object
@@ -1320,7 +1320,7 @@ class ObjectAPI:
         return 'StreamData'
 
     @make_object
-    def get_stream_type_by_top_10_platforms(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_stream_type_by_top_10_platforms(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                             grouping: bool = False) -> PlaysOrStreamTypesBy:
         """
         Get graph data by stream type by the top 10 platforms
@@ -1329,8 +1329,8 @@ class ObjectAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: PlaysOrStreamTypesBy object
@@ -1339,7 +1339,7 @@ class ObjectAPI:
         return 'PlaysOrStreamTypesBy'
 
     @make_object
-    def get_stream_type_by_top_10_users(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_stream_type_by_top_10_users(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                         grouping: bool = False) -> PlaysOrStreamTypesBy:
         """
         Get graph data by stream type by the top 10 users
@@ -1348,8 +1348,8 @@ class ObjectAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: PlaysOrStreamTypesBy object

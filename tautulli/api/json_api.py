@@ -104,7 +104,7 @@ class RawAPI:
         return static.empty_dict
 
     @raw_json
-    def _get_x_by(self, endpoint: str, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def _get_x_by(self, endpoint: str, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                   grouping: bool = False) -> dict:
         """
         Abstract method for the get_plays_by_X and get_streams_by_X functions
@@ -115,8 +115,8 @@ class RawAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: Dict of data
@@ -126,7 +126,9 @@ class RawAPI:
         if _is_invalid_choice(value=y_axis, variable_name='y_axis',
                               choices=static.stats_type):
             return False, None
-        params = build_optional_params(time_range=time_range, y_axis=y_axis, user_id=user_id, grouping=grouping)
+        if user_ids:
+            user_ids = comma_delimit(user_ids)
+        params = build_optional_params(time_range=time_range, y_axis=y_axis, user_id=user_ids, grouping=grouping)
         return endpoint, params
 
     @property
@@ -1363,7 +1365,7 @@ class RawAPI:
             params[name] = value
         return 'get_playlists_table', params
 
-    def get_plays_by_date(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_by_date(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                           grouping: bool = False) -> dict:
         """
         Get graph data by date
@@ -1372,17 +1374,17 @@ class RawAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: Dict of data
         :rtype: dict
         """
-        return self._get_x_by(endpoint='get_plays_by_date', time_range=time_range, y_axis=y_axis, user_id=user_id,
+        return self._get_x_by(endpoint='get_plays_by_date', time_range=time_range, y_axis=y_axis, user_ids=user_ids,
                               grouping=grouping)
 
-    def get_plays_by_day_of_week(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_by_day_of_week(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                  grouping: bool = False) -> dict:
         """
         Get graph data by day of the week
@@ -1391,17 +1393,17 @@ class RawAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: Dict of data
         :rtype: dict
         """
-        return self._get_x_by(endpoint='get_plays_by_dayofweek', time_range=time_range, y_axis=y_axis, user_id=user_id,
+        return self._get_x_by(endpoint='get_plays_by_dayofweek', time_range=time_range, y_axis=y_axis, user_ids=user_ids,
                               grouping=grouping)
 
-    def get_plays_by_hour_of_day(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_by_hour_of_day(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                  grouping: bool = False) -> dict:
         """
         Get graph data by hour of the day
@@ -1410,18 +1412,18 @@ class RawAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: Dict of data
         :rtype: dict
         """
         # noinspection SpellCheckingInspection
-        return self._get_x_by(endpoint='get_plays_by_hourofday', time_range=time_range, y_axis=y_axis, user_id=user_id,
+        return self._get_x_by(endpoint='get_plays_by_hourofday', time_range=time_range, y_axis=y_axis, user_ids=user_ids,
                               grouping=grouping)
 
-    def get_plays_by_source_resolution(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_by_source_resolution(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                        grouping: bool = False) -> dict:
         """
         Get graph data by source resolution
@@ -1430,17 +1432,17 @@ class RawAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: Dict of data
         :rtype: dict
         """
         return self._get_x_by(endpoint='get_plays_by_source_resolution', time_range=time_range, y_axis=y_axis,
-                              user_id=user_id, grouping=grouping)
+                              user_ids=user_ids, grouping=grouping)
 
-    def get_plays_by_stream_resolution(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_by_stream_resolution(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                        grouping: bool = False) -> dict:
         """
         Get graph data by stream resolution
@@ -1449,17 +1451,17 @@ class RawAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: Dict of data
         :rtype: dict
         """
         return self._get_x_by(endpoint='get_plays_by_stream_resolution', time_range=time_range, y_axis=y_axis,
-                              user_id=user_id, grouping=grouping)
+                              user_ids=user_ids, grouping=grouping)
 
-    def get_plays_by_stream_type(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_by_stream_type(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                  grouping: bool = False) -> dict:
         """
         Get graph data by stream type
@@ -1468,17 +1470,17 @@ class RawAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: Dict of data
         :rtype: dict
         """
         return self._get_x_by(endpoint='get_plays_by_stream_type', time_range=time_range, y_axis=y_axis,
-                              user_id=user_id, grouping=grouping)
+                              user_ids=user_ids, grouping=grouping)
 
-    def get_plays_by_top_10_platforms(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_by_top_10_platforms(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                       grouping: bool = False) -> dict:
         """
         Get graph data by top 10 platforms
@@ -1487,17 +1489,17 @@ class RawAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: Dict of data
         :rtype: dict
         """
         return self._get_x_by(endpoint='get_plays_by_top_10_platforms', time_range=time_range, y_axis=y_axis,
-                              user_id=user_id, grouping=grouping)
+                              user_ids=user_ids, grouping=grouping)
 
-    def get_plays_by_top_10_users(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_by_top_10_users(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                   grouping: bool = False) -> dict:
         """
         Get graph data by top 10 users
@@ -1506,17 +1508,17 @@ class RawAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: Dict of data
         :rtype: dict
         """
         return self._get_x_by(endpoint='get_plays_by_top_10_users', time_range=time_range, y_axis=y_axis,
-                              user_id=user_id, grouping=grouping)
+                              user_ids=user_ids, grouping=grouping)
 
-    def get_plays_per_month(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_plays_per_month(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                             grouping: bool = False) -> dict:
         """
         Get graph data by month
@@ -1525,14 +1527,14 @@ class RawAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: Dict of data
         :rtype: dict
         """
-        return self._get_x_by(endpoint='get_plays_per_month', time_range=time_range, y_axis=y_axis, user_id=user_id,
+        return self._get_x_by(endpoint='get_plays_per_month', time_range=time_range, y_axis=y_axis, user_ids=user_ids,
                               grouping=grouping)
 
     @raw_json
@@ -1714,7 +1716,7 @@ class RawAPI:
             params[name] = value
         return 'get_stream_data', params
 
-    def get_stream_type_by_top_10_platforms(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_stream_type_by_top_10_platforms(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                             grouping: bool = False) -> dict:
         """
         Get graph data by stream type by the top 10 platforms
@@ -1723,17 +1725,17 @@ class RawAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: Dict of data
         :rtype: dict
         """
         return self._get_x_by(endpoint='get_stream_type_by_top_10_platforms', time_range=time_range, y_axis=y_axis,
-                              user_id=user_id, grouping=grouping)
+                              user_ids=user_ids, grouping=grouping)
 
-    def get_stream_type_by_top_10_users(self, time_range: int = None, y_axis: str = None, user_id: str = None,
+    def get_stream_type_by_top_10_users(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
                                         grouping: bool = False) -> dict:
         """
         Get graph data by stream type by the top 10 users
@@ -1742,15 +1744,15 @@ class RawAPI:
         :type time_range: int, optional
         :param y_axis: Stat type ('plays' or 'duration')
         :type y_axis: str, optional
-        :param user_id: User ID to filter data
-        :type user_id: str, optional
+        :param user_ids: List of user IDs to filter data
+        :type user_ids: List[str], optional
         :param grouping: Whether to group the results (default: False)
         :type grouping: bool, optional
         :returns: Dict of data
         :rtype: dict
         """
         return self._get_x_by(endpoint='get_stream_type_by_top_10_users', time_range=time_range, y_axis=y_axis,
-                              user_id=user_id, grouping=grouping)
+                              user_ids=user_ids, grouping=grouping)
 
     @raw_json
     def get_synced_items(self, machine_id: str = None, user_id: str = None) -> dict:
