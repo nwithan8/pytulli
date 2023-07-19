@@ -5,6 +5,12 @@ from tautulli.internal.utils import _success_result, _get_response_data
 
 
 def raw_api_bool(func):
+    """
+    Execute the Raw API equivalent of an Object API function.
+
+    :returns: Result of the Raw API equivalent, or `False` if an error occurs.
+    :rtype: bool
+    """
     @wraps(func)
     def wrapper(self, *args, **kwargs) -> bool:
         try:
@@ -17,6 +23,13 @@ def raw_api_bool(func):
 
 
 def make_property_object(func):
+    """
+    Execute the Raw API equivalent of on Object API function.
+
+    Parse the response JSON into an object.
+
+    :returns: An instance of the class (determined by the first value in the tuple returned from the Object API function)
+    """
     @wraps(func)
     def wrapper(self, *args, **kwargs) -> object:
         try:
@@ -34,6 +47,13 @@ def make_property_object(func):
 
 
 def make_object(func):
+    """
+    Execute the Raw API equivalent of on Object API function.
+
+    Parse the response JSON into an object.
+
+    :returns: An instance of the class (determined by the first value in the tuple returned from the Object API function)
+    """
     @wraps(func)
     def wrapper(self, *args, **kwargs) -> object:
         try:
@@ -52,6 +72,11 @@ def make_object(func):
 
 
 def set_and_forget(func):
+    """
+    Execute an API call that does not return valuable data.
+
+    :returns: `True` if the server replied with success, `False` otherwise.
+    """
     @wraps(func)
     def wrapper(self, *args, **kwargs) -> bool:
         """
@@ -68,6 +93,11 @@ def set_and_forget(func):
 
 
 def raw_json(func):
+    """
+    Execute an API call that returns valuable data.
+
+    :returns: A JSON dictionary of the data returned by the API call.
+    """
     @wraps(func)
     def wrapper(self, *args, **kwargs) -> dict:
         """
