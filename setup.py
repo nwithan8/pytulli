@@ -19,11 +19,19 @@ __keywords__ = ["Tautulli", "API", "client", "Plex", "PMS", "Plex Media Server",
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+with open("requirements.txt", "r") as fh:
+    REQUIREMENTS = fh.read().splitlines()
+
+with open("requirements-dev.txt", "r") as fh:
+    DEV_REQUIREMENTS = fh.read().splitlines()
+
+
 def __supported_python_versions__() -> List[str]:
     """Return a list of supported Python versions."""
     with open(os.path.join(os.path.dirname(__file__), "tautulli", "PYTHON_VERSIONS.json")) as f:
         versions = f.read()
         return json.loads(versions)
+
 
 def python_versions() -> List[str]:
     """Return a list of supported Python versions."""
@@ -40,27 +48,6 @@ def python3_range() -> str:
     return f">={versions[0]}, <4"
 
 
-REQUIREMENTS = [
-    "objectrest==2.0.*",
-    "pydantic==1.10.*",
-    "pytz==2022.1.*",
-    "python-dotenv==0.20.*",
-    "packaging==21.3.*",
-    "typing-extensions"
-]
-
-DEV_REQUIREMENTS = [
-    "black",
-    "flake8",
-    "isort",
-    "pytest-cov==3.*",
-    "pytest-vcr==1.*",
-    "pytest==7.*",
-    "types-requests",
-    "types-urllib3",
-    "vcrpy==4.*",
-]
-
 classifiers = [
     'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
     'Development Status :: 4 - Beta',
@@ -73,6 +60,12 @@ classifiers = [
     'Operating System :: OS Independent'
 ]
 classifiers.extend(python_versions())
+
+# Replace version if not replaced already
+try:
+    _ = setuptools._vendor.packaging.version.Version(__version__)
+except Exception:
+    __version__ = '0.0.0'
 
 setuptools.setup(
     name=__title__,
