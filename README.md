@@ -1,4 +1,5 @@
 # A Python client for Tautulli's API
+
 [![PyPi](https://img.shields.io/pypi/dm/tautulli?label=Downloads&logo=pypi)](https://pypi.org/project/tautulli)
 [![License](https://img.shields.io/pypi/l/tautulli?color=orange&style=flat-square)](https://github.com/nwithan8/pytulli/blob/master/LICENSE)
 
@@ -12,11 +13,14 @@
 Interact with Tautulli's API in Python
 
 # Installation
-From PyPi: ``python -m pip install tautulli``
 
-From GitHub ``python -m pip install git+https://github.com/nwithan8/pytulli.git``
+- From PyPi (recommended): ``python -m pip install tautulli``
+- From GitHub ``python -m pip install git+https://github.com/nwithan8/pytulli.git``
+  - This is not recommended, as the version will always default to 0.0.0
+
 
 # Usage
+
 This client covers nearly 100% of all Tautulli's available API calls, including type checks and enforcing required variables.
 
 More details about Tautulli's API can be found on the [Tautulli's GitHub wiki page](https://github.com/Tautulli/Tautulli/wiki/Tautulli-API-Reference).
