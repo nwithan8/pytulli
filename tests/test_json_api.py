@@ -1,13 +1,15 @@
 import pytest
 
 from tautulli._info import __min_api_version__
+from tautulli.exceptions import HttpException
 from tests.setup import raw_client, invalid_raw_client, no_ssl_client
 
 @pytest.mark.skip(reason="Doesn't play well in CI.")
 def test_invalid_api_key():
     client = invalid_raw_client()
-    with pytest.raises(Exception) as e:
+    with pytest.raises(HttpException) as e:
         _ = client.tautulli_info
+    assert type(e.value) == HttpException
     assert "Invalid apikey" in str(e)
 
 def test_ssl():

@@ -13,6 +13,9 @@ from tautulli.internal.utils import build_optional_params, _get_response_data, _
     _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string, comma_delimit
 from tautulli.tools.api_helper import APIShortcuts
 from tautulli.tools.utils import redact
+from tautulli.exceptions.http_exception import HttpException
+from tautulli.exceptions.api_exception import ApiException
+from tautulli.exceptions.json_exception import JsonException
 
 import urllib3
 
@@ -51,16 +54,16 @@ class RawAPI:
         server_version_string: Union[str, None] = self.tautulli_info.get('tautulli_version', None)
 
         if server_version_string is None:
-            raise Exception("Tautulli did not report a version number.")
+            raise ApiException(message="Tautulli did not report a version number.")
         try:
             server_version = packaging.version.parse(server_version_string)
         except:
-            raise Exception("Could not parse Tautulli version number.")
+            raise ApiException(message="Could not parse Tautulli version number.")
 
         try:
             min_version = packaging.version.parse(min_version)
         except:
-            raise Exception("Could not parse minimum compatible version number.")
+            raise ApiException(message="Could not parse minimum compatible version number.")
 
         self._logger.debug(f"Server version: {server_version}, minimum version: {min_version}")
         return server_version >= min_version
@@ -98,26 +101,12 @@ class RawAPI:
         """
         response = self._get(command=command, params=params)
         if not response:
-            error_message = f"Tautulli API call reported a {response.status_code} status code."
-            tautulli_error = None
-            try:
-                data = response.json()
-                tautulli_error = data.get('response', {}).get('message', None)
-            except:
-                self._logger.error(f"{error_message} Could not parse JSON from response: {response.text}")
-
-            if not tautulli_error:
-                tautulli_error = "Unknown error."
-                raise Exception(f"{error_message} No error reason provided by Tautulli.")
-            else:
-                raise Exception(f"{error_message} {tautulli_error}")
+            raise HttpException.from_response(response=response, logger=self._logger)
 
         try:
             return response.json()
         except:
-            # TODO: Do we want to just log an error and return an empty dict, or raise an exception?
-            self._logger.error(f"Could not parse JSON from response: {response.text}")
-            return static.empty_dict
+            raise JsonException(message="Could not parse JSON from API response.", body=response.text)
 
     @raw_json
     def _get_x_by(self, endpoint: str, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
