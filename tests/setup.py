@@ -28,7 +28,7 @@ def invalid_raw_client() -> tautulli.RawAPI:
     url = os.getenv("T_URL")
     if not url:
         raise ValueError("T_URL is not set")
-    return tautulli.RawAPI(base_url=url, api_key="invalid_key")
+    return tautulli.RawAPI(base_url=url, api_key="invalid_key", verify=False)
 
 
 def object_client(no_key: bool = False) -> tautulli.ObjectAPI:
