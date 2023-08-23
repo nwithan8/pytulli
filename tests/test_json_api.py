@@ -5,13 +5,10 @@ from tests.setup import raw_client, invalid_raw_client, no_ssl_client
 
 def test_invalid_api_key():
     client = invalid_raw_client()
-    try:
+    with pytest.raises(Exception) as e:
         _ = client.tautulli_info
-        # If we get here, the test failed
-        assert False
-    except Exception as e:
-        assert type(e) == Exception
-        assert "Invalid apikey" in str(e)
+    assert type(e.value) == Exception
+    assert "Invalid apikey" in str(e)
 
 def test_ssl():
     client = raw_client()
