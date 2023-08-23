@@ -13,14 +13,19 @@ from tautulli.internal.utils import build_optional_params, _get_response_data, _
     _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string, comma_delimit
 from tautulli.tools.api_helper import APIShortcuts
 from tautulli.tools.utils import redact
+from tautulli.exceptions.http_exception import HttpException
+from tautulli.exceptions.api_exception import ApiException
+from tautulli.exceptions.json_exception import JsonException
 
 import urllib3
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+
 # noinspection PyTypeChecker
 class RawAPI:
-    def __init__(self, base_url: str, api_key: str, verbose: bool = False, verify: bool = True, ssl_verify: bool = True):
+    def __init__(self, base_url: str, api_key: str, verbose: bool = False, verify: bool = True,
+                 ssl_verify: bool = True):
         if base_url.endswith("/"):
             base_url = base_url[:-1]
         # Zero knowledge of the API key is kept
@@ -49,16 +54,16 @@ class RawAPI:
         server_version_string: Union[str, None] = self.tautulli_info.get('tautulli_version', None)
 
         if server_version_string is None:
-            raise Exception("Tautulli did not report a version number.")
+            raise ApiException(message="Tautulli did not report a version number.")
         try:
             server_version = packaging.version.parse(server_version_string)
         except:
-            raise Exception("Could not parse Tautulli version number.")
+            raise ApiException(message="Could not parse Tautulli version number.")
 
         try:
             min_version = packaging.version.parse(min_version)
         except:
-            raise Exception("Could not parse minimum compatible version number.")
+            raise ApiException(message="Could not parse minimum compatible version number.")
 
         self._logger.debug(f"Server version: {server_version}, minimum version: {min_version}")
         return server_version >= min_version
@@ -78,7 +83,8 @@ class RawAPI:
             params = {}
         params['cmd'] = command
         self._logger.debug(f"Making request to {self._redacted_url} with params {params}")
-        response = self._session.get(url=self._url, params=params, verify=self._ssl_verify) # Optionally ignore SSL errors for self-signed certificates
+        response = self._session.get(url=self._url, params=params,
+                                     verify=self._ssl_verify)  # Optionally ignore SSL errors for self-signed certificates
         self._logger.debug(f"Response: {response}")
         return response
 
@@ -94,14 +100,13 @@ class RawAPI:
         :rtype: dict
         """
         response = self._get(command=command, params=params)
-        if response:
-            try:
-                return response.json()
-            except:
-                # TODO: Do we want to just log an error and return an empty dict, or raise an exception?
-                self._logger.error(f"Could not parse JSON from response: {response.text}")
-                return static.empty_dict
-        return static.empty_dict
+        if not response:
+            raise HttpException.from_response(response=response, logger=self._logger)
+
+        try:
+            return response.json()
+        except:
+            raise JsonException(message="Could not parse JSON from API response.", body=response.text)
 
     @raw_json
     def _get_x_by(self, endpoint: str, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
@@ -1400,7 +1405,8 @@ class RawAPI:
         :returns: Dict of data
         :rtype: dict
         """
-        return self._get_x_by(endpoint='get_plays_by_dayofweek', time_range=time_range, y_axis=y_axis, user_ids=user_ids,
+        return self._get_x_by(endpoint='get_plays_by_dayofweek', time_range=time_range, y_axis=y_axis,
+                              user_ids=user_ids,
                               grouping=grouping)
 
     def get_plays_by_hour_of_day(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
@@ -1420,7 +1426,8 @@ class RawAPI:
         :rtype: dict
         """
         # noinspection SpellCheckingInspection
-        return self._get_x_by(endpoint='get_plays_by_hourofday', time_range=time_range, y_axis=y_axis, user_ids=user_ids,
+        return self._get_x_by(endpoint='get_plays_by_hourofday', time_range=time_range, y_axis=y_axis,
+                              user_ids=user_ids,
                               grouping=grouping)
 
     def get_plays_by_source_resolution(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
@@ -1716,7 +1723,8 @@ class RawAPI:
             params[name] = value
         return 'get_stream_data', params
 
-    def get_stream_type_by_top_10_platforms(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
+    def get_stream_type_by_top_10_platforms(self, time_range: int = None, y_axis: str = None,
+                                            user_ids: List[str] = None,
                                             grouping: bool = False) -> dict:
         """
         Get graph data by stream type by the top 10 platforms
