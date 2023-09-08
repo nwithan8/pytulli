@@ -1,3 +1,5 @@
+import objectrest
+
 from tautulli.internal import static
 from tautulli.models.activity import build_summary_from_activity_json
 
@@ -19,6 +21,34 @@ class APIShortcuts:
         """
         name = self._api.server_friendly_name
         return name is not None and name is not static.empty_string
+
+    def ping_plex(self, pms_url: str = None) -> bool:
+        """
+        Ping the Plex Media Server
+        :param pms_url: URL of the Plex Media Server, defaults to default PMS URL
+        :type pms_url: str, optional
+        :returns: `True` if successful, `False` if unsuccessful
+        :rtype: bool
+        """
+        pms_url = pms_url or self._api.server_info.get('pms_url', None)
+
+        if pms_url is None:
+            return False
+        try:
+            status_code = objectrest.get(url=pms_url, verify_ssl=False).status_code
+            return 200 <= status_code < 300 or status_code == 401 # 401 is a valid response
+        except Exception:
+            return False
+
+    @property
+    def has_plex_pass(self) -> bool:
+        """
+        Check if the Plex Media Server has Plex Pass
+
+        :returns: `True` if successful, `False` if unsuccessful
+        :rtype: bool
+        """
+        return self._api.server_info.get('pms_plexpass', 0) == 1
 
     @property
     def api_version(self) -> str:
