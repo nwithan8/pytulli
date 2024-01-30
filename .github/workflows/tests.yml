@@ -12,7 +12,7 @@ jobs:
       server_versions: ${{ steps.set-server-versions.outputs.server_versions }}
       python_versions: ${{ steps.set-python-versions.outputs.python_versions }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - id: set-server-versions
         run: echo "server_versions=$(cat tautulli/API_VERSIONS.json | jq -c '')" >> $GITHUB_OUTPUT
       - id: set-python-versions
@@ -40,7 +40,7 @@ jobs:
         with:
           time: '30s'
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Replace version stand-in
         uses: jacobtomlinson/gha-find-replace@2.0.0
         with:
