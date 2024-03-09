@@ -5,19 +5,18 @@ from typing import Union, List
 
 import objectrest
 import packaging.version
+import urllib3
 
 import tautulli.internal.static as static
 from tautulli._info import __min_api_version__
+from tautulli.exceptions.api_exception import ApiException
+from tautulli.exceptions.http_exception import HttpException
+from tautulli.exceptions.json_exception import JsonException
 from tautulli.internal.decorators import raw_json, set_and_forget
 from tautulli.internal.utils import build_optional_params, _get_response_data, _success_result, int_list_to_string, \
     _one_needed, _which_used, bool_to_int, _is_invalid_choice, datetime_to_string, comma_delimit
 from tautulli.tools.api_helper import APIShortcuts
 from tautulli.tools.utils import redact
-from tautulli.exceptions.http_exception import HttpException
-from tautulli.exceptions.api_exception import ApiException
-from tautulli.exceptions.json_exception import JsonException
-
-import urllib3
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -2095,10 +2094,9 @@ class RawAPI:
         params['rating_key'] = rating_key
         return 'notify_recently_added', params
 
-    @set_and_forget
     def pms_image_proxy(self, img: str = None, rating_key: str = None, width: int = None, height: int = None,
-                        opacity: int = None, background_hex: str = None, blur: int = None, img_format: str = None,
-                        fallback: str = None, refresh: bool = False, return_hash: bool = False) -> bool:
+                        opacity: int = None, background_hex: str = None, blur: int = None, img_format: str = 'png',
+                        fallback: str = None, refresh: bool = False) -> bytes:
         """
         Gets an image from the Plex Media Server and saves it to the image cache directory
 
@@ -2122,10 +2120,8 @@ class RawAPI:
         :type fallback: str, optional
         :param refresh: Whether or refresh the image cache (default: False)
         :type refresh: bool, optional
-        :param return_hash: Whether to return the self-hosted image hash instead of the image (default: False)
-        :type return_hash: bool, optional
-        :returns: `True` if successful, `False` if unsuccessful
-        :rtype: bool
+        :returns: Bytes of image
+        :rtype: bytearray
         """
         if not _one_needed(img=img, rating_key=rating_key):
             return False, None
@@ -2134,12 +2130,16 @@ class RawAPI:
             return False, None
         params = build_optional_params(width=width, height=height, opacity=opacity, background=background_hex,
                                        blur=blur,
-                                       img_format=img_format, fallback=fallback, refresh=refresh,
-                                       return_hash=return_hash)
+                                       img_format=img_format, fallback=fallback, refresh=refresh)
         name, value = _which_used(img=img, rating_key=rating_key)
         if name:
             params[name] = value
-        return 'pms_image_proxy', params
+
+        response = self._get(command='pms_image_proxy', params=params)
+        if response:
+            return response.content
+
+        return static.empty_bytes
 
     @set_and_forget
     def refresh_libraries_list(self) -> bool:
