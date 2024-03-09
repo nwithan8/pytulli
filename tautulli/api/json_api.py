@@ -27,9 +27,10 @@ class RawAPI:
                  ssl_verify: bool = True):
         if base_url.endswith("/"):
             base_url = base_url[:-1]
+        self._base_url = base_url
         # Zero knowledge of the API key is kept
-        self._url = f"{base_url}/api/v2?apikey={api_key}"
-        self._redacted_url = f"{base_url}/api/v2?apikey={redact(full_string=api_key, to_redact=api_key)}"
+        self._url = f"{self._base_url}/api/v2?apikey={api_key}"
+        self._redacted_url = f"{self._base_url}/api/v2?apikey={redact(full_string=api_key, to_redact=api_key)}"
         self._session = objectrest.Session()
         self._ssl_verify = ssl_verify
         logging.basicConfig(format='%(levelname)s:%(message)s', level=(logging.DEBUG if verbose else logging.ERROR))
