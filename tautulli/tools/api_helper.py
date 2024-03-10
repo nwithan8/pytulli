@@ -1,3 +1,5 @@
+from urllib.parse import quote_plus
+
 import objectrest
 
 from tautulli.internal import static
@@ -36,7 +38,7 @@ class APIShortcuts:
             return False
         try:
             status_code = objectrest.get(url=pms_url, verify_ssl=False).status_code
-            return 200 <= status_code < 300 or status_code == 401 # 401 is a valid response
+            return 200 <= status_code < 300 or status_code == 401  # 401 is a valid response
         except Exception:
             return False
 
@@ -94,3 +96,36 @@ class APIShortcuts:
         _activity_data = self._api.activity()
         # Yes, this is the JSON API using an object as a middleman.
         return build_summary_from_activity_json(activity_data=_activity_data).message
+
+    def get_plex_image_url_from_proxy(self, plex_image_path: str, image_type: str = 'poster') -> str:
+        """
+        Get a URL to a Plex Media Server image hosted by the Tautulli image proxy
+
+        :param plex_image_path: Path to the image on the Plex Media Server
+        :type plex_image_path: str
+        :param image_type: Image type, defaults to 'poster'
+        :type image_type: str, optional
+        :return: The URL to the image
+        :rtype: str
+        """
+        return f"{self._api._base_url}/pms_image_proxy?img={quote_plus(plex_image_path)}&fallback={image_type}"
+
+    def download_plex_image_from_proxy(self, plex_image_path: str, file_path: str, file_format: str = 'png',
+                                       image_type: str = 'poster') -> None:
+        """
+        Download an image from the Plex Media Server using the Tautulli API and save it to a local file
+
+        :param plex_image_path: Path to the image on the Plex Media Server
+        :type plex_image_path: str
+        :param file_path: Path to the file to save the image to
+        :type file_path: str
+        :param file_format: Image file format, defaults to 'png'
+        :type file_format: str, optional
+        :param image_type: Image type, defaults to 'poster'
+        :type image_type: str, optional
+        :returns: None
+        """
+        data = self._api.pms_image_proxy(img=plex_image_path, fallback=image_type, img_format=file_format)
+
+        with open(file_path, 'wb') as file:
+            file.write(data)

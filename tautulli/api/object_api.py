@@ -1320,7 +1320,8 @@ class ObjectAPI:
         return 'StreamData'
 
     @make_object
-    def get_stream_type_by_top_10_platforms(self, time_range: int = None, y_axis: str = None, user_ids: List[str] = None,
+    def get_stream_type_by_top_10_platforms(self, time_range: int = None, y_axis: str = None,
+                                            user_ids: List[str] = None,
                                             grouping: bool = False) -> PlaysOrStreamTypesBy:
         """
         Get graph data by stream type by the top 10 platforms
@@ -1631,10 +1632,9 @@ class ObjectAPI:
         """
         return False
 
-    @raw_api_bool
     def pms_image_proxy(self, img: str = None, rating_key: str = None, width: int = None, height: int = None,
-                        opacity: int = None, background_hex: str = None, blur: int = None, img_format: str = None,
-                        fallback: str = None, refresh: bool = False, return_hash: bool = False) -> bool:
+                        opacity: int = None, background_hex: str = None, blur: int = None, img_format: str = 'png',
+                        fallback: str = None, refresh: bool = False) -> bool:
         """
         Gets an image from the Plex Media Server and saves it to the image cache directory
 
@@ -1658,12 +1658,13 @@ class ObjectAPI:
         :type fallback: str, optional
         :param refresh: Whether or refresh the image cache (default: False)
         :type refresh: bool, optional
-        :param return_hash: Whether to return the self-hosted image hash instead of the image (default: False)
-        :type return_hash: bool, optional
-        :returns: `True` if successful, `False` if unsuccessful
-        :rtype: bool
+        :returns: Bytes of image
+        :rtype: bytearray
         """
-        return False
+        return self._raw_api.pms_image_proxy(img=img, rating_key=rating_key, width=width, height=height,
+                                             opacity=opacity,
+                                             background_hex=background_hex, blur=blur, img_format=img_format,
+                                             fallback=fallback, refresh=refresh)
 
     @raw_api_bool
     def refresh_libraries_list(self) -> bool:
