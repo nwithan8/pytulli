@@ -1,3 +1,6 @@
+from urllib.parse import quote_plus
+
+
 def _human_bitrate(number, denominator: int = 1, letter: str = "", d: int = 1):
     if d <= 0:
         return f'{int(number / denominator):d} {letter}bps'
@@ -48,3 +51,15 @@ def redact(full_string: str, to_redact: str, redaction: str = "[REDACTED]") -> s
     :rtype: str
     """
     return full_string.replace(to_redact, redaction)
+
+
+def url_encode(string: str) -> str:
+    """
+    URL encode a string
+
+    :param string: String to encode
+    :type string: str
+    :returns: URL encoded string
+    :rtype: str
+    """
+    return quote_plus(string)

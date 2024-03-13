@@ -1,9 +1,8 @@
-from urllib.parse import quote_plus
-
 import objectrest
 
 from tautulli.internal import static
 from tautulli.models.activity import build_summary_from_activity_json
+from tautulli.tools.utils import url_encode
 
 
 # noinspection PyTypeChecker
@@ -108,7 +107,7 @@ class APIShortcuts:
         :return: The URL to the image
         :rtype: str
         """
-        return f"{self._api._base_url}/pms_image_proxy?img={quote_plus(plex_image_path)}&fallback={image_type}"
+        return f"{self._api._base_url}/pms_image_proxy?img={url_encode(plex_image_path)}&fallback={image_type}"
 
     def download_plex_image_from_proxy(self, plex_image_path: str, file_path: str, file_format: str = 'png',
                                        image_type: str = 'poster') -> None:
@@ -129,3 +128,23 @@ class APIShortcuts:
 
         with open(file_path, 'wb') as file:
             file.write(data)
+
+    def get_link_to_open_media_item_in_browser(self, media_item_id: int) -> str:
+        """
+        Get a link to open a media item in the Plex Web app
+
+        :param media_item_id: ID of the media item
+        :type media_item_id: int
+        :returns: URL to open the media item in the Plex Web app
+        :rtype: str
+        """
+        plex_server_details = self._api.server_info
+        pms_url = plex_server_details.get('pms_url')
+        pms_id = plex_server_details.get('pms_identifier')
+
+        if not pms_url or not pms_id:
+            return None
+
+        key = url_encode(f"/library/metadata/{media_item_id}")
+
+        return f"{pms_url}#!/server/{pms_id}/details?key={key}"
