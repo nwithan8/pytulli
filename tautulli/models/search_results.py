@@ -9,9 +9,9 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Stream(BaseModel):
-    id: Optional[str]
-    type: Optional[str]
+class StreamModel(BaseModel):
+    id: Optional[str] = None
+    type: Optional[str] = None
     video_codec: Optional[str] = None
     video_codec_level: Optional[str] = None
     video_bitrate: Optional[str] = None
@@ -29,7 +29,7 @@ class Stream(BaseModel):
     video_language_code: Optional[str] = None
     video_profile: Optional[str] = None
     video_scan_type: Optional[str] = None
-    selected: Optional[int]
+    selected: Optional[int] = None
     audio_codec: Optional[str] = None
     audio_bitrate: Optional[str] = None
     audio_bitrate_mode: Optional[str] = None
@@ -48,259 +48,252 @@ class Stream(BaseModel):
     subtitle_language_code: Optional[str] = None
 
 
-class Part(BaseModel):
-    id: Optional[str]
-    file: Optional[str]
-    file_size: Optional[str]
-    indexes: Optional[int]
-    streams: Optional[List[Stream]]
-    selected: Optional[int]
+class PartModel(BaseModel):
+    id: Optional[str] = None
+    file: Optional[str] = None
+    file_size: Optional[str] = None
+    indexes: Optional[int] = None
+    streams: Optional[List[StreamModel]] = None
+    selected: Optional[int] = None
 
 
-class MediaInfoItem(BaseModel):
-    id: Optional[str]
-    container: Optional[str]
-    bitrate: Optional[str]
-    height: Optional[str]
-    width: Optional[str]
-    aspect_ratio: Optional[str]
-    video_codec: Optional[str]
-    video_resolution: Optional[str]
-    video_full_resolution: Optional[str]
-    video_framerate: Optional[str]
-    video_profile: Optional[str]
-    audio_codec: Optional[str]
-    audio_channels: Optional[str]
-    audio_channel_layout: Optional[str]
-    audio_profile: Optional[str]
-    optimized_version: Optional[int]
-    channel_call_sign: Optional[str]
-    channel_identifier: Optional[str]
-    channel_thumb: Optional[str]
-    parts: Optional[List[Part]]
+class MediaInfoItemModel(BaseModel):
+    id: Optional[str] = None
+    container: Optional[str] = None
+    bitrate: Optional[str] = None
+    height: Optional[str] = None
+    width: Optional[str] = None
+    aspect_ratio: Optional[str] = None
+    video_codec: Optional[str] = None
+    video_resolution: Optional[str] = None
+    video_full_resolution: Optional[str] = None
+    video_framerate: Optional[str] = None
+    video_profile: Optional[str] = None
+    audio_codec: Optional[str] = None
+    audio_channels: Optional[str] = None
+    audio_channel_layout: Optional[str] = None
+    audio_profile: Optional[str] = None
+    optimized_version: Optional[int] = None
+    channel_call_sign: Optional[str] = None
+    channel_identifier: Optional[str] = None
+    channel_thumb: Optional[str] = None
+    parts: Optional[List[PartModel]] = None
 
 
-class MovieItem(BaseModel):
-    media_type: Optional[str]
-    section_id: Optional[str]
-    library_name: Optional[str]
-    rating_key: Optional[str]
-    parent_rating_key: Optional[str]
-    grandparent_rating_key: Optional[str]
-    title: Optional[str]
-    parent_title: Optional[str]
-    grandparent_title: Optional[str]
-    original_title: Optional[str]
-    sort_title: Optional[str]
-    media_index: Optional[str]
-    parent_media_index: Optional[str]
-    studio: Optional[str]
-    content_rating: Optional[str]
-    summary: Optional[str]
-    tagline: Optional[str]
-    rating: Optional[str]
-    rating_image: Optional[str]
-    audience_rating: Optional[str]
-    audience_rating_image: Optional[str]
-    user_rating: Optional[str]
-    duration: Optional[str]
-    year: Optional[str]
-    thumb: Optional[str]
-    parent_thumb: Optional[str]
-    grandparent_thumb: Optional[str]
-    art: Optional[str]
-    banner: Optional[str]
-    originally_available_at: Optional[str]
-    added_at: Optional[str]
-    updated_at: Optional[str]
-    last_viewed_at: Optional[str]
-    guid: Optional[str]
-    parent_guid: Optional[str]
-    grandparent_guid: Optional[str]
-    directors: Optional[List]
-    writers: Optional[List]
-    actors: Optional[List]
-    genres: Optional[List]
-    labels: Optional[List]
-    collections: Optional[List]
-    guids: Optional[List]
-    full_title: Optional[str]
-    children_count: Optional[int]
-    live: Optional[int]
-    media_info: Optional[List[MediaInfoItem]]
+class MovieItemModel(BaseModel):
+    media_type: Optional[str] = None
+    section_id: Optional[str] = None
+    library_name: Optional[str] = None
+    rating_key: Optional[str] = None
+    parent_rating_key: Optional[str] = None
+    grandparent_rating_key: Optional[str] = None
+    title: Optional[str] = None
+    parent_title: Optional[str] = None
+    grandparent_title: Optional[str] = None
+    original_title: Optional[str] = None
+    sort_title: Optional[str] = None
+    media_index: Optional[str] = None
+    parent_media_index: Optional[str] = None
+    studio: Optional[str] = None
+    content_rating: Optional[str] = None
+    summary: Optional[str] = None
+    tagline: Optional[str] = None
+    rating: Optional[str] = None
+    rating_image: Optional[str] = None
+    audience_rating: Optional[str] = None
+    audience_rating_image: Optional[str] = None
+    user_rating: Optional[str] = None
+    duration: Optional[str] = None
+    year: Optional[str] = None
+    thumb: Optional[str] = None
+    parent_thumb: Optional[str] = None
+    grandparent_thumb: Optional[str] = None
+    art: Optional[str] = None
+    banner: Optional[str] = None
+    originally_available_at: Optional[str] = None
+    added_at: Optional[str] = None
+    updated_at: Optional[str] = None
+    last_viewed_at: Optional[str] = None
+    guid: Optional[str] = None
+    parent_guid: Optional[str] = None
+    grandparent_guid: Optional[str] = None
+    directors: Optional[List] = None
+    writers: Optional[List] = None
+    actors: Optional[List] = None
+    genres: Optional[List] = None
+    labels: Optional[List] = None
+    collections: Optional[List] = None
+    guids: Optional[List] = None
+    full_title: Optional[str] = None
+    children_count: Optional[int] = None
+    live: Optional[int] = None
+    media_info: Optional[List[MediaInfoItemModel]] = None
 
 
-class ShowItem(BaseModel):
-    media_type: Optional[str]
-    section_id: Optional[str]
-    library_name: Optional[str]
-    rating_key: Optional[str]
-    parent_rating_key: Optional[str]
-    grandparent_rating_key: Optional[str]
-    title: Optional[str]
-    parent_title: Optional[str]
-    grandparent_title: Optional[str]
-    original_title: Optional[str]
-    sort_title: Optional[str]
-    media_index: Optional[str]
-    parent_media_index: Optional[str]
-    studio: Optional[str]
-    content_rating: Optional[str]
-    summary: Optional[str]
-    tagline: Optional[str]
-    rating: Optional[str]
-    rating_image: Optional[str]
-    audience_rating: Optional[str]
-    audience_rating_image: Optional[str]
-    user_rating: Optional[str]
-    duration: Optional[str]
-    year: Optional[str]
-    thumb: Optional[str]
-    parent_thumb: Optional[str]
-    grandparent_thumb: Optional[str]
-    art: Optional[str]
-    banner: Optional[str]
-    originally_available_at: Optional[str]
-    added_at: Optional[str]
-    updated_at: Optional[str]
-    last_viewed_at: Optional[str]
-    guid: Optional[str]
-    parent_guid: Optional[str]
-    grandparent_guid: Optional[str]
-    directors: Optional[List]
-    writers: Optional[List]
-    actors: Optional[List[str]]
-    genres: Optional[List[str]]
-    labels: Optional[List]
-    collections: Optional[List]
-    guids: Optional[List]
-    full_title: Optional[str]
-    children_count: Optional[int]
-    live: Optional[int]
-    media_info: Optional[List]
+class ShowItemModel(BaseModel):
+    media_type: Optional[str] = None
+    section_id: Optional[str] = None
+    library_name: Optional[str] = None
+    rating_key: Optional[str] = None
+    parent_rating_key: Optional[str] = None
+    grandparent_rating_key: Optional[str] = None
+    title: Optional[str] = None
+    parent_title: Optional[str] = None
+    grandparent_title: Optional[str] = None
+    original_title: Optional[str] = None
+    sort_title: Optional[str] = None
+    media_index: Optional[str] = None
+    parent_media_index: Optional[str] = None
+    studio: Optional[str] = None
+    content_rating: Optional[str] = None
+    summary: Optional[str] = None
+    tagline: Optional[str] = None
+    rating: Optional[str] = None
+    rating_image: Optional[str] = None
+    audience_rating: Optional[str] = None
+    audience_rating_image: Optional[str] = None
+    user_rating: Optional[str] = None
+    duration: Optional[str] = None
+    year: Optional[str] = None
+    thumb: Optional[str] = None
+    parent_thumb: Optional[str] = None
+    grandparent_thumb: Optional[str] = None
+    art: Optional[str] = None
+    banner: Optional[str] = None
+    originally_available_at: Optional[str] = None
+    added_at: Optional[str] = None
+    updated_at: Optional[str] = None
+    last_viewed_at: Optional[str] = None
+    guid: Optional[str] = None
+    parent_guid: Optional[str] = None
+    grandparent_guid: Optional[str] = None
+    directors: Optional[List] = None
+    writers: Optional[List] = None
+    actors: Optional[List[str]] = None
+    genres: Optional[List[str]] = None
+    labels: Optional[List] = None
+    collections: Optional[List] = None
+    guids: Optional[List] = None
+    full_title: Optional[str] = None
+    children_count: Optional[int] = None
+    live: Optional[int] = None
+    media_info: Optional[List] = None
 
 
-class SeasonItem(BaseModel):
-    media_type: Optional[str]
-    section_id: Optional[str]
-    library_name: Optional[str]
-    rating_key: Optional[str]
-    parent_rating_key: Optional[str]
-    grandparent_rating_key: Optional[str]
-    title: Optional[str]
-    parent_title: Optional[str]
-    grandparent_title: Optional[str]
-    original_title: Optional[str]
-    sort_title: Optional[str]
-    media_index: Optional[str]
-    parent_media_index: Optional[str]
-    studio: Optional[str]
-    content_rating: Optional[str]
-    summary: Optional[str]
-    tagline: Optional[str]
-    rating: Optional[str]
-    rating_image: Optional[str]
-    audience_rating: Optional[str]
-    audience_rating_image: Optional[str]
-    user_rating: Optional[str]
-    duration: Optional[str]
-    year: Optional[str]
-    thumb: Optional[str]
-    parent_thumb: Optional[str]
-    grandparent_thumb: Optional[str]
-    art: Optional[str]
-    banner: Optional[str]
-    originally_available_at: Optional[str]
-    added_at: Optional[str]
-    updated_at: Optional[str]
-    last_viewed_at: Optional[str]
-    guid: Optional[str]
-    parent_guid: Optional[str]
-    grandparent_guid: Optional[str]
-    directors: Optional[List]
-    writers: Optional[List]
-    actors: Optional[List[str]]
-    genres: Optional[List[str]]
-    labels: Optional[List]
-    collections: Optional[List]
-    guids: Optional[List]
-    full_title: Optional[str]
-    children_count: Optional[int]
-    live: Optional[int]
-    media_info: Optional[List]
+class SeasonItemModel(BaseModel):
+    media_type: Optional[str] = None
+    section_id: Optional[str] = None
+    library_name: Optional[str] = None
+    rating_key: Optional[str] = None
+    parent_rating_key: Optional[str] = None
+    grandparent_rating_key: Optional[str] = None
+    title: Optional[str] = None
+    parent_title: Optional[str] = None
+    grandparent_title: Optional[str] = None
+    original_title: Optional[str] = None
+    sort_title: Optional[str] = None
+    media_index: Optional[str] = None
+    parent_media_index: Optional[str] = None
+    studio: Optional[str] = None
+    content_rating: Optional[str] = None
+    summary: Optional[str] = None
+    tagline: Optional[str] = None
+    rating: Optional[str] = None
+    rating_image: Optional[str] = None
+    audience_rating: Optional[str] = None
+    audience_rating_image: Optional[str] = None
+    user_rating: Optional[str] = None
+    duration: Optional[str] = None
+    year: Optional[str] = None
+    thumb: Optional[str] = None
+    parent_thumb: Optional[str] = None
+    grandparent_thumb: Optional[str] = None
+    art: Optional[str] = None
+    banner: Optional[str] = None
+    originally_available_at: Optional[str] = None
+    added_at: Optional[str] = None
+    updated_at: Optional[str] = None
+    last_viewed_at: Optional[str] = None
+    guid: Optional[str] = None
+    parent_guid: Optional[str] = None
+    grandparent_guid: Optional[str] = None
+    directors: Optional[List] = None
+    writers: Optional[List] = None
+    actors: Optional[List[str]] = None
+    genres: Optional[List[str]] = None
+    labels: Optional[List] = None
+    collections: Optional[List] = None
+    guids: Optional[List] = None
+    full_title: Optional[str] = None
+    children_count: Optional[int] = None
+    live: Optional[int] = None
+    media_info: Optional[List] = None
 
 
-class EpisodeItem(BaseModel):
-    media_type: Optional[str]
-    section_id: Optional[str]
-    library_name: Optional[str]
-    rating_key: Optional[str]
-    parent_rating_key: Optional[str]
-    grandparent_rating_key: Optional[str]
-    title: Optional[str]
-    parent_title: Optional[str]
-    grandparent_title: Optional[str]
-    original_title: Optional[str]
-    sort_title: Optional[str]
-    media_index: Optional[str]
-    parent_media_index: Optional[str]
-    studio: Optional[str]
-    content_rating: Optional[str]
-    summary: Optional[str]
-    tagline: Optional[str]
-    rating: Optional[str]
-    rating_image: Optional[str]
-    audience_rating: Optional[str]
-    audience_rating_image: Optional[str]
-    user_rating: Optional[str]
-    duration: Optional[str]
-    year: Optional[str]
-    thumb: Optional[str]
-    parent_thumb: Optional[str]
-    grandparent_thumb: Optional[str]
-    art: Optional[str]
-    banner: Optional[str]
-    originally_available_at: Optional[str]
-    added_at: Optional[str]
-    updated_at: Optional[str]
-    last_viewed_at: Optional[str]
-    guid: Optional[str]
-    parent_guid: Optional[str]
-    grandparent_guid: Optional[str]
-    directors: Optional[List[str]]
-    writers: Optional[List[str]]
-    actors: Optional[List[str]]
-    genres: Optional[List[str]]
-    labels: Optional[List]
-    collections: Optional[List]
-    guids: Optional[List]
-    full_title: Optional[str]
-    children_count: Optional[int]
-    live: Optional[int]
-    media_info: Optional[List[MediaInfoItem]]
+class EpisodeItemModel(BaseModel):
+    media_type: Optional[str] = None
+    section_id: Optional[str] = None
+    library_name: Optional[str] = None
+    rating_key: Optional[str] = None
+    parent_rating_key: Optional[str] = None
+    grandparent_rating_key: Optional[str] = None
+    title: Optional[str] = None
+    parent_title: Optional[str] = None
+    grandparent_title: Optional[str] = None
+    original_title: Optional[str] = None
+    sort_title: Optional[str] = None
+    media_index: Optional[str] = None
+    parent_media_index: Optional[str] = None
+    studio: Optional[str] = None
+    content_rating: Optional[str] = None
+    summary: Optional[str] = None
+    tagline: Optional[str] = None
+    rating: Optional[str] = None
+    rating_image: Optional[str] = None
+    audience_rating: Optional[str] = None
+    audience_rating_image: Optional[str] = None
+    user_rating: Optional[str] = None
+    duration: Optional[str] = None
+    year: Optional[str] = None
+    thumb: Optional[str] = None
+    parent_thumb: Optional[str] = None
+    grandparent_thumb: Optional[str] = None
+    art: Optional[str] = None
+    banner: Optional[str] = None
+    originally_available_at: Optional[str] = None
+    added_at: Optional[str] = None
+    updated_at: Optional[str] = None
+    last_viewed_at: Optional[str] = None
+    guid: Optional[str] = None
+    parent_guid: Optional[str] = None
+    grandparent_guid: Optional[str] = None
+    directors: Optional[List[str]] = None
+    writers: Optional[List[str]] = None
+    actors: Optional[List[str]] = None
+    genres: Optional[List[str]] = None
+    labels: Optional[List] = None
+    collections: Optional[List] = None
+    guids: Optional[List] = None
+    full_title: Optional[str] = None
+    children_count: Optional[int] = None
+    live: Optional[int] = None
+    media_info: Optional[List[MediaInfoItemModel]] = None
 
 
-class ResultsList(BaseModel):
-    movie: Optional[List[MovieItem]]
-    show: Optional[List[ShowItem]]
-    season: Optional[List[SeasonItem]]
-    episode: Optional[List[EpisodeItem]]
-    artist: Optional[List]
-    album: Optional[List]
-    track: Optional[List]
-    collection: Optional[List]
+class ResultsListModel(BaseModel):
+    movie: Optional[List[MovieItemModel]] = None
+    show: Optional[List[ShowItemModel]] = None
+    season: Optional[List[SeasonItemModel]] = None
+    episode: Optional[List[EpisodeItemModel]] = None
+    artist: Optional[List] = None
+    album: Optional[List] = None
+    track: Optional[List] = None
+    collection: Optional[List] = None
 
 
-class SearchResults(BaseModel):
-    results_count: Optional[int]
-    results_list: Optional[ResultsList]
+class SearchResultsModel(BaseModel):
+    results_count: Optional[int] = None
+    results_list: Optional[ResultsListModel] = None
 
 
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: SearchResults
 
-
-class Model(BaseModel):
-    response: Response

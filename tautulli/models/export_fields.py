@@ -4,31 +4,21 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import List, Optional
 
 from pydantic import BaseModel
 
 
-class MetadataField(BaseModel):
-    field: Optional[str]
-    level: Optional[int]
+class MetadataFieldModel(BaseModel):
+    field: Optional[str] = None
+    level: Optional[int] = None
 
 
-class MediaInfoField(BaseModel):
-    field: Optional[str]
-    level: Optional[int]
+class MediaInfoFieldModel(BaseModel):
+    field: Optional[str] = None
+    level: Optional[int] = None
 
 
-class ExportFields(BaseModel):
-    metadata_fields: Optional[List[MetadataField]]
-    media_info_fields: Optional[List[MediaInfoField]]
-
-
-class Response(BaseModel):
-    result: str
-    message: Any
-    data: ExportFields
-
-
-class Model(BaseModel):
-    response: Response
+class ExportFieldsModel(BaseModel):
+    metadata_fields: Optional[List[MetadataFieldModel]] = None
+    media_info_fields: Optional[List[MediaInfoFieldModel]] = None

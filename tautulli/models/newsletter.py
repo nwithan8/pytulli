@@ -9,21 +9,11 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Newsletter(BaseModel):
-    id: Optional[int]
-    agent_id: Optional[int]
-    agent_name: Optional[str]
-    agent_label: Optional[str]
-    friendly_name: Optional[str]
-    cron: Optional[str]
-    active: Optional[int]
-
-
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: List[Newsletter]
-
-
-class Model(BaseModel):
-    response: Response
+class NewsletterModel(BaseModel):
+    id: Optional[int] = None
+    agent_id: Optional[int] = None
+    agent_name: Optional[str] = None
+    agent_label: Optional[str] = None
+    friendly_name: Optional[str] = None
+    cron: Optional[str] = None
+    active: Optional[int] = None

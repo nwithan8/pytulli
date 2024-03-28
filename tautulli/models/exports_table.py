@@ -9,42 +9,35 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Datum(BaseModel):
-    timestamp: Optional[int]
-    art_level: Optional[int]
-    complete: Optional[int]
+class DatumModel(BaseModel):
+    timestamp: Optional[int] = None
+    art_level: Optional[int] = None
+    complete: Optional[int] = None
     custom_fields: str
-    exists: Optional[bool]
-    export_id: Optional[int]
-    exported_items: Optional[int]
-    file_format: Optional[str]
-    file_size: Optional[int]
-    filename: Optional[Any]
-    individual_files: Optional[int]
-    media_info_level: Optional[int]
-    media_type: Optional[str]
-    media_type_title: Optional[str]
-    metadata_level: Optional[int]
-    rating_key: Optional[Any]
-    section_id: Optional[int]
-    thumb_level: Optional[int]
-    title: Optional[str]
-    total_items: Optional[int]
-    user_id: Optional[Any]
+    exists: Optional[bool] = None
+    export_id: Optional[int] = None
+    exported_items: Optional[int] = None
+    file_format: Optional[str] = None
+    file_size: Optional[int] = None
+    filename: Optional[Any] = None
+    individual_files: Optional[int] = None
+    media_info_level: Optional[int] = None
+    media_type: Optional[str] = None
+    media_type_title: Optional[str] = None
+    metadata_level: Optional[int] = None
+    rating_key: Optional[Any] = None
+    section_id: Optional[int] = None
+    thumb_level: Optional[int] = None
+    title: Optional[str] = None
+    total_items: Optional[int] = None
+    user_id: Optional[Any] = None
 
 
-class ExportsTable(BaseModel):
-    draw: Optional[int]
-    recordsTotal: Optional[int]
-    recordsFiltered: Optional[int]
-    data: Optional[List[Datum]]
+class ExportsTableModel(BaseModel):
+    draw: Optional[int] = None
+    recordsTotal: Optional[int] = None
+    recordsFiltered: Optional[int] = None
+    data: Optional[List[DatumModel]] = None
 
 
-class Response(BaseModel):
-    result: str
-    message: Any
-    data: ExportsTable
 
-
-class Model(BaseModel):
-    response: Response

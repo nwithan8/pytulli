@@ -9,52 +9,45 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel
 
 
-class Config(BaseModel):
-    incl_poster: Optional[int]
-    html_support: Optional[int]
-    chat_id: Optional[str]
-    bot_token: Optional[str]
-    incl_subject: Optional[int]
-    disable_web_preview: Optional[int]
+class ConfigModel(BaseModel):
+    incl_poster: Optional[int] = None
+    html_support: Optional[int] = None
+    chat_id: Optional[str] = None
+    bot_token: Optional[str] = None
+    incl_subject: Optional[int] = None
+    disable_web_preview: Optional[int] = None
 
 
-class Actions(BaseModel):
-    on_play: Optional[int]
-    on_stop: Optional[int]
+class ActionsModel(BaseModel):
+    on_play: Optional[int] = None
+    on_stop: Optional[int] = None
 
 
-class OnPlay(BaseModel):
-    subject: Optional[str]
-    body: Optional[str]
+class OnPlayModel(BaseModel):
+    subject: Optional[str] = None
+    body: Optional[str] = None
 
 
-class OnStop(BaseModel):
-    subject: Optional[str]
-    body: Optional[str]
+class OnStopModel(BaseModel):
+    subject: Optional[str] = None
+    body: Optional[str] = None
 
 
-class NotifyText(BaseModel):
-    on_play: Optional[OnPlay]
-    on_stop: Optional[OnStop]
+class NotifyTextModel(BaseModel):
+    on_play: Optional[OnPlayModel] = None
+    on_stop: Optional[OnStopModel] = None
 
 
-class NotifierConfig(BaseModel):
-    id: Optional[int]
-    agent_id: Optional[int]
-    agent_name: Optional[str]
-    agent_label: Optional[str]
-    friendly_name: Optional[str]
-    config: Optional[Config]
-    config_options: Optional[List[Union[Dict[str, Any], str]]]
-    actions: Optional[Actions]
-    notify_text: Optional[NotifyText]
+class NotifierConfigModel(BaseModel):
+    id: Optional[int] = None
+    agent_id: Optional[int] = None
+    agent_name: Optional[str] = None
+    agent_label: Optional[str] = None
+    friendly_name: Optional[str] = None
+    config: Optional[ConfigModel] = None
+    config_options: Optional[List[Union[Dict[str, Any], str]]] = None
+    actions: Optional[ActionsModel] = None
+    notify_text: Optional[NotifyTextModel] = None
 
 
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: NotifierConfig
 
-
-class Model(BaseModel):
-    response: Response

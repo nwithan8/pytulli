@@ -9,21 +9,14 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Series(BaseModel):
-    name: Optional[str]
-    data: Optional[List]
+class SeriesModel(BaseModel):
+    name: Optional[str] = None
+    data: Optional[List] = None
 
 
-class PlaysOrStreamTypesBy(BaseModel):
-    categories: Optional[List[str]]
-    series: Optional[List[Series]]
+class PlaysOrStreamTypesByModel(BaseModel):
+    categories: Optional[List[str]] = None
+    series: Optional[List[SeriesModel]] = None
 
 
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: PlaysOrStreamTypesBy
 
-
-class Model(BaseModel):
-    response: Response

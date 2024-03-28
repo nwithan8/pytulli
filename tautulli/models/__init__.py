@@ -1,62 +1,62 @@
-from tautulli.models.activity import Activity
-from tautulli.models.docs import Docs
-from tautulli.models.date_formats import DateFormats
-from tautulli.models.library_names import LibraryName
-from tautulli.models.newsletter import Newsletter
-from tautulli.models.notifier_parameters import NotifierParameter
-from tautulli.models.pms_update import PMSUpdate
-from tautulli.models.server_identity import ServerIdentity
-from tautulli.models.server_list import ServerListEntry
-from tautulli.models.servers_info import ServersInfoEntry
-from tautulli.models.server_info import ServerInfo
-from tautulli.models.usernames import UserName
-from tautulli.models.users import User
-from tautulli.models.update_check import UpdateCheck
-from tautulli.models.collections_table import CollectionsTable
-from tautulli.models.export_fields import ExportFields
-from tautulli.models.exports_table import ExportsTable
-from tautulli.models.geo_ip_lookup import GeoIPLookup
-from tautulli.models.history import History
-from tautulli.models.home_stats import HomeStat
-from tautulli.models.library import Library
-from tautulli.models.libraries import LibrariesEntry
-from tautulli.models.libraries_table import LibrariesTable
-from tautulli.models.library_media_info import LibraryMediaInfo
-from tautulli.models.library_user_stats import LibraryUserStats
-from tautulli.models.library_watch_time_stats import LibraryWatchTimeStats
-from tautulli.models.logs import LogEntry
-from tautulli.models.item_user_stats import ItemUserStat
-from tautulli.models.item_watch_time_stats import ItemWatchTimeStat
-from tautulli.models.get_plays_or_stream_types_by import PlaysOrStreamTypesBy
-from tautulli.models.metadata import Metadata
-from tautulli.models.new_rating_keys import NewRatingKeys
-from tautulli.models.newsletter_config import NewsletterConfig
-from tautulli.models.newsletter_log import NewsletterLog
-from tautulli.models.newsletter_notification import NewsletterNotification
-from tautulli.models.notification import Notification
-from tautulli.models.notification_log import NotificationLog
-from tautulli.models.notifier_config import NotifierConfig
-from tautulli.models.notifiers import Notifier
-from tautulli.models.old_rating_keys import OldRatingKeys
-from tautulli.models.playlists_table import PlaylistsTable
-from tautulli.models.plex_log import PlexLog
-from tautulli.models.recently_added import RecentlyAdded
-from tautulli.models.server_id import ServerID
-from tautulli.models.settings import Settings
-from tautulli.models.stream_data import StreamData
-from tautulli.models.synced_items import SyncedItems
-from tautulli.models.user import User
-from tautulli.models.user_ips import UserIPs
-from tautulli.models.user_logins import UserLogins
-from tautulli.models.user_player_stats import UserPlayerStats
-from tautulli.models.user_watch_time_stats import UserWatchTimeStats
-from tautulli.models.users_table import UsersTable
-from tautulli.models.whois_lookup import WHOISLookup
-from tautulli.models.registered_device import RegisteredDevice
-from tautulli.models.search_results import SearchResults
+from tautulli.models.activity import ActivityModel as Activity
+from tautulli.models.docs import DocsModel as Docs
+from tautulli.models.date_formats import DateFormatsModel as DateFormats
+from tautulli.models.library_names import LibraryNameModel as LibraryName
+from tautulli.models.newsletter import NewsletterModel as Newsletter
+from tautulli.models.notifier_parameters import NotifierParameterModel as NotifierParameter
+from tautulli.models.pms_update import PMSUpdateModel as PMSUpdate
+from tautulli.models.server_identity import ServerIdentityModel as ServerIdentity
+from tautulli.models.server_list import ServerListEntryModel as ServerListEntry
+from tautulli.models.servers_info import ServersInfoEntryModel as ServersInfoEntry
+from tautulli.models.server_info import ServerInfoModel as ServerInfo
+from tautulli.models.usernames import UserNameModel as UserName
+from tautulli.models.users import UserModel as Users
+from tautulli.models.update_check import UpdateCheckModel as UpdateCheck
+from tautulli.models.collections_table import CollectionsTableModel as CollectionsTable
+from tautulli.models.export_fields import ExportFieldsModel as ExportFields
+from tautulli.models.exports_table import ExportsTableModel as ExportsTable
+from tautulli.models.geo_ip_lookup import GeoIPLookupModel as GeoIPLookup
+from tautulli.models.history import HistoryModel as History
+from tautulli.models.home_stats import HomeStatModel as HomeStat
+from tautulli.models.library import LibraryModel as Library
+from tautulli.models.libraries import LibrariesEntryModel as LibrariesEntry
+from tautulli.models.libraries_table import LibrariesTableModel as LibrariesTable
+from tautulli.models.library_media_info import LibraryMediaInfoModel as LibraryMediaInfo
+from tautulli.models.library_user_stats import LibraryUserStatsModel as LibraryUserStats
+from tautulli.models.library_watch_time_stats import LibraryWatchTimeStatsModel as LibraryWatchTimeStats
+from tautulli.models.logs import LogEntryModel as LogEntry
+from tautulli.models.item_user_stats import ItemUserStatModel as ItemUserStat
+from tautulli.models.item_watch_time_stats import ItemWatchTimeStatModel as ItemWatchTimeStat
+from tautulli.models.get_plays_or_stream_types_by import PlaysOrStreamTypesByModel as PlaysOrStreamTypesBy
+from tautulli.models.metadata import MetadataModel as Metadata
+from tautulli.models.new_rating_keys import NewRatingKeysModel as NewRatingKeys
+from tautulli.models.newsletter_config import NewsletterConfigModel as NewsletterConfig
+from tautulli.models.newsletter_log import NewsletterLogModel as NewsletterLog
+from tautulli.models.newsletter_notification import NewsletterNotificationModel as NewsletterNotification
+from tautulli.models.notification import NotificationModel as Notification
+from tautulli.models.notification_log import NotificationLogModel as NotificationLog
+from tautulli.models.notifier_config import NotifierConfigModel as NotifierConfig
+from tautulli.models.notifiers import NotifierModel as Notifier
+from tautulli.models.old_rating_keys import OldRatingKeysModel as OldRatingKeys
+from tautulli.models.playlists_table import PlaylistsTableModel as PlaylistsTable
+from tautulli.models.plex_log import PlexLogModel as PlexLog
+from tautulli.models.recently_added import RecentlyAddedModel as RecentlyAdded
+from tautulli.models.server_id import ServerIDModel as ServerID
+from tautulli.models.settings import SettingsModel as Settings
+from tautulli.models.stream_data import StreamDataModel as StreamData
+from tautulli.models.synced_items import SyncedItemsModel as SyncedItems
+from tautulli.models.user import UserModel as User
+from tautulli.models.user_ips import UserIPsModel as UserIPs
+from tautulli.models.user_logins import UserLoginsModel as UserLogins
+from tautulli.models.user_player_stats import UserPlayerStatsModel as UserPlayerStats
+from tautulli.models.user_watch_time_stats import UserWatchTimeStatsModel as UserWatchTimeStats
+from tautulli.models.users_table import UsersTableModel as UsersTable
+from tautulli.models.whois_lookup import WHOISLookupModel as WHOISLookup
+from tautulli.models.registered_device import RegisteredDeviceModel as RegisteredDevice
+from tautulli.models.search_results import SearchResultsModel as SearchResults
 # TODO: Need to implement SQLResults
-from tautulli.models.tautulli_info import TautulliInfo
-from tautulli.models.status import Status
-from tautulli.models.server_status import ServerStatus
-from tautulli.models.children_metadata import ChildrenMetadata
-from tautulli.models.get_plays_or_stream_types_by import PlaysOrStreamTypesBy
+from tautulli.models.tautulli_info import TautulliInfoModel as TautulliInfo
+from tautulli.models.status import StatusModel as Status
+from tautulli.models.server_status import ServerStatusModel as ServerStatus
+from tautulli.models.children_metadata import ChildrenMetadataModel as ChildrenMetadata
+from tautulli.models.get_plays_or_stream_types_by import PlaysOrStreamTypesByModel as PlaysOrStreamTypesBy

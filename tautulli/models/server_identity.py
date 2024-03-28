@@ -9,16 +9,6 @@ from typing import Any, Optional
 from pydantic import BaseModel
 
 
-class ServerIdentity(BaseModel):
-    machine_identifier: Optional[str]
-    version: Optional[str]
-
-
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: ServerIdentity
-
-
-class Model(BaseModel):
-    response: Response
+class ServerIdentityModel(BaseModel):
+    machine_identifier: Optional[str] = None
+    version: Optional[str] = None

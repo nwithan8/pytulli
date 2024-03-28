@@ -9,52 +9,45 @@ from typing import Any, List, Optional, Union
 from pydantic import BaseModel
 
 
-class Datum(BaseModel):
-    row_id: Optional[int]
-    server_id: Optional[str]
-    section_id: Optional[int]
-    section_name: Optional[str]
-    section_type: Optional[str]
-    count: Optional[int]
-    parent_count: Optional[int]
-    child_count: Optional[int]
-    library_thumb: Optional[str]
-    library_art: Optional[str]
-    plays: Optional[int]
-    duration: Optional[int]
-    last_accessed: Optional[int]
-    history_row_id: Optional[int]
-    last_played: Optional[str]
-    rating_key: Optional[int]
-    media_type: Optional[str]
-    thumb: Optional[str]
-    parent_title: Optional[str]
-    year: Optional[Union[int, str]]
-    media_index: Optional[Union[int, str]]
-    parent_media_index: Optional[Union[int, str]]
-    content_rating: Optional[str]
-    labels: Optional[List]
-    live: Optional[int]
-    originally_available_at: Optional[str]
-    guid: Optional[str]
-    do_notify: Optional[int]
-    do_notify_created: Optional[int]
-    keep_history: Optional[int]
-    is_active: Optional[int]
+class DatumModel(BaseModel):
+    row_id: Optional[int] = None
+    server_id: Optional[str] = None
+    section_id: Optional[int] = None
+    section_name: Optional[str] = None
+    section_type: Optional[str] = None
+    count: Optional[int] = None
+    parent_count: Optional[int] = None
+    child_count: Optional[int] = None
+    library_thumb: Optional[str] = None
+    library_art: Optional[str] = None
+    plays: Optional[int] = None
+    duration: Optional[int] = None
+    last_accessed: Optional[int] = None
+    history_row_id: Optional[int] = None
+    last_played: Optional[str] = None
+    rating_key: Optional[int] = None
+    media_type: Optional[str] = None
+    thumb: Optional[str] = None
+    parent_title: Optional[str] = None
+    year: Optional[Union[int, str]] = None
+    media_index: Optional[Union[int, str]] = None
+    parent_media_index: Optional[Union[int, str]] = None
+    content_rating: Optional[str] = None
+    labels: Optional[List] = None
+    live: Optional[int] = None
+    originally_available_at: Optional[str] = None
+    guid: Optional[str] = None
+    do_notify: Optional[int] = None
+    do_notify_created: Optional[int] = None
+    keep_history: Optional[int] = None
+    is_active: Optional[int] = None
 
 
-class LibrariesTable(BaseModel):
-    recordsFiltered: Optional[int]
-    recordsTotal: Optional[int]
-    data: Optional[List[Datum]]
-    draw: Optional[int]
+class LibrariesTableModel(BaseModel):
+    recordsFiltered: Optional[int] = None
+    recordsTotal: Optional[int] = None
+    data: Optional[List[DatumModel]] = None
+    draw: Optional[int] = None
 
 
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: LibrariesTable
 
-
-class Model(BaseModel):
-    response: Response

@@ -9,24 +9,17 @@ from typing import Any, Optional, Union
 from pydantic import BaseModel
 
 
-class GeoIPLookup(BaseModel):
-    city: Optional[str]
-    code: Optional[str]
-    continent: Optional[str]
-    country: Optional[str]
-    latitude: Optional[Union[float, None]]
-    longitude: Optional[Union[float, None]]
-    postal_code: Optional[str]
-    region: Optional[str]
-    timezone: Optional[str]
-    accuracy: Optional[Any]
+class GeoIPLookupModel(BaseModel):
+    city: Optional[str] = None
+    code: Optional[str] = None
+    continent: Optional[str] = None
+    country: Optional[str] = None
+    latitude: Optional[Union[float, None]] = None
+    longitude: Optional[Union[float, None]] = None
+    postal_code: Optional[str] = None
+    region: Optional[str] = None
+    timezone: Optional[str] = None
+    accuracy: Optional[Any] = None
 
 
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: GeoIPLookup
 
-
-class Model(BaseModel):
-    response: Response

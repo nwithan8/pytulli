@@ -9,16 +9,6 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class UpdateCheck(BaseModel):
-    update: Optional[bool]
-    install_type: Optional[str]
-
-
-class Response(BaseModel):
-    result: Optional[str]
-    message: Optional[str]
-    data: UpdateCheck
-
-
-class Model(BaseModel):
-    response: Response
+class UpdateCheckModel(BaseModel):
+    update: Optional[bool] = None
+    install_type: Optional[str] = None

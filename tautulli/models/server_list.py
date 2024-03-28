@@ -9,23 +9,13 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class ServerListEntry(BaseModel):
-    httpsRequired: Optional[str]
-    clientIdentifier: Optional[str]
-    label: Optional[str]
-    ip: Optional[str]
-    port: Optional[str]
-    uri: Optional[str]
-    local: Optional[str]
-    value: Optional[str]
-    is_cloud: Optional[bool]
-
-
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: List[ServerListEntry]
-
-
-class Model(BaseModel):
-    response: Response
+class ServerListEntryModel(BaseModel):
+    httpsRequired: Optional[str] = None
+    clientIdentifier: Optional[str] = None
+    label: Optional[str] = None
+    ip: Optional[str] = None
+    port: Optional[str] = None
+    uri: Optional[str] = None
+    local: Optional[str] = None
+    value: Optional[str] = None
+    is_cloud: Optional[bool] = None

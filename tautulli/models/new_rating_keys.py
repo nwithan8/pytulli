@@ -9,19 +9,12 @@ from typing import Any, Optional
 from pydantic import BaseModel, Field
 
 
-class Field0(BaseModel):
-    rating_key: Optional[int]
+class Field0Model(BaseModel):
+    rating_key: Optional[int] = None
 
 
-class NewRatingKeys(BaseModel):
-    field_0: Optional[Field0] = Field(..., alias='0')
+class NewRatingKeysModel(BaseModel):
+    field_0: Optional[Field0Model] = Field(..., alias='0')
 
 
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: NewRatingKeys
 
-
-class Model(BaseModel):
-    response: Response

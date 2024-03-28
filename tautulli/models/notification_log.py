@@ -9,34 +9,27 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Datum(BaseModel):
-    id: Optional[int]
-    timestamp: Optional[int]
-    session_key: Optional[int]
-    rating_key: Optional[int]
-    user_id: Optional[int]
-    user: Optional[str]
-    notifier_id: Optional[int]
-    agent_id: Optional[int]
-    agent_name: Optional[str]
-    notify_action: Optional[str]
-    subject_text: Optional[str]
-    body_text: Optional[str]
-    success: Optional[int]
+class DatumModel(BaseModel):
+    id: Optional[int] = None
+    timestamp: Optional[int] = None
+    session_key: Optional[int] = None
+    rating_key: Optional[int] = None
+    user_id: Optional[int] = None
+    user: Optional[str] = None
+    notifier_id: Optional[int] = None
+    agent_id: Optional[int] = None
+    agent_name: Optional[str] = None
+    notify_action: Optional[str] = None
+    subject_text: Optional[str] = None
+    body_text: Optional[str] = None
+    success: Optional[int] = None
 
 
-class NotificationLog(BaseModel):
-    recordsFiltered: Optional[int]
-    recordsTotal: Optional[int]
-    data: Optional[List[Datum]]
-    draw: Optional[int]
+class NotificationLogModel(BaseModel):
+    recordsFiltered: Optional[int] = None
+    recordsTotal: Optional[int] = None
+    data: Optional[List[DatumModel]] = None
+    draw: Optional[int] = None
 
 
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: NotificationLog
 
-
-class Model(BaseModel):
-    response: Response

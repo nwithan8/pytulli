@@ -9,15 +9,8 @@ from typing import Any, Optional
 from pydantic import BaseModel
 
 
-class Notification(BaseModel):
-    notification_id: Optional[int]
+class NotificationModel(BaseModel):
+    notification_id: Optional[int] = None
 
 
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: Notification
 
-
-class Model(BaseModel):
-    response: Response

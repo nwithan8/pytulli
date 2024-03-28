@@ -9,16 +9,9 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class UserName(BaseModel):
-    user_id: Optional[int]
-    friendly_name: Optional[str]
+class UserNameModel(BaseModel):
+    user_id: Optional[int] = None
+    friendly_name: Optional[str] = None
 
 
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: List[UserName]
 
-
-class Model(BaseModel):
-    response: Response

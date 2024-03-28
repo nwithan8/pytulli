@@ -9,62 +9,55 @@ from typing import Any, Optional
 from pydantic import BaseModel
 
 
-class StreamData(BaseModel):
-    bitrate: Optional[int]
-    video_full_resolution: Optional[str]
-    optimized_version: Optional[str]
-    optimized_version_profile: Optional[str]
-    optimized_version_title: Optional[str]
-    synced_version: Optional[str]
-    synced_version_profile: Optional[str]
-    container: Optional[str]
-    video_codec: Optional[str]
-    video_bitrate: Optional[int]
-    video_width: Optional[int]
-    video_height: Optional[int]
-    video_framerate: Optional[str]
-    video_dynamic_range: Optional[str]
-    aspect_ratio: Optional[str]
-    audio_codec: Optional[str]
-    audio_bitrate: Optional[int]
-    audio_channels: Optional[int]
-    subtitle_codec: Optional[str]
-    stream_bitrate: Optional[int]
-    stream_video_full_resolution: Optional[str]
-    quality_profile: Optional[str]
-    stream_container_decision: Optional[str]
-    stream_container: Optional[str]
-    stream_video_decision: Optional[str]
-    stream_video_codec: Optional[str]
-    stream_video_bitrate: Optional[int]
-    stream_video_width: Optional[int]
-    stream_video_height: Optional[int]
-    stream_video_framerate: Optional[str]
-    stream_video_dynamic_range: Optional[str]
-    stream_audio_decision: Optional[str]
-    stream_audio_codec: Optional[str]
-    stream_audio_bitrate: Optional[int]
-    stream_audio_channels: Optional[int]
-    subtitles: Optional[str]
-    stream_subtitle_decision: Optional[str]
-    stream_subtitle_codec: Optional[str]
-    transcode_hw_decoding: Optional[str]
-    transcode_hw_encoding: Optional[str]
-    video_decision: Optional[str]
-    audio_decision: Optional[str]
-    media_type: Optional[str]
-    title: Optional[str]
-    grandparent_title: Optional[str]
-    original_title: Optional[str]
-    current_session: Optional[int]
-    pre_tautulli: Optional[str]
+class StreamDataModel(BaseModel):
+    bitrate: Optional[int] = None
+    video_full_resolution: Optional[str] = None
+    optimized_version: Optional[str] = None
+    optimized_version_profile: Optional[str] = None
+    optimized_version_title: Optional[str] = None
+    synced_version: Optional[str] = None
+    synced_version_profile: Optional[str] = None
+    container: Optional[str] = None
+    video_codec: Optional[str] = None
+    video_bitrate: Optional[int] = None
+    video_width: Optional[int] = None
+    video_height: Optional[int] = None
+    video_framerate: Optional[str] = None
+    video_dynamic_range: Optional[str] = None
+    aspect_ratio: Optional[str] = None
+    audio_codec: Optional[str] = None
+    audio_bitrate: Optional[int] = None
+    audio_channels: Optional[int] = None
+    subtitle_codec: Optional[str] = None
+    stream_bitrate: Optional[int] = None
+    stream_video_full_resolution: Optional[str] = None
+    quality_profile: Optional[str] = None
+    stream_container_decision: Optional[str] = None
+    stream_container: Optional[str] = None
+    stream_video_decision: Optional[str] = None
+    stream_video_codec: Optional[str] = None
+    stream_video_bitrate: Optional[int] = None
+    stream_video_width: Optional[int] = None
+    stream_video_height: Optional[int] = None
+    stream_video_framerate: Optional[str] = None
+    stream_video_dynamic_range: Optional[str] = None
+    stream_audio_decision: Optional[str] = None
+    stream_audio_codec: Optional[str] = None
+    stream_audio_bitrate: Optional[int] = None
+    stream_audio_channels: Optional[int] = None
+    subtitles: Optional[str] = None
+    stream_subtitle_decision: Optional[str] = None
+    stream_subtitle_codec: Optional[str] = None
+    transcode_hw_decoding: Optional[str] = None
+    transcode_hw_encoding: Optional[str] = None
+    video_decision: Optional[str] = None
+    audio_decision: Optional[str] = None
+    media_type: Optional[str] = None
+    title: Optional[str] = None
+    grandparent_title: Optional[str] = None
+    original_title: Optional[str] = None
+    current_session: Optional[int] = None
+    pre_tautulli: Optional[str] = None
 
 
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: StreamData
 
-
-class Model(BaseModel):
-    response: Response

@@ -1,5 +1,5 @@
 PYTHON_BINARY := python3
-VIRTUAL_ENV := venv
+VIRTUAL_ENV := .venv
 VIRTUAL_BIN := $(VIRTUAL_ENV)/bin
 PROJECT_NAME := tautulli
 TEST_DIR := tests

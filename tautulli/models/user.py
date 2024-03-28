@@ -9,30 +9,23 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class User(BaseModel):
-    row_id: Optional[int]
-    user_id: Optional[int]
-    username: Optional[str]
-    friendly_name: Optional[str]
-    user_thumb: Optional[str]
-    email: Optional[str]
-    is_active: Optional[int]
-    is_admin: Optional[str]
-    is_home_user: Optional[int]
-    is_allow_sync: Optional[int]
-    is_restricted: Optional[int]
-    do_notify: Optional[int]
-    keep_history: Optional[int]
-    allow_guest: Optional[int]
-    deleted_user: Optional[int]
-    shared_libraries: Optional[List]
+class UserModel(BaseModel):
+    row_id: Optional[int] = None
+    user_id: Optional[int] = None
+    username: Optional[str] = None
+    friendly_name: Optional[str] = None
+    user_thumb: Optional[str] = None
+    email: Optional[str] = None
+    is_active: Optional[int] = None
+    is_admin: Optional[int] = None
+    is_home_user: Optional[int] = None
+    is_allow_sync: Optional[int] = None
+    is_restricted: Optional[int] = None
+    do_notify: Optional[int] = None
+    keep_history: Optional[int] = None
+    allow_guest: Optional[int] = None
+    deleted_user: Optional[int] = None
+    shared_libraries: Optional[List] = None
 
 
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: User
 
-
-class Model(BaseModel):
-    response: Response

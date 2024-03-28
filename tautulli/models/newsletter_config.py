@@ -9,107 +9,100 @@ from typing import List, Optional, Union
 from pydantic import BaseModel, Field
 
 
-class Config(BaseModel):
-    custom_cron: Optional[int]
-    time_frame: Optional[int]
-    time_frame_units: Optional[str]
-    formatted: Optional[int]
-    threaded: Optional[int]
-    notifier_id: Optional[int]
-    filename: Optional[str]
-    save_only: Optional[int]
-    incl_libraries: Optional[List[str]]
+class ConfigModel(BaseModel):
+    custom_cron: Optional[int] = None
+    time_frame: Optional[int] = None
+    time_frame_units: Optional[str] = None
+    formatted: Optional[int] = None
+    threaded: Optional[int] = None
+    notifier_id: Optional[int] = None
+    filename: Optional[str] = None
+    save_only: Optional[int] = None
+    incl_libraries: Optional[List[str]] = None
 
 
-class EmailConfig(BaseModel):
-    from_name: Optional[str]
+class EmailConfigModel(BaseModel):
+    from_name: Optional[str] = None
     from_: Optional[str] = Field(..., alias='from')
-    to: Optional[List[str]]
-    cc: Optional[List]
-    bcc: Optional[List]
-    smtp_server: Optional[str]
-    smtp_port: Optional[int]
-    smtp_user: Optional[str]
-    smtp_password: Optional[str]
-    tls: Optional[int]
-    html_support: Optional[int]
-    notifier_id: Optional[int]
+    to: Optional[List[str]] = None
+    cc: Optional[List] = None
+    bcc: Optional[List] = None
+    smtp_server: Optional[str] = None
+    smtp_port: Optional[int] = None
+    smtp_user: Optional[str] = None
+    smtp_password: Optional[str] = None
+    tls: Optional[int] = None
+    html_support: Optional[int] = None
+    notifier_id: Optional[int] = None
 
 
-class MovieLibrary(BaseModel):
-    value: Optional[int]
-    text: Optional[str]
+class MovieLibraryModel(BaseModel):
+    value: Optional[int] = None
+    text: Optional[str] = None
 
 
-class TVShowLibrary(BaseModel):
-    value: Optional[int]
-    text: Optional[str]
+class TVShowLibraryModel(BaseModel):
+    value: Optional[int] = None
+    text: Optional[str] = None
 
 
-class MusicLibrary(BaseModel):
-    value: Optional[int]
-    text: Optional[str]
+class MusicLibraryModel(BaseModel):
+    value: Optional[int] = None
+    text: Optional[str] = None
 
 
-class OtherVideoLibrary(BaseModel):
-    value: Optional[int]
-    text: Optional[str]
+class OtherVideoLibraryModel(BaseModel):
+    value: Optional[int] = None
+    text: Optional[str] = None
 
 
-class SelectOptions(BaseModel):
-    Movie_Libraries: Optional[List[MovieLibrary]] = Field(..., alias='Movie Libraries')
-    TV_Show_Libraries: Optional[List[TVShowLibrary]] = Field(..., alias='TV Show Libraries')
-    Music_Libraries: Optional[List[MusicLibrary]] = Field(..., alias='Music Libraries')
-    Other_Video_Libraries: Optional[List[OtherVideoLibrary]] = Field(
+class SelectOptionsModel(BaseModel):
+    Movie_Libraries: Optional[List[MovieLibraryModel]] = Field(..., alias='Movie Libraries')
+    TV_Show_Libraries: Optional[List[TVShowLibraryModel]] = Field(..., alias='TV Show Libraries')
+    Music_Libraries: Optional[List[MusicLibraryModel]] = Field(..., alias='Music Libraries')
+    Other_Video_Libraries: Optional[List[OtherVideoLibraryModel]] = Field(
         ..., alias='Other Video Libraries'
     )
 
 
-class ConfigOption(BaseModel):
-    label: Optional[str]
-    value: Optional[List[str]]
-    description: Optional[str]
-    name: Optional[str]
-    input_type: Optional[str]
-    select_options: Optional[SelectOptions]
+class ConfigOptionModel(BaseModel):
+    label: Optional[str] = None
+    value: Optional[List[str]] = None
+    description: Optional[str] = None
+    name: Optional[str] = None
+    input_type: Optional[str] = None
+    select_options: Optional[SelectOptionsModel] = None
 
 
-class SelectOption(BaseModel):
-    value: Optional[str]
-    text: Optional[str]
+class SelectOptionModel(BaseModel):
+    value: Optional[str] = None
+    text: Optional[str] = None
 
 
-class EmailConfigOption(BaseModel):
-    label: Optional[str]
-    value: Optional[Union[Union[int, str], List[str]]]
-    name: Optional[str]
-    description: Optional[str]
-    input_type: Optional[str]
-    select_options: Optional[List[SelectOption]] = None
+class EmailConfigOptionModel(BaseModel):
+    label: Optional[str] = None
+    value: Optional[Union[Union[int, str], List[str]]] = None
+    name: Optional[str] = None
+    description: Optional[str] = None
+    input_type: Optional[str] = None
+    select_options: Optional[List[SelectOptionModel]] = None
 
 
-class NewsletterConfig(BaseModel):
-    id: Optional[int]
-    agent_id: Optional[int]
-    agent_name: Optional[str]
-    agent_label: Optional[str]
-    friendly_name: Optional[str]
-    cron: Optional[str]
-    active: Optional[int]
-    id_name: Optional[str]
-    subject: Optional[str]
-    body: Optional[str]
-    config: Optional[Config]
-    email_config: Optional[EmailConfig]
-    config_options: Optional[List[ConfigOption]]
-    email_config_options: Optional[List[EmailConfigOption]]
+class NewsletterConfigModel(BaseModel):
+    id: Optional[int] = None
+    agent_id: Optional[int] = None
+    agent_name: Optional[str] = None
+    agent_label: Optional[str] = None
+    friendly_name: Optional[str] = None
+    cron: Optional[str] = None
+    active: Optional[int] = None
+    id_name: Optional[str] = None
+    subject: Optional[str] = None
+    body: Optional[str] = None
+    config: Optional[ConfigModel] = None
+    email_config: Optional[EmailConfigModel] = None
+    config_options: Optional[List[ConfigOptionModel]] = None
+    email_config_options: Optional[List[EmailConfigOptionModel]] = None
 
 
-class Response(BaseModel):
-    result: Optional[str]
-    message: Optional[str]
-    data: NewsletterConfig
 
-
-class Model(BaseModel):
-    response: Response

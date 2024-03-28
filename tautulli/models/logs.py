@@ -9,18 +9,11 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class LogEntry(BaseModel):
-    time: Optional[str]
-    loglevel: Optional[str]
-    msg: Optional[str]
-    thread: Optional[str]
+class LogEntryModel(BaseModel):
+    time: Optional[str] = None
+    loglevel: Optional[str] = None
+    msg: Optional[str] = None
+    thread: Optional[str] = None
 
 
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: List[LogEntry]
 
-
-class Model(BaseModel):
-    response: Response

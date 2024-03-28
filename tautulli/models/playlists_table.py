@@ -9,35 +9,28 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Datum(BaseModel):
-    addedAt: Optional[str]
-    composite: Optional[str]
-    duration: Optional[int]
-    guid: Optional[str]
-    leafCount: Optional[int]
-    librarySectionID: Optional[str]
-    playlistType: Optional[str]
-    ratingKey: Optional[int]
-    smart: Optional[bool]
-    summary: Optional[str]
-    title: Optional[str]
-    type: Optional[str]
-    updatedAt: Optional[str]
-    userID: Optional[Any]
+class DatumModel(BaseModel):
+    addedAt: Optional[str] = None
+    composite: Optional[str] = None
+    duration: Optional[int] = None
+    guid: Optional[str] = None
+    leafCount: Optional[int] = None
+    librarySectionID: Optional[str] = None
+    playlistType: Optional[str] = None
+    ratingKey: Optional[int] = None
+    smart: Optional[bool] = None
+    summary: Optional[str] = None
+    title: Optional[str] = None
+    type: Optional[str] = None
+    updatedAt: Optional[str] = None
+    userID: Optional[Any] = None
 
 
-class PlaylistsTable(BaseModel):
-    recordsFiltered: Optional[int]
-    recordsTotal: Optional[int]
-    data: Optional[List[Datum]]
-    draw: Optional[int]
+class PlaylistsTableModel(BaseModel):
+    recordsFiltered: Optional[int] = None
+    recordsTotal: Optional[int] = None
+    data: Optional[List[DatumModel]] = None
+    draw: Optional[int] = None
 
 
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: PlaylistsTable
 
-
-class Model(BaseModel):
-    response: Response

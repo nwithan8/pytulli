@@ -9,16 +9,6 @@ from typing import Any, Optional
 from pydantic import BaseModel
 
 
-class DateFormats(BaseModel):
-    date_format: Optional[str]
-    time_format: Optional[str]
-
-
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: DateFormats
-
-
-class Model(BaseModel):
-    response: Response
+class DateFormatsModel(BaseModel):
+    date_format: Optional[str] = None
+    time_format: Optional[str] = None

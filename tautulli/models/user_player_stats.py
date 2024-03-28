@@ -9,19 +9,12 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class UserPlayerStats(BaseModel):
-    platform: Optional[str]
-    platform_name: Optional[str]
-    player_name: Optional[str]
-    result_id: Optional[int]
-    total_plays: Optional[int]
+class UserPlayerStatsModel(BaseModel):
+    platform: Optional[str] = None
+    platform_name: Optional[str] = None
+    player_name: Optional[str] = None
+    result_id: Optional[int] = None
+    total_plays: Optional[int] = None
 
 
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: List[UserPlayerStats]
 
-
-class Model(BaseModel):
-    response: Response

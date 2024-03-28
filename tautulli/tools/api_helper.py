@@ -82,7 +82,7 @@ class APIShortcuts:
         :rtype: dict
         """
         _activity_data = self._api.activity()
-        return build_summary_from_activity_json(activity_data=_activity_data).dict()
+        return build_summary_from_activity_json(activity_data=_activity_data).model_dump()
 
     @property
     def activity_summary_message(self) -> str:

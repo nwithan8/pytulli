@@ -9,40 +9,33 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Datum(BaseModel):
-    addedAt: Optional[str]
-    art: Optional[Any]
-    childCount: Optional[int]
-    collectionMode: Optional[int]
-    collectionSort: Optional[int]
-    contentRating: Optional[str]
-    guid: Optional[str]
-    librarySectionID: Optional[str]
-    librarySectionTitle: Optional[str]
-    maxYear: Optional[int]
-    minYear: Optional[int]
-    ratingKey: Optional[int]
-    subtype: Optional[str]
-    summary: Optional[str]
-    thumb: Optional[str]
-    title: Optional[str]
-    titleSort: Optional[str]
-    type: Optional[str]
-    updatedAt: Optional[str]
+class DatumModel(BaseModel):
+    addedAt: Optional[str] = None
+    art: Optional[Any] = None
+    childCount: Optional[int] = None
+    collectionMode: Optional[int] = None
+    collectionSort: Optional[int] = None
+    contentRating: Optional[str] = None
+    guid: Optional[str] = None
+    librarySectionID: Optional[str] = None
+    librarySectionTitle: Optional[str] = None
+    maxYear: Optional[int] = None
+    minYear: Optional[int] = None
+    ratingKey: Optional[int] = None
+    subtype: Optional[str] = None
+    summary: Optional[str] = None
+    thumb: Optional[str] = None
+    title: Optional[str] = None
+    titleSort: Optional[str] = None
+    type: Optional[str] = None
+    updatedAt: Optional[str] = None
 
 
-class CollectionsTable(BaseModel):
-    recordsFiltered: Optional[int]
-    recordsTotal: Optional[int]
-    data: Optional[List[Datum]]
-    draw: Optional[int]
+class CollectionsTableModel(BaseModel):
+    recordsFiltered: Optional[int] = None
+    recordsTotal: Optional[int] = None
+    data: Optional[List[DatumModel]] = None
+    draw: Optional[int] = None
 
 
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: CollectionsTable
 
-
-class Model(BaseModel):
-    response: Response

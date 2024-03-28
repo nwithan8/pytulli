@@ -9,64 +9,57 @@ from typing import Any, List, Union, Optional
 from pydantic import BaseModel
 
 
-class Datum(BaseModel):
-    reference_id: Optional[int]
-    row_id: Optional[int]
-    id: Optional[int]
-    date: Optional[int]
-    started: Optional[int]
-    stopped: Optional[int]
-    duration: Optional[int] # Keep for backwards compatibility
-    play_duration: Optional[int]
-    paused_counter: Optional[int]
-    user_id: Optional[int]
-    user: Optional[str]
-    friendly_name: Optional[str]
-    user_thumb: Optional[str]
-    platform: Optional[str]
-    product: Optional[str]
-    player: Optional[str]
-    ip_address: Optional[str]
-    live: Optional[int]
-    machine_id: Optional[str]
-    media_type: Optional[str]
-    rating_key: Optional[int]
-    parent_rating_key: Optional[Union[int, str]]
-    grandparent_rating_key: Optional[Union[int, str]]
-    full_title: Optional[str]
-    title: Optional[str]
-    parent_title: Optional[str]
-    grandparent_title: Optional[str]
-    original_title: Optional[str]
-    year: Optional[Union[int, str]]
-    media_index: Optional[Union[int, str]]
-    parent_media_index: Optional[Union[int, str]]
-    thumb: Optional[str]
-    originally_available_at: Optional[str]
-    guid: Optional[str]
-    transcode_decision: Optional[str]
-    percent_complete: Optional[int]
-    watched_status: Optional[float]
-    group_count: Optional[int]
-    group_ids: Optional[str]
-    state: Optional[Any]
-    session_key: Optional[Any]
+class DatumModel(BaseModel):
+    reference_id: Optional[int] = None
+    row_id: Optional[int] = None
+    id: Optional[int] = None
+    date: Optional[int] = None
+    started: Optional[int] = None
+    stopped: Optional[int] = None
+    duration: Optional[int] = None # Keep for backwards compatibility
+    play_duration: Optional[int] = None
+    paused_counter: Optional[int] = None
+    user_id: Optional[int] = None
+    user: Optional[str] = None
+    friendly_name: Optional[str] = None
+    user_thumb: Optional[str] = None
+    platform: Optional[str] = None
+    product: Optional[str] = None
+    player: Optional[str] = None
+    ip_address: Optional[str] = None
+    live: Optional[int] = None
+    machine_id: Optional[str] = None
+    media_type: Optional[str] = None
+    rating_key: Optional[int] = None
+    parent_rating_key: Optional[Union[int, str]] = None
+    grandparent_rating_key: Optional[Union[int, str]] = None
+    full_title: Optional[str] = None
+    title: Optional[str] = None
+    parent_title: Optional[str] = None
+    grandparent_title: Optional[str] = None
+    original_title: Optional[str] = None
+    year: Optional[Union[int, str]] = None
+    media_index: Optional[Union[int, str]] = None
+    parent_media_index: Optional[Union[int, str]] = None
+    thumb: Optional[str] = None
+    originally_available_at: Optional[str] = None
+    guid: Optional[str] = None
+    transcode_decision: Optional[str] = None
+    percent_complete: Optional[int] = None
+    watched_status: Optional[float] = None
+    group_count: Optional[int] = None
+    group_ids: Optional[str] = None
+    state: Optional[Any] = None
+    session_key: Optional[Any] = None
 
 
-class History(BaseModel):
-    recordsFiltered: Optional[int]
-    recordsTotal: Optional[int]
-    data: Optional[List[Datum]]
-    draw: Optional[int]
-    filter_duration: Optional[str]
-    total_duration: Optional[str]
+class HistoryModel(BaseModel):
+    recordsFiltered: Optional[int] = None
+    recordsTotal: Optional[int] = None
+    data: Optional[List[DatumModel]] = None
+    draw: Optional[int] = None
+    filter_duration: Optional[str] = None
+    total_duration: Optional[str] = None
 
 
-class Response(BaseModel):
-    result: Optional[str]
-    message: Any
-    data: History
 
-
-class Model(BaseModel):
-    response: Response
