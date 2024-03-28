@@ -17,7 +17,7 @@ class UserModel(BaseModel):
     user_thumb: Optional[str] = None
     email: Optional[str] = None
     is_active: Optional[int] = None
-    is_admin: Optional[str] = None
+    is_admin: Optional[int] = None
     is_home_user: Optional[int] = None
     is_allow_sync: Optional[int] = None
     is_restricted: Optional[int] = None

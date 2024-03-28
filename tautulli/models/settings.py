@@ -66,7 +66,7 @@ class PMSModel(BaseModel):
     pms_version: Optional[str] = None
     pms_update_distro_build: Optional[str] = None
     pms_ip: Optional[str] = None
-    pms_logs_line_cap: Optional[str] = None
+    pms_logs_line_cap: Optional[int] = None
     pms_platform: Optional[str] = None
     pms_url_manual: Optional[int] = None
     pms_web_url: Optional[str] = None
@@ -75,14 +75,14 @@ class PMSModel(BaseModel):
 
 
 class MonitoringModel(BaseModel):
-    notify_upload_posters: Optional[str] = None
+    notify_upload_posters: Optional[int] = None
     movie_notify_enable: Optional[bool] = None
     notify_on_resume_body_text: Optional[str] = None
     notify_on_pmsupdate_body_text: Optional[str] = None
     refresh_libraries_on_startup: Optional[bool] = None
-    session_db_write_attempts: Optional[str] = None
+    session_db_write_attempts: Optional[int] = None
     notify_on_created_body_text: Optional[str] = None
-    buffer_wait: Optional[str] = None
+    buffer_wait: Optional[int] = None
     notify_on_intup_subject_text: Optional[str] = None
     notify_recently_added_grandparent: Optional[bool] = None
     notify_on_newdevice_subject_text: Optional[str] = None
@@ -103,16 +103,16 @@ class MonitoringModel(BaseModel):
     notify_scripts_args_text: Optional[str] = None
     music_logging_enable: Optional[bool] = None
     movie_notify_on_stop: Optional[bool] = None
-    notify_watched_percent: Optional[str] = None
+    notify_watched_percent: Optional[int] = None
     notify_on_concurrent_subject_text: Optional[str] = None
     notify_on_concurrent_body_text: Optional[str] = None
     tv_logging_enable: Optional[bool] = None
     tv_notify_enable: Optional[bool] = None
-    notify_recently_added_delay: Optional[str] = None
+    notify_recently_added_delay: Optional[int] = None
     notify_on_intdown_body_text: Optional[str] = None
-    logging_ignore_interval: Optional[str] = None
+    logging_ignore_interval: Optional[int] = None
     notify_on_newdevice_body_text: Optional[str] = None
-    refresh_users_interval: Optional[str] = None
+    refresh_users_interval: Optional[int] = None
     monitoring_use_websocket: Optional[bool] = None
     monitor_pms_updates: Optional[bool] = None
     notify_on_start_subject_text: Optional[str] = None
@@ -122,13 +122,13 @@ class MonitoringModel(BaseModel):
     movie_notify_on_start: Optional[bool] = None
     notify_concurrent_by_ip: Optional[bool] = None
     refresh_users_on_startup: Optional[bool] = None
-    buffer_threshold: Optional[str] = None
+    buffer_threshold: Optional[int] = None
     notify_on_extdown_subject_text: Optional[str] = None
-    refresh_libraries_interval: Optional[str] = None
+    refresh_libraries_interval: Optional[int] = None
     tv_notify_on_start: Optional[bool] = None
     video_logging_enable: Optional[bool] = None
     notify_on_resume_subject_text: Optional[str] = None
-    notify_concurrent_threshold: Optional[str] = None
+    notify_concurrent_threshold: Optional[int] = None
     notify_on_stop_subject_text: Optional[str] = None
     movie_notify_on_pause: Optional[bool] = None
     notify_consecutive: Optional[bool] = None
@@ -139,17 +139,17 @@ class MonitoringModel(BaseModel):
     tv_notify_on_pause: Optional[bool] = None
     monitor_remote_access: Optional[bool] = None
     imgur_client_id: Optional[str] = None
-    monitoring_interval: Optional[str] = None
+    monitoring_interval: Optional[int] = None
     notify_on_buffer_subject_text: Optional[str] = None
-    tv_watched_percent: Optional[str] = None
+    tv_watched_percent: Optional[int] = None
     notify_group_recently_added_grandparent: Optional[bool] = None
     notify_recently_added_upgrade: Optional[bool] = None
     notify_group_recently_added: Optional[bool] = None
     notify_group_recently_added_parent: Optional[bool] = None
-    movie_watched_percent: Optional[str] = None
-    music_watched_percent: Optional[str] = None
-    notify_continued_session_threshold: Optional[str] = None
-    notify_remote_access_threshold: Optional[str] = None
+    movie_watched_percent: Optional[int] = None
+    music_watched_percent: Optional[int] = None
+    notify_continued_session_threshold: Optional[int] = None
+    notify_remote_access_threshold: Optional[int] = None
     notify_new_device_initial_only: Optional[bool] = None
 
 
@@ -162,8 +162,8 @@ class GeneralModel(BaseModel):
     week_start_monday: Optional[bool] = None
     git_token: Optional[str] = None
     home_stats_cards: Optional[List[str]] = None
-    backup_interval: Optional[str] = None
-    graph_days: Optional[str] = None
+    backup_interval: Optional[int] = None
+    graph_days: Optional[int] = None
     graph_type: Optional[str] = None
     get_file_sizes: Optional[bool] = None
     http_basic_auth: Optional[bool] = None
@@ -185,7 +185,7 @@ class GeneralModel(BaseModel):
     git_path: Optional[str] = None
     update_labels: Optional[bool] = None
     config_version: Optional[str] = None
-    check_github_interval: Optional[str] = None
+    check_github_interval: Optional[int] = None
     https_ip: Optional[str] = None
     group_history_tables: Optional[bool] = None
     https_domain: Optional[str] = None
@@ -201,14 +201,14 @@ class GeneralModel(BaseModel):
     graph_months: Optional[str] = None
     cleanup_files: Optional[bool] = None
     check_github_on_startup: Optional[bool] = None
-    http_port: Optional[str] = None
+    http_port: Optional[int] = None
     log_dir: Optional[str] = None
-    update_db_interval: Optional[str] = None
+    update_db_interval: Optional[int] = None
     allow_guest_access: Optional[bool] = None
     time_format: Optional[str] = None
     cache_dir: Optional[str] = None
     home_sections: Optional[List[str]] = None
-    backup_days: Optional[str] = None
+    backup_days: Optional[int] = None
     https_cert: Optional[str] = None
     api_key: Optional[str] = None
     update_section_ids: Optional[bool] = None
@@ -235,19 +235,19 @@ class GeneralModel(BaseModel):
     themoviedb_lookup: Optional[bool] = None
     plexpy_auto_update: Optional[bool] = None
     update_libraries_db_notify: Optional[bool] = None
-    home_refresh_interval: Optional[str] = None
+    home_refresh_interval: Optional[int] = None
     http_base_url: Optional[str] = None
     win_sys_tray: Optional[bool] = None
     musicbrainz_lookup: Optional[bool] = None
-    geoip_db_update_days: Optional[str] = None
+    geoip_db_update_days: Optional[int] = None
     maxmind_license_key: Optional[str] = None
     geoip_db_installed: Optional[bool] = None
     launch_startup: Optional[bool] = None
     sys_tray_icon: Optional[bool] = None
     export_dir: Optional[str] = None
-    http_rate_limit_attempts: Optional[str] = None
-    http_rate_limit_attempts_interval: Optional[str] = None
-    http_rate_limit_lockout_time: Optional[str] = None
+    http_rate_limit_attempts: Optional[int] = None
+    http_rate_limit_attempts_interval: Optional[int] = None
+    http_rate_limit_lockout_time: Optional[int] = None
     get_file_sizes_hold: Optional[GetFileSizesHoldModel] = None
     interface_list: Optional[List[str]] = None
 
@@ -346,7 +346,7 @@ class ScriptsModel(BaseModel):
     scripts_on_pause_script: Optional[str] = None
     scripts_on_pause: Optional[bool] = None
     scripts_on_intup: Optional[bool] = None
-    scripts_timeout: Optional[str] = None
+    scripts_timeout: Optional[int] = None
     scripts_on_watched: Optional[bool] = None
     scripts_on_buffer_script: Optional[str] = None
     scripts_on_play: Optional[bool] = None
@@ -438,26 +438,26 @@ class ProwlModel(BaseModel):
 class AdvancedModel(BaseModel):
     verify_ssl_cert: Optional[bool] = None
     journal_mode: Optional[str] = None
-    pms_timeout: Optional[str] = None
-    cache_sizemb: Optional[str] = None
-    session_db_write_attempts: Optional[str] = None
+    pms_timeout: Optional[int] = None
+    cache_sizemb: Optional[int] = None
+    session_db_write_attempts: Optional[int] = None
     system_analytics: Optional[bool] = None
-    notification_threads: Optional[str] = None
-    remote_access_ping_threshold: Optional[str] = None
-    websocket_connection_timeout: Optional[str] = None
-    config_version: Optional[str] = None
-    metadata_cache_seconds: Optional[str] = None
-    websocket_connection_attempts: Optional[str] = None
+    notification_threads: Optional[int] = None
+    remote_access_ping_threshold: Optional[int] = None
+    websocket_connection_timeout: Optional[int] = None
+    config_version: Optional[int] = None
+    metadata_cache_seconds: Optional[int] = None
+    websocket_connection_attempts: Optional[int] = None
     jwt_secret: Optional[str] = None
     websocket_monitor_ping_pong: Optional[bool] = None
     synchronous_mode: Optional[str] = None
-    pms_update_check_interval: Optional[str] = None
+    pms_update_check_interval: Optional[int] = None
     jwt_update_secret: Optional[bool] = None
     verbose_logs: Optional[bool] = None
     add_live_tv_library: Optional[bool] = None
-    remote_access_ping_interval: Optional[str] = None
-    check_github_cache_seconds: Optional[str] = None
-    export_threads: Optional[str] = None
+    remote_access_ping_interval: Optional[int] = None
+    check_github_cache_seconds: Optional[int] = None
+    export_threads: Optional[int] = None
 
 
 class FacebookModel(BaseModel):
@@ -683,7 +683,7 @@ class BrowserModel(BaseModel):
     browser_on_pmsupdate: Optional[bool] = None
     browser_on_intup: Optional[bool] = None
     browser_on_buffer: Optional[bool] = None
-    browser_auto_hide_delay: Optional[str] = None
+    browser_auto_hide_delay: Optional[int] = None
     browser_on_created: Optional[bool] = None
     browser_on_pause: Optional[bool] = None
     browser_on_stop: Optional[bool] = None
