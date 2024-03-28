@@ -10,34 +10,34 @@ from pydantic import BaseModel
 
 
 class SyncedItems(BaseModel):
-    audio_bitrate: Optional[str]
-    client_id: Optional[str]
-    content_type: Optional[str]
-    device_name: Optional[str]
-    failure: Optional[str]
-    item_complete_count: Optional[str]
-    item_count: Optional[str]
-    item_downloaded_count: Optional[str]
-    item_downloaded_percent_complete: Optional[int]
-    metadata_type: Optional[str]
-    photo_quality: Optional[str]
-    platform: Optional[str]
-    rating_key: Optional[str]
-    root_title: Optional[str]
-    state: Optional[str]
-    sync_id: Optional[str]
-    sync_title: Optional[str]
-    total_size: Optional[str]
-    user: Optional[str]
-    user_id: Optional[str]
-    username: Optional[str]
-    video_bitrate: Optional[str]
-    video_quality: Optional[str]
+    audio_bitrate: Optional[str] = None
+    client_id: Optional[str] = None
+    content_type: Optional[str] = None
+    device_name: Optional[str] = None
+    failure: Optional[str] = None
+    item_complete_count: Optional[str] = None
+    item_count: Optional[str] = None
+    item_downloaded_count: Optional[str] = None
+    item_downloaded_percent_complete: Optional[int] = None
+    metadata_type: Optional[str] = None
+    photo_quality: Optional[str] = None
+    platform: Optional[str] = None
+    rating_key: Optional[str] = None
+    root_title: Optional[str] = None
+    state: Optional[str] = None
+    sync_id: Optional[str] = None
+    sync_title: Optional[str] = None
+    total_size: Optional[str] = None
+    user: Optional[str] = None
+    user_id: Optional[str] = None
+    username: Optional[str] = None
+    video_bitrate: Optional[str] = None
+    video_quality: Optional[str] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: List[SyncedItems]
 
 

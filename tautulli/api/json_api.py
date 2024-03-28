@@ -493,7 +493,10 @@ class RawAPI:
         :returns: Dict of data
         :rtype: dict
         """
-        return self._get_json(command='docs')
+        json_data = self._get_json(command='docs')
+        if _success_result(json_data=json_data):
+            return _get_response_data(json_data=json_data)
+        return static.empty_dict
 
     @property
     def docs_md(self) -> str:

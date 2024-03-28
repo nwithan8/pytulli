@@ -10,12 +10,12 @@ from pydantic import BaseModel
 
 
 class PlexLog(BaseModel):
-    data: Optional[List]
+    data: Optional[List] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: PlexLog
 
 

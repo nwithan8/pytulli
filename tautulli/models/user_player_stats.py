@@ -10,16 +10,16 @@ from pydantic import BaseModel
 
 
 class UserPlayerStats(BaseModel):
-    platform: Optional[str]
-    platform_name: Optional[str]
-    player_name: Optional[str]
-    result_id: Optional[int]
-    total_plays: Optional[int]
+    platform: Optional[str] = None
+    platform_name: Optional[str] = None
+    player_name: Optional[str] = None
+    result_id: Optional[int] = None
+    total_plays: Optional[int] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: List[UserPlayerStats]
 
 

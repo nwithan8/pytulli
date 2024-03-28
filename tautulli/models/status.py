@@ -10,8 +10,8 @@ from pydantic import BaseModel
 
 
 class Status(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
 
 
 class Model(BaseModel):

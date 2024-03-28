@@ -10,49 +10,49 @@ from pydantic import BaseModel
 
 
 class Config(BaseModel):
-    incl_poster: Optional[int]
-    html_support: Optional[int]
-    chat_id: Optional[str]
-    bot_token: Optional[str]
-    incl_subject: Optional[int]
-    disable_web_preview: Optional[int]
+    incl_poster: Optional[int] = None
+    html_support: Optional[int] = None
+    chat_id: Optional[str] = None
+    bot_token: Optional[str] = None
+    incl_subject: Optional[int] = None
+    disable_web_preview: Optional[int] = None
 
 
 class Actions(BaseModel):
-    on_play: Optional[int]
-    on_stop: Optional[int]
+    on_play: Optional[int] = None
+    on_stop: Optional[int] = None
 
 
 class OnPlay(BaseModel):
-    subject: Optional[str]
-    body: Optional[str]
+    subject: Optional[str] = None
+    body: Optional[str] = None
 
 
 class OnStop(BaseModel):
-    subject: Optional[str]
-    body: Optional[str]
+    subject: Optional[str] = None
+    body: Optional[str] = None
 
 
 class NotifyText(BaseModel):
-    on_play: Optional[OnPlay]
-    on_stop: Optional[OnStop]
+    on_play: Optional[OnPlay] = None
+    on_stop: Optional[OnStop] = None
 
 
 class NotifierConfig(BaseModel):
-    id: Optional[int]
-    agent_id: Optional[int]
-    agent_name: Optional[str]
-    agent_label: Optional[str]
-    friendly_name: Optional[str]
-    config: Optional[Config]
-    config_options: Optional[List[Union[Dict[str, Any], str]]]
-    actions: Optional[Actions]
-    notify_text: Optional[NotifyText]
+    id: Optional[int] = None
+    agent_id: Optional[int] = None
+    agent_name: Optional[str] = None
+    agent_label: Optional[str] = None
+    friendly_name: Optional[str] = None
+    config: Optional[Config] = None
+    config_options: Optional[List[Union[Dict[str, Any], str]]] = None
+    actions: Optional[Actions] = None
+    notify_text: Optional[NotifyText] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: NotifierConfig
 
 

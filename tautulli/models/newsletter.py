@@ -10,18 +10,18 @@ from pydantic import BaseModel
 
 
 class Newsletter(BaseModel):
-    id: Optional[int]
-    agent_id: Optional[int]
-    agent_name: Optional[str]
-    agent_label: Optional[str]
-    friendly_name: Optional[str]
-    cron: Optional[str]
-    active: Optional[int]
+    id: Optional[int] = None
+    agent_id: Optional[int] = None
+    agent_name: Optional[str] = None
+    agent_label: Optional[str] = None
+    friendly_name: Optional[str] = None
+    cron: Optional[str] = None
+    active: Optional[int] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: List[Newsletter]
 
 

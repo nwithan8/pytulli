@@ -10,28 +10,28 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    browser: Optional[str]
-    friendly_name: Optional[str]
-    host: Optional[str]
-    ip_address: Optional[str]
-    os: Optional[str]
-    timestamp: Optional[int]
-    user: Optional[str]
-    user_agent: Optional[str]
-    user_group: Optional[str]
-    user_id: Optional[int]
+    browser: Optional[str] = None
+    friendly_name: Optional[str] = None
+    host: Optional[str] = None
+    ip_address: Optional[str] = None
+    os: Optional[str] = None
+    timestamp: Optional[int] = None
+    user: Optional[str] = None
+    user_agent: Optional[str] = None
+    user_group: Optional[str] = None
+    user_id: Optional[int] = None
 
 
 class UserLogins(BaseModel):
-    draw: Optional[int]
-    recordsTotal: Optional[int]
-    recordsFiltered: Optional[int]
-    data: Optional[List[Datum]]
+    draw: Optional[int] = None
+    recordsTotal: Optional[int] = None
+    recordsFiltered: Optional[int] = None
+    data: Optional[List[Datum]] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: UserLogins
 
 

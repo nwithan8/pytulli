@@ -10,13 +10,13 @@ from pydantic import BaseModel
 
 
 class ServerStatus(BaseModel):
-    result: Optional[str]
-    connected: Optional[bool]
+    result: Optional[str] = None
+    connected: Optional[bool] = None
 
 
 class Response(BaseModel):
     result: str
-    message: Any
+    message: Any = None
     data: ServerStatus
 
 

@@ -10,60 +10,60 @@ from pydantic import BaseModel
 
 
 class ChildrenListItem(BaseModel):
-    actors: Optional[List]
-    added_at: Optional[str]
-    art: Optional[str]
-    audience_rating: Optional[str]
-    audience_rating_image: Optional[str]
-    banner: Optional[str]
-    content_rating: Optional[str]
-    directors: Optional[List]
-    duration: Optional[str]
-    full_title: Optional[str]
-    collections: Optional[List]
-    genres: Optional[List]
-    grandparent_rating_key: Optional[str]
-    grandparent_thumb: Optional[str]
-    grandparent_title: Optional[str]
-    guid: Optional[str]
-    labels: Optional[List]
-    last_viewed_at: Optional[str]
-    library_name: Optional[str]
-    media_index: Optional[str]
-    media_type: Optional[str]
-    original_title: Optional[str]
-    originally_available_at: Optional[str]
-    parent_media_index: Optional[str]
-    parent_rating_key: Optional[str]
-    parent_thumb: Optional[str]
-    parent_title: Optional[str]
-    rating: Optional[str]
-    rating_image: Optional[str]
-    rating_key: Optional[str]
-    section_id: Optional[str]
-    sort_title: Optional[str]
-    studio: Optional[str]
-    summary: Optional[str]
-    tagline: Optional[str]
-    thumb: Optional[str]
-    title: Optional[str]
-    updated_at: Optional[str]
-    user_rating: Optional[str]
-    writers: Optional[List]
-    year: Optional[str]
-    collections: Optional[List]
+    actors: Optional[List] = None
+    added_at: Optional[str] = None
+    art: Optional[str] = None
+    audience_rating: Optional[str] = None
+    audience_rating_image: Optional[str] = None
+    banner: Optional[str] = None
+    content_rating: Optional[str] = None
+    directors: Optional[List] = None
+    duration: Optional[str] = None
+    full_title: Optional[str] = None
+    collections: Optional[List] = None
+    genres: Optional[List] = None
+    grandparent_rating_key: Optional[str] = None
+    grandparent_thumb: Optional[str] = None
+    grandparent_title: Optional[str] = None
+    guid: Optional[str] = None
+    labels: Optional[List] = None
+    last_viewed_at: Optional[str] = None
+    library_name: Optional[str] = None
+    media_index: Optional[str] = None
+    media_type: Optional[str] = None
+    original_title: Optional[str] = None
+    originally_available_at: Optional[str] = None
+    parent_media_index: Optional[str] = None
+    parent_rating_key: Optional[str] = None
+    parent_thumb: Optional[str] = None
+    parent_title: Optional[str] = None
+    rating: Optional[str] = None
+    rating_image: Optional[str] = None
+    rating_key: Optional[str] = None
+    section_id: Optional[str] = None
+    sort_title: Optional[str] = None
+    studio: Optional[str] = None
+    summary: Optional[str] = None
+    tagline: Optional[str] = None
+    thumb: Optional[str] = None
+    title: Optional[str] = None
+    updated_at: Optional[str] = None
+    user_rating: Optional[str] = None
+    writers: Optional[List] = None
+    year: Optional[str] = None
+    collections: Optional[List] = None
 
 
 class ChildrenMetadata(BaseModel):
-    children_count: Optional[int]
-    children_type: Optional[str]
-    title: Optional[str]
-    children_list: Optional[List[ChildrenListItem]]
+    children_count: Optional[int] = None
+    children_type: Optional[str] = None
+    title: Optional[str] = None
+    children_list: Optional[List[ChildrenListItem]] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: ChildrenMetadata
 
 

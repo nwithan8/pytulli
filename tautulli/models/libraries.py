@@ -10,21 +10,21 @@ from pydantic import BaseModel
 
 
 class LibrariesEntry(BaseModel):
-    section_id: Optional[str]
-    section_name: Optional[str]
-    section_type: Optional[str]
-    agent: Optional[str]
-    thumb: Optional[str]
-    art: Optional[str]
-    count: Optional[str]
-    is_active: Optional[int]
+    section_id: Optional[str] = None
+    section_name: Optional[str] = None
+    section_type: Optional[str] = None
+    agent: Optional[str] = None
+    thumb: Optional[str] = None
+    art: Optional[str] = None
+    count: Optional[str] = None
+    is_active: Optional[int] = None
     parent_count: Optional[str] = None
     child_count: Optional[str] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: List[LibrariesEntry]
 
 

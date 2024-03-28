@@ -10,15 +10,15 @@ from pydantic import BaseModel
 
 
 class LogEntry(BaseModel):
-    time: Optional[str]
-    loglevel: Optional[str]
-    msg: Optional[str]
-    thread: Optional[str]
+    time: Optional[str] = None
+    loglevel: Optional[str] = None
+    msg: Optional[str] = None
+    thread: Optional[str] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: List[LogEntry]
 
 

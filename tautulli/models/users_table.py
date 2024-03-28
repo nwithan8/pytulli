@@ -10,48 +10,48 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    row_id: Optional[int]
-    user_id: Optional[int]
-    username: Optional[str]
-    friendly_name: Optional[str]
-    user_thumb: Optional[str]
-    plays: Optional[int]
-    duration: Optional[int]
-    last_seen: Optional[int]
-    last_played: Optional[str]
-    history_row_id: Optional[int]
-    ip_address: Optional[str]
-    platform: Optional[str]
-    player: Optional[str]
-    rating_key: Optional[int]
-    media_type: Optional[str]
-    thumb: Optional[str]
-    parent_title: Optional[str]
-    year: Optional[Any]
-    media_index: Optional[Union[int, str]]
-    parent_media_index: Optional[Union[int, str]]
-    live: Optional[int]
-    originally_available_at: Optional[str]
-    guid: Optional[str]
-    transcode_decision: Optional[str]
-    do_notify: Optional[int]
-    keep_history: Optional[int]
-    allow_guest: Optional[int]
-    is_active: Optional[int]
-    title: Optional[str]
-    email: Optional[str]
+    row_id: Optional[int] = None
+    user_id: Optional[int] = None
+    username: Optional[str] = None
+    friendly_name: Optional[str] = None
+    user_thumb: Optional[str] = None
+    plays: Optional[int] = None
+    duration: Optional[int] = None
+    last_seen: Optional[int] = None
+    last_played: Optional[str] = None
+    history_row_id: Optional[int] = None
+    ip_address: Optional[str] = None
+    platform: Optional[str] = None
+    player: Optional[str] = None
+    rating_key: Optional[int] = None
+    media_type: Optional[str] = None
+    thumb: Optional[str] = None
+    parent_title: Optional[str] = None
+    year: Optional[Any] = None
+    media_index: Optional[Union[int, str]] = None
+    parent_media_index: Optional[Union[int, str]] = None
+    live: Optional[int] = None
+    originally_available_at: Optional[str] = None
+    guid: Optional[str] = None
+    transcode_decision: Optional[str] = None
+    do_notify: Optional[int] = None
+    keep_history: Optional[int] = None
+    allow_guest: Optional[int] = None
+    is_active: Optional[int] = None
+    title: Optional[str] = None
+    email: Optional[str] = None
 
 
 class UsersTable(BaseModel):
-    recordsFiltered: Optional[int]
-    recordsTotal: Optional[int]
-    data: Optional[List[Datum]]
-    draw: Optional[int]
+    recordsFiltered: Optional[int] = None
+    recordsTotal: Optional[int] = None
+    data: Optional[List[Datum]] = None
+    draw: Optional[int] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: UsersTable
 
 

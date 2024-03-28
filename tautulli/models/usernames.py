@@ -10,13 +10,13 @@ from pydantic import BaseModel
 
 
 class UserName(BaseModel):
-    user_id: Optional[int]
-    friendly_name: Optional[str]
+    user_id: Optional[int] = None
+    friendly_name: Optional[str] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: List[UserName]
 
 

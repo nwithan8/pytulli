@@ -10,44 +10,44 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    video_resolution: Optional[str]
-    audio_channels: Optional[str]
-    container: Optional[str]
-    thumb: Optional[str]
-    media_index: Optional[str]
-    title: Optional[str]
-    bitrate: Optional[str]
-    video_codec: Optional[str]
-    section_type: Optional[str]
-    section_id: Optional[int]
-    added_at: Optional[str]
-    sort_title: Optional[str]
-    file_size: Optional[str]
-    parent_rating_key: Optional[str]
-    audio_codec: Optional[str]
-    year: Optional[str]
-    media_type: Optional[str]
-    parent_media_index: Optional[str]
-    grandparent_rating_key: Optional[str]
-    rating_key: Optional[str]
-    video_framerate: Optional[str]
-    last_played: Optional[int]
-    play_count: Optional[int]
+    video_resolution: Optional[str] = None
+    audio_channels: Optional[str] = None
+    container: Optional[str] = None
+    thumb: Optional[str] = None
+    media_index: Optional[str] = None
+    title: Optional[str] = None
+    bitrate: Optional[str] = None
+    video_codec: Optional[str] = None
+    section_type: Optional[str] = None
+    section_id: Optional[int] = None
+    added_at: Optional[str] = None
+    sort_title: Optional[str] = None
+    file_size: Optional[str] = None
+    parent_rating_key: Optional[str] = None
+    audio_codec: Optional[str] = None
+    year: Optional[str] = None
+    media_type: Optional[str] = None
+    parent_media_index: Optional[str] = None
+    grandparent_rating_key: Optional[str] = None
+    rating_key: Optional[str] = None
+    video_framerate: Optional[str] = None
+    last_played: Optional[int] = None
+    play_count: Optional[int] = None
 
 
 class LibraryMediaInfo(BaseModel):
-    recordsFiltered: Optional[int]
-    recordsTotal: Optional[int]
-    data: Optional[List[Datum]]
-    draw: Optional[int]
-    last_refreshed: Optional[int]
-    filtered_file_size: Optional[int]
-    total_file_size: Optional[int]
+    recordsFiltered: Optional[int] = None
+    recordsTotal: Optional[int] = None
+    data: Optional[List[Datum]] = None
+    draw: Optional[int] = None
+    last_refreshed: Optional[int] = None
+    filtered_file_size: Optional[int] = None
+    total_file_size: Optional[int] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: LibraryMediaInfo
 
 

@@ -10,22 +10,22 @@ from pydantic import BaseModel
 
 
 class ServerInfo(BaseModel):
-    pms_name: Optional[str]
-    pms_version: Optional[str]
-    pms_platform: Optional[str]
-    pms_ip: Optional[str]
-    pms_port: Optional[int]
-    pms_ssl: Optional[int]
-    pms_is_remote: Optional[int]
-    pms_url: Optional[str]
-    pms_url_manual: Optional[int]
-    pms_identifier: Optional[str]
-    pms_plexpass: Optional[int]
+    pms_name: Optional[str] = None
+    pms_version: Optional[str] = None
+    pms_platform: Optional[str] = None
+    pms_ip: Optional[str] = None
+    pms_port: Optional[int] = None
+    pms_ssl: Optional[int] = None
+    pms_is_remote: Optional[int] = None
+    pms_url: Optional[str] = None
+    pms_url_manual: Optional[int] = None
+    pms_identifier: Optional[str] = None
+    pms_plexpass: Optional[int] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: ServerInfo
 
 

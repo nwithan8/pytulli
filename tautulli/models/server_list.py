@@ -10,20 +10,20 @@ from pydantic import BaseModel
 
 
 class ServerListEntry(BaseModel):
-    httpsRequired: Optional[str]
-    clientIdentifier: Optional[str]
-    label: Optional[str]
-    ip: Optional[str]
-    port: Optional[str]
-    uri: Optional[str]
-    local: Optional[str]
-    value: Optional[str]
-    is_cloud: Optional[bool]
+    httpsRequired: Optional[str] = None
+    clientIdentifier: Optional[str] = None
+    label: Optional[str] = None
+    ip: Optional[str] = None
+    port: Optional[str] = None
+    uri: Optional[str] = None
+    local: Optional[str] = None
+    value: Optional[str] = None
+    is_cloud: Optional[bool] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: List[ServerListEntry]
 
 

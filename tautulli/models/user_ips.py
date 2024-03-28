@@ -10,39 +10,39 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    friendly_name: Optional[str]
-    guid: Optional[str]
-    id: Optional[int]
-    ip_address: Optional[str]
-    last_played: Optional[str]
-    last_seen: Optional[int]
-    first_seen: Optional[int]
-    live: Optional[int]
-    media_index: Optional[int]
-    media_type: Optional[str]
-    originally_available_at: Optional[str]
-    parent_media_index: Optional[int]
-    parent_title: Optional[str]
-    platform: Optional[str]
-    play_count: Optional[int]
-    player: Optional[str]
-    rating_key: Optional[int]
-    thumb: Optional[str]
-    transcode_decision: Optional[str]
-    user_id: Optional[int]
-    year: Optional[int]
+    friendly_name: Optional[str] = None
+    guid: Optional[str] = None
+    id: Optional[int] = None
+    ip_address: Optional[str] = None
+    last_played: Optional[str] = None
+    last_seen: Optional[int] = None
+    first_seen: Optional[int] = None
+    live: Optional[int] = None
+    media_index: Optional[int] = None
+    media_type: Optional[str] = None
+    originally_available_at: Optional[str] = None
+    parent_media_index: Optional[int] = None
+    parent_title: Optional[str] = None
+    platform: Optional[str] = None
+    play_count: Optional[int] = None
+    player: Optional[str] = None
+    rating_key: Optional[int] = None
+    thumb: Optional[str] = None
+    transcode_decision: Optional[str] = None
+    user_id: Optional[int] = None
+    year: Optional[int] = None
 
 
 class UserIPs(BaseModel):
-    draw: Optional[int]
-    recordsTotal: Optional[int]
-    recordsFiltered: Optional[int]
-    data: Optional[List[Datum]]
+    draw: Optional[int] = None
+    recordsTotal: Optional[int] = None
+    recordsFiltered: Optional[int] = None
+    data: Optional[List[Datum]] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: UserIPs
 
 

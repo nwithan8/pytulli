@@ -10,16 +10,16 @@ from pydantic import BaseModel
 
 
 class ServersInfoEntry(BaseModel):
-    name: Optional[str]
-    machine_identifier: Optional[str]
-    host: Optional[str]
-    port: Optional[str]
-    version: Optional[str]
+    name: Optional[str] = None
+    machine_identifier: Optional[str] = None
+    host: Optional[str] = None
+    port: Optional[str] = None
+    version: Optional[str] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: List[ServersInfoEntry]
 
 

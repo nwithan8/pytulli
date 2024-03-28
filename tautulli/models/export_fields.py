@@ -10,23 +10,23 @@ from pydantic import BaseModel
 
 
 class MetadataField(BaseModel):
-    field: Optional[str]
-    level: Optional[int]
+    field: Optional[str] = None
+    level: Optional[int] = None
 
 
 class MediaInfoField(BaseModel):
-    field: Optional[str]
-    level: Optional[int]
+    field: Optional[str] = None
+    level: Optional[int] = None
 
 
 class ExportFields(BaseModel):
-    metadata_fields: Optional[List[MetadataField]]
-    media_info_fields: Optional[List[MediaInfoField]]
+    metadata_fields: Optional[List[MetadataField]] = None
+    media_info_fields: Optional[List[MediaInfoField]] = None
 
 
 class Response(BaseModel):
     result: str
-    message: Any
+    message: Any = None
     data: ExportFields
 
 

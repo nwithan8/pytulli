@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field
 
 
 class Field0(BaseModel):
-    rating_key: Optional[int]
+    rating_key: Optional[int] = None
 
 
 class NewRatingKeys(BaseModel):
@@ -18,8 +18,8 @@ class NewRatingKeys(BaseModel):
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: NewRatingKeys
 
 

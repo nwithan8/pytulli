@@ -10,15 +10,15 @@ from pydantic import BaseModel
 
 
 class LibraryName(BaseModel):
-    section_id: Optional[int]
-    section_name: Optional[str]
-    section_type: Optional[str]
-    agent: Optional[str]
+    section_id: Optional[int] = None
+    section_name: Optional[str] = None
+    section_type: Optional[str] = None
+    agent: Optional[str] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: List[LibraryName]
 
 

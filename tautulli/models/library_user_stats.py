@@ -10,16 +10,16 @@ from pydantic import BaseModel
 
 
 class LibraryUserStats(BaseModel):
-    friendly_name: Optional[str]
-    user_id: Optional[int]
-    user_thumb: Optional[str]
-    username: Optional[str]
-    total_plays: Optional[int]
+    friendly_name: Optional[str] = None
+    user_id: Optional[int] = None
+    user_thumb: Optional[str] = None
+    username: Optional[str] = None
+    total_plays: Optional[int] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: List[LibraryUserStats]
 
 

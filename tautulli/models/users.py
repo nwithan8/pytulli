@@ -10,31 +10,31 @@ from pydantic import BaseModel
 
 
 class User(BaseModel):
-    row_id: Optional[int]
-    user_id: Optional[int]
-    username: Optional[str]
-    friendly_name: Optional[str]
-    thumb: Optional[str]
-    email: Optional[str]
-    is_active: Optional[int]
-    is_admin: Optional[int]
-    is_home_user: Optional[int]
-    is_allow_sync: Optional[int]
-    is_restricted: Optional[int]
-    do_notify: Optional[int]
-    keep_history: Optional[int]
-    allow_guest: Optional[int]
-    shared_libraries: Optional[List[str]]
-    filter_all: Optional[str]
-    filter_movies: Optional[str]
-    filter_tv: Optional[str]
-    filter_music: Optional[str]
-    filter_photos: Optional[str]
+    row_id: Optional[int] = None
+    user_id: Optional[int] = None
+    username: Optional[str] = None
+    friendly_name: Optional[str] = None
+    thumb: Optional[str] = None
+    email: Optional[str] = None
+    is_active: Optional[int] = None
+    is_admin: Optional[int] = None
+    is_home_user: Optional[int] = None
+    is_allow_sync: Optional[int] = None
+    is_restricted: Optional[int] = None
+    do_notify: Optional[int] = None
+    keep_history: Optional[int] = None
+    allow_guest: Optional[int] = None
+    shared_libraries: Optional[List[str]] = None
+    filter_all: Optional[str] = None
+    filter_movies: Optional[str] = None
+    filter_tv: Optional[str] = None
+    filter_music: Optional[str] = None
+    filter_photos: Optional[str] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: List[User]
 
 

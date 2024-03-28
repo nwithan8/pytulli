@@ -10,18 +10,18 @@ from pydantic import BaseModel
 
 
 class Series(BaseModel):
-    name: Optional[str]
-    data: Optional[List]
+    name: Optional[str] = None
+    data: Optional[List] = None
 
 
 class PlaysOrStreamTypesBy(BaseModel):
-    categories: Optional[List[str]]
-    series: Optional[List[Series]]
+    categories: Optional[List[str]] = None
+    series: Optional[List[Series]] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: PlaysOrStreamTypesBy
 
 

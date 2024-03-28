@@ -10,26 +10,26 @@ from pydantic import BaseModel
 
 
 class Library(BaseModel):
-    row_id: Optional[int]
-    server_id: Optional[str]
-    section_id: Optional[int]
-    section_name: Optional[str]
-    section_type: Optional[str]
-    library_thumb: Optional[str]
-    library_art: Optional[str]
-    count: Optional[int]
-    parent_count: Optional[Any]
-    child_count: Optional[Any]
-    is_active: Optional[int]
-    do_notify: Optional[int]
-    do_notify_created: Optional[int]
-    keep_history: Optional[int]
-    deleted_section: Optional[int]
+    row_id: Optional[int] = None
+    server_id: Optional[str] = None
+    section_id: Optional[int] = None
+    section_name: Optional[str] = None
+    section_type: Optional[str] = None
+    library_thumb: Optional[str] = None
+    library_art: Optional[str] = None
+    count: Optional[int] = None
+    parent_count: Optional[Any] = None
+    child_count: Optional[Any] = None
+    is_active: Optional[int] = None
+    do_notify: Optional[int] = None
+    do_notify_created: Optional[int] = None
+    keep_history: Optional[int] = None
+    deleted_section: Optional[int] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: Library
 
 

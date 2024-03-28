@@ -56,12 +56,12 @@ class RecentlyAddedItem(BaseModel):
 
 
 class RecentlyAdded(BaseModel):
-    recently_added: Optional[List[RecentlyAddedItem]]
+    recently_added: Optional[List[RecentlyAddedItem]] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: RecentlyAdded
 
 

@@ -10,13 +10,13 @@ from pydantic import BaseModel
 
 
 class ServerIdentity(BaseModel):
-    machine_identifier: Optional[str]
-    version: Optional[str]
+    machine_identifier: Optional[str] = None
+    version: Optional[str] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: ServerIdentity
 
 

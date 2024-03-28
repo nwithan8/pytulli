@@ -10,19 +10,19 @@ from pydantic import BaseModel
 
 
 class TautulliInfo(BaseModel):
-    tautulli_install_type: Optional[str]
-    tautulli_version: Optional[str]
-    tautulli_branch: Optional[str]
-    tautulli_commit: Optional[str]
-    tautulli_platform: Optional[str]
-    tautulli_platform_release: Optional[str]
-    tautulli_platform_version: Optional[str]
-    tautulli_platform_linux_distro: Optional[str]
-    tautulli_platform_device_name: Optional[str]
-    tautulli_python_version: Optional[str]
+    tautulli_install_type: Optional[str] = None
+    tautulli_version: Optional[str] = None
+    tautulli_branch: Optional[str] = None
+    tautulli_commit: Optional[str] = None
+    tautulli_platform: Optional[str] = None
+    tautulli_platform_release: Optional[str] = None
+    tautulli_platform_version: Optional[str] = None
+    tautulli_platform_linux_distro: Optional[str] = None
+    tautulli_platform_device_name: Optional[str] = None
+    tautulli_python_version: Optional[str] = None
 
 
 class Model(BaseModel):
-    result: Optional[str]
-    message: Optional[str]
+    result: Optional[str] = None
+    message: Optional[str] = None
     data: TautulliInfo

@@ -10,12 +10,12 @@ from pydantic import BaseModel
 
 
 class ServerID(BaseModel):
-    identifier: Optional[Any]
+    identifier: Optional[Any] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: ServerID
 
 

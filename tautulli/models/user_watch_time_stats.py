@@ -10,14 +10,14 @@ from pydantic import BaseModel
 
 
 class UserWatchTimeStats(BaseModel):
-    query_days: Optional[int]
-    total_plays: Optional[int]
-    total_time: Optional[int]
+    query_days: Optional[int] = None
+    total_plays: Optional[int] = None
+    total_time: Optional[int] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: List[UserWatchTimeStats]
 
 

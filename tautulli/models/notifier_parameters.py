@@ -10,14 +10,14 @@ from pydantic import BaseModel
 
 
 class NotifierParameter(BaseModel):
-    name: Optional[str]
-    type: Optional[str]
-    value: Optional[str]
+    name: Optional[str] = None
+    type: Optional[str] = None
+    value: Optional[str] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: List[NotifierParameter]
 
 

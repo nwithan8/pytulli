@@ -10,12 +10,12 @@ from pydantic import BaseModel
 
 
 class NewsletterNotification(BaseModel):
-    newsletter_notification_id: Optional[int]
+    newsletter_notification_id: Optional[int] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: NewsletterNotification
 
 

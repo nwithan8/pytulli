@@ -10,30 +10,30 @@ from pydantic import BaseModel
 
 
 class Datum(BaseModel):
-    id: Optional[int]
-    timestamp: Optional[int]
-    newsletter_id: Optional[int]
-    agent_id: Optional[int]
-    agent_name: Optional[str]
-    notify_action: Optional[str]
-    subject_text: Optional[str]
-    body_text: Optional[str]
-    start_date: Optional[str]
-    end_date: Optional[str]
-    uuid: Optional[str]
-    success: Optional[int]
+    id: Optional[int] = None
+    timestamp: Optional[int] = None
+    newsletter_id: Optional[int] = None
+    agent_id: Optional[int] = None
+    agent_name: Optional[str] = None
+    notify_action: Optional[str] = None
+    subject_text: Optional[str] = None
+    body_text: Optional[str] = None
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
+    uuid: Optional[str] = None
+    success: Optional[int] = None
 
 
 class NewsletterLog(BaseModel):
-    recordsFiltered: Optional[int]
-    recordsTotal: Optional[int]
-    data: Optional[List[Datum]]
-    draw: Optional[int]
+    recordsFiltered: Optional[int] = None
+    recordsTotal: Optional[int] = None
+    data: Optional[List[Datum]] = None
+    draw: Optional[int] = None
 
 
 class Response(BaseModel):
-    result: Optional[str]
-    message: Any
+    result: Optional[str] = None
+    message: Any = None
     data: NewsletterLog
 
 
