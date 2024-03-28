@@ -1,6 +1,6 @@
 objectrest==2.0.*
-pydantic==1.10.*
-pytz==2022.1.*
-python-dotenv==0.20.*
-packaging==21.3.*
+pydantic==2.6.*
+pytz==2024.*
+python-dotenv==1.0.*
+packaging==24.*
 typing-extensions

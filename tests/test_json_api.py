@@ -4,6 +4,7 @@ from tautulli._info import __min_api_version__
 from tautulli.exceptions import HttpException
 from tests.setup import raw_client, invalid_raw_client, no_ssl_client
 
+
 @pytest.mark.skip(reason="Doesn't play well in CI.")
 def test_invalid_api_key():
     client = invalid_raw_client()
@@ -12,14 +13,16 @@ def test_invalid_api_key():
     assert type(e.value) == HttpException
     assert "Invalid apikey" in str(e)
 
+
 def test_ssl():
     client = raw_client()
     assert client._ssl_verify is True
     client = no_ssl_client()
     assert client._ssl_verify is False
-    arnold_quote = client.arnold # attempt to use the client
+    arnold_quote = client.arnold  # attempt to use the client
     assert arnold_quote is not None
     assert type(arnold_quote) == str
+
 
 @pytest.mark.skip(reason="Can't test add.")
 def test_add_newsletter_config():
