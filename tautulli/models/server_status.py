@@ -9,16 +9,9 @@ from typing import Any, Optional
 from pydantic import BaseModel
 
 
-class ServerStatus(BaseModel):
+class ServerStatusModel(BaseModel):
     result: Optional[str] = None
     connected: Optional[bool] = None
 
 
-class Response(BaseModel):
-    result: str
-    message: Any = None
-    data: ServerStatus
 
-
-class Model(BaseModel):
-    response: Response

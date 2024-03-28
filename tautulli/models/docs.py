@@ -9,7 +9,7 @@ from typing import Any, Optional
 from pydantic import BaseModel
 
 
-class Docs(BaseModel):
+class DocsModel(BaseModel):
     add_newsletter_config: Optional[str] = None
     add_notifier_config: Optional[str] = None
     arnold: Optional[str] = None
@@ -130,13 +130,3 @@ class Docs(BaseModel):
     update: Optional[str] = None
     update_check: Optional[str] = None
     update_metadata_details: Optional[str] = None
-
-
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: Docs
-
-
-class Model(BaseModel):
-    response: Response

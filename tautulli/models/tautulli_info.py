@@ -9,7 +9,7 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class TautulliInfo(BaseModel):
+class TautulliInfoModel(BaseModel):
     tautulli_install_type: Optional[str] = None
     tautulli_version: Optional[str] = None
     tautulli_branch: Optional[str] = None
@@ -20,9 +20,3 @@ class TautulliInfo(BaseModel):
     tautulli_platform_linux_distro: Optional[str] = None
     tautulli_platform_device_name: Optional[str] = None
     tautulli_python_version: Optional[str] = None
-
-
-class Model(BaseModel):
-    result: Optional[str] = None
-    message: Optional[str] = None
-    data: TautulliInfo

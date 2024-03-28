@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class IFTTT(BaseModel):
+class IFTTTModel(BaseModel):
     ifttt_on_stop: Optional[bool] = None
     ifttt_on_pause: Optional[bool] = None
     ifttt_key: Optional[str] = None
@@ -29,7 +29,7 @@ class IFTTT(BaseModel):
     ifttt_on_play: Optional[bool] = None
 
 
-class Growl(BaseModel):
+class GrowlModel(BaseModel):
     growl_enabled: Optional[bool] = None
     growl_on_play: Optional[bool] = None
     growl_on_stop: Optional[bool] = None
@@ -49,7 +49,7 @@ class Growl(BaseModel):
     growl_on_extdown: Optional[bool] = None
 
 
-class PMS(BaseModel):
+class PMSModel(BaseModel):
     pms_use_bif: Optional[bool] = None
     pms_uuid: Optional[str] = None
     pms_url: Optional[str] = None
@@ -74,7 +74,7 @@ class PMS(BaseModel):
     pms_url_override: Optional[str] = None
 
 
-class Monitoring(BaseModel):
+class MonitoringModel(BaseModel):
     notify_upload_posters: Optional[str] = None
     movie_notify_enable: Optional[bool] = None
     notify_on_resume_body_text: Optional[str] = None
@@ -153,12 +153,12 @@ class Monitoring(BaseModel):
     notify_new_device_initial_only: Optional[bool] = None
 
 
-class GetFileSizesHold(BaseModel):
+class GetFileSizesHoldModel(BaseModel):
     section_ids: Optional[List] = None
     rating_keys: Optional[List] = None
 
 
-class General(BaseModel):
+class GeneralModel(BaseModel):
     week_start_monday: Optional[bool] = None
     git_token: Optional[str] = None
     home_stats_cards: Optional[List[str]] = None
@@ -248,11 +248,11 @@ class General(BaseModel):
     http_rate_limit_attempts: Optional[str] = None
     http_rate_limit_attempts_interval: Optional[str] = None
     http_rate_limit_lockout_time: Optional[str] = None
-    get_file_sizes_hold: Optional[GetFileSizesHold] = None
+    get_file_sizes_hold: Optional[GetFileSizesHoldModel] = None
     interface_list: Optional[List[str]] = None
 
 
-class Slack(BaseModel):
+class SlackModel(BaseModel):
     slack_on_stop: Optional[bool] = None
     slack_icon_emoji: Optional[str] = None
     slack_on_watched: Optional[bool] = None
@@ -277,7 +277,7 @@ class Slack(BaseModel):
     slack_on_newdevice: Optional[bool] = None
 
 
-class Boxcar(BaseModel):
+class BoxcarModel(BaseModel):
     boxcar_sound: Optional[str] = None
     boxcar_on_newdevice: Optional[bool] = None
     boxcar_on_watched: Optional[bool] = None
@@ -297,7 +297,7 @@ class Boxcar(BaseModel):
     boxcar_token: Optional[str] = None
 
 
-class PushBullet(BaseModel):
+class PushBulletModel(BaseModel):
     pushbullet_on_play: Optional[bool] = None
     pushbullet_channel_tag: Optional[str] = None
     pushbullet_on_buffer: Optional[bool] = None
@@ -318,7 +318,7 @@ class PushBullet(BaseModel):
     pushbullet_on_newdevice: Optional[bool] = None
 
 
-class Scripts(BaseModel):
+class ScriptsModel(BaseModel):
     scripts_on_newdevice: Optional[bool] = None
     scripts_on_stop: Optional[bool] = None
     scripts_on_intdown_script: Optional[str] = None
@@ -352,7 +352,7 @@ class Scripts(BaseModel):
     scripts_on_play: Optional[bool] = None
 
 
-class NMA(BaseModel):
+class NMAModel(BaseModel):
     nma_on_pmsupdate: Optional[bool] = None
     nma_priority: Optional[bool] = None
     nma_on_intdown: Optional[bool] = None
@@ -372,7 +372,7 @@ class NMA(BaseModel):
     nma_on_extup: Optional[bool] = None
 
 
-class Hipchat(BaseModel):
+class HipchatModel(BaseModel):
     hipchat_emoticon: Optional[str] = None
     hipchat_incl_subject: Optional[bool] = None
     hipchat_on_extdown: Optional[bool] = None
@@ -396,7 +396,7 @@ class Hipchat(BaseModel):
     hipchat_on_stop: Optional[bool] = None
 
 
-class Pushalot(BaseModel):
+class PushalotModel(BaseModel):
     pushalot_apikey: Optional[str] = None
     pushalot_on_pmsupdate: Optional[bool] = None
     pushalot_enabled: Optional[bool] = None
@@ -415,7 +415,7 @@ class Pushalot(BaseModel):
     pushalot_on_resume: Optional[bool] = None
 
 
-class Prowl(BaseModel):
+class ProwlModel(BaseModel):
     prowl_on_created: Optional[bool] = None
     prowl_on_play: Optional[bool] = None
     prowl_on_extdown: Optional[bool] = None
@@ -435,7 +435,7 @@ class Prowl(BaseModel):
     prowl_keys: Optional[str] = None
 
 
-class Advanced(BaseModel):
+class AdvancedModel(BaseModel):
     verify_ssl_cert: Optional[bool] = None
     journal_mode: Optional[str] = None
     pms_timeout: Optional[str] = None
@@ -460,7 +460,7 @@ class Advanced(BaseModel):
     export_threads: Optional[str] = None
 
 
-class Facebook(BaseModel):
+class FacebookModel(BaseModel):
     facebook_app_secret: Optional[str] = None
     facebook_on_stop: Optional[bool] = None
     facebook_token: Optional[str] = None
@@ -486,7 +486,7 @@ class Facebook(BaseModel):
     facebook_on_created: Optional[bool] = None
 
 
-class Email(BaseModel):
+class EmailModel(BaseModel):
     email_from_name: Optional[str] = None
     email_bcc: Optional[str] = None
     email_on_pause: Optional[bool] = None
@@ -515,7 +515,7 @@ class Email(BaseModel):
     email_on_play: Optional[bool] = None
 
 
-class OSXNotify(BaseModel):
+class OSXNotifyModel(BaseModel):
     osx_notify_on_intdown: Optional[bool] = None
     osx_notify_on_buffer: Optional[bool] = None
     osx_notify_app: Optional[str] = None
@@ -534,14 +534,14 @@ class OSXNotify(BaseModel):
     osx_notify_on_resume: Optional[bool] = None
 
 
-class PlexWatch(BaseModel):
+class PlexWatchModel(BaseModel):
     grouping_user_history: Optional[bool] = None
     plexwatch_database: Optional[str] = None
     grouping_global_history: Optional[bool] = None
     grouping_charts: Optional[bool] = None
 
 
-class Pushover(BaseModel):
+class PushoverModel(BaseModel):
     pushover_enabled: Optional[bool] = None
     pushover_on_extup: Optional[bool] = None
     pushover_on_intup: Optional[bool] = None
@@ -566,7 +566,7 @@ class Pushover(BaseModel):
     pushover_on_watched: Optional[bool] = None
 
 
-class Telegram(BaseModel):
+class TelegramModel(BaseModel):
     telegram_on_buffer: Optional[bool] = None
     telegram_bot_token: Optional[str] = None
     telegram_incl_poster: Optional[bool] = None
@@ -590,7 +590,7 @@ class Telegram(BaseModel):
     telegram_on_intup: Optional[bool] = None
 
 
-class Twitter(BaseModel):
+class TwitterModel(BaseModel):
     twitter_on_resume: Optional[bool] = None
     twitter_on_pmsupdate: Optional[bool] = None
     twitter_on_buffer: Optional[bool] = None
@@ -614,7 +614,7 @@ class Twitter(BaseModel):
     twitter_on_created: Optional[bool] = None
 
 
-class Plex(BaseModel):
+class PlexModel(BaseModel):
     plex_on_created: Optional[bool] = None
     plex_on_concurrent: Optional[bool] = None
     plex_client_host: Optional[str] = None
@@ -635,7 +635,7 @@ class Plex(BaseModel):
     plex_on_extup: Optional[bool] = None
 
 
-class Join(BaseModel):
+class JoinModel(BaseModel):
     join_on_concurrent: Optional[bool] = None
     join_on_newdevice: Optional[bool] = None
     join_deviceid: Optional[str] = None
@@ -656,7 +656,7 @@ class Join(BaseModel):
     join_on_stop: Optional[bool] = None
 
 
-class XBMC(BaseModel):
+class XBMCModel(BaseModel):
     xbmc_password: Optional[str] = None
     xbmc_on_play: Optional[bool] = None
     xbmc_on_pause: Optional[bool] = None
@@ -677,7 +677,7 @@ class XBMC(BaseModel):
     xbmc_on_concurrent: Optional[bool] = None
 
 
-class Browser(BaseModel):
+class BrowserModel(BaseModel):
     browser_on_intdown: Optional[bool] = None
     browser_on_newdevice: Optional[bool] = None
     browser_on_pmsupdate: Optional[bool] = None
@@ -696,7 +696,7 @@ class Browser(BaseModel):
     browser_enabled: Optional[bool] = None
 
 
-class Newsletter(BaseModel):
+class NewsletterModel(BaseModel):
     newsletter_dir: Optional[str] = None
     newsletter_templates: Optional[str] = None
     newsletter_self_hosted: Optional[bool] = None
@@ -707,47 +707,37 @@ class Newsletter(BaseModel):
     newsletter_auth: Optional[bool] = None
 
 
-class Cloudinary(BaseModel):
+class CloudinaryModel(BaseModel):
     cloudinary_api_key: Optional[str] = None
     cloudinary_cloud_name: Optional[str] = None
     cloudinary_api_secret: Optional[str] = None
 
 
-class Settings(BaseModel):
-    IFTTT: Optional[IFTTT] = None
-    Growl: Optional[Growl] = None
-    PMS: Optional[PMS] = None
-    Monitoring: Optional[Monitoring] = None
-    General: Optional[General] = None
-    Slack: Optional[Slack] = None
-    Boxcar: Optional[Boxcar] = None
-    PushBullet: Optional[PushBullet] = None
-    Scripts: Optional[Scripts] = None
-    NMA: Optional[NMA] = None
-    Hipchat: Optional[Hipchat] = None
-    Pushalot: Optional[Pushalot] = None
-    Prowl: Optional[Prowl] = None
-    Advanced: Optional[Advanced] = None
-    Facebook: Optional[Facebook] = None
-    Email: Optional[Email] = None
-    OSX_Notify: Optional[OSXNotify] = None
-    PlexWatch: Optional[PlexWatch] = None
-    Pushover: Optional[Pushover] = None
-    Telegram: Optional[Telegram] = None
-    Twitter: Optional[Twitter] = None
-    Plex: Optional[Plex] = None
-    Join: Optional[Join] = None
-    XBMC: Optional[XBMC] = None
-    Browser: Optional[Browser] = None
-    Newsletter: Optional[Newsletter] = None
-    Cloudinary: Optional[Cloudinary] = None
-
-
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: Settings
-
-
-class Model(BaseModel):
-    response: Response
+class SettingsModel(BaseModel):
+    IFTTT: Optional[IFTTTModel] = None
+    Growl: Optional[GrowlModel] = None
+    PMS: Optional[PMSModel] = None
+    Monitoring: Optional[MonitoringModel] = None
+    General: Optional[GeneralModel] = None
+    Slack: Optional[SlackModel] = None
+    Boxcar: Optional[BoxcarModel] = None
+    PushBullet: Optional[PushBulletModel] = None
+    Scripts: Optional[ScriptsModel] = None
+    NMA: Optional[NMAModel] = None
+    Hipchat: Optional[HipchatModel] = None
+    Pushalot: Optional[PushalotModel] = None
+    Prowl: Optional[ProwlModel] = None
+    Advanced: Optional[AdvancedModel] = None
+    Facebook: Optional[FacebookModel] = None
+    Email: Optional[EmailModel] = None
+    OSX_Notify: Optional[OSXNotifyModel] = None
+    PlexWatch: Optional[PlexWatchModel] = None
+    Pushover: Optional[PushoverModel] = None
+    Telegram: Optional[TelegramModel] = None
+    Twitter: Optional[TwitterModel] = None
+    Plex: Optional[PlexModel] = None
+    Join: Optional[JoinModel] = None
+    XBMC: Optional[XBMCModel] = None
+    Browser: Optional[BrowserModel] = None
+    Newsletter: Optional[NewsletterModel] = None
+    Cloudinary: Optional[CloudinaryModel] = None

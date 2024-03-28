@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Newsletter(BaseModel):
+class NewsletterModel(BaseModel):
     id: Optional[int] = None
     agent_id: Optional[int] = None
     agent_name: Optional[str] = None
@@ -17,13 +17,3 @@ class Newsletter(BaseModel):
     friendly_name: Optional[str] = None
     cron: Optional[str] = None
     active: Optional[int] = None
-
-
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: List[Newsletter]
-
-
-class Model(BaseModel):
-    response: Response

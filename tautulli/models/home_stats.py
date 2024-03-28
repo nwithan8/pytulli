@@ -9,7 +9,7 @@ from typing import Any, List, Optional, Union
 from pydantic import BaseModel
 
 
-class Row(BaseModel):
+class RowModel(BaseModel):
     title: Optional[str] = None
     users_watched: Optional[Union[int, str]] = None
     rating_key: Optional[Union[int, str]] = None
@@ -39,18 +39,11 @@ class Row(BaseModel):
     player: Optional[str] = None
 
 
-class HomeStat(BaseModel):
+class HomeStatModel(BaseModel):
     stat_id: Optional[str] = None
     stat_title: Optional[str] = None
-    rows: Optional[List[Row]] = None
+    rows: Optional[List[RowModel]] = None
     stat_type: Optional[str] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: List[HomeStat]
 
-
-class Model(BaseModel):
-    response: Response

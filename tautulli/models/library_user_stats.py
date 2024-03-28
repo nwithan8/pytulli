@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class LibraryUserStats(BaseModel):
+class LibraryUserStatsModel(BaseModel):
     friendly_name: Optional[str] = None
     user_id: Optional[int] = None
     user_thumb: Optional[str] = None
@@ -17,11 +17,4 @@ class LibraryUserStats(BaseModel):
     total_plays: Optional[int] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: List[LibraryUserStats]
 
-
-class Model(BaseModel):
-    response: Response

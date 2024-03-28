@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Stream(BaseModel):
+class StreamModel(BaseModel):
     id: Optional[str] = None
     type: Optional[str] = None
     video_codec: Optional[str] = None
@@ -42,16 +42,16 @@ class Stream(BaseModel):
     audio_profile: Optional[str] = None
 
 
-class Part(BaseModel):
+class PartModel(BaseModel):
     id: Optional[str] = None
     file: Optional[str] = None
     file_size: Optional[str] = None
     indexes: Optional[int] = None
-    streams: Optional[List[Stream]] = None
+    streams: Optional[List[StreamModel]] = None
     selected: Optional[int] = None
 
 
-class MediaInfoItem(BaseModel):
+class MediaInfoItemModel(BaseModel):
     id: Optional[str] = None
     container: Optional[str] = None
     bitrate: Optional[str] = None
@@ -71,9 +71,9 @@ class MediaInfoItem(BaseModel):
     channel_call_sign: Optional[str] = None
     channel_identifier: Optional[str] = None
     channel_thumb: Optional[str] = None
-    parts: Optional[List[Part]] = None
+    parts: Optional[List[PartModel]] = None
 
-class Marker(BaseModel):
+class MarkerModel(BaseModel):
     id: Optional[int] = None
     type: Optional[str] = None
     start_time_offset: Optional[int] = None
@@ -81,7 +81,7 @@ class Marker(BaseModel):
     first: Optional[bool] = None
     final: Optional[bool] = None
 
-class Metadata(BaseModel):
+class MetadataModel(BaseModel):
     media_type: Optional[str] = None
     section_id: Optional[str] = None
     library_name: Optional[str] = None
@@ -133,16 +133,9 @@ class Metadata(BaseModel):
     full_title: Optional[str] = None
     children_count: Optional[int] = None
     live: Optional[int] = None
-    media_info: Optional[List[MediaInfoItem]] = None
+    media_info: Optional[List[MediaInfoItemModel]] = None
     edition_title: Optional[str] = None
-    markers: Optional[Marker] = None
+    markers: Optional[MarkerModel] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: Metadata
 
-
-class Model(BaseModel):
-    response: Response

@@ -9,7 +9,7 @@ from typing import Any, Optional
 from pydantic import BaseModel
 
 
-class PMSUpdate(BaseModel):
+class PMSUpdateModel(BaseModel):
     update_available: Optional[bool] = None
     platform: Optional[str] = None
     release_date: Optional[int] = None
@@ -22,13 +22,3 @@ class PMSUpdate(BaseModel):
     distro: Optional[str] = None
     distro_build: Optional[str] = None
     download_url: Optional[str] = None
-
-
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: PMSUpdate
-
-
-class Model(BaseModel):
-    response: Response

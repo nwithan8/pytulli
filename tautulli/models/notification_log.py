@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Datum(BaseModel):
+class DatumModel(BaseModel):
     id: Optional[int] = None
     timestamp: Optional[int] = None
     session_key: Optional[int] = None
@@ -25,18 +25,11 @@ class Datum(BaseModel):
     success: Optional[int] = None
 
 
-class NotificationLog(BaseModel):
+class NotificationLogModel(BaseModel):
     recordsFiltered: Optional[int] = None
     recordsTotal: Optional[int] = None
-    data: Optional[List[Datum]] = None
+    data: Optional[List[DatumModel]] = None
     draw: Optional[int] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: NotificationLog
 
-
-class Model(BaseModel):
-    response: Response

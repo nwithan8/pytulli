@@ -9,7 +9,7 @@ from typing import Any, Optional
 from pydantic import BaseModel
 
 
-class Library(BaseModel):
+class LibraryModel(BaseModel):
     row_id: Optional[int] = None
     server_id: Optional[str] = None
     section_id: Optional[int] = None
@@ -27,11 +27,4 @@ class Library(BaseModel):
     deleted_section: Optional[int] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: Library
 
-
-class Model(BaseModel):
-    response: Response

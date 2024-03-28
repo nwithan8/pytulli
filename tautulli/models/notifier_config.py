@@ -9,7 +9,7 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel
 
 
-class Config(BaseModel):
+class ConfigModel(BaseModel):
     incl_poster: Optional[int] = None
     html_support: Optional[int] = None
     chat_id: Optional[str] = None
@@ -18,43 +18,36 @@ class Config(BaseModel):
     disable_web_preview: Optional[int] = None
 
 
-class Actions(BaseModel):
+class ActionsModel(BaseModel):
     on_play: Optional[int] = None
     on_stop: Optional[int] = None
 
 
-class OnPlay(BaseModel):
+class OnPlayModel(BaseModel):
     subject: Optional[str] = None
     body: Optional[str] = None
 
 
-class OnStop(BaseModel):
+class OnStopModel(BaseModel):
     subject: Optional[str] = None
     body: Optional[str] = None
 
 
-class NotifyText(BaseModel):
-    on_play: Optional[OnPlay] = None
-    on_stop: Optional[OnStop] = None
+class NotifyTextModel(BaseModel):
+    on_play: Optional[OnPlayModel] = None
+    on_stop: Optional[OnStopModel] = None
 
 
-class NotifierConfig(BaseModel):
+class NotifierConfigModel(BaseModel):
     id: Optional[int] = None
     agent_id: Optional[int] = None
     agent_name: Optional[str] = None
     agent_label: Optional[str] = None
     friendly_name: Optional[str] = None
-    config: Optional[Config] = None
+    config: Optional[ConfigModel] = None
     config_options: Optional[List[Union[Dict[str, Any], str]]] = None
-    actions: Optional[Actions] = None
-    notify_text: Optional[NotifyText] = None
+    actions: Optional[ActionsModel] = None
+    notify_text: Optional[NotifyTextModel] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: NotifierConfig
 
-
-class Model(BaseModel):
-    response: Response

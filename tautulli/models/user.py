@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class User(BaseModel):
+class UserModel(BaseModel):
     row_id: Optional[int] = None
     user_id: Optional[int] = None
     username: Optional[str] = None
@@ -28,11 +28,4 @@ class User(BaseModel):
     shared_libraries: Optional[List] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: User
 
-
-class Model(BaseModel):
-    response: Response

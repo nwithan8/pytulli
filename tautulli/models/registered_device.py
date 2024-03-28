@@ -9,7 +9,7 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class RegisteredDevice(BaseModel):
+class RegisteredDeviceModel(BaseModel):
     server_id: Optional[str] = None
     pms_name: Optional[str] = None
     pms_version: Optional[str] = None
@@ -35,11 +35,4 @@ class RegisteredDevice(BaseModel):
     tautulli_python_version: Optional[str] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Optional[str] = None
-    data: RegisteredDevice
 
-
-class Model(BaseModel):
-    response: Response

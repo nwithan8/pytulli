@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class User(BaseModel):
+class UserModel(BaseModel):
     row_id: Optional[int] = None
     user_id: Optional[int] = None
     username: Optional[str] = None
@@ -32,11 +32,4 @@ class User(BaseModel):
     filter_photos: Optional[str] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: List[User]
 
-
-class Model(BaseModel):
-    response: Response

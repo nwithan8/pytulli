@@ -9,17 +9,10 @@ from typing import List, Optional, Any
 from pydantic import BaseModel
 
 
-class ItemWatchTimeStat(BaseModel):
+class ItemWatchTimeStatModel(BaseModel):
     query_days: Optional[int] = None
     total_time: Optional[int] = None
     total_plays: Optional[int] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: List[ItemWatchTimeStat]
 
-
-class Model(BaseModel):
-    response: Response

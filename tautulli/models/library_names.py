@@ -9,18 +9,8 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class LibraryName(BaseModel):
+class LibraryNameModel(BaseModel):
     section_id: Optional[int] = None
     section_name: Optional[str] = None
     section_type: Optional[str] = None
     agent: Optional[str] = None
-
-
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: List[LibraryName]
-
-
-class Model(BaseModel):
-    response: Response

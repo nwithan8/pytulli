@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Stream(BaseModel):
+class StreamModel(BaseModel):
     id: Optional[str] = None
     type: Optional[str] = None
     video_codec: Optional[str] = None
@@ -48,16 +48,16 @@ class Stream(BaseModel):
     subtitle_language_code: Optional[str] = None
 
 
-class Part(BaseModel):
+class PartModel(BaseModel):
     id: Optional[str] = None
     file: Optional[str] = None
     file_size: Optional[str] = None
     indexes: Optional[int] = None
-    streams: Optional[List[Stream]] = None
+    streams: Optional[List[StreamModel]] = None
     selected: Optional[int] = None
 
 
-class MediaInfoItem(BaseModel):
+class MediaInfoItemModel(BaseModel):
     id: Optional[str] = None
     container: Optional[str] = None
     bitrate: Optional[str] = None
@@ -77,10 +77,10 @@ class MediaInfoItem(BaseModel):
     channel_call_sign: Optional[str] = None
     channel_identifier: Optional[str] = None
     channel_thumb: Optional[str] = None
-    parts: Optional[List[Part]] = None
+    parts: Optional[List[PartModel]] = None
 
 
-class MovieItem(BaseModel):
+class MovieItemModel(BaseModel):
     media_type: Optional[str] = None
     section_id: Optional[str] = None
     library_name: Optional[str] = None
@@ -127,10 +127,10 @@ class MovieItem(BaseModel):
     full_title: Optional[str] = None
     children_count: Optional[int] = None
     live: Optional[int] = None
-    media_info: Optional[List[MediaInfoItem]] = None
+    media_info: Optional[List[MediaInfoItemModel]] = None
 
 
-class ShowItem(BaseModel):
+class ShowItemModel(BaseModel):
     media_type: Optional[str] = None
     section_id: Optional[str] = None
     library_name: Optional[str] = None
@@ -180,7 +180,7 @@ class ShowItem(BaseModel):
     media_info: Optional[List] = None
 
 
-class SeasonItem(BaseModel):
+class SeasonItemModel(BaseModel):
     media_type: Optional[str] = None
     section_id: Optional[str] = None
     library_name: Optional[str] = None
@@ -230,7 +230,7 @@ class SeasonItem(BaseModel):
     media_info: Optional[List] = None
 
 
-class EpisodeItem(BaseModel):
+class EpisodeItemModel(BaseModel):
     media_type: Optional[str] = None
     section_id: Optional[str] = None
     library_name: Optional[str] = None
@@ -277,30 +277,23 @@ class EpisodeItem(BaseModel):
     full_title: Optional[str] = None
     children_count: Optional[int] = None
     live: Optional[int] = None
-    media_info: Optional[List[MediaInfoItem]] = None
+    media_info: Optional[List[MediaInfoItemModel]] = None
 
 
-class ResultsList(BaseModel):
-    movie: Optional[List[MovieItem]] = None
-    show: Optional[List[ShowItem]] = None
-    season: Optional[List[SeasonItem]] = None
-    episode: Optional[List[EpisodeItem]] = None
+class ResultsListModel(BaseModel):
+    movie: Optional[List[MovieItemModel]] = None
+    show: Optional[List[ShowItemModel]] = None
+    season: Optional[List[SeasonItemModel]] = None
+    episode: Optional[List[EpisodeItemModel]] = None
     artist: Optional[List] = None
     album: Optional[List] = None
     track: Optional[List] = None
     collection: Optional[List] = None
 
 
-class SearchResults(BaseModel):
+class SearchResultsModel(BaseModel):
     results_count: Optional[int] = None
-    results_list: Optional[ResultsList] = None
+    results_list: Optional[ResultsListModel] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: SearchResults
 
-
-class Model(BaseModel):
-    response: Response

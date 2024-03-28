@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Datum(BaseModel):
+class DatumModel(BaseModel):
     video_resolution: Optional[str] = None
     audio_channels: Optional[str] = None
     container: Optional[str] = None
@@ -35,21 +35,14 @@ class Datum(BaseModel):
     play_count: Optional[int] = None
 
 
-class LibraryMediaInfo(BaseModel):
+class LibraryMediaInfoModel(BaseModel):
     recordsFiltered: Optional[int] = None
     recordsTotal: Optional[int] = None
-    data: Optional[List[Datum]] = None
+    data: Optional[List[DatumModel]] = None
     draw: Optional[int] = None
     last_refreshed: Optional[int] = None
     filtered_file_size: Optional[int] = None
     total_file_size: Optional[int] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: LibraryMediaInfo
 
-
-class Model(BaseModel):
-    response: Response

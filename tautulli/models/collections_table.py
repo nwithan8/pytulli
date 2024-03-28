@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Datum(BaseModel):
+class DatumModel(BaseModel):
     addedAt: Optional[str] = None
     art: Optional[Any] = None
     childCount: Optional[int] = None
@@ -31,18 +31,11 @@ class Datum(BaseModel):
     updatedAt: Optional[str] = None
 
 
-class CollectionsTable(BaseModel):
+class CollectionsTableModel(BaseModel):
     recordsFiltered: Optional[int] = None
     recordsTotal: Optional[int] = None
-    data: Optional[List[Datum]] = None
+    data: Optional[List[DatumModel]] = None
     draw: Optional[int] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: CollectionsTable
 
-
-class Model(BaseModel):
-    response: Response

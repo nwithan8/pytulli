@@ -4,24 +4,14 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import Optional
 
 from pydantic import BaseModel
 
 
-class ServersInfoEntry(BaseModel):
+class ServersInfoEntryModel(BaseModel):
     name: Optional[str] = None
     machine_identifier: Optional[str] = None
     host: Optional[str] = None
     port: Optional[str] = None
     version: Optional[str] = None
-
-
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: List[ServersInfoEntry]
-
-
-class Model(BaseModel):
-    response: Response

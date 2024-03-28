@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class RecentlyAddedItem(BaseModel):
+class RecentlyAddedItemModel(BaseModel):
     media_type: str
     section_id: str
     library_name: str
@@ -55,15 +55,8 @@ class RecentlyAddedItem(BaseModel):
     child_count: str
 
 
-class RecentlyAdded(BaseModel):
-    recently_added: Optional[List[RecentlyAddedItem]] = None
+class RecentlyAddedModel(BaseModel):
+    recently_added: Optional[List[RecentlyAddedItemModel]] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: RecentlyAdded
 
-
-class Model(BaseModel):
-    response: Response

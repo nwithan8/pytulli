@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Datum(BaseModel):
+class DatumModel(BaseModel):
     addedAt: Optional[str] = None
     composite: Optional[str] = None
     duration: Optional[int] = None
@@ -26,18 +26,11 @@ class Datum(BaseModel):
     userID: Optional[Any] = None
 
 
-class PlaylistsTable(BaseModel):
+class PlaylistsTableModel(BaseModel):
     recordsFiltered: Optional[int] = None
     recordsTotal: Optional[int] = None
-    data: Optional[List[Datum]] = None
+    data: Optional[List[DatumModel]] = None
     draw: Optional[int] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: PlaylistsTable
 
-
-class Model(BaseModel):
-    response: Response

@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class SyncedItems(BaseModel):
+class SyncedItemsModel(BaseModel):
     audio_bitrate: Optional[str] = None
     client_id: Optional[str] = None
     content_type: Optional[str] = None
@@ -35,11 +35,4 @@ class SyncedItems(BaseModel):
     video_quality: Optional[str] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: List[SyncedItems]
 
-
-class Model(BaseModel):
-    response: Response

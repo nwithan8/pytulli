@@ -9,10 +9,6 @@ from typing import Any, Optional, Union
 from pydantic import BaseModel
 
 
-class Status(BaseModel):
+class StatusModel(BaseModel):
     result: Optional[str] = None
     message: Any = None
-
-
-class Model(BaseModel):
-    response: Status

@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class ChildrenListItem(BaseModel):
+class ChildrenListItemModel(BaseModel):
     actors: Optional[List] = None
     added_at: Optional[str] = None
     art: Optional[str] = None
@@ -54,18 +54,11 @@ class ChildrenListItem(BaseModel):
     collections: Optional[List] = None
 
 
-class ChildrenMetadata(BaseModel):
+class ChildrenMetadataModel(BaseModel):
     children_count: Optional[int] = None
     children_type: Optional[str] = None
     title: Optional[str] = None
-    children_list: Optional[List[ChildrenListItem]] = None
+    children_list: Optional[List[ChildrenListItemModel]] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: ChildrenMetadata
 
-
-class Model(BaseModel):
-    response: Response

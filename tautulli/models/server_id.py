@@ -9,15 +9,8 @@ from typing import Any, Optional
 from pydantic import BaseModel
 
 
-class ServerID(BaseModel):
+class ServerIDModel(BaseModel):
     identifier: Optional[Any] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: ServerID
 
-
-class Model(BaseModel):
-    response: Response

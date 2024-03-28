@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class LibrariesEntry(BaseModel):
+class LibrariesEntryModel(BaseModel):
     section_id: Optional[str] = None
     section_name: Optional[str] = None
     section_type: Optional[str] = None
@@ -22,11 +22,4 @@ class LibrariesEntry(BaseModel):
     child_count: Optional[str] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: List[LibrariesEntry]
 
-
-class Model(BaseModel):
-    response: Response

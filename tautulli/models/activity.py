@@ -12,7 +12,7 @@ from tautulli.internal import utils as internal_utils, static
 from tautulli.tools.utils import to_human_bitrate
 
 
-class Session(BaseModel):
+class SessionModel(BaseModel):
     session_key: Optional[str] = None
     media_type: Optional[str] = None
     view_offset: Optional[str] = None
@@ -305,9 +305,9 @@ class Session(BaseModel):
                f"{static.session_progress_message.format(progress=self.progress_marker, eta=self.eta)}"
 
 
-class Activity(BaseModel):
+class ActivityModel(BaseModel):
     stream_count: Optional[str] = None
-    sessions: Optional[List[Session]] = None
+    sessions: Optional[List[SessionModel]] = None
     stream_count_direct_play: Optional[int] = None
     stream_count_direct_stream: Optional[int] = None
     stream_count_transcode: Optional[int] = None
@@ -316,21 +316,11 @@ class Activity(BaseModel):
     wan_bandwidth: Optional[int] = None
 
     @property
-    def summary(self) -> ActivitySummary:
+    def summary(self) -> ActivitySummaryModel:
         return build_summary_from_activity_object(activity=self)
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: Activity
-
-
-class Model(BaseModel):
-    response: Response
-
-
-class ActivitySummary(BaseModel):
+class ActivitySummaryModel(BaseModel):
     stream_count: Optional[str] = "0"
     transcode_count: Optional[int] = 0
     total_bandwidth: Optional[int] = 0
@@ -366,16 +356,16 @@ class ActivitySummary(BaseModel):
         return overview_message
 
 
-def build_summary_from_activity_object(activity: Activity) -> ActivitySummary:
+def build_summary_from_activity_object(activity: ActivityModel) -> ActivitySummaryModel:
     """
     Create an ActivitySummary using an Activity object
 
     :param activity: Activity object to use for Overview
     :type activity: Activity
-    :returns: ActivitySummary object
-    :rtype: ActivitySummary
+    :returns: ActivitySummaryModel object
+    :rtype: ActivitySummaryModel
     """
-    overview = ActivitySummary()
+    overview = ActivitySummaryModel()
     overview.stream_count = activity.stream_count
     overview.transcode_count = activity.stream_count_transcode
     overview.total_bandwidth = activity.total_bandwidth
@@ -384,13 +374,13 @@ def build_summary_from_activity_object(activity: Activity) -> ActivitySummary:
     return overview
 
 
-def build_summary_from_activity_json(activity_data: dict) -> ActivitySummary:
+def build_summary_from_activity_json(activity_data: dict) -> ActivitySummaryModel:
     """
     Create an ActivitySummary using Activity JSON data
 
     :param activity_data: Activity JSON data to use for Overview
     :type activity_data: dict
-    :returns: ActivitySummary object
-    :rtype: ActivitySummary
+    :returns: ActivitySummaryModel object
+    :rtype: ActivitySummaryModel
     """
-    return ActivitySummary(**activity_data)
+    return ActivitySummaryModel(**activity_data)

@@ -9,7 +9,7 @@ from typing import Any, List, Optional, Union
 from pydantic import BaseModel
 
 
-class Datum(BaseModel):
+class DatumModel(BaseModel):
     row_id: Optional[int] = None
     user_id: Optional[int] = None
     username: Optional[str] = None
@@ -42,18 +42,11 @@ class Datum(BaseModel):
     email: Optional[str] = None
 
 
-class UsersTable(BaseModel):
+class UsersTableModel(BaseModel):
     recordsFiltered: Optional[int] = None
     recordsTotal: Optional[int] = None
-    data: Optional[List[Datum]] = None
+    data: Optional[List[DatumModel]] = None
     draw: Optional[int] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: UsersTable
 
-
-class Model(BaseModel):
-    response: Response

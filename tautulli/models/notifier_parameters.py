@@ -9,17 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class NotifierParameter(BaseModel):
+class NotifierParameterModel(BaseModel):
     name: Optional[str] = None
     type: Optional[str] = None
     value: Optional[str] = None
-
-
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: List[NotifierParameter]
-
-
-class Model(BaseModel):
-    response: Response

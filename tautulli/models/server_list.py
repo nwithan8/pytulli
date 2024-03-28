@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class ServerListEntry(BaseModel):
+class ServerListEntryModel(BaseModel):
     httpsRequired: Optional[str] = None
     clientIdentifier: Optional[str] = None
     label: Optional[str] = None
@@ -19,13 +19,3 @@ class ServerListEntry(BaseModel):
     local: Optional[str] = None
     value: Optional[str] = None
     is_cloud: Optional[bool] = None
-
-
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: List[ServerListEntry]
-
-
-class Model(BaseModel):
-    response: Response

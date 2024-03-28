@@ -9,7 +9,7 @@ from typing import Any, Optional
 from pydantic import BaseModel
 
 
-class StreamData(BaseModel):
+class StreamDataModel(BaseModel):
     bitrate: Optional[int] = None
     video_full_resolution: Optional[str] = None
     optimized_version: Optional[str] = None
@@ -60,11 +60,4 @@ class StreamData(BaseModel):
     pre_tautulli: Optional[str] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: StreamData
 
-
-class Model(BaseModel):
-    response: Response

@@ -9,7 +9,7 @@ from typing import Any, List, Optional
 from pydantic import BaseModel
 
 
-class Net(BaseModel):
+class NetModel(BaseModel):
     cidr: Optional[str] = None
     name: Optional[str] = None
     handle: Optional[str] = None
@@ -25,16 +25,9 @@ class Net(BaseModel):
     updated: Optional[str] = None
 
 
-class WHOISLookup(BaseModel):
+class WHOISLookupModel(BaseModel):
     host: Optional[str] = None
-    nets: Optional[List[Net]] = None
+    nets: Optional[List[NetModel]] = None
 
 
-class Response(BaseModel):
-    result: Optional[str] = None
-    message: Any = None
-    data: WHOISLookup
 
-
-class Model(BaseModel):
-    response: Response
