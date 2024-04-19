@@ -916,7 +916,8 @@ class RawAPI:
 
     @raw_json
     def get_home_stats(self, grouping: bool = False, time_range: int = 30, stats_type: str = 'plays', start: int = 0,
-                       count: int = 5, stat_id: str = None, user_id: int = None, section_id: int = None) -> List[dict]:
+                       count: int = 5, stat_id: str = None, user_id: int = None, section_id: int = None,
+                       before: datetime = None, after: datetime = None) -> List[dict]:
         """
         Get the homepage watch statistics
 
@@ -936,6 +937,10 @@ class RawAPI:
         :type user_id: int, optional
         :param section_id: The ID of the Plex library section
         :type section_id: int, optional
+        :param before: Results before and including the date
+        :type before: datetime, optional
+        :param after: Results after and including the date
+        :type after: datetime, optional
         :returns: List of data
         :rtype: List[dict]
         """
@@ -946,9 +951,11 @@ class RawAPI:
         if _is_invalid_choice(value=stat_id, variable_name='stat_id',
                               choices=static.stats_category):
             return False, None
+        before = datetime_to_string(datetime_object=before)
+        after = datetime_to_string(datetime_object=after)
         params = build_optional_params(grouping=grouping, time_range=time_range, stats_type=stats_type,
                                        stats_start=start, stats_count=count, stat_id=stat_id, section_id=section_id,
-                                       user_id=user_id)
+                                       user_id=user_id, before=before, after=after)
         return 'get_home_stats', params
 
     @raw_json
