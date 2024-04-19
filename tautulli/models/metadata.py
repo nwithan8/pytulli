@@ -22,6 +22,13 @@ class StreamModel(BaseModel):
     video_color_space: Optional[str] = None
     video_color_trc: Optional[str] = None
     video_dynamic_range: Optional[str] = None
+    video_dovi_bl_present: Optional[int] = None
+    video_dovi_el_present: Optional[int] = None
+    video_dovi_level: Optional[int] = None
+    video_dovi_present: Optional[int] = None
+    video_dovi_profile: Optional[int] = None
+    video_dovi_rpu_present: Optional[int] = None
+    video_dovi_version: Optional[float] = None
     video_frame_rate: Optional[str] = None
     video_ref_frames: Optional[str] = None
     video_height: Optional[str] = None
