@@ -84,8 +84,11 @@ class SessionModel(BaseModel):
     audio_profile: Optional[str] = None
     optimized_version: Optional[int] = None
     channel_call_sign: Optional[str] = None
+    channel_id: Optional[str] = None
     channel_identifier: Optional[str] = None
+    channel_title: Optional[str] = None
     channel_thumb: Optional[str] = None
+    channel_vcn: Optional[str] = None
     file: Optional[str] = None
     file_size: Optional[str] = None
     indexes: Optional[int] = None

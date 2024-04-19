@@ -644,8 +644,8 @@ class ObjectAPI:
 
     @make_object
     def get_home_stats(self, grouping: bool = False, time_range: int = 30, stats_type: str = 'plays', start: int = 0,
-                       count: int = 5, stat_id: str = None, user_id: int = None, section_id: int = None) -> List[
-        HomeStat]:
+                       count: int = 5, stat_id: str = None, user_id: int = None, section_id: int = None,
+                       before: datetime = None, after: datetime = None) -> List[HomeStat]:
         """
         Get the homepage watch statistics
 
@@ -665,13 +665,17 @@ class ObjectAPI:
         :type user_id: int, optional
         :param section_id: The ID of the Plex library section
         :type section_id: int, optional
+        :param before: Results before and including the date
+        :type before: datetime, optional
+        :param after: Results after and including the date
+        :type after: datetime, optional
         :returns: List of HomeStat object
         """
         return 'HomeStat'
 
     @make_object
-    def get_item_user_stats(self, rating_key: str, grouping: bool = False, media_type: str = None) -> List[
-        ItemUserStat]:
+    def get_item_user_stats(self, rating_key: str, grouping: bool = False, media_type: str = None) \
+            -> List[ItemUserStat]:
         """
         Get the user statistics for the media item
 

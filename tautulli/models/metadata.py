@@ -22,6 +22,13 @@ class StreamModel(BaseModel):
     video_color_space: Optional[str] = None
     video_color_trc: Optional[str] = None
     video_dynamic_range: Optional[str] = None
+    video_dovi_bl_present: Optional[int] = None
+    video_dovi_el_present: Optional[int] = None
+    video_dovi_level: Optional[int] = None
+    video_dovi_present: Optional[int] = None
+    video_dovi_profile: Optional[int] = None
+    video_dovi_rpu_present: Optional[int] = None
+    video_dovi_version: Optional[float] = None
     video_frame_rate: Optional[str] = None
     video_ref_frames: Optional[str] = None
     video_height: Optional[str] = None
@@ -69,8 +76,11 @@ class MediaInfoItemModel(BaseModel):
     audio_profile: Optional[str] = None
     optimized_version: Optional[int] = None
     channel_call_sign: Optional[str] = None
+    channel_id: Optional[str] = None
     channel_identifier: Optional[str] = None
+    channel_title: Optional[str] = None
     channel_thumb: Optional[str] = None
+    channel_vcn: Optional[str] = None
     parts: Optional[List[PartModel]] = None
 
 class MarkerModel(BaseModel):
