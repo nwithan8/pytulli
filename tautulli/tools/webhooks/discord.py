@@ -3,8 +3,6 @@ from typing import Optional, List
 
 from pydantic import BaseModel
 
-from flask import Request as FlaskRequest
-
 
 class DiscordWebhookEmbedImage(BaseModel):
     url: str
@@ -62,7 +60,7 @@ class DiscordWebhookIngestor(BaseModel):
     attachments: Optional[List[DiscordWebhookAttachment]]
 
     @classmethod
-    def from_flask_request(cls, request: FlaskRequest) -> "DiscordWebhookIngestor":
+    def from_flask_request(cls, request) -> "DiscordWebhookIngestor":
         try:
             body = request.get_json()
         except Exception:
