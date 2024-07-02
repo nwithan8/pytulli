@@ -5,6 +5,7 @@ import objectrest
 from tautulli.internal import static
 from tautulli.models.activity import build_summary_from_activity_json
 from tautulli.tools.utils import url_encode
+from tautulli.exceptions import PlexException
 
 from plexapi.server import PlexServer
 
@@ -80,10 +81,14 @@ class APIShortcuts:
         if self._plex_api is None:
             server_url: Union[str, None] = self._api.server_info.get('pms_url', None)
             server_token: Union[str, None] = self._get_plex_server_token()
+
             if not server_url or not server_token:
                 return None
-            self._plex_api: PlexServer = PlexServer(baseurl=server_url,
-                                                    token=server_token)
+
+            try:
+                self._plex_api: PlexServer = PlexServer(baseurl=server_url, token=server_token)
+            except Exception as e:
+                raise PlexException(f"Could not connect to the Plex Media Server: {e}")
 
         return self._plex_api
 
