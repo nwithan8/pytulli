@@ -1,14 +1,20 @@
+from typing import Union, List
+
 import objectrest
 
 from tautulli.internal import static
 from tautulli.models.activity import build_summary_from_activity_json
 from tautulli.tools.utils import url_encode
+from tautulli.exceptions import PlexException
+
+from plexapi.server import PlexServer
 
 
 # noinspection PyTypeChecker
 class APIShortcuts:
     def __init__(self, api: "RawAPI"):
         self._api = api
+        self._plex_api = None
 
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
@@ -60,6 +66,54 @@ class APIShortcuts:
         :rtype: str
         """
         return self._api.tautulli_info.get('tautulli_version', None)
+
+    @property
+    def plex_api(self) -> Union[PlexServer, None]:
+        """
+        Get a configured Plex API connection to the Plex Media Server configured in Tautulli.
+
+        This **may** require running a server-side SQL query to retrieve the admin user's Plex Media Server token.
+        Enable SQL queries by setting `api_sql = 1` in Tautulli's config.ini file while the application is not running.
+
+        :returns: Plex API object, or None if it could not be configured
+        :rtype: plexapi.server.PlexServer or None
+        """
+        if self._plex_api is None:
+            server_url: Union[str, None] = self._api.server_info.get('pms_url', None)
+            server_token: Union[str, None] = self._get_plex_server_token()
+
+            if not server_url or not server_token:
+                return None
+
+            try:
+                self._plex_api: PlexServer = PlexServer(baseurl=server_url, token=server_token)
+            except Exception as e:
+                raise PlexException(f"Could not connect to the Plex Media Server: {e}")
+
+        return self._plex_api
+
+    def _get_plex_server_token(self) -> Union[str, None]:
+        """
+        Get the Plex Media Server token used by the Tautulli instance
+
+        :returns: Plex Media Server token
+        :rtype: str
+        """
+        # Attempt to get it from the settings
+        pms_settings: Union[dict, None] = self._api.get_settings(key='PMS')
+        if pms_settings:
+            pms_token: Union[str, None] = pms_settings.get('pms_token', None)
+            if pms_token:
+                return pms_token
+
+        # Attempt to get it via an admin user in the database (there should only be one)
+        sql_query: str = "SELECT server_token FROM users WHERE is_admin == 1 LIMIT 1"
+        sql_response: Union[List[dict], None] = self._api.sql(query=sql_query)
+        if sql_response:
+            first_entry: dict = sql_response[0]
+            return first_entry.get('server_token', None)
+
+        return None
 
     def get_library_by_name(self, library_name: str) -> dict:
         """
