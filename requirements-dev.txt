@@ -7,3 +7,9 @@ pytest==7.*
 types-requests
 types-urllib3
 vcrpy==4.*
+pre-commit
+sphinx
+sphinx_rtd_theme
+sphinx-jsonschema
+sphinx-pydantic
+sphinx_autodoc_typehints
