@@ -30,6 +30,7 @@ jobs:
         image: tautulli/tautulli:v${{ matrix.image_version }}
         ports:
           - 8001:8181
+    continue-on-error: true  # Continue running tests (some Docker images will fail to pull)
     steps:
       - name: Matrix => (${{ matrix.image_version }} ${{ matrix.python_version}})
         run: |
