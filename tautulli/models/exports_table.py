@@ -21,6 +21,7 @@ class DatumModel(BaseModel):
     file_size: Optional[int] = None
     filename: Optional[Any] = None
     individual_files: Optional[int] = None
+    logo_level: Optional[int] = None
     media_info_level: Optional[int] = None
     media_type: Optional[str] = None
     media_type_title: Optional[str] = None
