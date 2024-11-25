@@ -83,6 +83,7 @@ class MediaInfoItemModel(BaseModel):
     channel_vcn: Optional[str] = None
     parts: Optional[List[PartModel]] = None
 
+
 class MarkerModel(BaseModel):
     id: Optional[int] = None
     type: Optional[str] = None
@@ -90,6 +91,7 @@ class MarkerModel(BaseModel):
     end_time_offset: Optional[int] = None
     first: Optional[bool] = None
     final: Optional[bool] = None
+
 
 class MetadataModel(BaseModel):
     media_type: Optional[str] = None
@@ -146,6 +148,65 @@ class MetadataModel(BaseModel):
     media_info: Optional[List[MediaInfoItemModel]] = None
     edition_title: Optional[str] = None
     markers: Optional[MarkerModel] = None
+    slug: Optional[str] = None
+    parent_slug: Optional[str] = None
+    grandparent_slug: Optional[str] = None
 
+    @property
+    def is_movie(self) -> bool:
+        return self.media_type == "movie"
 
+    @property
+    def is_show(self) -> bool:
+        return self.media_type == "show"
 
+    @property
+    def is_season(self) -> bool:
+        return self.media_type == "season"
+
+    @property
+    def is_episode(self) -> bool:
+        return self.media_type == "episode"
+
+    @property
+    def is_artist(self) -> bool:
+        return self.media_type == "artist"
+
+    @property
+    def is_album(self) -> bool:
+        return self.media_type == "album"
+
+    @property
+    def is_track(self) -> bool:
+        return self.media_type == "track"
+
+    @property
+    def is_clip(self) -> bool:
+        return self.media_type == "clip"
+
+    @property
+    def _plex_watch_url_slug(self) -> str:
+        if any([self.is_movie, self.is_show, self.is_artist, self.is_clip]):
+            return self.slug
+        elif any([self.is_season, self.is_album]):
+            return self.parent_slug
+        elif any([self.is_episode, self.is_track]):
+            return self.grandparent_slug
+        return ""
+
+    @property
+    def _plex_watch_url_type(self) -> str:
+        if self.is_movie:
+            return "movie"
+        elif any([self.is_show, self.is_season, self.is_episode]):
+            return "show"
+        else:
+            return ""
+
+    @property
+    def plex_watch_url(self) -> str:
+        _prefix = self._plex_watch_url_type
+        _slug = self._plex_watch_url_slug
+        if not _prefix or not _slug:
+            return ""
+        return f"https://watch.plex.tv/{_prefix}/{_slug}"

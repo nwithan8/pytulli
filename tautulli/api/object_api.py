@@ -449,7 +449,7 @@ class ObjectAPI:
     def export_metadata(self, section_id: int = None, user_id: int = None, rating_key: int = None,
                         file_format: str = 'csv', metadata_level: int = 1, media_info_level: int = 1,
                         thumb_level: int = 0, art_level: int = 0, custom_fields: List[str] = None,
-                        export_type: str = None, individual_files: bool = False) -> bool:
+                        export_type: str = None, individual_files: bool = False, logo_level: int = 0) -> bool:
         """
         Export library or media metadata to a file
 
@@ -475,6 +475,8 @@ class ObjectAPI:
         :type export_type: str, optional
         :param individual_files: Export each item as an individual field for library/user export (default: False)
         :type individual_files: bool, optional
+        :param logo_level: Level of logo images to export (default: 0)
+        :type logo_level: int, optional
         :returns: `True` if successful, `False` if unsuccessful
         :rtype: bool
         """
