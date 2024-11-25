@@ -190,7 +190,7 @@ class MetadataModel(BaseModel):
             return self.slug
         elif any([self.is_season, self.is_album]):
             return self.parent_slug
-        if any([self.is_episode, self.is_track]):
+        elif any([self.is_episode, self.is_track]):
             return self.grandparent_slug
         return ""
 
