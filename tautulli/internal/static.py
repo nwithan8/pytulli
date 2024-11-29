@@ -62,3 +62,5 @@ session_player_message = """__Player__: {product} ({player})"""
 session_details_message = """__Quality__: {quality_profile} ({bandwidth}){transcoding}"""
 session_progress_message = """__Progress__: {progress} (ETA: {eta})"""
 
+webhook_trigger_pattern = r"action=([a-z_]+)"  # Find continuous lowercase letters and underscores
+
