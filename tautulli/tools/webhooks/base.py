@@ -54,7 +54,7 @@ class _TautulliWebhook(BaseModel, ABC):
     @property
     def trigger(self) -> Union[TautulliWebhookTrigger, None]:
         if not self._trigger:
-            self._trigger = self.determine_trigger()
+            self._trigger = self._determine_trigger()
 
         return self._trigger
 
