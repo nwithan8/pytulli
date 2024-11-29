@@ -1,4 +1,5 @@
 import enum
+from abc import abstractmethod, ABC
 from typing import Union, Optional
 
 from pydantic import BaseModel
@@ -41,7 +42,7 @@ class TautulliWebhookTrigger(enum.Enum):
         return self.value
 
 
-class _TautulliWebhook(BaseModel):
+class _TautulliWebhook(BaseModel, ABC):
     """
     A webhook from Tautulli
     """
@@ -57,8 +58,9 @@ class _TautulliWebhook(BaseModel):
 
         return self._trigger
 
-    def determine_trigger(self, **kwargs) -> Union[TautulliWebhookTrigger, None]:
+    @abstractmethod
+    def _determine_trigger(self, **kwargs: dict) -> Union[TautulliWebhookTrigger, None]:
         """
         Determine the trigger of a Tautulli webhook.
         """
-        return None
+        raise NotImplementedError

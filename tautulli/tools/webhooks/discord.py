@@ -54,9 +54,11 @@ class DiscordWebhookAttachment(BaseModel):
         """
         # Will probably only have one key, 'files[0]'
         # ref: https://github.com/Tautulli/Tautulli/blob/d019efcf911b4806618761c2da48bab7d04031ec/plexpy/notifiers.py#L1170
+        attachments = []
         for key, value in files.items():
             content = value.read()
-            yield cls(filename=value.filename, file_type=value.content_type, content=content)
+            attachments.append(cls(filename=value.filename, file_type=value.content_type, content=content))
+        return attachments
 
 
 class _DiscordWebhookData(BaseModel):
@@ -213,7 +215,7 @@ class DiscordWebhook(_TautulliWebhook):
             body = json.loads(request.form.get('payload_json', '{}'))
 
         files = request.files
-        attachments = list(DiscordWebhookAttachment.from_flask_request_files(files=files))
+        attachments: List[DiscordWebhookAttachment] = DiscordWebhookAttachment.from_flask_request_files(files=files)
 
         # Determine how to parse the data based on the webhook trigger
         keys = body.keys()
@@ -226,7 +228,7 @@ class DiscordWebhook(_TautulliWebhook):
 
         return cls(data=data, attachments=attachments)
 
-    def determine_trigger(self, **kwargs) -> Union[TautulliWebhookTrigger, None]:
+    def _determine_trigger(self, **kwargs) -> Union[TautulliWebhookTrigger, None]:
         """
         Determine the trigger of a Discord-style webhook.
 
@@ -238,10 +240,10 @@ class DiscordWebhook(_TautulliWebhook):
 
         if isinstance(self.data, PlaybackStateChangeDiscordWebhookData):
             # Couldn't parse webhook data
-            if not self.data or not self.data.data or not self.data.data.content:
+            if not self.data or not self.data.content:
                 return None
 
-            text = self.data.data.content
+            text = self.data.content
             if not text:
                 return None
 
