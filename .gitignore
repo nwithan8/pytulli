@@ -132,3 +132,4 @@ dmypy.json
 test.py
 /scratch.py
 /tautulli/models/data.json
+/reference/
