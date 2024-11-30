@@ -42,7 +42,7 @@ class TautulliWebhookTrigger(enum.Enum):
         return self.value
 
 
-class _TautulliWebhook(BaseModel, ABC):
+class TautulliWebhook(BaseModel, ABC):
     """
     A webhook from Tautulli
     """
