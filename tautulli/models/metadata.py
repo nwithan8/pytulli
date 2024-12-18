@@ -147,7 +147,7 @@ class MetadataModel(BaseModel):
     live: Optional[int] = None
     media_info: Optional[List[MediaInfoItemModel]] = None
     edition_title: Optional[str] = None
-    markers: Optional[MarkerModel] = None
+    markers: Optional[List[MarkerModel]] = None
     slug: Optional[str] = None
     parent_slug: Optional[str] = None
     grandparent_slug: Optional[str] = None
