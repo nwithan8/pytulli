@@ -14,9 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: set-server-versions
-        run: echo "server_versions=$(cat tautulli/API_VERSIONS.json | jq -c '')" >> $GITHUB_OUTPUT
+        run: echo "server_versions=$(cat tautulli/API_VERSIONS.json | jq -c '.')" >> $GITHUB_OUTPUT
       - id: set-python-versions
-        run: echo "python_versions=$(cat tautulli/PYTHON_VERSIONS.json | jq -c '')" >> $GITHUB_OUTPUT
+        run: echo "python_versions=$(cat tautulli/PYTHON_VERSIONS.json | jq -c '.')" >> $GITHUB_OUTPUT
 
   unit-tests:
     needs: versions
