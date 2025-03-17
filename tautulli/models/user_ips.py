@@ -4,39 +4,39 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class DatumModel(BaseModel):
+class DatumModel(_Base):
     friendly_name: Optional[str] = None
     guid: Optional[str] = None
-    id: Optional[int] = None
+    id: EmptyStringNullableInt = None
     ip_address: Optional[str] = None
     last_played: Optional[str] = None
-    last_seen: Optional[int] = None
-    first_seen: Optional[int] = None
-    live: Optional[int] = None
-    media_index: Optional[int] = None
+    last_seen: EmptyStringNullableInt = None
+    first_seen: EmptyStringNullableInt = None
+    live: EmptyStringNullableInt = None
+    media_index: EmptyStringNullableInt = None
     media_type: Optional[str] = None
     originally_available_at: Optional[str] = None
-    parent_media_index: Optional[int] = None
+    parent_media_index: EmptyStringNullableInt = None
     parent_title: Optional[str] = None
     platform: Optional[str] = None
-    play_count: Optional[int] = None
+    play_count: EmptyStringNullableInt = None
     player: Optional[str] = None
-    rating_key: Optional[int] = None
+    rating_key: EmptyStringNullableInt = None
     thumb: Optional[str] = None
     transcode_decision: Optional[str] = None
-    user_id: Optional[int] = None
-    year: Optional[int] = None
+    user_id: EmptyStringNullableInt = None
+    year: EmptyStringNullableInt = None
 
 
-class UserIPsModel(BaseModel):
-    draw: Optional[int] = None
-    recordsTotal: Optional[int] = None
-    recordsFiltered: Optional[int] = None
+class UserIPsModel(_Base):
+    draw: EmptyStringNullableInt = None
+    recordsTotal: EmptyStringNullableInt = None
+    recordsFiltered: EmptyStringNullableInt = None
     data: Optional[List[DatumModel]] = None
 
 

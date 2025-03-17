@@ -4,13 +4,13 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class LibraryNameModel(BaseModel):
-    section_id: Optional[int] = None
+class LibraryNameModel(_Base):
+    section_id: EmptyStringNullableInt = None
     section_name: Optional[str] = None
     section_type: Optional[str] = None
     agent: Optional[str] = None

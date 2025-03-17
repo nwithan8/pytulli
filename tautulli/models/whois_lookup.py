@@ -4,12 +4,12 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base
 
 
-class NetModel(BaseModel):
+class NetModel(_Base):
     cidr: Optional[str] = None
     name: Optional[str] = None
     handle: Optional[str] = None
@@ -25,7 +25,7 @@ class NetModel(BaseModel):
     updated: Optional[str] = None
 
 
-class WHOISLookupModel(BaseModel):
+class WHOISLookupModel(_Base):
     host: Optional[str] = None
     nets: Optional[List[NetModel]] = None
 

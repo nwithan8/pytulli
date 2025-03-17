@@ -4,12 +4,12 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class LibrariesEntryModel(BaseModel):
+class LibrariesEntryModel(_Base):
     section_id: Optional[str] = None
     section_name: Optional[str] = None
     section_type: Optional[str] = None
@@ -17,7 +17,7 @@ class LibrariesEntryModel(BaseModel):
     thumb: Optional[str] = None
     art: Optional[str] = None
     count: Optional[str] = None
-    is_active: Optional[int] = None
+    is_active: EmptyStringNullableInt = None
     parent_count: Optional[str] = None
     child_count: Optional[str] = None
 

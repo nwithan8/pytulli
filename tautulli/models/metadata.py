@@ -4,12 +4,12 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt, EmptyStringNullableFloat
 
 
-class StreamModel(BaseModel):
+class StreamModel(_Base):
     id: Optional[str] = None
     type: Optional[str] = None
     video_codec: Optional[str] = None
@@ -22,13 +22,13 @@ class StreamModel(BaseModel):
     video_color_space: Optional[str] = None
     video_color_trc: Optional[str] = None
     video_dynamic_range: Optional[str] = None
-    video_dovi_bl_present: Optional[int] = None
-    video_dovi_el_present: Optional[int] = None
-    video_dovi_level: Optional[int] = None
-    video_dovi_present: Optional[int] = None
-    video_dovi_profile: Optional[int] = None
-    video_dovi_rpu_present: Optional[int] = None
-    video_dovi_version: Optional[float] = None
+    video_dovi_bl_present: EmptyStringNullableInt = None
+    video_dovi_el_present: EmptyStringNullableInt = None
+    video_dovi_level: EmptyStringNullableInt = None
+    video_dovi_present: EmptyStringNullableInt = None
+    video_dovi_profile: EmptyStringNullableInt = None
+    video_dovi_rpu_present: EmptyStringNullableInt = None
+    video_dovi_version: EmptyStringNullableFloat = None
     video_frame_rate: Optional[str] = None
     video_ref_frames: Optional[str] = None
     video_height: Optional[str] = None
@@ -37,7 +37,7 @@ class StreamModel(BaseModel):
     video_language_code: Optional[str] = None
     video_profile: Optional[str] = None
     video_scan_type: Optional[str] = None
-    selected: Optional[int] = None
+    selected: EmptyStringNullableInt = None
     audio_codec: Optional[str] = None
     audio_bitrate: Optional[str] = None
     audio_bitrate_mode: Optional[str] = None
@@ -49,16 +49,16 @@ class StreamModel(BaseModel):
     audio_profile: Optional[str] = None
 
 
-class PartModel(BaseModel):
+class PartModel(_Base):
     id: Optional[str] = None
     file: Optional[str] = None
     file_size: Optional[str] = None
-    indexes: Optional[int] = None
+    indexes: EmptyStringNullableInt = None
     streams: Optional[List[StreamModel]] = None
-    selected: Optional[int] = None
+    selected: EmptyStringNullableInt = None
 
 
-class MediaInfoItemModel(BaseModel):
+class MediaInfoItemModel(_Base):
     id: Optional[str] = None
     container: Optional[str] = None
     bitrate: Optional[str] = None
@@ -74,7 +74,7 @@ class MediaInfoItemModel(BaseModel):
     audio_channels: Optional[str] = None
     audio_channel_layout: Optional[str] = None
     audio_profile: Optional[str] = None
-    optimized_version: Optional[int] = None
+    optimized_version: EmptyStringNullableInt = None
     channel_call_sign: Optional[str] = None
     channel_id: Optional[str] = None
     channel_identifier: Optional[str] = None
@@ -84,16 +84,16 @@ class MediaInfoItemModel(BaseModel):
     parts: Optional[List[PartModel]] = None
 
 
-class MarkerModel(BaseModel):
-    id: Optional[int] = None
+class MarkerModel(_Base):
+    id: EmptyStringNullableInt = None
     type: Optional[str] = None
-    start_time_offset: Optional[int] = None
-    end_time_offset: Optional[int] = None
+    start_time_offset: EmptyStringNullableInt = None
+    end_time_offset: EmptyStringNullableInt = None
     first: Optional[bool] = None
     final: Optional[bool] = None
 
 
-class MetadataModel(BaseModel):
+class MetadataModel(_Base):
     media_type: Optional[str] = None
     section_id: Optional[str] = None
     library_name: Optional[str] = None
@@ -143,8 +143,8 @@ class MetadataModel(BaseModel):
     collections: Optional[List] = None
     guids: Optional[List[str]] = None
     full_title: Optional[str] = None
-    children_count: Optional[int] = None
-    live: Optional[int] = None
+    children_count: EmptyStringNullableInt = None
+    live: EmptyStringNullableInt = None
     media_info: Optional[List[MediaInfoItemModel]] = None
     edition_title: Optional[str] = None
     markers: Optional[List[MarkerModel]] = None

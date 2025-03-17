@@ -4,42 +4,42 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional, Union
+from typing import List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class RowModel(BaseModel):
+class RowModel(_Base):
     title: Optional[str] = None
-    users_watched: Optional[Union[int, str]] = None
-    rating_key: Optional[Union[int, str]] = None
-    last_play: Optional[int] = None
-    total_plays: Optional[int] = None
+    users_watched: EmptyStringNullableInt = None
+    rating_key: EmptyStringNullableInt = None
+    last_play: EmptyStringNullableInt = None
+    total_plays: EmptyStringNullableInt = None
     grandparent_thumb: Optional[str] = None
     thumb: Optional[str] = None
     art: Optional[str] = None
-    section_id: Optional[int] = None
+    section_id: EmptyStringNullableInt = None
     media_type: Optional[str] = None
     content_rating: Optional[str] = None
     labels: Optional[List] = None
     user: Optional[str] = None
     friendly_name: Optional[str] = None
     platform: Optional[str] = None
-    live: Optional[int] = None
+    live: EmptyStringNullableInt = None
     guid: Optional[str] = None
-    row_id: Optional[Union[int, str]] = None
-    total_duration: Optional[int] = None
-    count: Optional[int] = None
+    row_id: EmptyStringNullableInt = None
+    total_duration: EmptyStringNullableInt = None
+    count: EmptyStringNullableInt = None
     started: Optional[str] = None
     stopped: Optional[str] = None
-    user_id: Optional[int] = None
+    user_id: EmptyStringNullableInt = None
     user_thumb: Optional[str] = None
     platform_name: Optional[str] = None
-    last_watch: Optional[int] = None
+    last_watch: EmptyStringNullableInt = None
     player: Optional[str] = None
 
 
-class HomeStatModel(BaseModel):
+class HomeStatModel(_Base):
     stat_id: Optional[str] = None
     stat_title: Optional[str] = None
     rows: Optional[List[RowModel]] = None

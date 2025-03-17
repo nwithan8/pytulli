@@ -4,12 +4,12 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base
 
 
-class NotifierParameterModel(BaseModel):
+class NotifierParameterModel(_Base):
     name: Optional[str] = None
     type: Optional[str] = None
     value: Optional[str] = None

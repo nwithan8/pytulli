@@ -4,11 +4,11 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base
 
 
-class ServerIdentityModel(BaseModel):
+class ServerIdentityModel(_Base):
     machine_identifier: Optional[str] = None
     version: Optional[str] = None

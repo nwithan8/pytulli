@@ -4,12 +4,12 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class SyncedItemsModel(BaseModel):
+class SyncedItemsModel(_Base):
     audio_bitrate: Optional[str] = None
     client_id: Optional[str] = None
     content_type: Optional[str] = None
@@ -18,7 +18,7 @@ class SyncedItemsModel(BaseModel):
     item_complete_count: Optional[str] = None
     item_count: Optional[str] = None
     item_downloaded_count: Optional[str] = None
-    item_downloaded_percent_complete: Optional[int] = None
+    item_downloaded_percent_complete: EmptyStringNullableInt = None
     metadata_type: Optional[str] = None
     photo_quality: Optional[str] = None
     platform: Optional[str] = None

@@ -4,13 +4,11 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional
-
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class NewsletterNotificationModel(BaseModel):
-    newsletter_notification_id: Optional[int] = None
+class NewsletterNotificationModel(_Base):
+    newsletter_notification_id: EmptyStringNullableInt = None
 
 
 

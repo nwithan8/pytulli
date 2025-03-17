@@ -6,41 +6,41 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional, Union
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class ConfigModel(BaseModel):
-    incl_poster: Optional[int] = None
-    html_support: Optional[int] = None
+class ConfigModel(_Base):
+    incl_poster: EmptyStringNullableInt = None
+    html_support: EmptyStringNullableInt = None
     chat_id: Optional[str] = None
     bot_token: Optional[str] = None
-    incl_subject: Optional[int] = None
-    disable_web_preview: Optional[int] = None
+    incl_subject: EmptyStringNullableInt = None
+    disable_web_preview: EmptyStringNullableInt = None
 
 
-class ActionsModel(BaseModel):
-    on_play: Optional[int] = None
-    on_stop: Optional[int] = None
+class ActionsModel(_Base):
+    on_play: EmptyStringNullableInt = None
+    on_stop: EmptyStringNullableInt = None
 
 
-class OnPlayModel(BaseModel):
+class OnPlayModel(_Base):
     subject: Optional[str] = None
     body: Optional[str] = None
 
 
-class OnStopModel(BaseModel):
+class OnStopModel(_Base):
     subject: Optional[str] = None
     body: Optional[str] = None
 
 
-class NotifyTextModel(BaseModel):
+class NotifyTextModel(_Base):
     on_play: Optional[OnPlayModel] = None
     on_stop: Optional[OnStopModel] = None
 
 
-class NotifierConfigModel(BaseModel):
-    id: Optional[int] = None
-    agent_id: Optional[int] = None
+class NotifierConfigModel(_Base):
+    id: EmptyStringNullableInt = None
+    agent_id: EmptyStringNullableInt = None
     agent_name: Optional[str] = None
     agent_label: Optional[str] = None
     friendly_name: Optional[str] = None

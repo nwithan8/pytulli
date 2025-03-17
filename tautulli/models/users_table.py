@@ -4,49 +4,49 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional, Union
+from typing import Any, List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class DatumModel(BaseModel):
-    row_id: Optional[int] = None
-    user_id: Optional[int] = None
+class DatumModel(_Base):
+    row_id: EmptyStringNullableInt = None
+    user_id: EmptyStringNullableInt = None
     username: Optional[str] = None
     friendly_name: Optional[str] = None
     user_thumb: Optional[str] = None
-    plays: Optional[int] = None
-    duration: Optional[int] = None
-    last_seen: Optional[int] = None
+    plays: EmptyStringNullableInt = None
+    duration: EmptyStringNullableInt = None
+    last_seen: EmptyStringNullableInt = None
     last_played: Optional[str] = None
-    history_row_id: Optional[int] = None
+    history_row_id: EmptyStringNullableInt = None
     ip_address: Optional[str] = None
     platform: Optional[str] = None
     player: Optional[str] = None
-    rating_key: Optional[int] = None
+    rating_key: EmptyStringNullableInt = None
     media_type: Optional[str] = None
     thumb: Optional[str] = None
     parent_title: Optional[str] = None
     year: Optional[Any] = None
-    media_index: Optional[Union[int, str]] = None
-    parent_media_index: Optional[Union[int, str]] = None
-    live: Optional[int] = None
+    media_index: EmptyStringNullableInt = None
+    parent_media_index: EmptyStringNullableInt = None
+    live: EmptyStringNullableInt = None
     originally_available_at: Optional[str] = None
     guid: Optional[str] = None
     transcode_decision: Optional[str] = None
-    do_notify: Optional[int] = None
-    keep_history: Optional[int] = None
-    allow_guest: Optional[int] = None
-    is_active: Optional[int] = None
+    do_notify: EmptyStringNullableInt = None
+    keep_history: EmptyStringNullableInt = None
+    allow_guest: EmptyStringNullableInt = None
+    is_active: EmptyStringNullableInt = None
     title: Optional[str] = None
     email: Optional[str] = None
 
 
-class UsersTableModel(BaseModel):
-    recordsFiltered: Optional[int] = None
-    recordsTotal: Optional[int] = None
+class UsersTableModel(_Base):
+    recordsFiltered: EmptyStringNullableInt = None
+    recordsTotal: EmptyStringNullableInt = None
     data: Optional[List[DatumModel]] = None
-    draw: Optional[int] = None
+    draw: EmptyStringNullableInt = None
 
 
 

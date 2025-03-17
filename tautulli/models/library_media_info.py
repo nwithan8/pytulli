@@ -4,12 +4,12 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class DatumModel(BaseModel):
+class DatumModel(_Base):
     video_resolution: Optional[str] = None
     audio_channels: Optional[str] = None
     container: Optional[str] = None
@@ -19,7 +19,7 @@ class DatumModel(BaseModel):
     bitrate: Optional[str] = None
     video_codec: Optional[str] = None
     section_type: Optional[str] = None
-    section_id: Optional[int] = None
+    section_id: EmptyStringNullableInt = None
     added_at: Optional[str] = None
     sort_title: Optional[str] = None
     file_size: Optional[str] = None
@@ -31,18 +31,18 @@ class DatumModel(BaseModel):
     grandparent_rating_key: Optional[str] = None
     rating_key: Optional[str] = None
     video_framerate: Optional[str] = None
-    last_played: Optional[int] = None
-    play_count: Optional[int] = None
+    last_played: EmptyStringNullableInt = None
+    play_count: EmptyStringNullableInt = None
 
 
-class LibraryMediaInfoModel(BaseModel):
-    recordsFiltered: Optional[int] = None
-    recordsTotal: Optional[int] = None
+class LibraryMediaInfoModel(_Base):
+    recordsFiltered: EmptyStringNullableInt = None
+    recordsTotal: EmptyStringNullableInt = None
     data: Optional[List[DatumModel]] = None
-    draw: Optional[int] = None
-    last_refreshed: Optional[int] = None
-    filtered_file_size: Optional[int] = None
-    total_file_size: Optional[int] = None
+    draw: EmptyStringNullableInt = None
+    last_refreshed: EmptyStringNullableInt = None
+    filtered_file_size: EmptyStringNullableInt = None
+    total_file_size: EmptyStringNullableInt = None
 
 
 

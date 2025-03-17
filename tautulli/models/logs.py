@@ -4,12 +4,12 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base
 
 
-class LogEntryModel(BaseModel):
+class LogEntryModel(_Base):
     time: Optional[str] = None
     loglevel: Optional[str] = None
     msg: Optional[str] = None

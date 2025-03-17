@@ -6,22 +6,22 @@ from __future__ import annotations
 
 from typing import Any, List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class DatumModel(BaseModel):
+class DatumModel(_Base):
     addedAt: Optional[str] = None
     art: Optional[Any] = None
-    childCount: Optional[int] = None
-    collectionMode: Optional[int] = None
-    collectionSort: Optional[int] = None
+    childCount: EmptyStringNullableInt = None
+    collectionMode: EmptyStringNullableInt = None
+    collectionSort: EmptyStringNullableInt = None
     contentRating: Optional[str] = None
     guid: Optional[str] = None
     librarySectionID: Optional[str] = None
     librarySectionTitle: Optional[str] = None
-    maxYear: Optional[int] = None
-    minYear: Optional[int] = None
-    ratingKey: Optional[int] = None
+    maxYear: EmptyStringNullableInt = None
+    minYear: EmptyStringNullableInt = None
+    ratingKey: EmptyStringNullableInt = None
     subtype: Optional[str] = None
     summary: Optional[str] = None
     thumb: Optional[str] = None
@@ -31,11 +31,11 @@ class DatumModel(BaseModel):
     updatedAt: Optional[str] = None
 
 
-class CollectionsTableModel(BaseModel):
-    recordsFiltered: Optional[int] = None
-    recordsTotal: Optional[int] = None
+class CollectionsTableModel(_Base):
+    recordsFiltered: EmptyStringNullableInt = None
+    recordsTotal: EmptyStringNullableInt = None
     data: Optional[List[DatumModel]] = None
-    draw: Optional[int] = None
+    draw: EmptyStringNullableInt = None
 
 
 

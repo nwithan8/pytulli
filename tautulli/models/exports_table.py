@@ -6,38 +6,38 @@ from __future__ import annotations
 
 from typing import Any, List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class DatumModel(BaseModel):
-    timestamp: Optional[int] = None
-    art_level: Optional[int] = None
-    complete: Optional[int] = None
+class DatumModel(_Base):
+    timestamp: EmptyStringNullableInt = None
+    art_level: EmptyStringNullableInt = None
+    complete: EmptyStringNullableInt = None
     custom_fields: str
     exists: Optional[bool] = None
-    export_id: Optional[int] = None
-    exported_items: Optional[int] = None
+    export_id: EmptyStringNullableInt = None
+    exported_items: EmptyStringNullableInt = None
     file_format: Optional[str] = None
-    file_size: Optional[int] = None
+    file_size: EmptyStringNullableInt = None
     filename: Optional[Any] = None
-    individual_files: Optional[int] = None
-    logo_level: Optional[int] = None
-    media_info_level: Optional[int] = None
+    individual_files: EmptyStringNullableInt = None
+    logo_level: EmptyStringNullableInt = None
+    media_info_level: EmptyStringNullableInt = None
     media_type: Optional[str] = None
     media_type_title: Optional[str] = None
-    metadata_level: Optional[int] = None
+    metadata_level: EmptyStringNullableInt = None
     rating_key: Optional[Any] = None
-    section_id: Optional[int] = None
-    thumb_level: Optional[int] = None
+    section_id: EmptyStringNullableInt = None
+    thumb_level: EmptyStringNullableInt = None
     title: Optional[str] = None
-    total_items: Optional[int] = None
+    total_items: EmptyStringNullableInt = None
     user_id: Optional[Any] = None
 
 
-class ExportsTableModel(BaseModel):
-    draw: Optional[int] = None
-    recordsTotal: Optional[int] = None
-    recordsFiltered: Optional[int] = None
+class ExportsTableModel(_Base):
+    draw: EmptyStringNullableInt = None
+    recordsTotal: EmptyStringNullableInt = None
+    recordsFiltered: EmptyStringNullableInt = None
     data: Optional[List[DatumModel]] = None
 
 

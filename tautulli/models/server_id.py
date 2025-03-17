@@ -6,10 +6,10 @@ from __future__ import annotations
 
 from typing import Any, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base
 
 
-class ServerIDModel(BaseModel):
+class ServerIDModel(_Base):
     identifier: Optional[Any] = None
 
 

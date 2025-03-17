@@ -4,15 +4,15 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class PMSUpdateModel(BaseModel):
+class PMSUpdateModel(_Base):
     update_available: Optional[bool] = None
     platform: Optional[str] = None
-    release_date: Optional[int] = None
+    release_date: EmptyStringNullableInt = None
     version: Optional[str] = None
     requirements: Optional[str] = None
     extra_info: Optional[str] = None

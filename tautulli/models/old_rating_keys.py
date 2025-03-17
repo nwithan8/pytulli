@@ -4,16 +4,16 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Optional
 
-from pydantic import BaseModel, Field
-
-
-class Field0Model(BaseModel):
-    rating_key: Optional[int] = None
+from tautulli.models._base import _Base, Field, EmptyStringNullableInt
 
 
-class OldRatingKeysModel(BaseModel):
+class Field0Model(_Base):
+    rating_key: EmptyStringNullableInt = None
+
+
+class OldRatingKeysModel(_Base):
     field_0: Optional[Field0Model] = Field(..., alias='0')
 
 

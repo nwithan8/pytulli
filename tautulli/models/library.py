@@ -6,25 +6,25 @@ from __future__ import annotations
 
 from typing import Any, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class LibraryModel(BaseModel):
-    row_id: Optional[int] = None
+class LibraryModel(_Base):
+    row_id: EmptyStringNullableInt = None
     server_id: Optional[str] = None
-    section_id: Optional[int] = None
+    section_id: EmptyStringNullableInt = None
     section_name: Optional[str] = None
     section_type: Optional[str] = None
     library_thumb: Optional[str] = None
     library_art: Optional[str] = None
-    count: Optional[int] = None
+    count: EmptyStringNullableInt = None
     parent_count: Optional[Any] = None
     child_count: Optional[Any] = None
-    is_active: Optional[int] = None
-    do_notify: Optional[int] = None
-    do_notify_created: Optional[int] = None
-    keep_history: Optional[int] = None
-    deleted_section: Optional[int] = None
+    is_active: EmptyStringNullableInt = None
+    do_notify: EmptyStringNullableInt = None
+    do_notify_created: EmptyStringNullableInt = None
+    keep_history: EmptyStringNullableInt = None
+    deleted_section: EmptyStringNullableInt = None
 
 
 

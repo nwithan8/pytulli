@@ -4,18 +4,18 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional, Union
+from typing import Any, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableFloat
 
 
-class GeoIPLookupModel(BaseModel):
+class GeoIPLookupModel(_Base):
     city: Optional[str] = None
     code: Optional[str] = None
     continent: Optional[str] = None
     country: Optional[str] = None
-    latitude: Optional[Union[float, None]] = None
-    longitude: Optional[Union[float, None]] = None
+    latitude: EmptyStringNullableFloat = None
+    longitude: EmptyStringNullableFloat = None
     postal_code: Optional[str] = None
     region: Optional[str] = None
     timezone: Optional[str] = None
