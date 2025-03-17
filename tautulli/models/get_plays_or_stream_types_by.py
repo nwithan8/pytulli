@@ -4,17 +4,17 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base
 
 
-class SeriesModel(BaseModel):
+class SeriesModel(_Base):
     name: Optional[str] = None
     data: Optional[List] = None
 
 
-class PlaysOrStreamTypesByModel(BaseModel):
+class PlaysOrStreamTypesByModel(_Base):
     categories: Optional[List[str]] = None
     series: Optional[List[SeriesModel]] = None
 

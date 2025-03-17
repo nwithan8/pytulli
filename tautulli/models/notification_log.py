@@ -4,32 +4,32 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class DatumModel(BaseModel):
-    id: Optional[int] = None
-    timestamp: Optional[int] = None
-    session_key: Optional[int] = None
-    rating_key: Optional[int] = None
-    user_id: Optional[int] = None
+class DatumModel(_Base):
+    id: EmptyStringNullableInt = None
+    timestamp: EmptyStringNullableInt = None
+    session_key: EmptyStringNullableInt = None
+    rating_key: EmptyStringNullableInt = None
+    user_id: EmptyStringNullableInt = None
     user: Optional[str] = None
-    notifier_id: Optional[int] = None
-    agent_id: Optional[int] = None
+    notifier_id: EmptyStringNullableInt = None
+    agent_id: EmptyStringNullableInt = None
     agent_name: Optional[str] = None
     notify_action: Optional[str] = None
     subject_text: Optional[str] = None
     body_text: Optional[str] = None
-    success: Optional[int] = None
+    success: EmptyStringNullableInt = None
 
 
-class NotificationLogModel(BaseModel):
-    recordsFiltered: Optional[int] = None
-    recordsTotal: Optional[int] = None
+class NotificationLogModel(_Base):
+    recordsFiltered: EmptyStringNullableInt = None
+    recordsTotal: EmptyStringNullableInt = None
     data: Optional[List[DatumModel]] = None
-    draw: Optional[int] = None
+    draw: EmptyStringNullableInt = None
 
 
 

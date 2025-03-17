@@ -4,12 +4,12 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base
 
 
-class RecentlyAddedItemModel(BaseModel):
+class RecentlyAddedItemModel(_Base):
     media_type: str
     section_id: str
     library_name: str
@@ -55,7 +55,7 @@ class RecentlyAddedItemModel(BaseModel):
     child_count: str
 
 
-class RecentlyAddedModel(BaseModel):
+class RecentlyAddedModel(_Base):
     recently_added: Optional[List[RecentlyAddedItemModel]] = None
 
 

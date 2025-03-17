@@ -4,22 +4,22 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Union, Optional
+from typing import Any, List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt, EmptyStringNullableFloat
 
 
-class DatumModel(BaseModel):
-    reference_id: Optional[int] = None
-    row_id: Optional[int] = None
-    id: Optional[int] = None
-    date: Optional[int] = None
-    started: Optional[int] = None
-    stopped: Optional[int] = None
-    duration: Optional[int] = None # Keep for backwards compatibility
-    play_duration: Optional[int] = None
-    paused_counter: Optional[int] = None
-    user_id: Optional[int] = None
+class DatumModel(_Base):
+    reference_id: EmptyStringNullableInt = None
+    row_id: EmptyStringNullableInt = None
+    id: EmptyStringNullableInt = None
+    date: EmptyStringNullableInt = None
+    started: EmptyStringNullableInt = None
+    stopped: EmptyStringNullableInt = None
+    duration: EmptyStringNullableInt = None # Keep for backwards compatibility
+    play_duration: EmptyStringNullableInt = None
+    paused_counter: EmptyStringNullableInt = None
+    user_id: EmptyStringNullableInt = None
     user: Optional[str] = None
     friendly_name: Optional[str] = None
     user_thumb: Optional[str] = None
@@ -27,37 +27,37 @@ class DatumModel(BaseModel):
     product: Optional[str] = None
     player: Optional[str] = None
     ip_address: Optional[str] = None
-    live: Optional[int] = None
+    live: EmptyStringNullableInt = None
     machine_id: Optional[str] = None
     media_type: Optional[str] = None
-    rating_key: Optional[int] = None
-    parent_rating_key: Optional[Union[int, str]] = None
-    grandparent_rating_key: Optional[Union[int, str]] = None
+    rating_key: EmptyStringNullableInt = None
+    parent_rating_key: EmptyStringNullableInt = None
+    grandparent_rating_key: EmptyStringNullableInt = None
     full_title: Optional[str] = None
     title: Optional[str] = None
     parent_title: Optional[str] = None
     grandparent_title: Optional[str] = None
     original_title: Optional[str] = None
-    year: Optional[Union[int, str]] = None
-    media_index: Optional[Union[int, str]] = None
-    parent_media_index: Optional[Union[int, str]] = None
+    year: EmptyStringNullableInt = None
+    media_index: EmptyStringNullableInt = None
+    parent_media_index: EmptyStringNullableInt = None
     thumb: Optional[str] = None
     originally_available_at: Optional[str] = None
     guid: Optional[str] = None
     transcode_decision: Optional[str] = None
-    percent_complete: Optional[int] = None
-    watched_status: Optional[float] = None
-    group_count: Optional[int] = None
+    percent_complete: EmptyStringNullableInt = None
+    watched_status: EmptyStringNullableFloat = None
+    group_count: EmptyStringNullableInt = None
     group_ids: Optional[str] = None
     state: Optional[Any] = None
     session_key: Optional[Any] = None
 
 
-class HistoryModel(BaseModel):
-    recordsFiltered: Optional[int] = None
-    recordsTotal: Optional[int] = None
+class HistoryModel(_Base):
+    recordsFiltered: EmptyStringNullableInt = None
+    recordsTotal: EmptyStringNullableInt = None
     data: Optional[List[DatumModel]] = None
-    draw: Optional[int] = None
+    draw: EmptyStringNullableInt = None
     filter_duration: Optional[str] = None
     total_duration: Optional[str] = None
 

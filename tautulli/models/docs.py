@@ -4,12 +4,12 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base
 
 
-class DocsModel(BaseModel):
+class DocsModel(_Base):
     add_newsletter_config: Optional[str] = None
     add_notifier_config: Optional[str] = None
     arnold: Optional[str] = None

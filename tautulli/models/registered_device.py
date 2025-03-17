@@ -6,23 +6,23 @@ from __future__ import annotations
 
 from typing import Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class RegisteredDeviceModel(BaseModel):
+class RegisteredDeviceModel(_Base):
     server_id: Optional[str] = None
     pms_name: Optional[str] = None
     pms_version: Optional[str] = None
     pms_platform: Optional[str] = None
     pms_ip: Optional[str] = None
-    pms_port: Optional[int] = None
-    pms_ssl: Optional[int] = None
-    pms_is_remote: Optional[int] = None
-    pms_is_cloud: Optional[int] = None
+    pms_port: EmptyStringNullableInt = None
+    pms_ssl: EmptyStringNullableInt = None
+    pms_is_remote: EmptyStringNullableInt = None
+    pms_is_cloud: EmptyStringNullableInt = None
     pms_url: Optional[str] = None
-    pms_url_manual: Optional[int] = None
+    pms_url_manual: EmptyStringNullableInt = None
     pms_identifier: Optional[str] = None
-    pms_plexpass: Optional[int] = None
+    pms_plexpass: EmptyStringNullableInt = None
     tautulli_install_type: Optional[str] = None
     tautulli_version: Optional[str] = None
     tautulli_branch: Optional[str] = None

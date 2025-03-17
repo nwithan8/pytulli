@@ -6,10 +6,10 @@ from __future__ import annotations
 
 from typing import Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base
 
 
-class ServersInfoEntryModel(BaseModel):
+class ServersInfoEntryModel(_Base):
     name: Optional[str] = None
     machine_identifier: Optional[str] = None
     host: Optional[str] = None

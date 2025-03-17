@@ -4,16 +4,16 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class DatumModel(BaseModel):
-    id: Optional[int] = None
-    timestamp: Optional[int] = None
-    newsletter_id: Optional[int] = None
-    agent_id: Optional[int] = None
+class DatumModel(_Base):
+    id: EmptyStringNullableInt = None
+    timestamp: EmptyStringNullableInt = None
+    newsletter_id: EmptyStringNullableInt = None
+    agent_id: EmptyStringNullableInt = None
     agent_name: Optional[str] = None
     notify_action: Optional[str] = None
     subject_text: Optional[str] = None
@@ -21,14 +21,14 @@ class DatumModel(BaseModel):
     start_date: Optional[str] = None
     end_date: Optional[str] = None
     uuid: Optional[str] = None
-    success: Optional[int] = None
+    success: EmptyStringNullableInt = None
 
 
-class NewsletterLogModel(BaseModel):
-    recordsFiltered: Optional[int] = None
-    recordsTotal: Optional[int] = None
+class NewsletterLogModel(_Base):
+    recordsFiltered: EmptyStringNullableInt = None
+    recordsTotal: EmptyStringNullableInt = None
     data: Optional[List[DatumModel]] = None
-    draw: Optional[int] = None
+    draw: EmptyStringNullableInt = None
 
 
 

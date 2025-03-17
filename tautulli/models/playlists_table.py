@@ -6,18 +6,18 @@ from __future__ import annotations
 
 from typing import Any, List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class DatumModel(BaseModel):
+class DatumModel(_Base):
     addedAt: Optional[str] = None
     composite: Optional[str] = None
-    duration: Optional[int] = None
+    duration: EmptyStringNullableInt = None
     guid: Optional[str] = None
-    leafCount: Optional[int] = None
+    leafCount: EmptyStringNullableInt = None
     librarySectionID: Optional[str] = None
     playlistType: Optional[str] = None
-    ratingKey: Optional[int] = None
+    ratingKey: EmptyStringNullableInt = None
     smart: Optional[bool] = None
     summary: Optional[str] = None
     title: Optional[str] = None
@@ -26,11 +26,11 @@ class DatumModel(BaseModel):
     userID: Optional[Any] = None
 
 
-class PlaylistsTableModel(BaseModel):
-    recordsFiltered: Optional[int] = None
-    recordsTotal: Optional[int] = None
+class PlaylistsTableModel(_Base):
+    recordsFiltered: EmptyStringNullableInt = None
+    recordsTotal: EmptyStringNullableInt = None
     data: Optional[List[DatumModel]] = None
-    draw: Optional[int] = None
+    draw: EmptyStringNullableInt = None
 
 
 

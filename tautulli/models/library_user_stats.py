@@ -4,17 +4,17 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class LibraryUserStatsModel(BaseModel):
+class LibraryUserStatsModel(_Base):
     friendly_name: Optional[str] = None
-    user_id: Optional[int] = None
+    user_id: EmptyStringNullableInt = None
     user_thumb: Optional[str] = None
     username: Optional[str] = None
-    total_plays: Optional[int] = None
+    total_plays: EmptyStringNullableInt = None
 
 
 

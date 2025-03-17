@@ -4,12 +4,12 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base
 
 
-class ServerListEntryModel(BaseModel):
+class ServerListEntryModel(_Base):
     httpsRequired: Optional[str] = None
     clientIdentifier: Optional[str] = None
     label: Optional[str] = None

@@ -4,50 +4,50 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional, Union
+from typing import List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class DatumModel(BaseModel):
-    row_id: Optional[int] = None
+class DatumModel(_Base):
+    row_id: EmptyStringNullableInt = None
     server_id: Optional[str] = None
-    section_id: Optional[int] = None
+    section_id: EmptyStringNullableInt = None
     section_name: Optional[str] = None
     section_type: Optional[str] = None
-    count: Optional[int] = None
-    parent_count: Optional[int] = None
-    child_count: Optional[int] = None
+    count: EmptyStringNullableInt = None
+    parent_count: EmptyStringNullableInt = None
+    child_count: EmptyStringNullableInt = None
     library_thumb: Optional[str] = None
     library_art: Optional[str] = None
-    plays: Optional[int] = None
-    duration: Optional[int] = None
-    last_accessed: Optional[int] = None
-    history_row_id: Optional[int] = None
+    plays: EmptyStringNullableInt = None
+    duration: EmptyStringNullableInt = None
+    last_accessed: EmptyStringNullableInt = None
+    history_row_id: EmptyStringNullableInt = None
     last_played: Optional[str] = None
-    rating_key: Optional[int] = None
+    rating_key: EmptyStringNullableInt = None
     media_type: Optional[str] = None
     thumb: Optional[str] = None
     parent_title: Optional[str] = None
-    year: Optional[Union[int, str]] = None
-    media_index: Optional[Union[int, str]] = None
-    parent_media_index: Optional[Union[int, str]] = None
+    year: EmptyStringNullableInt = None
+    media_index: EmptyStringNullableInt = None
+    parent_media_index: EmptyStringNullableInt = None
     content_rating: Optional[str] = None
     labels: Optional[List] = None
-    live: Optional[int] = None
+    live: EmptyStringNullableInt = None
     originally_available_at: Optional[str] = None
     guid: Optional[str] = None
-    do_notify: Optional[int] = None
-    do_notify_created: Optional[int] = None
-    keep_history: Optional[int] = None
-    is_active: Optional[int] = None
+    do_notify: EmptyStringNullableInt = None
+    do_notify_created: EmptyStringNullableInt = None
+    keep_history: EmptyStringNullableInt = None
+    is_active: EmptyStringNullableInt = None
 
 
-class LibrariesTableModel(BaseModel):
-    recordsFiltered: Optional[int] = None
-    recordsTotal: Optional[int] = None
+class LibrariesTableModel(_Base):
+    recordsFiltered: EmptyStringNullableInt = None
+    recordsTotal: EmptyStringNullableInt = None
     data: Optional[List[DatumModel]] = None
-    draw: Optional[int] = None
+    draw: EmptyStringNullableInt = None
 
 
 

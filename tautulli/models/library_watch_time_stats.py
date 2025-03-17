@@ -4,15 +4,13 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
-
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class LibraryWatchTimeStatsModel(BaseModel):
-    query_days: Optional[int] = None
-    total_time: Optional[int] = None
-    total_plays: Optional[int] = None
+class LibraryWatchTimeStatsModel(_Base):
+    query_days: EmptyStringNullableInt = None
+    total_time: EmptyStringNullableInt = None
+    total_plays: EmptyStringNullableInt = None
 
 
 

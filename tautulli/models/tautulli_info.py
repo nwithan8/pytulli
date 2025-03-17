@@ -6,10 +6,10 @@ from __future__ import annotations
 
 from typing import Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base
 
 
-class TautulliInfoModel(BaseModel):
+class TautulliInfoModel(_Base):
     tautulli_install_type: Optional[str] = None
     tautulli_version: Optional[str] = None
     tautulli_branch: Optional[str] = None

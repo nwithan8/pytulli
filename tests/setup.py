@@ -23,6 +23,7 @@ def raw_client(no_key: bool = False) -> tautulli.RawAPI:
         else:
             raise ValueError("T_KEY is not set and could not be retrieved from server")
 
+
 def invalid_raw_client() -> tautulli.RawAPI:
     load_dotenv()
     url = os.getenv("T_URL")
@@ -48,6 +49,7 @@ def object_client(no_key: bool = False) -> tautulli.ObjectAPI:
             return tautulli.ObjectAPI(base_url=url, api_key=key)
         else:
             raise ValueError("T_KEY is not set and could not be retrieved from server")
+
 
 def no_ssl_client(no_key: bool = False) -> tautulli.RawAPI:
     load_dotenv()

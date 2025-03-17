@@ -6,19 +6,19 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class MetadataFieldModel(BaseModel):
+class MetadataFieldModel(_Base):
     field: Optional[str] = None
-    level: Optional[int] = None
+    level: EmptyStringNullableInt = None
 
 
-class MediaInfoFieldModel(BaseModel):
+class MediaInfoFieldModel(_Base):
     field: Optional[str] = None
-    level: Optional[int] = None
+    level: EmptyStringNullableInt = None
 
 
-class ExportFieldsModel(BaseModel):
+class ExportFieldsModel(_Base):
     metadata_fields: Optional[List[MetadataFieldModel]] = None
     media_info_fields: Optional[List[MediaInfoFieldModel]] = None

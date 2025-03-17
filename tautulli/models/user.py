@@ -4,27 +4,27 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class UserModel(BaseModel):
-    row_id: Optional[int] = None
-    user_id: Optional[int] = None
+class UserModel(_Base):
+    row_id: EmptyStringNullableInt = None
+    user_id: EmptyStringNullableInt = None
     username: Optional[str] = None
     friendly_name: Optional[str] = None
     user_thumb: Optional[str] = None
     email: Optional[str] = None
-    is_active: Optional[int] = None
-    is_admin: Optional[int] = None
-    is_home_user: Optional[int] = None
-    is_allow_sync: Optional[int] = None
-    is_restricted: Optional[int] = None
-    do_notify: Optional[int] = None
-    keep_history: Optional[int] = None
-    allow_guest: Optional[int] = None
-    deleted_user: Optional[int] = None
+    is_active: EmptyStringNullableInt = None
+    is_admin: EmptyStringNullableInt = None
+    is_home_user: EmptyStringNullableInt = None
+    is_allow_sync: EmptyStringNullableInt = None
+    is_restricted: EmptyStringNullableInt = None
+    do_notify: EmptyStringNullableInt = None
+    keep_history: EmptyStringNullableInt = None
+    allow_guest: EmptyStringNullableInt = None
+    deleted_user: EmptyStringNullableInt = None
     shared_libraries: Optional[List] = None
 
 

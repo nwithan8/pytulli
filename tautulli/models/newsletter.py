@@ -4,16 +4,16 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class NewsletterModel(BaseModel):
-    id: Optional[int] = None
-    agent_id: Optional[int] = None
+class NewsletterModel(_Base):
+    id: EmptyStringNullableInt = None
+    agent_id: EmptyStringNullableInt = None
     agent_name: Optional[str] = None
     agent_label: Optional[str] = None
     friendly_name: Optional[str] = None
     cron: Optional[str] = None
-    active: Optional[int] = None
+    active: EmptyStringNullableInt = None

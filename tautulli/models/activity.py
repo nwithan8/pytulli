@@ -4,15 +4,14 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
-
-from pydantic import BaseModel
+from typing import List, Optional
 
 from tautulli.internal import utils as internal_utils, static
+from tautulli.models._base import _Base, EmptyStringNullableInt
 from tautulli.tools.utils import to_human_bitrate
 
 
-class SessionModel(BaseModel):
+class SessionModel(_Base):
     session_key: Optional[str] = None
     media_type: Optional[str] = None
     view_offset: Optional[str] = None
@@ -21,7 +20,7 @@ class SessionModel(BaseModel):
     synced_version_profile: Optional[str] = None
     optimized_version_profile: Optional[str] = None
     user: Optional[str] = None
-    channel_stream: Optional[int] = None
+    channel_stream: EmptyStringNullableInt = None
     section_id: Optional[str] = None
     library_name: Optional[str] = None
     rating_key: Optional[str] = None
@@ -65,8 +64,8 @@ class SessionModel(BaseModel):
     collections: Optional[List] = None
     guids: Optional[List] = None
     full_title: Optional[str] = None
-    children_count: Optional[int] = None
-    live: Optional[int] = None
+    children_count: EmptyStringNullableInt = None
+    live: EmptyStringNullableInt = None
     id: Optional[str] = None
     container: Optional[str] = None
     bitrate: Optional[str] = None
@@ -82,7 +81,7 @@ class SessionModel(BaseModel):
     audio_channels: Optional[str] = None
     audio_channel_layout: Optional[str] = None
     audio_profile: Optional[str] = None
-    optimized_version: Optional[int] = None
+    optimized_version: EmptyStringNullableInt = None
     channel_call_sign: Optional[str] = None
     channel_id: Optional[str] = None
     channel_identifier: Optional[str] = None
@@ -91,8 +90,8 @@ class SessionModel(BaseModel):
     channel_vcn: Optional[str] = None
     file: Optional[str] = None
     file_size: Optional[str] = None
-    indexes: Optional[int] = None
-    selected: Optional[int] = None
+    indexes: EmptyStringNullableInt = None
+    selected: EmptyStringNullableInt = None
     type: Optional[str] = None
     video_codec_level: Optional[str] = None
     video_bitrate: Optional[str] = None
@@ -117,25 +116,25 @@ class SessionModel(BaseModel):
     subtitle_codec: Optional[str] = None
     subtitle_container: Optional[str] = None
     subtitle_format: Optional[str] = None
-    subtitle_forced: Optional[int] = None
+    subtitle_forced: EmptyStringNullableInt = None
     subtitle_location: Optional[str] = None
     subtitle_language: Optional[str] = None
     subtitle_language_code: Optional[str] = None
-    row_id: Optional[int] = None
-    user_id: Optional[int] = None
+    row_id: EmptyStringNullableInt = None
+    user_id: EmptyStringNullableInt = None
     username: Optional[str] = None
     friendly_name: Optional[str] = None
     user_thumb: Optional[str] = None
     email: Optional[str] = None
-    is_active: Optional[int] = None
-    is_admin: Optional[int] = None
-    is_home_user: Optional[int] = None
-    is_allow_sync: Optional[int] = None
-    is_restricted: Optional[int] = None
-    do_notify: Optional[int] = None
-    keep_history: Optional[int] = None
-    deleted_user: Optional[int] = None
-    allow_guest: Optional[int] = None
+    is_active: EmptyStringNullableInt = None
+    is_admin: EmptyStringNullableInt = None
+    is_home_user: EmptyStringNullableInt = None
+    is_allow_sync: EmptyStringNullableInt = None
+    is_restricted: EmptyStringNullableInt = None
+    do_notify: EmptyStringNullableInt = None
+    keep_history: EmptyStringNullableInt = None
+    deleted_user: EmptyStringNullableInt = None
+    allow_guest: EmptyStringNullableInt = None
     shared_libraries: Optional[List[str]] = None
     ip_address: Optional[str] = None
     ip_address_public: Optional[str] = None
@@ -149,15 +148,15 @@ class SessionModel(BaseModel):
     player: Optional[str] = None
     machine_id: Optional[str] = None
     state: Optional[str] = None
-    local: Optional[int] = None
-    relayed: Optional[int] = None
-    secure: Optional[int] = None
+    local: EmptyStringNullableInt = None
+    relayed: EmptyStringNullableInt = None
+    secure: EmptyStringNullableInt = None
     session_id: Optional[str] = None
     bandwidth: Optional[str] = None
     location: Optional[str] = None
     transcode_key: Optional[str] = None
-    transcode_throttled: Optional[int] = None
-    transcode_progress: Optional[int] = None
+    transcode_throttled: EmptyStringNullableInt = None
+    transcode_progress: EmptyStringNullableInt = None
     transcode_speed: Optional[str] = None
     transcode_audio_channels: Optional[str] = None
     transcode_audio_codec: Optional[str] = None
@@ -166,20 +165,20 @@ class SessionModel(BaseModel):
     transcode_height: Optional[str] = None
     transcode_container: Optional[str] = None
     transcode_protocol: Optional[str] = None
-    transcode_hw_requested: Optional[int] = None
+    transcode_hw_requested: EmptyStringNullableInt = None
     transcode_hw_decode: Optional[str] = None
     transcode_hw_decode_title: Optional[str] = None
     transcode_hw_encode: Optional[str] = None
     transcode_hw_encode_title: Optional[str] = None
-    transcode_hw_full_pipeline: Optional[int] = None
-    transcode_max_offset_available: Optional[int] = None
-    transcode_min_offset_available: Optional[int] = None
+    transcode_hw_full_pipeline: EmptyStringNullableInt = None
+    transcode_max_offset_available: EmptyStringNullableInt = None
+    transcode_min_offset_available: EmptyStringNullableInt = None
     audio_decision: Optional[str] = None
     video_decision: Optional[str] = None
     subtitle_decision: Optional[str] = None
     throttled: Optional[str] = None
-    transcode_hw_decoding: Optional[int] = None
-    transcode_hw_encoding: Optional[int] = None
+    transcode_hw_decoding: EmptyStringNullableInt = None
+    transcode_hw_encoding: EmptyStringNullableInt = None
     stream_container: Optional[str] = None
     stream_bitrate: Optional[str] = None
     stream_aspect_ratio: Optional[str] = None
@@ -194,10 +193,10 @@ class SessionModel(BaseModel):
     stream_duration: Optional[str] = None
     stream_container_decision: Optional[str] = None
     optimized_version_title: Optional[str] = None
-    synced_version: Optional[int] = None
+    synced_version: EmptyStringNullableInt = None
     live_uuid: Optional[str] = None
     bif_thumb: Optional[str] = None
-    subtitles: Optional[int] = None
+    subtitles: EmptyStringNullableInt = None
     transcode_decision: Optional[str] = None
     container_decision: Optional[str] = None
     stream_video_full_resolution: Optional[str] = None
@@ -226,12 +225,12 @@ class SessionModel(BaseModel):
     stream_subtitle_codec: Optional[str] = None
     stream_subtitle_container: Optional[str] = None
     stream_subtitle_format: Optional[str] = None
-    stream_subtitle_forced: Optional[int] = None
+    stream_subtitle_forced: EmptyStringNullableInt = None
     stream_subtitle_location: Optional[str] = None
     stream_subtitle_language: Optional[str] = None
     stream_subtitle_language_code: Optional[str] = None
     stream_subtitle_decision: Optional[str] = None
-    stream_subtitle_transient: Optional[int] = None
+    stream_subtitle_transient: EmptyStringNullableInt = None
 
     @property
     def duration_milliseconds(self):
@@ -308,26 +307,26 @@ class SessionModel(BaseModel):
                f"{static.session_progress_message.format(progress=self.progress_marker, eta=self.eta)}"
 
 
-class ActivityModel(BaseModel):
+class ActivityModel(_Base):
     stream_count: Optional[str] = None
     sessions: Optional[List[SessionModel]] = None
-    stream_count_direct_play: Optional[int] = None
-    stream_count_direct_stream: Optional[int] = None
-    stream_count_transcode: Optional[int] = None
-    total_bandwidth: Optional[int] = None
-    lan_bandwidth: Optional[int] = None
-    wan_bandwidth: Optional[int] = None
+    stream_count_direct_play: EmptyStringNullableInt = None
+    stream_count_direct_stream: EmptyStringNullableInt = None
+    stream_count_transcode: EmptyStringNullableInt = None
+    total_bandwidth: EmptyStringNullableInt = None
+    lan_bandwidth: EmptyStringNullableInt = None
+    wan_bandwidth: EmptyStringNullableInt = None
 
     @property
     def summary(self) -> ActivitySummaryModel:
         return build_summary_from_activity_object(activity=self)
 
 
-class ActivitySummaryModel(BaseModel):
+class ActivitySummaryModel(_Base):
     stream_count: Optional[str] = "0"
-    transcode_count: Optional[int] = 0
-    total_bandwidth: Optional[int] = 0
-    lan_bandwidth: Optional[int] = 0
+    transcode_count: EmptyStringNullableInt = 0
+    total_bandwidth: EmptyStringNullableInt = 0
+    lan_bandwidth: EmptyStringNullableInt = 0
 
     @property
     def message(self):

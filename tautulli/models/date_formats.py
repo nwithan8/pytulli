@@ -4,11 +4,11 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base
 
 
-class DateFormatsModel(BaseModel):
+class DateFormatsModel(_Base):
     date_format: Optional[str] = None
     time_format: Optional[str] = None

@@ -4,28 +4,28 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import List, Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base, EmptyStringNullableInt
 
 
-class DatumModel(BaseModel):
+class DatumModel(_Base):
     browser: Optional[str] = None
     friendly_name: Optional[str] = None
     host: Optional[str] = None
     ip_address: Optional[str] = None
     os: Optional[str] = None
-    timestamp: Optional[int] = None
+    timestamp: EmptyStringNullableInt = None
     user: Optional[str] = None
     user_agent: Optional[str] = None
     user_group: Optional[str] = None
-    user_id: Optional[int] = None
+    user_id: EmptyStringNullableInt = None
 
 
-class UserLoginsModel(BaseModel):
-    draw: Optional[int] = None
-    recordsTotal: Optional[int] = None
-    recordsFiltered: Optional[int] = None
+class UserLoginsModel(_Base):
+    draw: EmptyStringNullableInt = None
+    recordsTotal: EmptyStringNullableInt = None
+    recordsFiltered: EmptyStringNullableInt = None
     data: Optional[List[DatumModel]] = None
 
 

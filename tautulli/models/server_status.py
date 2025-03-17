@@ -4,12 +4,12 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Optional
 
-from pydantic import BaseModel
+from tautulli.models._base import _Base
 
 
-class ServerStatusModel(BaseModel):
+class ServerStatusModel(_Base):
     result: Optional[str] = None
     connected: Optional[bool] = None
 
