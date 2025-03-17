@@ -14,9 +14,9 @@ def empty_string_to_none(value: Any) -> Union[str, None]:
     return value if value != "" else None
 
 
-EmptyStringNullableInt = Annotated[Optional[int], BeforeValidator(empty_string_to_none)]
+EmptyStringNullableInt: Union[int, None] = Annotated[Optional[int], BeforeValidator(empty_string_to_none)]
 
-EmptyStringNullableFloat = Annotated[Optional[float], BeforeValidator(empty_string_to_none)]
+EmptyStringNullableFloat: Union[float, None] = Annotated[Optional[float], BeforeValidator(empty_string_to_none)]
 
 
 class _Base(BaseModel):
