@@ -1,5 +1,5 @@
 objectrest==2.0.*
-pydantic==2.6.*
+pydantic>=2.10.0
 pytz==2024.*
 python-dotenv==1.0.*
 packaging==24.*
