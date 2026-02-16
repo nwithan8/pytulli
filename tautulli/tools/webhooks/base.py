@@ -25,6 +25,7 @@ class TautulliWebhookTrigger(enum.Enum):
     PLEX_REMOTE_ACCESS_DOWN = "on_extdown"
     PLEX_REMOTE_ACCESS_UP = "on_extup"
     PLEX_UPDATE_AVAILABLE = "on_pmsupdate"
+    PLEX_TOKEN_EXPIRED = "on_tokenexpired"
     TAUTULLI_UPDATE_AVAILABLE = "on_plexpyupdate"
     TAUTULLI_DATABASE_CORRUPT = "on_plexpydbcorrupt"
 
