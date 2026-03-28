@@ -704,25 +704,6 @@ class RawAPI:
         params = build_optional_params(session_key=session_key, session_id=session_id)
         return 'get_activity', params
 
-    def get_api_key(self, username: str = None, password: str = None) -> Union[str, None]:
-        """
-        Get the Tautulli API key.
-        Username and password are required if auth is enabled.
-        Makes and saves the API key if it does not exist.
-
-        :param username: Tautulli username
-        :type username: str, optional
-        :param password: Tautulli password
-        :type password: str, optional
-        :returns: API key
-        :rtype: str or None
-        """
-        params = build_optional_params(username=username, password=password)
-        json_data = self._get_json(command='get_apikey', params=params)
-        if _success_result(json_data=json_data):
-            return _get_response_data(json_data=json_data)
-        return None
-
     @raw_json
     def get_children_metadata(self, rating_key: str, media_type: str) -> dict:
         """

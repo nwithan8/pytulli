@@ -46,7 +46,6 @@ class DocsModel(_Base):
     edit_user: Optional[str] = None
     export_metadata: Optional[str] = None
     get_activity: Optional[str] = None
-    get_apikey: Optional[str] = None
     get_collections_table: Optional[str] = None
     get_date_formats: Optional[str] = None
     get_export_fields: Optional[str] = None

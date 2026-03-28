@@ -212,12 +212,6 @@ def test_activity():
     assert type(activity) == dict
 
 
-def test_get_api_key():
-    no_key_client = raw_client(no_key=True)
-    key = no_key_client.get_api_key()
-    assert key is not None
-
-
 @pytest.mark.skip(reason="Requires parameters.")
 def test_get_children_metadata():
     client = raw_client()

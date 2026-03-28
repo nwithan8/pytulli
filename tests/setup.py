@@ -14,9 +14,6 @@ def raw_client(no_key: bool = False) -> tautulli.RawAPI:
         return tautulli.RawAPI(base_url=url, api_key="placeholder", verify=False)
     else:
         key = os.getenv("T_KEY")
-        if not key:
-            temp_client = tautulli.RawAPI(base_url=url, api_key="placeholder", verify=False)
-            key = temp_client.get_api_key()
         if key:
             os.environ["T_KEY"] = key
             return tautulli.RawAPI(base_url=url, api_key=key)
@@ -41,9 +38,6 @@ def object_client(no_key: bool = False) -> tautulli.ObjectAPI:
         return tautulli.ObjectAPI(base_url=url, api_key="placeholder", verify=False)
     else:
         key = os.getenv("T_KEY")
-        if not key:
-            temp_client = tautulli.ObjectAPI(base_url=url, api_key="placeholder", verify=False)
-            key = temp_client.get_api_key()
         if key:
             os.environ["T_KEY"] = key
             return tautulli.ObjectAPI(base_url=url, api_key=key)
@@ -60,9 +54,6 @@ def no_ssl_client(no_key: bool = False) -> tautulli.RawAPI:
         return tautulli.RawAPI(base_url=url, api_key="placeholder", verify=False, ssl_verify=False)
     else:
         key = os.getenv("T_KEY")
-        if not key:
-            temp_client = tautulli.RawAPI(base_url=url, api_key="placeholder", verify=False, ssl_verify=False)
-            key = temp_client.get_api_key()
         if key:
             os.environ["T_KEY"] = key
             return tautulli.RawAPI(base_url=url, api_key=key, ssl_verify=False)

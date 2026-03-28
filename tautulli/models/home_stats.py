@@ -21,6 +21,7 @@ class RowModel(_Base):
     section_id: EmptyStringNullableInt = None
     media_type: Optional[str] = None
     content_rating: Optional[str] = None
+    rating: Optional[float] = None
     labels: Optional[List] = None
     user: Optional[str] = None
     friendly_name: Optional[str] = None

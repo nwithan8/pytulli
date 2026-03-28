@@ -495,21 +495,6 @@ class ObjectAPI:
         """
         return 'Activity'
 
-    def get_api_key(self, username: str = None, password: str = None) -> Union[str, None]:
-        """
-        Get the Tautulli API key.
-        Username and password are required if auth is enabled.
-        Makes and saves the API key if it does not exist.
-
-        :param username: Tautulli username
-        :type username: str, optional
-        :param password: Tautulli password
-        :type password: str, optional
-        :returns: API key
-        :rtype: str or None
-        """
-        return self._raw_api.get_api_key(username=username, password=password)
-
     @make_object
     def get_children_metadata(self, rating_key: str, media_type: str) -> ChildrenMetadata:
         """

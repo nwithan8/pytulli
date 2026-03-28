@@ -192,12 +192,6 @@ def test_activity():
     assert type(activity) == models.Activity
 
 
-def test_get_api_key():
-    no_key_client = object_client(no_key=True)
-    key = no_key_client.get_api_key()
-    assert key is not None
-
-
 @pytest.mark.skip(reason="Requires parameters.")
 def test_get_children_metadata():
     client = object_client()
